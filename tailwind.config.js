@@ -15,10 +15,14 @@ export default {
 				'01dp': '0px 2.5px 2.5px -1.5px rgba(0, 0, 0, 0.12)',
 				'04dp': '0px 6px 12px -6px rgba(0, 0, 0, 0.16)',
 				'08dp': '0px 6px 12px -6px rgba(0, 0, 0, 0.2), 0px 8px 24px -4px rgba(0, 0, 0, 0.08)',
-				'24dp': '0px 8px 16px 2px rgba(0, 0, 0, 0.1), 0px 4px 4px -2px rgba(0, 0, 0, 0.2)',
-				red: '0px 0px 4px 1px rgba(246, 102, 111, 0.25)',
-				gold: '0px 0px 4px 1px rgba(255, 122, 0, 0.45)',
-				autofill: '0 0 0 30px var(--tw-shadow-color) inset !important '
+				'24dp': '0px 8px 16px 2px rgba(0, 0, 0, 0.1), 0px 4px 4px -2px rgba(0, 0, 0, 0.2)'
+				// red: '0px 0px 4px 1px rgba(246, 102, 111, 0.25)',
+				// gold: '0px 0px 4px 1px rgba(255, 122, 0, 0.45)',
+				// autofill: '0 0 0 30px var(--tw-shadow-color) inset !important '
+			},
+			fontFamily: {
+				leagueSpartan: ['League Spartan'],
+				sans: ['DM Sans']
 			}
 		}
 	},

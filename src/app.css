@@ -1,3 +1,20 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+	@font-face {
+		font-family: League Spartan;
+		src:
+			local('League Spartan'),
+			url('/fonts/LeagueSpartan-VariableFont_wght.ttf') format('truetype');
+		font-display: swap;
+	}
+	@font-face {
+		font-family: DM Sans;
+		src:
+			local('DM Sans'),
+			url('/fonts/DMSans-VariableFont_wght.ttf') format('truetype');
+		font-display: swap;
+	}
+}
