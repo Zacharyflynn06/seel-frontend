@@ -21,7 +21,8 @@ export default {
 				// autofill: '0 0 0 30px var(--tw-shadow-color) inset !important '
 			},
 			fontFamily: {
-				leagueSpartan: ['leagueSpartan', 'sans-serif']
+				leagueSpartan: ['League Spartan'],
+				sans: ['DM Sans']
 			}
 		}
 	},
