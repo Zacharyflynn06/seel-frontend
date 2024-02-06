@@ -15,7 +15,7 @@
 	</div>
 
 	<div
-		class="hidden text-center text-[10px] font-extrabold uppercase tracking-[6px] text-white md:block"
+		class=" text-center text-[10px] uppercase text-white md:block md:font-extrabold md:tracking-[6px]"
 	>
 		<!-- using this nbsp to counter the wide letter spacing at the end of name to stay centered-->
 		&nbsp;{navObj.name}

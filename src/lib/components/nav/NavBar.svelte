@@ -15,12 +15,12 @@
 		},
 		{
 			name: 'Review Deal',
-			href: '/review',
+			href: '/review-deal',
 			icon: DocumentMagnifyingGlassIcon
 		},
 		{
 			name: 'Submit Deal',
-			href: '/submit',
+			href: '/submit-deal',
 			icon: CheckIcon
 		},
 		{
@@ -37,7 +37,7 @@
 </script>
 
 <div
-	class="from-pink to-purple shadow-24dp fixed bottom-0 z-10 h-[5rem] w-full bg-gradient-to-b md:inset-0 md:h-screen md:w-[10rem]"
+	class="from-pink to-purple shadow-24dp fixed bottom-0 z-10 h-[7rem] w-full bg-gradient-to-b md:inset-0 md:h-screen md:w-[10rem]"
 >
 	<!-- logo and slogan -->
 	<div class="mx-auto hidden flex-col space-y-2.5 pt-5 text-center md:flex md:h-auto md:w-32">
@@ -46,7 +46,7 @@
 	</div>
 
 	<!-- navlinks -->
-	<div class="flex w-full justify-evenly pt-2.5 md:flex-col md:space-y-5 md:pt-10">
+	<div class="flex w-full justify-evenly p-5 md:flex-col md:space-y-5 md:pt-10">
 		{#each navLinks as navObj}
 			<NavItem {navObj}></NavItem>
 		{/each}
