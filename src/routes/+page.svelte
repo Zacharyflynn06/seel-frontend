@@ -1,17 +1,33 @@
-<div class="flex h-screen w-full">
-	<div class="from-pink to-purple hover:shadow-24dp z-10 h-screen w-[20rem] bg-gradient-to-b"></div>
+<script lang="ts">
+	import Card from '$lib/components/Card.svelte';
 
-	<div class="bg-off-white flex h-screen w-full items-center justify-center">
-		<div
-			class="shadow-08dp hover:shadow-24dp active:shadow-01dp transform rounded-xl bg-white p-48 transition-all duration-500 ease-in-out hover:scale-[101%] active:scale-[99%]"
-		>
-			<div
-				class="from-purple to-pink font-leagueSpartan bg-gradient-to-r bg-clip-text text-5xl font-extrabold text-transparent"
-			>
-				Hello World
-			</div>
+	const dummyData = [
+		{ heading: 'New Object 1', body: 'This is a new object added to the array.' },
+		{ heading: 'New Object 2', body: 'This is another new object added to the array.' },
+		{ heading: 'New Object 3', body: 'Yet another new object added to the array.' },
+		{ heading: 'New Object 4', body: 'Adding more objects to the array.' },
+		{ heading: 'New Object 5', body: 'Another object added for testing purposes.' },
+		{ heading: 'New Object 6', body: 'Testing the functionality of the array.' },
+		{ heading: 'New Object 7', body: 'Adding more data to the array.' },
+		{ heading: 'New Object 8', body: 'Testing the rendering of multiple cards.' },
+		{ heading: 'New Object 9', body: 'Adding more objects to the array.' },
+		{ heading: 'New Object 10', body: 'Final object added to the array.' },
+		{ heading: 'New Object 11', body: 'This is another new object added to the array.' },
+		{ heading: 'New Object 12', body: 'Yet another new object added to the array.' },
+		{ heading: 'New Object 13', body: 'Adding more objects to the array.' },
+		{ heading: 'New Object 14', body: 'Another object added for testing purposes.' },
+		{ heading: 'New Object 15', body: 'Testing the functionality of the array.' },
+		{ heading: 'New Object 16', body: 'Adding more data to the array.' },
+		{ heading: 'New Object 17', body: 'Testing the rendering of multiple cards.' },
+		{ heading: 'New Object 18', body: 'Adding more objects to the array.' },
+		{ heading: 'New Object 19', body: 'Final object added to the array.' }
+	];
+</script>
 
-			<div class="">THIS IS A HEADING</div>
-		</div>
-	</div>
+<div
+	class="bg-off-white grid h-screen w-full gap-5 overflow-x-hidden p-5 md:grid-cols-4 md:pl-[11.25rem]"
+>
+	{#each dummyData as data}
+		<Card {data} />
+	{/each}
 </div>
