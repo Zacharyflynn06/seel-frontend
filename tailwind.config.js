@@ -4,6 +4,7 @@ export default {
 	theme: {
 		extend: {
 			colors: {
+				black: '#020202',
 				'off-white': '#f2f2f2',
 				'off-black': '#333333',
 				purple: '#4b4a78',
