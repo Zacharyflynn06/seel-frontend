@@ -25,7 +25,7 @@
 </script>
 
 <div
-	class="bg-off-white grid h-screen w-full gap-5 overflow-x-hidden p-5 md:grid-cols-4 md:pl-[11.25rem]"
+	class="grid h-screen w-full gap-5 overflow-x-hidden bg-off-white p-5 md:grid-cols-4 md:pl-[11.25rem] dark:bg-black"
 >
 	{#each dummyData as data}
 		<Card {data} />
