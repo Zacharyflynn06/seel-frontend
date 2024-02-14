@@ -1,12 +1,17 @@
 <script lang="ts">
-	export let data: { heading: string; body: string };
+	export let data: { heading: string; body: string } = {
+		heading: 'Test Heading',
+		body: 'Test Body'
+	};
 </script>
 
 <section
-	class="transform rounded-2xl bg-white shadow-08dp transition-all duration-500 ease-in-out hover:scale-101 hover:shadow-24dp active:scale-99 active:shadow-01dp dark:bg-off-black"
+	class=" transform-gpu rounded-2xl bg-white p-5 shadow-08dp transition-all duration-500 ease-in-out hover:scale-101 hover:shadow-24dp active:scale-99 active:shadow-01dp dark:bg-off-black"
 >
-	<div>
-		<h2 class="p-5 text-2xl font-bold">{data.heading}</h2>
-		<p class="p-5 text-lg">{data.body}</p>
-	</div>
+	<slot>
+		<div>
+			<h2 class="font-spartan text-2xl font-bold">{data.heading}</h2>
+			<p class=" text-lg">{data.body}</p>
+		</div>
+	</slot>
 </section>

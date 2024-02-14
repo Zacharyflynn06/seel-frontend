@@ -18,6 +18,6 @@
 		class=" text-center text-[10px] uppercase text-white md:block md:font-extrabold md:tracking-[6px] dark:text-black"
 	>
 		<!-- using this nbsp to counter the wide letter spacing at the end of name to stay centered-->
-		&nbsp;{navObj.name}
+		{navObj.name}
 	</div>
 </a>

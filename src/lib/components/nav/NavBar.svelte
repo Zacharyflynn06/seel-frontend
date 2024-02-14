@@ -12,13 +12,13 @@
 			icon: RectangleGroupIcon
 		},
 		{
-			name: 'Review Deal',
-			href: '/review-deal',
+			name: 'Review Deals',
+			href: '/review-deals',
 			icon: RocketIcon
 		},
 		{
-			name: 'Submit Deal',
-			href: '/submit-deal',
+			name: 'Submit Deals',
+			href: '/submit-deals',
 			icon: CheckIcon
 		}
 		// {
@@ -35,19 +35,21 @@
 </script>
 
 <nav
-	class="fixed bottom-0 z-10 h-[7rem] w-full bg-gradient-to-b from-pink to-purple shadow-24dp md:inset-0 md:h-screen md:w-[10rem]"
+	class="fixed bottom-0 z-10 h-[7rem] w-full bg-gradient-to-b from-pink to-purple md:inset-0 md:h-screen md:w-[10rem]"
 >
 	<!-- logo and slogan -->
-	<div class="mx-auto hidden flex-col space-y-2.5 pt-5 text-center md:flex md:h-auto md:w-32">
-		<div>
+	<div class="mx-auto hidden flex-col space-y-2.5 pt-5 text-center md:flex md:h-auto md:w-24">
+		<div class="grid justify-center">
 			<img src="/images/SeelLogo.png" alt="" class="drop-shadow-2xl" />
 			<div
-				class="font-spartan text-7xl font-extrabold text-white drop-shadow-2xl dark:text-off-black"
+				class="font-spartan text-center text-7xl font-extrabold text-white drop-shadow-2xl dark:text-off-black"
 			>
 				seel
 			</div>
 		</div>
-		<div class="text-[10px] uppercase tracking-[.3rem] text-white drop-shadow-2xl dark:text-black">
+		<div
+			class="line-clamp-1 text-[10px] uppercase tracking-[.1rem] text-white drop-shadow-2xl dark:text-black"
+		>
 			seel the deal
 		</div>
 	</div>

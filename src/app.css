@@ -2,10 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
-html {
+body {
 	@apply bg-off-white text-black dark:bg-black dark:text-white;
 }
 @layer base {
+	.input {
+		@apply border-purple;
+	}
 	@font-face {
 		font-family: League Spartan;
 		src:
