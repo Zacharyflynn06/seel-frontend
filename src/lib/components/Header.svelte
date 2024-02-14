@@ -2,7 +2,11 @@
 	import { page } from '$app/stores';
 	import CogIcon from './icons/CogIcon.svelte';
 	import BellIcon from './icons/BellIcon.svelte';
-	import { mainPanelWidth } from '$lib/classes';
+	import { animatedTouchClasses, mainPanelWidth } from '$lib/classes';
+	import { themeStore } from '$lib/stores/themeStore';
+	import SunIcon from './icons/SunIcon.svelte';
+	import MoonIcon from './icons/MoonIcon.svelte';
+	import DarkModeToggleButton from './buttons/DarkModeToggleButton.svelte';
 
 	let title: string;
 
@@ -21,14 +25,14 @@
 </script>
 
 <header
-	class="fixed top-0 z-10 flex h-20 md:left-[10rem] {mainPanelWidth} items-end justify-between bg-off-white p-5 dark:bg-black"
+	class="fixed top-0 z-10 flex h-20 md:left-[10rem] {mainPanelWidth} items-center justify-between bg-off-white p-5 dark:bg-black"
 >
 	<h1 class="text-4xl font-extrabold capitalize">
 		{title}
 	</h1>
 
-	<div class="hidden space-x-5 md:flex">
-		<div class="md:space-x-2.5">
+	<div class="hidden md:grid md:gap-2 xl:flex xl:space-x-5">
+		<div class="xl:space-x-2.5">
 			<span class="text-sm uppercase tracking-[.3rem] text-black/50 dark:text-white/50"
 				>organization</span
 			>
@@ -37,7 +41,7 @@
 			</select>
 		</div>
 
-		<div class="md:space-x-2.5">
+		<div class="xl:space-x-2.5">
 			<span class="text-sm uppercase tracking-[.3rem] text-black/50 dark:text-white/50"
 				>vehicles</span
 			>
@@ -48,6 +52,7 @@
 	</div>
 
 	<div class="flex items-center space-x-2 md:mr-2.5">
+		<DarkModeToggleButton />
 		<div class="text-pink"><CogIcon /></div>
 		<div class="text-pink"><BellIcon /></div>
 		<div class="font-bold">Username</div>

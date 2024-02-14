@@ -1,6 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 export default {
 	content: ['./src/**/*.{html,js,svelte,ts}'],
+	darkMode: 'class',
 	theme: {
 		extend: {
 			scale: {
@@ -25,6 +26,9 @@ export default {
 				gold: '0px 0px 4px 1px rgba(255, 122, 0, 0.45)',
 				pink: '0px 0px 4px 1px rgba(208, 87, 123, .45)'
 				// autofill: '0 0 0 30px var(--tw-shadow-color) inset !important '
+			},
+			dropShadow: {
+				pink: '0px 0px 4px 1px rgba(208, 87, 123, .45)'
 			},
 			fontFamily: {
 				spartan: ['League Spartan'],

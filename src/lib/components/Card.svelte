@@ -10,7 +10,7 @@
 >
 	<slot>
 		<div>
-			<h2 class="text-2xl font-bold">{data.heading}</h2>
+			<h2 class="font-spartan text-2xl font-bold">{data.heading}</h2>
 			<p class=" text-lg">{data.body}</p>
 		</div>
 	</slot>

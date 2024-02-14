@@ -3,7 +3,6 @@
 	import Card from '$lib/components/Card.svelte';
 </script>
 
-<svelte:head />
 <main
 	class="mb-[7rem] grid h-[calc(100vh-80px)] gap-5 bg-off-white p-5 md:mb-0 md:ml-[10rem] md:{mainPanelWidth} md:grid-cols-4 dark:bg-black"
 >
