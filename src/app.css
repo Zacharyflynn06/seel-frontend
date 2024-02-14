@@ -2,9 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+	@apply bg-off-white text-black dark:bg-black dark:text-white;
+}
 @layer base {
-	html {
-		@apply bg-off-white;
+	.input {
+		@apply border-purple;
 	}
 	@font-face {
 		font-family: League Spartan;
