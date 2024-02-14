@@ -1,4 +1,5 @@
 <script>
+	import Header from '$lib/components/Header.svelte';
 	import NavBar from '$lib/components/nav/NavBar.svelte';
 	// import { onMount } from 'svelte';
 	import '../app.css';
@@ -8,6 +9,11 @@
 	// });
 </script>
 
+<!-- navbar and header are fixed -->
 <NavBar />
 
-<slot />
+<Header />
+
+<div class="mt-20">
+	<slot />
+</div>
