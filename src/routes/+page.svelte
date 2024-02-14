@@ -17,10 +17,10 @@
 	];
 </script>
 
-<div
+<main
 	class="grid h-screen w-full gap-5 overflow-x-hidden bg-off-white p-5 md:grid-cols-4 md:pl-[11.25rem] dark:bg-black"
 >
 	{#each dummyData as data (data)}
 		<Card {data} />
 	{/each}
-</div>
+</main>

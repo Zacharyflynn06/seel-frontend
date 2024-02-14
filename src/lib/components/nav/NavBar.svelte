@@ -1,20 +1,20 @@
 <script lang="ts">
 	import NavItem from './NavItem.svelte';
 	import type { NavigationItem } from '$lib/types/nav';
-	import HomeIcon from '../icons/HomeIcon.svelte';
 	import CheckIcon from '../icons/CheckIcon.svelte';
-	import DocumentMagnifyingGlassIcon from '../icons/DocumentMagnifyingGlassIcon.svelte';
+	import RectangleGroupIcon from '../icons/RectangleGroupIcon.svelte';
+	import RocketIcon from '../icons/RocketIcon.svelte';
 
 	const navLinks: NavigationItem[] = [
 		{
 			name: 'Dashboard',
 			href: '/',
-			icon: HomeIcon
+			icon: RectangleGroupIcon
 		},
 		{
 			name: 'Review Deal',
 			href: '/review-deal',
-			icon: DocumentMagnifyingGlassIcon
+			icon: RocketIcon
 		},
 		{
 			name: 'Submit Deal',
@@ -34,7 +34,7 @@
 	];
 </script>
 
-<div
+<nav
 	class="fixed bottom-0 z-10 h-[7rem] w-full bg-gradient-to-b from-pink to-purple shadow-24dp md:inset-0 md:h-screen md:w-[10rem]"
 >
 	<!-- logo and slogan -->
@@ -42,7 +42,7 @@
 		<div>
 			<img src="/images/SeelLogo.png" alt="" class="drop-shadow-2xl" />
 			<div
-				class="font-leagueSpartan text-7xl font-extrabold text-white drop-shadow-2xl dark:text-black"
+				class="font-spartan text-7xl font-extrabold text-white drop-shadow-2xl dark:text-off-black"
 			>
 				seel
 			</div>
@@ -58,4 +58,4 @@
 			<NavItem {navObj}></NavItem>
 		{/each}
 	</div>
-</div>
+</nav>
