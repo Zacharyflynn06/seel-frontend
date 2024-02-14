@@ -35,7 +35,7 @@
 </script>
 
 <nav
-	class="fixed bottom-0 z-10 h-[7rem] w-full bg-gradient-to-b from-pink to-purple shadow-24dp md:inset-0 md:h-screen md:w-[10rem]"
+	class="fixed bottom-0 z-10 h-[7rem] w-full bg-gradient-to-b from-pink to-purple md:inset-0 md:h-screen md:w-[10rem]"
 >
 	<!-- logo and slogan -->
 	<div class="mx-auto hidden flex-col space-y-2.5 pt-5 text-center md:flex md:h-auto md:w-24">

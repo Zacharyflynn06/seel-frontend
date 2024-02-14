@@ -1,26 +1,23 @@
 <script lang="ts">
+	import { mainPanelWidth } from '$lib/classes';
 	import Card from '$lib/components/Card.svelte';
-
-	const dummyData = [
-		{ heading: 'New Object 1', body: 'This is a new object added to the array.' },
-		{ heading: 'New Object 2', body: 'This is another new object added to the array.' },
-		{ heading: 'New Object 3', body: 'Yet another new object added to the array.' },
-		{ heading: 'New Object 4', body: 'Adding more objects to the array.' },
-		{ heading: 'New Object 5', body: 'Another object added for testing purposes.' },
-		{ heading: 'New Object 6', body: 'Testing the functionality of the array.' },
-		{ heading: 'New Object 7', body: 'Adding more data to the array.' },
-		{ heading: 'New Object 8', body: 'Testing the rendering of multiple cards.' },
-		{ heading: 'New Object 9', body: 'Adding more objects to the array.' },
-		{ heading: 'New Object 10', body: 'Final object added to the array.' },
-		{ heading: 'New Object 11', body: 'This is another new object added to the array.' },
-		{ heading: 'New Object 12', body: 'Yet another new object added to the array.' }
-	];
 </script>
 
+<svelte:head />
 <main
-	class="grid h-screen w-full gap-5 overflow-x-hidden bg-off-white p-5 md:grid-cols-4 md:pl-[11.25rem] dark:bg-black"
+	class="mb-[7rem] grid h-[calc(100vh-80px)] gap-5 bg-off-white p-5 md:mb-0 md:ml-[10rem] md:{mainPanelWidth} md:grid-cols-4 dark:bg-black"
 >
-	{#each dummyData as data (data)}
-		<Card {data} />
-	{/each}
+	<div class="grid h-full gap-4">
+		<Card>
+			<div class="grid h-fit justify-center gap-4 text-center">
+				<span>Deals to Review</span>
+				<span class="font-spartan text-8xl font-extrabold text-light-purple">15</span>
+				<span></span>
+			</div>
+		</Card>
+		<Card>
+			<div class="h-2 text-center font-extrabold">Submit a new deal</div>
+		</Card>
+		<Card data={{ heading: 'Test Heading', body: 'Test Body' }} />
+	</div>
 </main>
