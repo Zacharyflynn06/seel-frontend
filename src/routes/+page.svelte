@@ -1,22 +1,21 @@
-<script lang="ts">
-	import { mainPanelWidth } from '$lib/classes';
-	import Card from '$lib/components/Card.svelte';
-</script>
-
 <main
-	class="mb-[7rem] grid h-[calc(100vh-80px)] gap-5 bg-off-white p-5 md:mb-0 md:ml-[10rem] md:{mainPanelWidth} md:grid-cols-4 dark:bg-black"
+	class="grid h-[100dvh] w-full items-center justify-center overflow-hidden bg-gradient-to-bl from-pink to-purple"
 >
-	<div class="grid h-full gap-4">
-		<Card>
-			<div class="grid h-fit justify-center gap-4 text-center">
-				<span>Deals to Review</span>
-				<span class="font-spartan text-8xl font-extrabold text-light-purple">15</span>
-				<span></span>
-			</div>
-		</Card>
-		<Card>
-			<div class="h-2 text-center font-extrabold">Submit a new deal</div>
-		</Card>
-		<Card data={{ heading: 'Test Heading', body: 'Test Body' }} />
-	</div>
+	<form class="flex max-w-[500px] flex-col items-center justify-between">
+		<img src="/images/SeelLogo.png" class="h-32 drop-shadow-2xl" />
+
+		<h1
+			class="font-spartan text-7xl font-extrabold text-off-white drop-shadow-2xl dark:text-off-black"
+		>
+			Seel
+		</h1>
+		<div class="grid w-full items-center justify-center space-y-5 text-center">
+			<input
+				placeholder="Ask me about Seel..."
+				type="text"
+				class="border-1 rounded-lg bg-off-white px-3 py-1.5 ring-0 drop-shadow-2xl focus-within:ring-0 focus:border-light-purple focus:ring-0"
+			/>
+			<div class="text-off-white drop-shadow-2xl">this is where the response will animate in</div>
+		</div>
+	</form>
 </main>
