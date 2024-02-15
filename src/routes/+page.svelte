@@ -1,5 +1,5 @@
 <main
-	class="grid h-[100dvh] w-full items-center justify-center overflow-hidden bg-gradient-to-bl from-pink to-purple"
+	class="gradient-animation grid h-[100dvh] w-full items-center justify-center overflow-hidden bg-gradient-to-bl from-pink to-purple"
 >
 	<form class="flex max-w-[500px] flex-col items-center justify-between">
 		<img src="/images/SeelLogo.png" class="h-32 drop-shadow-2xl" />
@@ -19,3 +19,23 @@
 		</div>
 	</form>
 </main>
+
+<style>
+	.gradient-animation {
+		background: linear-gradient(45deg, #d0577b, #4b4a78);
+		background-size: 200% 200%;
+		animation: gradient 15s ease infinite;
+		height: 100dvh;
+	}
+	@keyframes gradient {
+		0% {
+			background-position: 0% 50%;
+		}
+		50% {
+			background-position: 100% 50%;
+		}
+		100% {
+			background-position: 0% 50%;
+		}
+	}
+</style>
