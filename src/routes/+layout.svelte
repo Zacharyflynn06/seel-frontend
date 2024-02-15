@@ -1,6 +1,4 @@
-<script>
-	import Header from '$lib/components/Header.svelte';
-	import NavBar from '$lib/components/nav/NavBar.svelte';
+<script lang="ts">
 	import { onMount } from 'svelte';
 	import '../app.css';
 
@@ -16,11 +14,4 @@
 	});
 </script>
 
-<!-- navbar and header are position fixed -->
-<NavBar />
-
-<Header />
-
-<div class="mt-20">
-	<slot />
-</div>
+<slot />
