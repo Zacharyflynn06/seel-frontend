@@ -8,7 +8,7 @@
 	const navLinks: NavigationItem[] = [
 		{
 			name: 'Dashboard',
-			href: '/',
+			href: '/dashboard',
 			icon: RectangleGroupIcon
 		},
 		{
@@ -42,7 +42,7 @@
 		<div class="grid justify-center">
 			<img src="/images/SeelLogo.png" alt="" class="drop-shadow-2xl" />
 			<div
-				class="font-spartan text-center text-7xl font-extrabold text-white drop-shadow-2xl dark:text-off-black"
+				class="text-center font-spartan text-7xl font-extrabold text-white drop-shadow-2xl dark:text-off-black"
 			>
 				seel
 			</div>

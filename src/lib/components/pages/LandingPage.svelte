@@ -1,0 +1,110 @@
+<script>
+	import { animatedTouchClasses } from '$lib/classes';
+	import Spinner from '$lib/components/Spinner.svelte';
+	import ArrowIcon from '$lib/components/icons/ArrowIcon.svelte';
+	import Typewriter from 'svelte-typewriter';
+
+	let loading = false;
+	let userInput = '';
+
+	let apiResponse = '';
+
+	async function handleSubmit() {
+		loading = !loading;
+
+		try {
+			let request = new Request(`https://fanz3qdbx3.execute-api.us-east-1.amazonaws.com/api/ask`, {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify({
+					question: userInput
+				})
+			});
+			let response = await fetch(request);
+			if (!response.ok) {
+				loading = false;
+				throw new Error(response.statusText);
+			} else {
+				apiResponse = await response.json();
+				console.log({ apiResponse });
+				loading = false;
+			}
+		} catch (error) {
+			console.log(error);
+		}
+	}
+
+	let width = 0;
+
+	$: console.log({ width });
+</script>
+
+<svelte:window bind:innerWidth={width} />
+
+<main
+	class="gradient-animation grid h-[100dvh] w-screen items-center bg-gradient-to-bl from-pink to-purple md:justify-center"
+>
+	<form
+		on:submit|preventDefault={handleSubmit}
+		class="flex flex-col items-center justify-between space-y-5 p-5 md:w-[500px] md:max-w-[500px]"
+	>
+		<div>
+			<img
+				alt="Seel logo"
+				src="/images/SeelLogo.png"
+				class="spinner-animate h-32 drop-shadow-2xl"
+			/>
+
+			<h1 class="font-spartan text-7xl font-extrabold text-off-white drop-shadow-2xl">Seel</h1>
+		</div>
+		<div
+			class="relative grid w-full items-center rounded-lg border border-transparent bg-off-white text-center shadow-08dp focus-within:border-light-purple focus:ring-purple"
+		>
+			<button
+				type="submit"
+				class="absolute right-1.5 z-10 h-full transform bg-transparent pl-1 ease-in-out {animatedTouchClasses} group-hover:border-purple"
+			>
+				{#if !loading}
+					<ArrowIcon className="h-6 w-6 " />
+				{:else}
+					<Spinner className="h-6 w-6 text-light-purple" />
+				{/if}
+			</button>
+			<input
+				placeholder="Ask me about Seel..."
+				bind:value={userInput}
+				type="text"
+				class="group mr-8 rounded-l-lg border-transparent bg-transparent px-3 py-1.5 ring-transparent focus:border-transparent focus:ring-transparent"
+			/>
+		</div>
+		<div class="min-h-20 text-white">
+			{#if apiResponse && userInput}
+				<Typewriter>
+					{apiResponse.answer}
+				</Typewriter>
+			{/if}
+		</div>
+	</form>
+</main>
+
+<style>
+	.gradient-animation {
+		background: linear-gradient(45deg, #d0577b, #4b4a78);
+		background-size: 200% 200%;
+		animation: gradient 15s ease infinite;
+		height: 100dvh;
+	}
+	@keyframes gradient {
+		0% {
+			background-position: 0% 50%;
+		}
+		50% {
+			background-position: 100% 50%;
+		}
+		100% {
+			background-position: 0% 50%;
+		}
+	}
+</style>
