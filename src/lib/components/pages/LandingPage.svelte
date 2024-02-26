@@ -41,11 +41,7 @@
 	$: console.log({ width });
 </script>
 
-<svelte:window bind:innerWidth={width} />
-
-<main
-	class="gradient-animation grid h-[100dvh] w-screen items-center bg-gradient-to-bl from-pink to-purple md:justify-center"
->
+<main class="gradient-animation grid h-[100dvh] w-screen items-center md:justify-center">
 	<form
 		on:submit|preventDefault={handleSubmit}
 		class="flex flex-col items-center justify-between space-y-5 p-5 md:w-[500px] md:max-w-[500px]"
@@ -60,7 +56,7 @@
 			<h1 class="font-spartan text-7xl font-extrabold text-off-white drop-shadow-2xl">Seel</h1>
 		</div>
 		<div
-			class="relative grid w-full items-center rounded-lg border border-transparent bg-off-white text-center shadow-08dp focus-within:border-light-purple focus:ring-purple"
+			class="relative grid w-full items-center rounded-lg border border-transparent bg-off-white text-center shadow-08dp focus-within:border-light-purple focus:ring-purple dark:bg-off-black"
 		>
 			<button
 				type="submit"
@@ -93,7 +89,7 @@
 	.gradient-animation {
 		background: linear-gradient(45deg, #d0577b, #4b4a78);
 		background-size: 200% 200%;
-		animation: gradient 15s ease infinite;
+		animation: gradient 15s cubic-bezier(0.075, 0.82, 0.165, 1) infinite;
 		height: 100dvh;
 	}
 	@keyframes gradient {

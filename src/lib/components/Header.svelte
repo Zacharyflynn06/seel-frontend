@@ -2,7 +2,7 @@
 	import { page } from '$app/stores';
 	import CogIcon from './icons/CogIcon.svelte';
 	import BellIcon from './icons/BellIcon.svelte';
-	import { animatedTouchClasses, mainPanelWidth } from '$lib/classes';
+	import { animatedTouchClasses, mainPanelWidth, selectBoxClasses } from '$lib/classes';
 	import { themeStore } from '$lib/stores/themeStore';
 	import SunIcon from './icons/SunIcon.svelte';
 	import MoonIcon from './icons/MoonIcon.svelte';
@@ -36,7 +36,7 @@
 			<span class="text-sm uppercase tracking-[.3rem] text-black/50 dark:text-white/50"
 				>organization</span
 			>
-			<select name="" id="" class="capitalize">
+			<select name="" id="" class={selectBoxClasses}>
 				<option value="">platy partners</option>
 			</select>
 		</div>
@@ -45,7 +45,7 @@
 			<span class="text-sm uppercase tracking-[.3rem] text-black/50 dark:text-white/50"
 				>vehicles</span
 			>
-			<select name="" id="" class="capitalize">
+			<select name="" id="" class={selectBoxClasses}>
 				<option value="">platy partners fund</option>
 			</select>
 		</div>
