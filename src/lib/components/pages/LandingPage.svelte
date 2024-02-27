@@ -1,8 +1,9 @@
 <script>
-	import { animatedTouchClasses } from '$lib/classes';
+	import { animatedTouchClasses, flexCenter } from '$lib/classes';
 	import Spinner from '$lib/components/Spinner.svelte';
 	import ArrowIcon from '$lib/components/icons/ArrowIcon.svelte';
 	import Typewriter from 'svelte-typewriter';
+	import SeelIcon from '../icons/SeelIcon.svelte';
 
 	let loading = false;
 	let userInput = '';
@@ -44,16 +45,16 @@
 <main class="gradient-animation grid h-[100dvh] w-screen items-center md:justify-center">
 	<form
 		on:submit|preventDefault={handleSubmit}
-		class="flex flex-col items-center justify-between space-y-5 p-5 md:w-[500px] md:max-w-[500px]"
+		class=" {flexCenter} flex-col space-y-5 p-5 md:w-[500px] md:max-w-[500px]"
 	>
 		<div>
-			<img
+			<!-- <img
 				alt="Seel logo"
 				src="/images/SeelLogo.png"
 				class="spinner-animate h-32 drop-shadow-2xl"
-			/>
-
-			<h1 class="font-spartan text-7xl font-extrabold text-off-white drop-shadow-2xl">Seel</h1>
+			/> -->
+			<SeelIcon className="h-[15rem] w-[15rem]" />
+			<!-- <h1 class="font-spartan text-7xl font-extrabold text-off-white drop-shadow-2xl">Seel</h1> -->
 		</div>
 		<div
 			class="relative grid w-full items-center rounded-lg border border-transparent bg-off-white text-center shadow-08dp focus-within:border-light-purple focus:ring-purple dark:bg-off-black"

@@ -7,7 +7,7 @@ body {
 }
 @layer base {
 	.input {
-		@apply border-purple;
+		@apply rounded-md border-[1.5px] border-purple text-[16px];
 	}
 	@font-face {
 		font-family: League Spartan;
