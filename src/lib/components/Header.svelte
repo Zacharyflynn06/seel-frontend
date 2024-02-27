@@ -2,10 +2,7 @@
 	import { page } from '$app/stores';
 	import CogIcon from './icons/CogIcon.svelte';
 	import BellIcon from './icons/BellIcon.svelte';
-	import { animatedTouchClasses, mainPanelWidth, selectBoxClasses } from '$lib/classes';
-	import { themeStore } from '$lib/stores/themeStore';
-	import SunIcon from './icons/SunIcon.svelte';
-	import MoonIcon from './icons/MoonIcon.svelte';
+	import { mainPanelWidth, selectBoxClasses } from '$lib/classes';
 	import DarkModeToggleButton from './buttons/DarkModeToggleButton.svelte';
 
 	let title: string;
@@ -25,7 +22,7 @@
 </script>
 
 <header
-	class="fixed top-0 z-10 flex md:left-[10rem] {mainPanelWidth} items-center justify-between border bg-off-white p-5 dark:bg-black"
+	class="fixed top-0 z-10 flex md:left-[10rem] {mainPanelWidth} items-center justify-between border-b border-black/50 bg-off-white p-5 dark:border-white/50 dark:bg-black"
 >
 	<div class="flex w-full flex-col-reverse justify-between md:flex-row md:items-center">
 		<h1 class="w-fit flex-grow pt-5 text-4xl font-extrabold capitalize md:mr-5 md:w-[25%] md:pt-0">
