@@ -29,7 +29,6 @@
 				throw new Error(response.statusText);
 			} else {
 				apiResponse = await response.json();
-				console.log({ apiResponse });
 				loading = false;
 			}
 		} catch (error) {
@@ -44,13 +43,7 @@
 		class=" {flexCenter} flex-col space-y-5 p-5 md:w-[500px] md:max-w-[500px]"
 	>
 		<div>
-			<!-- <img
-				alt="Seel logo"
-				src="/images/SeelLogo.png"
-				class="spinner-animate h-32 drop-shadow-2xl"
-			/> -->
 			<SeelIcon className="h-[15rem] w-[15rem]" />
-			<!-- <h1 class="font-spartan text-7xl font-extrabold text-off-white drop-shadow-2xl">Seel</h1> -->
 		</div>
 		<div
 			class="relative grid w-full items-center rounded-lg border border-transparent bg-off-white text-center shadow-08dp focus-within:border-light-purple focus:ring-purple dark:bg-off-black"
@@ -73,7 +66,7 @@
 			/>
 		</div>
 		<div class="min-h-20 text-white">
-			{#if apiResponse && userInput}
+			{#if apiResponse}
 				<Typewriter>
 					{apiResponse.answer}
 				</Typewriter>
