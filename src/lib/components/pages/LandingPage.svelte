@@ -36,10 +36,6 @@
 			console.log(error);
 		}
 	}
-
-	let width = 0;
-
-	$: console.log({ width });
 </script>
 
 <main class="gradient-animation grid h-[100dvh] w-screen items-center md:justify-center">
