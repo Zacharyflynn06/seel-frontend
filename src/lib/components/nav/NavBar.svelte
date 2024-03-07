@@ -4,6 +4,7 @@
 	import CheckIcon from '../icons/CheckIcon.svelte';
 	import RectangleGroupIcon from '../icons/RectangleGroupIcon.svelte';
 	import RocketIcon from '../icons/RocketIcon.svelte';
+	import SeelIcon from '../icons/SeelIcon.svelte';
 
 	const navLinks: NavigationItem[] = [
 		{
@@ -40,12 +41,7 @@
 	<!-- logo and slogan -->
 	<div class="mx-auto hidden flex-col space-y-2.5 pt-5 text-center md:flex md:h-auto md:w-24">
 		<div class="grid justify-center">
-			<img src="/images/SeelLogo.png" alt="" class="drop-shadow-2xl" />
-			<div
-				class="text-center font-spartan text-7xl font-extrabold text-white drop-shadow-2xl dark:text-off-black"
-			>
-				seel
-			</div>
+			<SeelIcon className="h-[10rem] w-[10rem]" />
 		</div>
 		<div
 			class="line-clamp-1 text-[10px] uppercase tracking-[.1rem] text-white drop-shadow-2xl dark:text-black"

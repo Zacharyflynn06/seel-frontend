@@ -4,6 +4,8 @@
 	import { themeStore } from '$lib/stores/themeStore';
 	import MoonIcon from '../icons/MoonIcon.svelte';
 	import SunIcon from '../icons/SunIcon.svelte';
+
+	$: theme = $themeStore.theme;
 </script>
 
 <button
@@ -12,9 +14,9 @@
 	}}
 	class="text-pink {animatedTouchClasses} dark:hover:drop-shadow-pink"
 >
-	{#if $themeStore.theme === 'light'}
+	{#if theme === 'light'}
 		<MoonIcon />
-	{:else}
+	{:else if theme === 'dark'}
 		<SunIcon />
 	{/if}
 </button>

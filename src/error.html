@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>%sveltekit.error.message%</title>
+		<link rel="icon" href="%sveltekit.assets%/images/SeelLogo.png" />
+		<link
+			rel="preload"
+			href="/fonts/LeagueSpartan-VariableFont_wght.ttf"
+			as="font"
+			type="font/ttf"
+			crossorigin
+		/>
+		<link
+			rel="preload"
+			href="/fonts/DMSans-VariableFont_wght.ttf"
+			as="font"
+			type="font/ttf"
+			crossorigin
+		/>
+	</head>
+	<body
+		style="
+			display: grid;
+			place-items: center;
+			background-color: #333333;
+
+			font-family: sans-serif;
+			justify-content: center;
+			height: 100vh;
+		"
+	>
+		<div style="text-align: center; padding: 2rem; background-color: #333333">
+			<img src="images/SeelLogo.png" alt="" />
+			<div style="text-align: center; color: white">
+				<h1>We're Sorry!</h1>
+				<h1>Something Went Wrong</h1>
+				<div>
+					<p>Status: %sveltekit.status%</p>
+					<p>Message: %sveltekit.error.message%</p>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
