@@ -2,7 +2,7 @@
 	import { page } from '$app/stores';
 	import CogIcon from './icons/CogIcon.svelte';
 	import BellIcon from './icons/BellIcon.svelte';
-	import { mainPanelWidth, selectBoxClasses } from '$lib/classes';
+	import { selectBoxClasses } from '$lib/classes';
 	import DarkModeToggleButton from './buttons/DarkModeToggleButton.svelte';
 
 	let title: string;
@@ -25,13 +25,14 @@
 	class="flex items-center justify-between border-b border-black/50 bg-off-white p-5 dark:border-white/50 dark:bg-black"
 >
 	<div class="flex w-full flex-col-reverse justify-between md:flex-row md:items-center">
-		<h1 class="w-fit flex-grow pt-5 text-4xl font-extrabold capitalize md:mr-5 md:w-[25%] md:pt-0">
+		<h1 class="w-fit pt-5 text-3xl font-extrabold capitalize md:mr-5 md:w-[25%] md:pt-0">
 			{title}
 		</h1>
 		<div class="w-full space-x-5 text-[1rem] md:flex md:w-full md:justify-between">
 			<div class="hidden md:flex md:space-x-5">
-				<div class="grid items-center space-y-1 xl:flex xl:space-x-2.5 xl:space-y-0">
-					<span class="text-xs uppercase tracking-[.3rem] text-black/50 dark:text-white/50"
+				<div class="grid items-center xl:flex xl:space-x-2.5 xl:space-y-0">
+					<span
+						class="hidden text-xs uppercase tracking-[.3rem] text-black/50 dark:text-white/50 xl:block"
 						>organization</span
 					>
 					<select name="" id="" class={selectBoxClasses}>
@@ -45,7 +46,8 @@
 				</div>
 
 				<div class="grid items-center xl:flex xl:space-x-2.5">
-					<span class="text-xs uppercase tracking-[.3rem] text-black/50 dark:text-white/50"
+					<span
+						class="hidden text-xs uppercase tracking-[.3rem] text-black/50 dark:text-white/50 xl:block"
 						>vehicles</span
 					>
 					<select name="" id="" class={selectBoxClasses}>
