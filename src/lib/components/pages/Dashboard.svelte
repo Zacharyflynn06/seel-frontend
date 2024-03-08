@@ -64,8 +64,15 @@
 	<div class="grid gap-5 md:grid-rows-3">
 		<Card heading="Pipeline">
 			<div class="h-full w-full space-y-2.5">
+				<!-- Mobile Nav -->
+				<select name="" id="" class="{selectBoxClasses} md:hidden">
+					{#each pipelineNavItems as navItem}
+						<option value={navItem}>{navItem}</option>
+					{/each}
+				</select>
+				<!-- Desktop Nav -->
 				<ul
-					class="flex w-full divide-x divide-black/50 rounded-full border border-black/50 font-bold dark:divide-white/50 dark:border-white/50"
+					class="hidden w-full divide-x divide-black/50 rounded-full border border-black/50 font-bold dark:divide-white/50 dark:border-white/50 md:flex"
 				>
 					{#each pipelineNavItems as navItem, i}
 						<li
@@ -85,17 +92,19 @@
 					{/each}
 				</ul>
 
-				<div class="flex max-h-[120px] w-full space-x-2.5 2xl:max-h-[160px]">
+				<div
+					class="flex w-full flex-col space-y-2.5 pb-5 md:max-h-[120px] md:flex-row md:space-x-2.5 md:pb-0 2xl:max-h-[180px]"
+				>
 					<div class="w-full overflow-scroll rounded-sm">
 						<table class="w-full table-auto rounded-md border text-xs shadow-04dp">
-							<!-- <thead> -->
-							<tr class="h-5 divide-x border bg-purple py-1 text-xs font-bold text-white">
-								<td>Company </td>
-								<td>Series</td>
-								<td>Shares</td>
-								<td>Price</td>
-							</tr>
-							<!-- </thead> -->
+							<thead>
+								<tr class="h-5 divide-x border bg-purple py-1 text-xs font-bold text-white">
+									<td>Company </td>
+									<td>Series</td>
+									<td>Shares</td>
+									<td>Price</td>
+								</tr>
+							</thead>
 							<tbody class="divide-y">
 								{#each pipelineOptions as item}
 									<tr
@@ -114,7 +123,7 @@
 						</table>
 					</div>
 
-					<div class="flex flex-col items-center justify-between">
+					<div class="flex flex-col items-center justify-between space-y-2.5 md:space-y-0">
 						<button class={smallButtonClasses}>Update Stage</button>
 						<button class={smallButtonClasses}>Send Message</button>
 						<button class={smallButtonClasses}>Request Documents</button>
@@ -123,8 +132,10 @@
 			</div>
 		</Card>
 		<Card heading="Quick Review">
-			<div class="flex h-full w-full justify-between space-x-2.5">
-				<div class="flex h-full w-1/3 flex-col justify-between">
+			<div
+				class="flex h-full w-full flex-col justify-between space-y-2.5 pb-5 md:flex-row md:space-x-2.5 md:space-y-0 md:pb-0"
+			>
+				<div class="flex h-full w-full flex-col justify-between md:w-1/3">
 					<div class="flex justify-between font-spartan text-xs uppercase">
 						<span class="tracking-widest text-black/50 dark:text-white/50">Criteria Match</span>
 						<span class="text-light-purple">77%</span>
@@ -132,20 +143,20 @@
 					<input type="range" name="" id="" value="77" />
 					<table class=" table-auto rounded-md border text-xs shadow-04dp">
 						<tbody class="w-full divide-y text-xs">
-							<tr class="py-0">
-								<td class="font-bold">Round</td>
+							<tr class="divide-x">
+								<td class="pl-2 font-bold">Round</td>
 								<td>Series A</td>
 							</tr>
-							<tr>
-								<td class="font-bold">Industry</td>
+							<tr class="divide-x">
+								<td class="pl-2 font-bold">Industry</td>
 								<td>Technology</td>
 							</tr>
-							<tr>
-								<td class="font-bold">Funding Amount</td>
+							<tr class="divide-x">
+								<td class="pl-2 font-bold">Funding Amount</td>
 								<td>$5M</td>
 							</tr>
-							<tr>
-								<td class="font-bold">Competitors</td>
+							<tr class="divide-x">
+								<td class="pl-2 font-bold">Competitors</td>
 								<td>2</td>
 							</tr>
 						</tbody>
@@ -153,7 +164,7 @@
 				</div>
 
 				<div
-					class="grid h-full w-1/3 items-center justify-between rounded-md border p-2.5 text-sm shadow-04dp"
+					class="grid h-full w-full items-center justify-between rounded-md border p-2.5 text-sm shadow-04dp md:w-1/3"
 				>
 					<div class="font-bold">Potential Competitors</div>
 					<div>Doordash</div>
@@ -162,7 +173,7 @@
 				</div>
 
 				<div
-					class="grid h-full w-1/3 items-center justify-between rounded-md border p-2.5 text-sm shadow-04dp"
+					class="grid h-full w-full items-center justify-between rounded-md border p-2.5 text-sm shadow-04dp md:w-1/3"
 				>
 					<div class="font-bold">Contacts</div>
 					<div class="flex items-center space-x-2.5">
@@ -187,7 +198,7 @@
 
 	<div class="grid gap-5 md:grid-rows-2">
 		<Card heading="Due Diligence">
-			<div class="flex h-full flex-col items-center justify-between">
+			<div class="flex h-full flex-col items-center justify-between space-y-2.5 md:space-y-0">
 				{#each dueDiligenceOptions as item}
 					<button class="{smallButtonClasses} py-2.5">{item}</button>
 				{/each}
