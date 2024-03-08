@@ -1,17 +1,21 @@
 <script lang="ts">
-	import { animatedTouchClasses } from '$lib/classes';
+	import { cardHeadingClasses } from '$lib/classes';
 
-	export let data: { heading: string; body: string } = {
-		heading: 'Test Heading',
-		body: 'Test Body'
-	};
+	export let className = '';
+
 	export let heading = '';
+	export let headingIsCentered = false;
 </script>
 
-<section class="{animatedTouchClasses} rounded-2xl bg-white p-5 shadow-08dp dark:bg-off-black">
-	<slot>
-		<div>
-			<h2 class=" text-2xl font-bold">{heading}</h2>
-		</div>
-	</slot>
+<section
+	class="w-full space-y-2 rounded-2xl bg-white p-5 shadow-08dp dark:bg-off-black {className}"
+>
+	{#if heading}
+		<h2 class="{cardHeadingClasses} {headingIsCentered ? 'text-center' : ''} h-[10%]">
+			{heading}
+		</h2>
+	{/if}
+	<div class={heading ? 'h-[90%]' : 'h-full'}>
+		<slot />
+	</div>
 </section>
