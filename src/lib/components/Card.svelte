@@ -15,7 +15,7 @@
 			{heading}
 		</h2>
 	{/if}
-	<div class={heading ? 'h-[90%]' : 'h-full'}>
+	<div class={heading ? 'h-[85%] ' : 'h-full'}>
 		<slot />
 	</div>
 </section>
