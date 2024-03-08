@@ -21,9 +21,7 @@
 	}
 </script>
 
-<header
-	class="flex items-center justify-between border-b border-black/50 bg-off-white p-5 dark:border-white/50 dark:bg-black"
->
+<header class="flex items-center justify-between p-5">
 	<div class="flex w-full flex-col-reverse justify-between md:flex-row md:items-center">
 		<h1 class="w-fit pt-5 text-3xl font-extrabold capitalize md:mr-5 md:w-[25%] md:pt-0">
 			{title}
