@@ -8,6 +8,9 @@
 	import Card from '$lib/components/Card.svelte';
 	import UploadIcon from '../icons/UploadIcon.svelte';
 	import GridLayout from '../layouts/GridLayout.svelte';
+	import BarChart from '../chartJS/BarChart.svelte';
+	import DoughnutChart from '../chartJS/DoughnutChart.svelte';
+	import PieChart from '../chartJS/PieChart.svelte';
 
 	let pipelineNavItems = [
 		'In Review',
@@ -18,6 +21,13 @@
 		'Execution'
 	];
 	let selectedNavItem = pipelineNavItems[0];
+
+	let reportingItems = [
+		'Bar Chart',
+		'Doughnut Chart',
+		'Pie Chart'
+	];
+	let selectedReportItem = reportingItems[0];
 
 	let pipelineOptions = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 	let selectedPipelineRow = 0;
@@ -140,7 +150,7 @@
 						<span class="tracking-widest text-black/50 dark:text-white/50">Criteria Match</span>
 						<span class="text-light-purple">77%</span>
 					</div>
-					<input type="range" name="" id="" value="77" />
+					<input type="range" name="" id="" value="77"/>
 					<table class=" table-auto rounded-md border text-xs shadow-04dp">
 						<tbody class="w-full divide-y text-xs">
 							<tr class="divide-x">
@@ -193,7 +203,53 @@
 				</div>
 			</div>
 		</Card>
-		<Card heading="Reporting" />
+		<Card heading="Reporting">
+			<div class="h-full w-full space-y-2.5">
+				<!-- Mobile Nav -->
+				<select name="" id="" class="{selectBoxClasses} md:hidden">
+					{#each reportingItems as reportItem}
+						<option value={reportItem}>{reportItem}</option>
+					{/each}
+				</select>
+				<!-- Desktop Nav -->
+				<ul
+					class="hidden w-full divide-x divide-black/50 rounded-full border border-black/50 font-bold dark:divide-white/50 dark:border-white/50 md:flex"
+				>
+					{#each reportingItems as reportItem, i}
+						<li
+							class="{selectedReportItem === reportItem ? 'bg-pink text-white  ' : standardHoverClasses} 
+						{i === 0 ? 'rounded-l-full' : ''} {i === reportingItems.length - 1 ? 'rounded-r-full' : ''} 
+							flex w-1/3 items-center justify-center py-0.5"
+						>
+							<button
+								on:click={() => {
+									selectedReportItem = reportItem;
+								}}
+								class="h-full w-full text-[10px]"
+							>
+								{reportItem}
+							</button>
+						</li>
+					{/each}
+				</ul>
+
+				{#if selectedReportItem === 'Bar Chart'}
+				<BarChart/>
+				{:else if selectedReportItem === 'Doughnut Chart'}
+				<DoughnutChart />
+				{:else}
+				<PieChart />
+				{/if}
+				
+			</div>
+			<!-- <div class="flex h-full w-full flex-col justify-between space-y-2.5 pb-5 md:flex-row md:space-x-2.5 md:space-y-0 md:pb-0">
+				<div class="flex h-full w-full flex-col justify-between md:w-2/3">
+					<BarChart/>
+				</div>
+
+		
+			</div> -->
+		</Card>
 	</div>
 
 	<div class="grid gap-5 md:grid-rows-2">

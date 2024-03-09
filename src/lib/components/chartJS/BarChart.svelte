@@ -1,0 +1,60 @@
+<script lang='ts'>
+    import { Bar } from 'svelte-chartjs';
+    import { data } from './testData';
+    import {
+    Chart,
+    Title,
+    Tooltip,
+    Legend,
+    BarElement,
+    CategoryScale,
+    LinearScale,
+  } from 'chart.js';
+
+  Chart.register(
+    Title,
+    Tooltip,
+    Legend,
+    BarElement,
+    CategoryScale,
+    LinearScale
+  );
+
+//   const data = {
+//   labels: ['In Review', 'Accepted', 'Negotiation', 'Due Diligence', 'Documents', 'Execution'],
+//   datasets: [
+//     {
+//       label: 'Deals by Status',
+//       data: [12, 19, 3, 5, 2, 3],
+//       backgroundColor: [
+//         'rgba(255, 134,159,0.4)',
+//         'rgba(98,  182, 239,0.4)',
+//         'rgba(255, 218, 128,0.4)',
+//         'rgba(113, 205, 205,0.4)',
+//         'rgba(170, 128, 252,0.4)',
+//         'rgba(255, 177, 101,0.4)',
+//       ],
+//       hoverBackgroundColor: [
+//         'rgba(255, 134, 159, 0.8)',
+//         'rgba(98,  182, 239, 0.8)',
+//         'rgba(255, 218, 128, 0.8)',
+//         'rgba(113, 205, 205, 0.8)',
+//         'rgba(170, 128, 252, 0.8)',
+//         'rgba(255, 177, 101, 0.8)',
+//       ],
+//       borderWidth: 2,
+//       borderColor: [
+//         'rgba(255, 134, 159, 1)',
+//         'rgba(98,  182, 239, 1)',
+//         'rgba(255, 218, 128, 1)',
+//         'rgba(113, 205, 205, 1)',
+//         'rgba(170, 128, 252, 1)',
+//         'rgba(255, 177, 101, 1)',
+//       ],
+//     },
+//   ],
+// };
+</script>
+<div>
+    <Bar {data} options={{ responsive: true }} />
+</div>
