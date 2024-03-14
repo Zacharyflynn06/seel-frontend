@@ -1,5 +1,5 @@
 <script lang="ts">
-	export let className: string = 'h-6 w-6';
+	export let className: string = 'h-6 w-6 ';
 </script>
 
 <svg
@@ -71,7 +71,7 @@
 				/></g
 			></g
 		></g
-	><g fill="#ffffff" fill-opacity="1"
+	><g fill="currentColor" fill-opacity="1"
 		><g transform="translate(77.762853, 313.113037)"
 			><g
 				><path
@@ -79,7 +79,7 @@
 				/></g
 			></g
 		></g
-	><g fill="#ffffff" fill-opacity="1"
+	><g fill="currentColor" fill-opacity="1"
 		><g transform="translate(131.879812, 313.113037)"
 			><g
 				><path
@@ -87,7 +87,7 @@
 				/></g
 			></g
 		></g
-	><g fill="#ffffff" fill-opacity="1"
+	><g fill="currentColor" fill-opacity="1"
 		><g transform="translate(198.206081, 313.113037)"
 			><g
 				><path
@@ -95,7 +95,7 @@
 				/></g
 			></g
 		></g
-	><g fill="#ffffff" fill-opacity="1"
+	><g fill="currentColor" fill-opacity="1"
 		><g transform="translate(264.53235, 313.113037)"
 			><g
 				><path
