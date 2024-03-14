@@ -7,7 +7,7 @@ body {
 }
 @layer base {
 	.input {
-		@apply rounded-md border-[1.5px] border-purple text-[16px];
+		@apply rounded-md border-[0.5px] border-purple text-[16px];
 	}
 	@font-face {
 		font-family: League Spartan;
@@ -22,5 +22,23 @@ body {
 			local('DM Sans'),
 			url('/fonts/DMSans-VariableFont_wght.ttf') format('truetype');
 		font-display: swap;
+	}
+
+	.gradient-animation {
+		background: linear-gradient(45deg, #d0577b, #4b4a78);
+		background-size: 200% 200%;
+		animation: gradient 15s cubic-bezier(0.075, 0.82, 0.165, 1) infinite;
+		height: 100dvh;
+	}
+	@keyframes gradient {
+		0% {
+			background-position: 0% 50%;
+		}
+		50% {
+			background-position: 100% 50%;
+		}
+		100% {
+			background-position: 0% 50%;
+		}
 	}
 }

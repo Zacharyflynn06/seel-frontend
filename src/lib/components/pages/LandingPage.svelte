@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import { animatedTouchClasses, flexCenter } from '$lib/classes';
 	import Spinner from '$lib/components/Spinner.svelte';
 	import ArrowIcon from '$lib/components/icons/ArrowIcon.svelte';
@@ -8,10 +8,17 @@
 	let loading = false;
 	let userInput = '';
 
-	let apiResponse = '';
+	let answer: string | undefined = '';
 
 	async function handleSubmit() {
 		loading = !loading;
+
+		let apiResponse: undefined | { answer: string } = undefined;
+
+		if (!userInput) {
+			loading = false;
+			return;
+		}
 
 		try {
 			let request = new Request(`https://fanz3qdbx3.execute-api.us-east-1.amazonaws.com/api/ask`, {
@@ -29,6 +36,7 @@
 				throw new Error(response.statusText);
 			} else {
 				apiResponse = await response.json();
+				answer = apiResponse?.answer;
 				loading = false;
 			}
 		} catch (error) {
@@ -40,7 +48,7 @@
 <main class="gradient-animation grid h-[100dvh] w-screen items-center md:justify-center">
 	<form
 		on:submit|preventDefault={handleSubmit}
-		class=" {flexCenter} flex-col space-y-5 p-5 md:w-[500px] md:max-w-[500px]"
+		class="{flexCenter} flex-col space-y-5 p-5 md:w-[500px] md:max-w-[500px]"
 	>
 		<div>
 			<SeelIcon className="h-[15rem] w-[15rem]" />
@@ -66,31 +74,11 @@
 			/>
 		</div>
 		<div class="min-h-20 text-white">
-			{#if apiResponse}
+			{#if answer}
 				<Typewriter>
-					{apiResponse.answer}
+					{answer}
 				</Typewriter>
 			{/if}
 		</div>
 	</form>
 </main>
-
-<style>
-	.gradient-animation {
-		background: linear-gradient(45deg, #d0577b, #4b4a78);
-		background-size: 200% 200%;
-		animation: gradient 15s cubic-bezier(0.075, 0.82, 0.165, 1) infinite;
-		height: 100dvh;
-	}
-	@keyframes gradient {
-		0% {
-			background-position: 0% 50%;
-		}
-		50% {
-			background-position: 100% 50%;
-		}
-		100% {
-			background-position: 0% 50%;
-		}
-	}
-</style>

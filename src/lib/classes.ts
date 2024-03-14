@@ -12,9 +12,10 @@ export const zeroDp = 'shadow-01dp dark:shadow-01dp bg-off-white dark:bg-black';
 // input classes
 export const inputResetClasses = 'ring-0 focus-within:ring-0 border-purple border-[1.5px]';
 
-export const inputBaseColors = 'bg-transparent';
+export const textInputClasses =
+	'w-full bg-white mt-1 block w-full rounded-md border-0  shadow-sm focus:border-light-purple focus:ring focus:ring-light-purple focus:ring-opacity-50';
 
-export const selectBoxClasses = `py-1 rounded-md border border-black/50 dark:border-white/50 dark:focus:border-light-purple focus:border-light-purple capitalize shadow-04dp  ${inputBaseColors} ${inputResetClasses} `;
+export const selectBoxClasses = `py-1 rounded-md border border-black/50 dark:border-white/50 dark:focus:border-light-purple focus:border-light-purple capitalize shadow-04dp `;
 
 export const cardHeadingClasses =
 	'font-spartan text-xl font-bold text-black dark:text-white leading-[100%]';
