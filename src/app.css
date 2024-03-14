@@ -9,6 +9,10 @@ body {
 	.input {
 		@apply rounded-md border-[0.5px] border-purple text-[16px];
 	}
+
+	h1 {
+		@apply font-spartan text-2xl font-bold;
+	}
 	@font-face {
 		font-family: League Spartan;
 		src:
