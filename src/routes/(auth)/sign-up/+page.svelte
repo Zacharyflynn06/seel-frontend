@@ -16,7 +16,7 @@
 	};
 </script>
 
-<form class="space-y-5" on:submit|preventDefault={handleSubmit}>
+<form class="space-y-2.5" on:submit|preventDefault={handleSubmit}>
 	<h1>Sign up</h1>
 	<TextInput
 		bind:value={email}

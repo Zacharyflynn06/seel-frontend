@@ -5,8 +5,8 @@
 	let confirmPassword = '';
 </script>
 
-<form class="space-y-4">
-	<h1>Create new password</h1>
+<form class="space-y-2.5">
+	<h1>Reset password</h1>
 
 	<TextInput
 		bind:value={password}

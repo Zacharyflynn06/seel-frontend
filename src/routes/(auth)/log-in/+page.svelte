@@ -5,7 +5,7 @@
 	let password = '';
 </script>
 
-<form class="space-y-5">
+<form class="space-y-2.5">
 	<h1>Log in</h1>
 	<TextInput
 		bind:value={email}
@@ -21,6 +21,10 @@
 		label="Password"
 		placeholder="Password"
 	/>
+	<a class="text-xs text-black/50 underline hover:text-pink" href="/forgot-password"
+		>Forgot password?</a
+	>
+
 	<div class="flex justify-end">
 		<SmallButton type="submit" label="Log in" />
 	</div>

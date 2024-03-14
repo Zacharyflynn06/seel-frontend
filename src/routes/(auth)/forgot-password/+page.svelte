@@ -4,8 +4,8 @@
 	let email = '';
 </script>
 
-<form class="space-y-4">
-	<h1>Create new password</h1>
+<form class="space-y-2.5">
+	<h1>Forgot password</h1>
 	<p class="text-xs text-black/50">
 		Please enter your email address below and we will send you a link to reset your password.
 	</p>
