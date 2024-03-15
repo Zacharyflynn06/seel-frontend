@@ -1,3 +1,5 @@
+export const secondaryTextClasses = 'text-black/50 dark:text-white/50';
+
 export const flexCenter = 'flex items-center justify-center';
 
 export const mainPanelWidth = 'w-full md:w-[calc(100vw-10rem)]';

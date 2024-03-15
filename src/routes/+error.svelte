@@ -3,7 +3,7 @@
 	import SeelIcon from '$lib/components/icons/SeelIcon.svelte';
 </script>
 
-<div class="grid h-screen w-full items-center justify-center bg-gradient-to-bl from-pink to-purple">
+<div class="gradient-animation grid h-screen w-full items-center justify-center">
 	<div class="flex flex-col items-center justify-center space-y-5">
 		<SeelIcon className="h-[15rem] w-[15rem] text-off-white" />
 		<div class="font text-center font-spartan text-2xl text-white">

@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { secondaryTextClasses } from '$lib/classes';
 	import SmallButton from '$lib/components/buttons/SmallButton.svelte';
 	import TextInput from '$lib/components/formComponents/TextInput.svelte';
 	let email = '';
@@ -21,7 +22,7 @@
 		label="Password"
 		placeholder="Password"
 	/>
-	<a class="text-xs text-black/50 underline hover:text-pink" href="/forgot-password"
+	<a class="{secondaryTextClasses} text-xs underline hover:text-pink" href="/forgot-password"
 		>Forgot password?</a
 	>
 
