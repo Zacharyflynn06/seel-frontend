@@ -17,11 +17,13 @@
 
     <Doughnut 
         {data} 
-        options={{ responsive: true, 
+        options={{ 
+                responsive: true, 
                 plugins: {
                     legend: {
                     position: "left",
                     align: "center"
                     }
-                } 
+                },
+                maintainAspectRatio: false
             }}/>

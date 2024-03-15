@@ -232,23 +232,16 @@
 						</li>
 					{/each}
 				</ul>
-
-				{#if selectedReportItem === 'Bar Chart'}
-				<BarChart/>
-				{:else if selectedReportItem === 'Doughnut Chart'}
-				<DoughnutChart />
-				{:else}
-				<PieChart />
-				{/if}
-				
-			</div>
-			<!-- <div class="flex h-full w-full flex-col justify-between space-y-2.5 pb-5 md:flex-row md:space-x-2.5 md:space-y-0 md:pb-0">
-				<div class="flex h-full w-full flex-col justify-between md:w-2/3">
+				<div class="h-full w-full space-y-2.5" style="height:320px">
+					{#if selectedReportItem === 'Bar Chart'}
 					<BarChart/>
+					{:else if selectedReportItem === 'Doughnut Chart'}
+					<DoughnutChart />
+					{:else}
+					<PieChart />
+					{/if}
 				</div>
-
-		
-			</div> -->
+			</div>
 		</Card>
 	</div>
 

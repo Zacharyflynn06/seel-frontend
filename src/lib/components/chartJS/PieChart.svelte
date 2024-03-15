@@ -21,5 +21,7 @@
             position: "left",
             align: "center"
             }
-        } 
+        },
+        maintainAspectRatio: false
+        // animation: false ??
     }}/>
