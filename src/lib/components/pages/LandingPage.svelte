@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { animatedTouchClasses, flexCenter } from '$lib/classes';
+	import { flexCenter } from '$lib/classes';
 	import Spinner from '$lib/components/Spinner.svelte';
 	import ArrowIcon from '$lib/components/icons/ArrowIcon.svelte';
 	import Typewriter from 'svelte-typewriter';
@@ -51,14 +51,14 @@
 		class="{flexCenter} flex-col space-y-5 p-5 md:w-[500px] md:max-w-[500px]"
 	>
 		<div>
-			<SeelIcon className="h-[15rem] w-[15rem]" />
+			<SeelIcon className="h-[15rem] w-[15rem] text-off-white drop-shadow-xl" />
 		</div>
 		<div
 			class="relative grid w-full items-center rounded-lg border border-transparent bg-off-white text-center shadow-08dp focus-within:border-light-purple focus:ring-purple dark:bg-off-black"
 		>
 			<button
 				type="submit"
-				class="absolute right-1.5 z-10 h-full transform bg-transparent pl-1 ease-in-out {animatedTouchClasses} group-hover:border-purple"
+				class="absolute right-1.5 z-10 h-full transform bg-transparent pl-1 group-hover:border-purple"
 			>
 				{#if !loading}
 					<ArrowIcon className="h-6 w-6 " />
@@ -73,7 +73,7 @@
 				class="group mr-8 rounded-l-lg border-transparent bg-transparent px-3 py-1.5 ring-transparent focus:border-transparent focus:ring-transparent"
 			/>
 		</div>
-		<div class="min-h-20 text-white">
+		<div class="mx-3.5 min-h-20 text-white">
 			{#if answer}
 				<Typewriter>
 					{answer}

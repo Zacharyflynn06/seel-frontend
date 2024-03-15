@@ -1,3 +1,8 @@
+export const secondaryTextClasses = 'text-black/50 dark:text-white/50';
+
+export const anchorTagClasses =
+	secondaryTextClasses + ' ml-2.5 block underline hover:text-pink dark:hover:text-pink';
+
 export const flexCenter = 'flex items-center justify-center';
 
 export const mainPanelWidth = 'w-full md:w-[calc(100vw-10rem)]';

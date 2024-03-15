@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { anchorTagClasses, secondaryTextClasses } from '$lib/classes';
 	import SmallButton from '$lib/components/buttons/SmallButton.svelte';
 	import TextInput from '$lib/components/formComponents/TextInput.svelte';
 
@@ -40,6 +41,7 @@
 		placeholder="Confirm Password"
 	/>
 
+	<a href="/log-in" class="{anchorTagClasses} text-xs">Already have an account?</a>
 	<div class="flex justify-end">
 		<SmallButton type="submit" label="Sign up" />
 	</div>

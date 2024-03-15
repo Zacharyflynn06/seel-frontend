@@ -1,6 +1,4 @@
-<script>
-	import { animatedTouchClasses } from '$lib/classes';
-
+<script type="ts">
 	import { themeStore } from '$lib/stores/themeStore';
 	import MoonIcon from '../icons/MoonIcon.svelte';
 	import SunIcon from '../icons/SunIcon.svelte';
@@ -12,7 +10,7 @@
 	on:click={() => {
 		themeStore.toggle();
 	}}
-	class="text-pink {animatedTouchClasses} dark:hover:drop-shadow-pink"
+	class="text-pink hover:scale-105 hover:drop-shadow-lg active:scale-95"
 >
 	{#if theme === 'light'}
 		<MoonIcon />
