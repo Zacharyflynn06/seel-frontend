@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { secondaryTextClasses } from '$lib/classes';
+	import { anchorTagClasses, secondaryTextClasses } from '$lib/classes';
 	import SmallButton from '$lib/components/buttons/SmallButton.svelte';
 	import TextInput from '$lib/components/formComponents/TextInput.svelte';
 	let email = '';
@@ -22,9 +22,7 @@
 		label="Password"
 		placeholder="Password"
 	/>
-	<a class="{secondaryTextClasses} text-xs underline hover:text-pink" href="/forgot-password"
-		>Forgot password?</a
-	>
+	<a class="{anchorTagClasses} text-xs" href="/forgot-password">Forgot password?</a>
 
 	<div class="flex justify-end">
 		<SmallButton type="submit" label="Log in" />

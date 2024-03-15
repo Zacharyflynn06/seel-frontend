@@ -4,9 +4,8 @@
 	export let label = '';
 </script>
 
-<div class="sm:gradient-animation grid w-full pt-[64px]">
+<div class="sm:gradient-animation grid h-screen w-full items-center pt-[64px]">
 	<div
-		on:close
 		class="m-auto h-full w-full bg-off-white p-10 shadow-08dp dark:bg-off-black md:h-fit md:max-w-[400px] md:rounded-2xl"
 	>
 		<div class="flex w-full items-center justify-center">

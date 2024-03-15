@@ -3,7 +3,7 @@
 	import DarkModeToggleButton from '$lib/components/buttons/DarkModeToggleButton.svelte';
 </script>
 
-<header class="fixed inset-0 h-16 w-full bg-off-white shadow-24dp dark:bg-off-black">
+<header class="fixed inset-0 h-16 w-full bg-off-white shadow-08dp dark:bg-off-black">
 	<div class="mx-auto flex h-full w-full max-w-[1200px] items-center justify-between px-5">
 		<a
 			href="/"
