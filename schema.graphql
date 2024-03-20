@@ -1,0 +1,99 @@
+"""
+Tells the service this field/object has access authorized by an API key.
+"""
+directive @aws_api_key on FIELD_DEFINITION | OBJECT
+
+"""Directs the schema to enforce authorization on a field"""
+directive @aws_auth(
+  """List of cognito user pool groups which have access on this field"""
+  cognito_groups: [String]
+) on FIELD_DEFINITION
+
+"""
+Tells the service this field/object has access authorized by a Cognito User Pools token.
+"""
+directive @aws_cognito_user_pools(
+  """List of cognito user pool groups which have access on this field"""
+  cognito_groups: [String]
+) on FIELD_DEFINITION | OBJECT
+
+"""
+Tells the service this field/object has access authorized by sigv4 signing.
+"""
+directive @aws_iam on FIELD_DEFINITION | OBJECT
+
+"""
+Tells the service this field/object has access authorized by a Lambda Authorizer.
+"""
+directive @aws_lambda on FIELD_DEFINITION | OBJECT
+
+"""
+Tells the service this field/object has access authorized by an OIDC token.
+"""
+directive @aws_oidc on FIELD_DEFINITION | OBJECT
+
+"""
+Tells the service which subscriptions will be published to when this mutation is called. This directive is deprecated use @aws_susbscribe directive instead.
+"""
+directive @aws_publish(
+  """
+  List of subscriptions which will be published to when this mutation is called.
+  """
+  subscriptions: [String]
+) on FIELD_DEFINITION
+
+"""Tells the service which mutation triggers this subscription."""
+directive @aws_subscribe(
+  """
+  List of mutations which will trigger this subscription when they are called.
+  """
+  mutations: [String]
+) on FIELD_DEFINITION
+
+"""This directive allows results to be deferred during execution"""
+directive @defer on FIELD
+
+"""
+The `AWSJSON` scalar type provided by AWS AppSync, represents a JSON string that complies with [RFC 8259](https://tools.ietf.org/html/rfc8259).  Maps like "**{\\"upvotes\\": 10}**", lists like "**[1,2,3]**", and scalar values like "**\\"AWSJSON example string\\"**", "**1**", and "**true**" are accepted as valid JSON and will automatically be parsed and loaded in the resolver mapping templates as Maps, Lists, or Scalar values rather than as the literal input strings.  Invalid JSON strings like "**{a: 1}**", "**{'a': 1}**" and "**Unquoted string**" will throw GraphQL validation errors.
+"""
+scalar AWSJSON
+
+type Client {
+  config: AWSJSON!
+  display_name: String!
+  id: String!
+  lookup_name: String!
+}
+
+type EmailData {
+  any_additional_founders: String
+  burn_rate: Int
+  category: String
+  client_id: String!
+  company_name: String
+  competitors: String
+  complete: Boolean
+  differentiation_from_competitors: String
+  first_time_founder: Boolean
+  full_time: Boolean
+  funding_round: String
+  id: String!
+  is_saas: Boolean
+  is_us_based: Boolean
+  location: String
+  next_steps: String
+  response_message_id: String
+  s3_bucket: String!
+  s3_key: String!
+  sender_email: String
+  sender_job_title: String
+  sender_name: String
+  thread_id: String!
+  university: String
+  women_founded_or_owned: Boolean
+}
+
+type Query {
+  clients: [Client]
+  emails: [EmailData]
+}
