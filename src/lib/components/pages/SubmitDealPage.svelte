@@ -12,9 +12,9 @@
 	<div class="grid">
 		<Card heading="Results" />
 	</div>
-	<div class="grid space-y-5 md:grid-rows-3">
+	<!-- <div class="grid space-y-5 md:grid-rows-3">
 		<div class="grid"><Card heading="Criteria Match" /></div>
 		<div class="grid"><Card heading="Missing Information" /></div>
 		<div class="grid"><Card heading="Existing Matches" /></div>
-	</div>
+	</div> -->
 </GridLayout>
