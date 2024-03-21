@@ -1,0 +1,8 @@
+query ClientsQuery {
+	clients {
+		config
+		display_name
+		id
+		lookup_name
+	}
+}
