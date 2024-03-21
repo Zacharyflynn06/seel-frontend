@@ -2,7 +2,7 @@
 	export let className: string = 'h-6 w-6';
 </script>
 
-<svg class={className} viewBox="0 0 24 24" stroke="currentColor" xmlns="http://www.w3.org/2000/svg">
+<svg class={className} viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
 	<g class="spinner-animation"
 		><circle cx="12" cy="2.5" r="1.5" opacity=".14" /><circle
 			cx="16.75"

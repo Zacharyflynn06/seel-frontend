@@ -1,4 +1,6 @@
 import type { Record } from "./public/record";
+import { DashboardQuery$result, DashboardQuery$input } from "../artifacts/DashboardQuery";
+import { DashboardQueryStore } from "../plugins/houdini-svelte/stores/DashboardQuery";
 import { EmailsQuery$result, EmailsQuery$input } from "../artifacts/EmailsQuery";
 import { EmailsQueryStore } from "../plugins/houdini-svelte/stores/EmailsQuery";
 import { ClientsQuery$result, ClientsQuery$input } from "../artifacts/ClientsQuery";
@@ -12,7 +14,7 @@ export declare type CacheTypeDef = {
             };
             fields: {
                 config: {
-                    type: YourType_AWSJSON;
+                    type: object;
                     args: never;
                 };
                 display_name: {
@@ -154,5 +156,5 @@ export declare type CacheTypeDef = {
         };
     };
     lists: {};
-    queries: [[ClientsQueryStore, ClientsQuery$result, ClientsQuery$input], [EmailsQueryStore, EmailsQuery$result, EmailsQuery$input]];
+    queries: [[ClientsQueryStore, ClientsQuery$result, ClientsQuery$input], [EmailsQueryStore, EmailsQuery$result, EmailsQuery$input], [DashboardQueryStore, DashboardQuery$result, DashboardQuery$input]];
 };

@@ -1,4 +1,5 @@
 export * from "./artifacts/ClientsQuery";
+export * from "./artifacts/DashboardQuery";
 export * from "./artifacts/EmailsQuery";
 export * from "./runtime";
 export * from "./graphql";

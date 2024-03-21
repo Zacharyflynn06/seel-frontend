@@ -12,12 +12,20 @@ const config = {
 	plugins: {
 		'houdini-svelte': {}
 	},
+	framework: 'sveltekit',
+	include: ['src/lib/graphql/**/*.gql', 'src/routes/**/*.{svelte,graphql,gql,ts,js}'],
 
+	// Yeah... AppSync only allows their build-in scalars:
+	// AWSDate, AWSDateTime, AWSEmail, AWSIPAddress, AWSJSON, AWSPhone, AWSTime, AWSTimestamp, AWSURL
 	scalars: {
-		/* in your case, something like */
 		AWSJSON: {
-			// <- The GraphQL Scalar
-			type: 'YourType_AWSJSON' // <-  The TypeScript type
+			type: 'object',
+			unmarshal(val) {
+				return val && typeof val === 'string' ? JSON.parse(val) : val;
+			},
+			marshal(obj) {
+				return obj && typeof obj !== 'string' ? JSON.stringify(obj) : obj;
+			}
 		},
 
 		DateTime: {

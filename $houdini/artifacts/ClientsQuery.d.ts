@@ -5,7 +5,7 @@ export type ClientsQuery = {
 
 export type ClientsQuery$result = {
     readonly clients: ({
-        readonly config: YourType_AWSJSON;
+        readonly config: object;
         readonly display_name: string;
         readonly id: string;
         readonly lookup_name: string;

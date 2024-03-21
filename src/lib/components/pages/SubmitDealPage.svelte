@@ -1,6 +1,4 @@
 <script lang="ts">
-	// your script goes here
-
 	import Card from '../Card.svelte';
 	import GridLayout from '../layouts/GridLayout.svelte';
 </script>
