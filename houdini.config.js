@@ -2,6 +2,7 @@
 
 /** @type {import('houdini').ConfigFile} */
 const config = {
+	schemaPath: './schema.graphql',
 	watchSchema: {
 		url: 'https://fmfxd3pstrhzffv2nppqxedxa4.appsync-api.us-east-1.amazonaws.com/graphql',
 		headers: {
@@ -12,8 +13,6 @@ const config = {
 	plugins: {
 		'houdini-svelte': {}
 	},
-	framework: 'sveltekit',
-	include: ['src/lib/graphql/**/*.gql', 'src/routes/**/*.{svelte,graphql,gql,ts,js}'],
 
 	// Yeah... AppSync only allows their build-in scalars:
 	// AWSDate, AWSDateTime, AWSEmail, AWSIPAddress, AWSJSON, AWSPhone, AWSTime, AWSTimestamp, AWSURL

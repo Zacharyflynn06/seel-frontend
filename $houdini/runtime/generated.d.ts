@@ -1,10 +1,12 @@
 import type { Record } from "./public/record";
+import { ReviewDealsQuery$result, ReviewDealsQuery$input } from "../artifacts/ReviewDealsQuery";
+import { ReviewDealsQueryStore } from "../plugins/houdini-svelte/stores/ReviewDealsQuery";
 import { DashboardQuery$result, DashboardQuery$input } from "../artifacts/DashboardQuery";
 import { DashboardQueryStore } from "../plugins/houdini-svelte/stores/DashboardQuery";
-import { EmailsQuery$result, EmailsQuery$input } from "../artifacts/EmailsQuery";
-import { EmailsQueryStore } from "../plugins/houdini-svelte/stores/EmailsQuery";
 import { ClientsQuery$result, ClientsQuery$input } from "../artifacts/ClientsQuery";
 import { ClientsQueryStore } from "../plugins/houdini-svelte/stores/ClientsQuery";
+import { EmailsQuery$result, EmailsQuery$input } from "../artifacts/EmailsQuery";
+import { EmailsQueryStore } from "../plugins/houdini-svelte/stores/EmailsQuery";
 
 export declare type CacheTypeDef = {
     types: {
@@ -156,5 +158,5 @@ export declare type CacheTypeDef = {
         };
     };
     lists: {};
-    queries: [[ClientsQueryStore, ClientsQuery$result, ClientsQuery$input], [EmailsQueryStore, EmailsQuery$result, EmailsQuery$input], [DashboardQueryStore, DashboardQuery$result, DashboardQuery$input]];
+    queries: [[EmailsQueryStore, EmailsQuery$result, EmailsQuery$input], [ClientsQueryStore, ClientsQuery$result, ClientsQuery$input], [DashboardQueryStore, DashboardQuery$result, DashboardQuery$input], [ReviewDealsQueryStore, ReviewDealsQuery$result, ReviewDealsQuery$input]];
 };

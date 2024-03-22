@@ -6,8 +6,6 @@
 	export let data: PageData;
 
 	$: ({ DashboardQuery } = data);
-
-	$: console.log({ $DashboardQuery });
 </script>
 
 {#if $DashboardQuery.fetching}
