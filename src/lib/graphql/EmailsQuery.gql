@@ -1,0 +1,29 @@
+query EmailsQuery {
+	emails {
+		any_additional_founders
+		burn_rate
+		women_founded_or_owned
+		university
+		thread_id
+		sender_name
+		sender_job_title
+		s3_bucket
+		sender_email
+		s3_key
+		response_message_id
+		next_steps
+		location
+		is_us_based
+		is_saas
+		id
+		funding_round
+		full_time
+		first_time_founder
+		differentiation_from_competitors
+		complete
+		competitors
+		company_name
+		client_id
+		category
+	}
+}

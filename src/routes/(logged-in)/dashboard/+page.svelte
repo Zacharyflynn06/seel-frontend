@@ -1,18 +1,15 @@
 <script lang="ts">
-	import Spinner from '$lib/components/Spinner.svelte';
 	import Dashboard from '$lib/components/pages/Dashboard.svelte';
-
+	import LoadingPage from '$lib/components/pages/LoadingPage.svelte';
 	import type { PageData } from './$houdini';
-	import { ClientsQueryStore } from '$houdini';
+
 	export let data: PageData;
 
-	$: ({ EmailsQuery } = data);
-
-	$: console.log(ClientsQueryStore);
+	$: ({ DashboardQuery } = data);
 </script>
 
-{#if $EmailsQuery.fetching}
-	<Spinner />
+{#if $DashboardQuery.fetching}
+	<LoadingPage />
 {:else}
 	<Dashboard />
 {/if}
