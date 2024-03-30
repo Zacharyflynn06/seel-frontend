@@ -1,26 +1,23 @@
-import { fail, type Actions, type Action, redirect } from '@sveltejs/kit';
+import { fail } from '@sveltejs/kit';
 import { Auth } from 'aws-amplify';
-const login: Action = async ({ request }) => {
-	const data = await request.formData();
-	const email = data.get('email-address');
-	const password = data.get('password');
 
-	console.log({ email, password });
+export const actions = {
+	login: async ({ request }) => {
+		const data = await request.formData();
 
-	if (typeof email !== 'string' || typeof password !== 'string' || !email || !password) {
-		return fail(400, { invalid: true });
-	}
+		const email = data.get('email-address');
+		const password = data.get('password');
 
-	const variable = await Auth.signIn(email, password)
-		.then((user) => {
-			console.log({ user });
-			throw redirect(303, '/dashboard');
-		})
-		.catch((error) => {
-			console.log({ error });
+		if (typeof email !== 'string' || typeof password !== 'string' || !email || !password) {
 			return fail(400, { invalid: true });
-		});
+		}
 
-	console.log({ variable });
+		try {
+			const user = await Auth.signIn(email, password);
+			console.log({ user });
+			return { success: true };
+		} catch (error) {
+			return fail(400, { error: 'Invalid email or password, please try again' });
+		}
+	}
 };
-export const actions: Actions = { login };

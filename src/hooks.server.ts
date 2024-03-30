@@ -1,10 +1,22 @@
+import type { Handle } from '@sveltejs/kit';
+import { sequence } from '@sveltejs/kit/hooks';
+
 /** @type {import('@sveltejs/kit').Handle} */
+function authorize({ event, resolve, locals }) {
+	// console.log({ 'authorize event': event });
 
-export async function handle({ event, resolve }) {
-	if (event.url.pathname.startsWith('/custom')) {
-		return new Response('custom response');
-	}
+	return resolve(event);
+}
 
+async function logger({ event, resolve }) {
+	const startTime = Date.now();
+	const humanFormatDate = new Date(startTime).toLocaleString();
 	const response = await resolve(event);
+	console.log(
+		`${Date.now() - startTime}ms ${event.request.method} from ${event.url.host} to ${event.url.pathname} started at ${humanFormatDate}`
+	);
+
 	return response;
 }
+
+export const handle: Handle = sequence(logger, authorize);
