@@ -7,16 +7,25 @@
 	export let placeholder = '';
 	export let className = textInputClasses;
 	export let type = 'text';
+	export let minlength = 0;
 </script>
 
 <label class="block">
 	<span class="font-spartan text-off-black dark:text-off-white">{label}</span>
 
 	{#if type === 'text'}
-		<input type="text" {value} {name} {placeholder} class={className} />
+		<input type="text" {value} {name} {placeholder} class={className} {minlength} />
 	{:else if type === 'password'}
-		<input type="password" {value} {name} {placeholder} class={className} />
+		<input
+			type="password"
+			{value}
+			{name}
+			{placeholder}
+			class={className}
+			{minlength}
+			autocomplete="current-password"
+		/>
 	{:else if type === 'email'}
-		<input type="email" {value} {name} {placeholder} class={className} />
+		<input type="email" {value} {name} {placeholder} class={className} {minlength} />
 	{/if}
 </label>

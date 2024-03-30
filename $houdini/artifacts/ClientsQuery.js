@@ -60,7 +60,7 @@ export default {
     },
 
     "policy": "CacheOrNetwork",
-    "partial": false
+    "partial": true
 };
 
 "HoudiniHash=8c03b36391d1358d431a3e6613780f166b5756c938b7bf1201899961d65a6fc8";
