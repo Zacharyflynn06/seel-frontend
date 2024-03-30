@@ -3,7 +3,7 @@ import { sequence } from '@sveltejs/kit/hooks';
 
 /** @type {import('@sveltejs/kit').Handle} */
 function authorize({ event, resolve, locals }) {
-	// console.log({ 'authorize event': event });
+	console.log({ 'authorize event': event });
 
 	return resolve(event);
 }
