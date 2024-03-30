@@ -15,18 +15,20 @@ export const animatedTouchClasses =
 
 export const zeroDp = 'shadow-01dp dark:shadow-01dp bg-off-white dark:bg-black';
 
-// input classes
+// Form Input Classes
 export const inputResetClasses = 'ring-0 focus-within:ring-0 border-purple border-[1.5px]';
 
 export const textInputClasses =
-	'w-full bg-white mt-1 block w-full rounded-md border-0  shadow-sm focus:border-light-purple focus:ring focus:ring-light-purple focus:ring-opacity-50';
+	'w-full bg-white dark:bg-grey-04 dark:placeholder:text-off-white mt-1 block w-full rounded-md border-0 dark:text-off-white shadow-sm focus:border-light-purple focus:ring focus:ring-light-purple focus:ring-opacity-50';
 
 export const selectBoxClasses = `py-1 rounded-md border border-black/50 dark:border-white/50 dark:focus:border-light-purple focus:border-light-purple capitalize shadow-04dp `;
 
 export const cardHeadingClasses =
 	'font-spartan text-xl font-bold text-black dark:text-white leading-[100%]';
 
-// buttons
+// Buttons
 export const smallButtonClasses =
 	animatedTouchClasses +
 	' w-full rounded-sm text-off-white py-1 text-xs leading-[100%] bg-light-purple ';
+
+export const svgTouchClasses = 'ease-linear hover:scale-105 active:scale-95 duration-300';
