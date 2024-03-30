@@ -1,3 +1,8 @@
-export async function handle({ event, resolve }) {
-	return resolve(event);
-}
+// export const handle = async ({ request, resolve }) => {
+// 	const user = request.locals.user;
+
+// 	const context = {
+// 		user,
+// 		isLoggedIn: !!user
+// 	};
+// };

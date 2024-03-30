@@ -233,5 +233,5 @@ export type EmailsQuery$artifact = {
         "houdini-svelte": {};
     };
     "policy": "CacheOrNetwork";
-    "partial": false;
+    "partial": true;
 };

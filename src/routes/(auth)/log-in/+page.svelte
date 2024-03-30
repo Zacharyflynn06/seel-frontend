@@ -1,24 +1,26 @@
 <script lang="ts">
-	import { anchorTagClasses, secondaryTextClasses } from '$lib/classes';
+	import { enhance } from '$app/forms';
+	import { anchorTagClasses } from '$lib/classes';
 	import SmallButton from '$lib/components/buttons/SmallButton.svelte';
 	import TextInput from '$lib/components/formComponents/TextInput.svelte';
-	let email = '';
-	let password = '';
 </script>
 
-<form class="space-y-2.5">
+<form use:enhance action="?/login" method="POST" class="space-y-2.5">
 	<h1>Log in</h1>
+	<label for="email-address" class="sr-only">Email </label>
+
 	<TextInput
-		bind:value={email}
 		type="email"
-		name="email"
+		name="email-address"
 		label="Email Address"
 		placeholder="john.doe@example.com"
 	/>
+	<label for="password" class="sr-only">Password</label>
+
 	<TextInput
-		bind:value={password}
 		type="password"
 		name="password"
+		minlength={6}
 		label="Password"
 		placeholder="Password"
 	/>

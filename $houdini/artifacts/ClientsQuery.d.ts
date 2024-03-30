@@ -66,5 +66,5 @@ export type ClientsQuery$artifact = {
         "houdini-svelte": {};
     };
     "policy": "CacheOrNetwork";
-    "partial": false;
+    "partial": true;
 };
