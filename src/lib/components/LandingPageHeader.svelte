@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { page } from '$app/stores';
 	import DarkModeToggleButton from './buttons/DarkModeToggleButton.svelte';
 	import SmallButton from './buttons/SmallButton.svelte';
 </script>
@@ -13,9 +14,16 @@
 		</div>
 		<div class="flex space-x-5">
 			<DarkModeToggleButton />
-			<a href="/log-in" class="hidden md:block">
-				<SmallButton>Log in</SmallButton>
-			</a>
+
+			{#if $page.url.pathname === '/log-in'}
+				<a href="/sign-up" class="hidden md:block">
+					<SmallButton>Sign up</SmallButton>
+				</a>
+			{:else}
+				<a href="/log-in" class="hidden md:block">
+					<SmallButton>Log in</SmallButton>
+				</a>
+			{/if}
 		</div>
 	</div>
 </header>
