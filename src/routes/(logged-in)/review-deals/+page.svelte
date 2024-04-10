@@ -5,12 +5,12 @@
 
 	export let data: PageData;
 
-	$: ({ ReviewDealsQuery } = data);
-	$: emails = $ReviewDealsQuery.data?.emails;
+	// $: ({ ReviewDealsQuery } = data);
+	// $: emails = $ReviewDealsQuery.data?.emails;
 </script>
 
-{#if $ReviewDealsQuery.fetching}
+<!-- {#if $ReviewDealsQuery.fetching}
 	<LoadingPage />
-{:else}
-	<ReviewDealsPage {emails} />
-{/if}
+{:else} -->
+<ReviewDealsPage {data} />
+<!-- {/if} -->

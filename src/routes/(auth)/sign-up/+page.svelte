@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { anchorTagClasses, secondaryTextClasses } from '$lib/classes';
+	import { anchorTagClasses } from '$lib/classes';
 	import SmallButton from '$lib/components/buttons/SmallButton.svelte';
 	import TextInput from '$lib/components/formComponents/TextInput.svelte';
 

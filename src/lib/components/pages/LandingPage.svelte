@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { flexCenter } from '$lib/classes';
+	import { flexCenter, svgTouchClasses } from '$lib/classes';
 	import Spinner from '$lib/components/Spinner.svelte';
 	import ArrowIcon from '$lib/components/icons/ArrowIcon.svelte';
 	import Typewriter from 'svelte-typewriter';
@@ -58,7 +58,7 @@
 		>
 			<button
 				type="submit"
-				class="absolute right-1.5 z-10 h-full transform bg-transparent pl-1 group-hover:border-purple"
+				class="{svgTouchClasses} absolute right-2.5 z-10 h-full bg-transparent pl-1 text-purple dark:text-pink"
 			>
 				{#if !loading}
 					<ArrowIcon className="h-6 w-6 " />
@@ -70,7 +70,7 @@
 				placeholder="Ask me about Seel..."
 				bind:value={userInput}
 				type="text"
-				class="group mr-8 rounded-l-lg border-transparent bg-transparent px-3 py-1.5 ring-transparent focus:border-transparent focus:ring-transparent"
+				class="group mr-8 rounded-l-lg border-transparent bg-transparent px-3 py-1.5 ring-transparent focus:border-transparent focus:ring-transparent dark:text-white dark:placeholder:text-off-white"
 			/>
 		</div>
 		<div class="mx-3.5 min-h-20 text-white">

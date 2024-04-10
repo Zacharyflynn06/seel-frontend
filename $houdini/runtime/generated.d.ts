@@ -1,12 +1,4 @@
 import type { Record } from "./public/record";
-import { ReviewDealsQuery$result, ReviewDealsQuery$input } from "../artifacts/ReviewDealsQuery";
-import { ReviewDealsQueryStore } from "../plugins/houdini-svelte/stores/ReviewDealsQuery";
-import { DashboardQuery$result, DashboardQuery$input } from "../artifacts/DashboardQuery";
-import { DashboardQueryStore } from "../plugins/houdini-svelte/stores/DashboardQuery";
-import { EmailsQuery$result, EmailsQuery$input } from "../artifacts/EmailsQuery";
-import { EmailsQueryStore } from "../plugins/houdini-svelte/stores/EmailsQuery";
-import { ClientsQuery$result, ClientsQuery$input } from "../artifacts/ClientsQuery";
-import { ClientsQueryStore } from "../plugins/houdini-svelte/stores/ClientsQuery";
 
 export declare type CacheTypeDef = {
     types: {
@@ -15,6 +7,10 @@ export declare type CacheTypeDef = {
                 id: string;
             };
             fields: {
+                companies: {
+                    type: (Record<CacheTypeDef, "Company">)[] | null;
+                    args: never;
+                };
                 config: {
                     type: object;
                     args: never;
@@ -34,7 +30,7 @@ export declare type CacheTypeDef = {
             };
             fragments: [];
         };
-        EmailData: {
+        Company: {
             idFields: {
                 id: string;
             };
@@ -51,8 +47,8 @@ export declare type CacheTypeDef = {
                     type: string | null;
                     args: never;
                 };
-                client_id: {
-                    type: string;
+                client: {
+                    type: Record<CacheTypeDef, "Client">;
                     args: never;
                 };
                 company_name: {
@@ -61,10 +57,6 @@ export declare type CacheTypeDef = {
                 };
                 competitors: {
                     type: string | null;
-                    args: never;
-                };
-                complete: {
-                    type: boolean | null;
                     args: never;
                 };
                 differentiation_from_competitors: {
@@ -103,36 +95,16 @@ export declare type CacheTypeDef = {
                     type: string | null;
                     args: never;
                 };
-                response_message_id: {
-                    type: string | null;
-                    args: never;
-                };
-                s3_bucket: {
-                    type: string;
-                    args: never;
-                };
-                s3_key: {
-                    type: string;
-                    args: never;
-                };
-                sender_email: {
-                    type: string | null;
-                    args: never;
-                };
-                sender_job_title: {
-                    type: string | null;
-                    args: never;
-                };
-                sender_name: {
-                    type: string | null;
-                    args: never;
-                };
-                thread_id: {
-                    type: string;
+                source: {
+                    type: CompanySource;
                     args: never;
                 };
                 university: {
                     type: string | null;
+                    args: never;
+                };
+                users: {
+                    type: (Record<CacheTypeDef, "User">)[] | null;
                     args: never;
                 };
                 women_founded_or_owned: {
@@ -145,12 +117,36 @@ export declare type CacheTypeDef = {
         __ROOT__: {
             idFields: {};
             fields: {
-                clients: {
-                    type: ((Record<CacheTypeDef, "Client"> | null))[] | null;
+                getCompany: {
+                    type: Record<CacheTypeDef, "Company"> | null;
+                    args: {
+                        id: string;
+                    };
+                };
+                getUser: {
+                    type: Record<CacheTypeDef, "User"> | null;
+                    args: {
+                        id: string;
+                    };
+                };
+            };
+            fragments: [];
+        };
+        User: {
+            idFields: {
+                id: string;
+            };
+            fields: {
+                companies: {
+                    type: (Record<CacheTypeDef, "Company">)[] | null;
                     args: never;
                 };
-                emails: {
-                    type: ((Record<CacheTypeDef, "EmailData"> | null))[] | null;
+                email: {
+                    type: string;
+                    args: never;
+                };
+                id: {
+                    type: string;
                     args: never;
                 };
             };
@@ -158,5 +154,5 @@ export declare type CacheTypeDef = {
         };
     };
     lists: {};
-    queries: [[ClientsQueryStore, ClientsQuery$result, ClientsQuery$input], [EmailsQueryStore, EmailsQuery$result, EmailsQuery$input], [DashboardQueryStore, DashboardQuery$result, DashboardQuery$input], [ReviewDealsQueryStore, ReviewDealsQuery$result, ReviewDealsQuery$input]];
+    queries: [];
 };
