@@ -15,7 +15,7 @@
 		});
 	});
 
-	// $: console.log($page);
+	$: console.log($page);
 </script>
 
 <LandingPageHeader />
