@@ -1,7 +1,0 @@
-query ReviewDealsQuery {
-	emails {
-		id
-		company_name
-		category
-	}
-}

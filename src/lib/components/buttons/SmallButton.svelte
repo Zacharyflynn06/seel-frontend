@@ -6,9 +6,11 @@
 	export let bgColor = 'bg-pink';
 	export let textColor = 'text-off-white ';
 	export let label = '';
+	export let disabled = false;
 </script>
 
 <button
+	{disabled}
 	{type}
 	class="{bgColor} {textColor} {animatedTouchClasses} flex space-x-2.5 rounded-md bg-pink px-4 py-2 text-white focus:outline-none"
 >

@@ -7,7 +7,3 @@ export type Result<DataType> = {
 	data?: DataType | null
 	error?: Error | null
 }
-export * from './ClientsQuery'
-export * from './DashboardQuery'
-export * from './EmailsQuery'
-export * from './ReviewDealsQuery'

@@ -1,6 +1,4 @@
 import type * as Kit from '@sveltejs/kit';
-import { ReviewDealsQuery$result, ReviewDealsQuery$input } from '../../../../../artifacts/ReviewDealsQuery';
-import { ReviewDealsQueryStore } from '../../../../../plugins/houdini-svelte/stores/ReviewDealsQuery';
 
 type Expand<T> = T extends infer O ? { [K in keyof O]: O[K] } : never;
 // @ts-ignore
@@ -18,9 +16,8 @@ type PageParentData = Omit<EnsureDefined<import('../../$houdini').LayoutData>, k
 							[Key in Keys]?: Target[Key] | undefined | null
 						}
 					
-type PageParams = PageLoadEvent['params'];
 
 export type PageServerData = null;
 export type PageLoad<OutputData extends OutputDataShape<PageParentData> = OutputDataShape<PageParentData>> = Kit.Load<RouteParams, PageServerData, PageParentData, OutputData, RouteId>;
 export type PageLoadEvent = Parameters<PageLoad>[0];
-export type PageData = Expand<Expand<Omit<PageParentData, keyof PageParentData & EnsureDefined<PageServerData>> & OptionalUnion<EnsureDefined<PageParentData & EnsureDefined<PageServerData>>>> & { ReviewDealsQuery: ReviewDealsQueryStore }>;
+export type PageData = Expand<Expand<Omit<PageParentData, keyof PageParentData & EnsureDefined<PageServerData>> & OptionalUnion<EnsureDefined<PageParentData & EnsureDefined<PageServerData>>>> & {  }>;

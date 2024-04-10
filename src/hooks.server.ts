@@ -1,9 +1,8 @@
 import type { Handle } from '@sveltejs/kit';
 import { sequence } from '@sveltejs/kit/hooks';
 
-/** @type {import('@sveltejs/kit').Handle} */
 function authorize({ event, resolve, locals }) {
-	console.log({ 'authorize event': event });
+	// console.log({ 'authorize event': event, 'authorize locals': locals });
 
 	return resolve(event);
 }

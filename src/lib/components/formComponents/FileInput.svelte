@@ -29,12 +29,7 @@
 	}
 
 	function handleAddFile(err, fileItem) {
-		debugger;
 		console.log('A file has been added', fileItem.file);
-
-		let base64EncodedString = fileItem.getFileEncodeBase64String();
-
-		console.log(base64EncodedString);
 	}
 </script>
 
@@ -42,6 +37,7 @@
 	<FilePond
 		bind:this={pond}
 		{name}
+		server={'/api/upload'}
 		credits={false}
 		oninit={handleInit}
 		onaddfile={handleAddFile}
