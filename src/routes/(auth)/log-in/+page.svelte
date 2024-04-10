@@ -6,10 +6,6 @@
 	import TextInput from '$lib/components/formComponents/TextInput.svelte';
 
 	export let form: { error: string; success: boolean } | undefined;
-
-	$: if (form?.success) {
-		goto('/dashboard');
-	}
 </script>
 
 <form use:enhance action="?/login" method="POST" class="space-y-2.5">

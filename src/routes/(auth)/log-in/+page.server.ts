@@ -1,4 +1,4 @@
-import { fail } from '@sveltejs/kit';
+import { fail, redirect } from '@sveltejs/kit';
 import { Auth } from 'aws-amplify';
 
 export const actions = {
@@ -16,11 +16,12 @@ export const actions = {
 			const user = await Auth.signIn(email, password);
 			if (user) {
 				locals.user = user;
-				return { success: true };
 			}
 		} catch (error) {
 			console.log((error as Error).message);
 			return fail(400, { error: 'Invalid email or password, please try again' });
 		}
+
+		redirect(300, '/submit-deals');
 	}
 };

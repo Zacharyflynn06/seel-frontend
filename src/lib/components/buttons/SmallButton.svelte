@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { animatedTouchClasses } from '$lib/classes';
+	import Spinner from '../Spinner.svelte';
 	import UploadIcon from '../icons/UploadIcon.svelte';
 
 	export let type: 'button' | 'submit' | 'reset' | null | undefined = 'button';
@@ -7,6 +8,7 @@
 	export let textColor = 'text-off-white ';
 	export let label = '';
 	export let disabled = false;
+	export let loading = false;
 </script>
 
 <button
@@ -16,6 +18,10 @@
 >
 	<slot />
 	<span>
-		{label}
+		{#if loading}
+			<Spinner className="h-6 w-6" />
+		{:else}
+			{label}
+		{/if}
 	</span>
 </button>
