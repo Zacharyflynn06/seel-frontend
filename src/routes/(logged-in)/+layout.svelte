@@ -3,13 +3,15 @@
 	import Header from '$lib/components/Header.svelte';
 	import NavBar from '$lib/components/nav/NavBar.svelte';
 	import { currentAuthenticatedUser } from '$lib/session/session';
-	import { Auth } from 'aws-amplify';
+
+	$: if (!currentAuthenticatedUser()) {
+		console.log('no user');
+	}
 </script>
 
 <NavBar />
 
-<main class="h-[100dvh] md:ml-[10rem] {mainPanelWidth}">
-	<Header />
-
+<Header />
+<main class="h-[calc(100vh-80px)] md:ml-[10rem] {mainPanelWidth} overflow-hidden">
 	<slot />
 </main>
