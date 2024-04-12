@@ -41,7 +41,7 @@
 	<!-- logo and slogan -->
 	<div class="mx-auto hidden flex-col space-y-2.5 pt-5 text-center md:flex md:h-auto md:w-24">
 		<div class="grid justify-center">
-			<SeelIcon className="h-[10rem] w-[10rem]" />
+			<SeelIcon className="h-[10rem] w-[10rem] text-off-white" />
 		</div>
 		<div
 			class="line-clamp-1 text-[10px] uppercase tracking-[.1rem] text-white drop-shadow-2xl dark:text-black"
