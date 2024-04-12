@@ -1,8 +1,9 @@
+import { setSession } from '$houdini';
 import { fail, redirect } from '@sveltejs/kit';
 import { Auth } from 'aws-amplify';
 
 export const actions = {
-	login: async ({ request, locals }) => {
+	login: async ({ request, locals, cookies }) => {
 		const data = await request.formData();
 
 		const email = data.get('email-address');
@@ -14,9 +15,8 @@ export const actions = {
 
 		try {
 			const user = await Auth.signIn(email, password);
-			if (user) {
-				locals.user = user;
-			}
+			const session = await Auth.userSession(user);
+			console.log('successfully logged in', { session });
 		} catch (error) {
 			console.log((error as Error).message);
 			return fail(400, { error: 'Invalid email or password, please try again' });

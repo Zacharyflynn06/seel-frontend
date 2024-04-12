@@ -1,9 +1,15 @@
-import type { Handle } from '@sveltejs/kit';
+import { fail, redirect, type Handle } from '@sveltejs/kit';
 import { sequence } from '@sveltejs/kit/hooks';
+import { Auth } from 'aws-amplify';
 
-function authorize({ event, resolve, locals }) {
-	// console.log({ 'authorize event': event, 'authorize locals': locals });
+async function authorize({ event, resolve }) {
+	// console.log({ 'hooks.server.ts event': event });
 
+	try {
+		const user = await Auth.currentAuthenticatedUser();
+	} catch (error) {
+		console.log(error);
+	}
 	return resolve(event);
 }
 
@@ -12,7 +18,7 @@ async function logger({ event, resolve }) {
 	const humanFormatDate = new Date(startTime).toLocaleString();
 	const response = await resolve(event);
 	console.log(
-		`${Date.now() - startTime}ms ${event.request.method} from ${event.url.host} to ${event.url.pathname} started at ${humanFormatDate}`
+		`**** ${Date.now() - startTime}ms ${event.request.method} from ${event.url.host} to ${event.url.pathname} started at ${humanFormatDate}`
 	);
 
 	return response;

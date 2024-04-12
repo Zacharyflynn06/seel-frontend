@@ -4,6 +4,9 @@
 	import BellIcon from './icons/BellIcon.svelte';
 	import { selectBoxClasses } from '$lib/classes';
 	import DarkModeToggleButton from './buttons/DarkModeToggleButton.svelte';
+	import SmallButton from './buttons/SmallButton.svelte';
+	import { enhance } from '$app/forms';
+	import { fade } from 'svelte/transition';
 
 	let title: string;
 
@@ -22,13 +25,15 @@
 </script>
 
 <header class="flex items-center justify-between p-5">
-	<div class="flex w-full flex-col-reverse justify-between md:flex-row md:items-center">
+	<div
+		class="mx-auto flex w-full max-w-[1200px] flex-col-reverse justify-between md:flex-row md:items-center"
+	>
 		<h1 class="w-fit pt-5 text-3xl font-extrabold capitalize md:mr-5 md:w-[25%] md:pt-0">
 			{title}
 		</h1>
 		<div class="w-full space-x-5 text-[1rem] md:flex md:w-full md:justify-between">
 			<div class="hidden md:flex md:space-x-5">
-				<div class="grid items-center xl:flex xl:space-x-2.5 xl:space-y-0">
+				<!-- <div class="grid items-center xl:flex xl:space-x-2.5 xl:space-y-0">
 					<span
 						class="hidden text-xs uppercase tracking-[.3rem] text-black/50 dark:text-white/50 xl:block"
 						>organization</span
@@ -51,17 +56,20 @@
 					<select name="" id="" class={selectBoxClasses}>
 						<option value="">platy partners fund</option>
 					</select>
-				</div>
+				</div> -->
 			</div>
 
 			<div
 				class="flex items-center justify-end space-x-2 md:mr-2.5 md:flex md:flex-shrink-0 md:justify-start"
 			>
 				<DarkModeToggleButton />
-				<div class="text-pink"><CogIcon /></div>
+				<form transition:fade action="/log-out" method="POST" use:enhance>
+					<SmallButton type="submit" label="Sign Out" />
+				</form>
+				<!-- <div class="text-pink"><CogIcon /></div>
 				<div class="text-pink"><BellIcon /></div>
 				<div class="font-bold">Username</div>
-				<div class="h-10 w-10 rounded-full bg-white dark:bg-off-black" />
+				<div class="h-10 w-10 rounded-full bg-white dark:bg-off-black" /> -->
 			</div>
 		</div>
 	</div>

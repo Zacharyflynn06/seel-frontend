@@ -2,7 +2,6 @@
 	import '../app.css';
 	import { page } from '$app/stores';
 	import { onMount } from 'svelte';
-	import LandingPageHeader from '$lib/components/LandingPageHeader.svelte';
 
 	// this listens for the system to change dark mode preference
 	onMount(() => {
@@ -17,7 +16,5 @@
 
 	$: console.log($page);
 </script>
-
-<LandingPageHeader />
 
 <slot />

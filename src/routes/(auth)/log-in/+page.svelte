@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
-	import { goto } from '$app/navigation';
 	import { anchorTagClasses } from '$lib/classes';
 	import SmallButton from '$lib/components/buttons/SmallButton.svelte';
 	import TextInput from '$lib/components/formComponents/TextInput.svelte';
