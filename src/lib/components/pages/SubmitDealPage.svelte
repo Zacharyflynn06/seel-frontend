@@ -11,7 +11,7 @@
 <div class=" h-full w-full {flexCenter} ">
 	<Card
 		heading="Upload Documents"
-		className="h-fit min-h-[50%] md:max-w-[500px] md:max-h-[90%] overflow-none grid items center"
+		className="h-full md:h-fit md:min-h-[50%] md:max-w-[500px] md:max-h-[90%] overflow-none grid items center"
 	>
 		<form
 			method="post"
