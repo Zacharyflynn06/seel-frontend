@@ -2,8 +2,6 @@
 	import { themeStore } from '$lib/stores/themeStore';
 	import MoonIcon from '../icons/MoonIcon.svelte';
 	import SunIcon from '../icons/SunIcon.svelte';
-
-	$: theme = $themeStore.theme;
 </script>
 
 <button
@@ -12,9 +10,9 @@
 	}}
 	class="m-auto rounded-full text-pink"
 >
-	{#if theme === 'light'}
+	{#if $themeStore.theme === 'light'}
 		<MoonIcon />
-	{:else if theme === 'dark'}
+	{:else}
 		<SunIcon />
 	{/if}
 </button>

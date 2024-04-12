@@ -2,9 +2,10 @@
 	import '../app.css';
 	import { page } from '$app/stores';
 	import { onMount } from 'svelte';
+	import { themeStore } from '$lib/stores/themeStore';
 
-	// this listens for the system to change dark mode preference
 	onMount(() => {
+		// this listens for the system to change dark mode preference
 		window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function (e) {
 			if (e.matches) {
 				document.documentElement.classList.add('dark');
@@ -12,9 +13,14 @@
 				document.documentElement.classList.remove('dark');
 			}
 		});
+
+		if ($themeStore.theme === 'dark') {
+			document.documentElement.classList.add('dark');
+		}
 	});
 
 	$: console.log($page);
+	$: console.log($themeStore);
 </script>
 
 <slot />
