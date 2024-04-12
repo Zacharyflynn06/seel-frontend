@@ -21,7 +21,7 @@
 	}
 </script>
 
-<header class="flex items-center justify-between p-5">
+<header class="flex items-center justify-between p-5 dark:bg-grey-01 dark:text-off-white">
 	<div
 		class="mx-auto flex w-full max-w-[1200px] flex-col-reverse justify-between md:flex-row md:items-center"
 	>

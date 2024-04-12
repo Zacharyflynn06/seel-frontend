@@ -2,11 +2,19 @@ import { browser } from '$app/environment';
 import { writable } from 'svelte/store';
 
 type Theme = {
-	theme: 'light' | 'dark' | 'system';
+	theme: 'light' | 'dark';
+};
+
+const isSystemDarkMode = () => {
+	if (browser) {
+		const darkModeMatch = window.matchMedia('(prefers-color-scheme: dark)');
+		return darkModeMatch.matches;
+	}
+	return false;
 };
 
 const initialState: Theme = {
-	theme: browser && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+	theme: isSystemDarkMode() ? 'dark' : 'light'
 };
 const createThemeStore = () => {
 	const { subscribe, set, update } = writable(initialState);

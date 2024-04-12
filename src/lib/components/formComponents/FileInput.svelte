@@ -48,10 +48,6 @@
 	}
 </script>
 
-{#if previewUrl}
-	<img src={previewUrl} class="h-20 w-20" alt="" />
-{/if}
-
 <div class="app">
 	<FilePond
 		bind:this={pond}
@@ -69,3 +65,18 @@
 		oninit={handleInit}
 	/>
 </div>
+
+<style lang="postcss">
+	:global(.dark .filepond--panel-root) {
+		@apply bg-grey-08;
+	}
+	:global(.filepond--panel-root) {
+		@apply border border-pink;
+	}
+	:global(.dark .filepond--drop-label) {
+		@apply text-off-white;
+	}
+	:global(.filepond--drop-label) {
+		@apply text-off-black;
+	}
+</style>
