@@ -16,11 +16,11 @@
 			<DarkModeToggleButton />
 
 			{#if $page.url.pathname === '/log-in'}
-				<a href="/sign-up" class="hidden md:block">
+				<a href="/sign-up">
 					<SmallButton label="Sign up" />
 				</a>
 			{:else}
-				<a href="/log-in" class="hidden md:block">
+				<a href="/log-in">
 					<SmallButton label="Log in" />
 				</a>
 			{/if}
