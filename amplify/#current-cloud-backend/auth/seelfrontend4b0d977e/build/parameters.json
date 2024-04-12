@@ -1,60 +1,42 @@
 {
-  "identityPoolName": "seelfrontend4b0d977e_identitypool_4b0d977e",
-  "allowUnauthenticatedIdentities": false,
-  "resourceNameTruncated": "seelfr4b0d977e",
-  "userPoolName": "seelfrontend4b0d977e_userpool_4b0d977e",
-  "autoVerifiedAttributes": [
-    "email"
-  ],
-  "mfaConfiguration": "OFF",
-  "mfaTypes": [
-    "SMS Text Message"
-  ],
-  "smsAuthenticationMessage": "Your authentication code is {####}",
-  "smsVerificationMessage": "Your verification code is {####}",
-  "emailVerificationSubject": "Your verification code",
-  "emailVerificationMessage": "Your verification code is {####}",
-  "defaultPasswordPolicy": false,
-  "passwordPolicyMinLength": 8,
-  "passwordPolicyCharacters": [],
-  "requiredAttributes": [
-    "email"
-  ],
-  "aliasAttributes": [],
-  "userpoolClientGenerateSecret": false,
-  "userpoolClientRefreshTokenValidity": 30,
-  "userpoolClientWriteAttributes": [
-    "email"
-  ],
-  "userpoolClientReadAttributes": [
-    "email"
-  ],
-  "userpoolClientLambdaRole": "seelfr4b0d977e_userpoolclient_lambda_role",
-  "userpoolClientSetAttributes": false,
-  "sharedId": "4b0d977e",
-  "resourceName": "seelfrontend4b0d977e",
-  "authSelections": "identityPoolAndUserPool",
-  "useDefault": "default",
-  "usernameAttributes": [
-    "email"
-  ],
-  "triggers": "{}",
-  "userPoolGroupList": [],
-  "serviceName": "Cognito",
-  "usernameCaseSensitive": false,
-  "useEnabledMfas": true,
-  "authRoleArn": {
-    "Fn::GetAtt": [
-      "AuthRole",
-      "Arn"
-    ]
-  },
-  "unauthRoleArn": {
-    "Fn::GetAtt": [
-      "UnauthRole",
-      "Arn"
-    ]
-  },
-  "breakCircularDependency": true,
-  "dependsOn": []
+	"identityPoolName": "seelfrontend4b0d977e_identitypool_4b0d977e",
+	"allowUnauthenticatedIdentities": false,
+	"resourceNameTruncated": "seelfr4b0d977e",
+	"userPoolName": "seelfrontend4b0d977e_userpool_4b0d977e",
+	"autoVerifiedAttributes": ["email"],
+	"mfaConfiguration": "OFF",
+	"mfaTypes": ["SMS Text Message"],
+	"smsAuthenticationMessage": "Your authentication code from Seel is {####}",
+	"smsVerificationMessage": "Your verification code from Seel is {####}",
+	"emailVerificationSubject": "Your verification code from Seel",
+	"emailVerificationMessage": "Your verification code from Seel is {####}",
+	"defaultPasswordPolicy": false,
+	"passwordPolicyMinLength": 8,
+	"passwordPolicyCharacters": [],
+	"requiredAttributes": ["email"],
+	"aliasAttributes": [],
+	"userpoolClientGenerateSecret": false,
+	"userpoolClientRefreshTokenValidity": 30,
+	"userpoolClientWriteAttributes": ["email"],
+	"userpoolClientReadAttributes": ["email"],
+	"userpoolClientLambdaRole": "seelfr4b0d977e_userpoolclient_lambda_role",
+	"userpoolClientSetAttributes": false,
+	"sharedId": "4b0d977e",
+	"resourceName": "seelfrontend4b0d977e",
+	"authSelections": "identityPoolAndUserPool",
+	"useDefault": "default",
+	"usernameAttributes": ["email"],
+	"triggers": "{}",
+	"userPoolGroupList": [],
+	"serviceName": "Cognito",
+	"usernameCaseSensitive": false,
+	"useEnabledMfas": true,
+	"authRoleArn": {
+		"Fn::GetAtt": ["AuthRole", "Arn"]
+	},
+	"unauthRoleArn": {
+		"Fn::GetAtt": ["UnauthRole", "Arn"]
+	},
+	"breakCircularDependency": true,
+	"dependsOn": []
 }

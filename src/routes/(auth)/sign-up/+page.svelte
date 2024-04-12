@@ -5,6 +5,8 @@
 	import TextInput from '$lib/components/formComponents/TextInput.svelte';
 
 	export let form;
+
+	let loading = false;
 	let isVerificationCodeVisible = false;
 
 	$: if (form?.success) {
@@ -13,7 +15,18 @@
 </script>
 
 {#if !isVerificationCodeVisible}
-	<form use:enhance class="space-y-2.5" action="?/signUp" method="POST">
+	<form
+		use:enhance={() => {
+			loading = true;
+			return async ({ update }) => {
+				loading = false;
+				update();
+			};
+		}}
+		class="space-y-2.5"
+		action="?/signUp"
+		method="POST"
+	>
 		<h1>Sign up</h1>
 		<TextInput
 			type="email"
@@ -38,7 +51,7 @@
 		{/if}
 
 		<div class="flex justify-end">
-			<SmallButton type="submit" label="Sign up" />
+			<SmallButton type="submit" {loading} label="Sign up" />
 		</div>
 	</form>
 {:else}

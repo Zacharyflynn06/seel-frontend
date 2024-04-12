@@ -17,11 +17,11 @@
 
 			{#if $page.url.pathname === '/log-in'}
 				<a href="/sign-up" class="hidden md:block">
-					<SmallButton>Sign up</SmallButton>
+					<SmallButton label="Sign up" />
 				</a>
 			{:else}
 				<a href="/log-in" class="hidden md:block">
-					<SmallButton>Log in</SmallButton>
+					<SmallButton label="Log in" />
 				</a>
 			{/if}
 		</div>

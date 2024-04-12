@@ -1,8 +1,5 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	import CogIcon from './icons/CogIcon.svelte';
-	import BellIcon from './icons/BellIcon.svelte';
-	import { selectBoxClasses } from '$lib/classes';
 	import DarkModeToggleButton from './buttons/DarkModeToggleButton.svelte';
 	import SmallButton from './buttons/SmallButton.svelte';
 	import { enhance } from '$app/forms';

@@ -5,9 +5,22 @@
 	import TextInput from '$lib/components/formComponents/TextInput.svelte';
 
 	export let form: { error: string; success: boolean } | undefined;
+
+	let loading = false;
 </script>
 
-<form use:enhance action="?/login" method="POST" class="space-y-2.5">
+<form
+	use:enhance={() => {
+		loading = true;
+		return async ({ update }) => {
+			loading = false;
+			update();
+		};
+	}}
+	action="?/login"
+	method="POST"
+	class="space-y-2.5"
+>
 	<h1>Log in</h1>
 	<label for="email-address" class="sr-only">Email </label>
 
@@ -34,6 +47,6 @@
 	<a class="{anchorTagClasses} text-xs" href="/forgot-password">Forgot password?</a>
 
 	<div class="flex justify-end">
-		<SmallButton type="submit" label="Log in" />
+		<SmallButton type="submit" {loading} label="Log in" />
 	</div>
 </form>
