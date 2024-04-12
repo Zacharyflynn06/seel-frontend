@@ -59,20 +59,20 @@ The `AWSJSON` scalar type provided by AWS AppSync, represents a JSON string that
 scalar AWSJSON
 
 type Client {
+  companies: [Company!]
   config: AWSJSON!
   display_name: String!
   id: String!
   lookup_name: String!
 }
 
-type EmailData {
+type Company {
   any_additional_founders: String
   burn_rate: Int
   category: String
-  client_id: String!
+  client: Client!
   company_name: String
   competitors: String
-  complete: Boolean
   differentiation_from_competitors: String
   first_time_founder: Boolean
   full_time: Boolean
@@ -82,18 +82,63 @@ type EmailData {
   is_us_based: Boolean
   location: String
   next_steps: String
-  response_message_id: String
-  s3_bucket: String!
-  s3_key: String!
-  sender_email: String
-  sender_job_title: String
-  sender_name: String
-  thread_id: String!
+  source: CompanySource!
+  university: String
+  users: [User!]
+  women_founded_or_owned: Boolean
+}
+
+enum CompanySource {
+  EMAIL
+  FRONTEND
+}
+
+type Mutation {
+  addCompanyToUser(company_id: String!, user_id: String!): Boolean!
+  removeCompanyFromUser(company_id: String!, user_id: String!): Boolean!
+  upsertCompany(company: UpsertCompanyInput!): Company!
+  upsertUser(user: UpsertUserInput!): User!
+}
+
+type Query {
+  getCompany(id: String!): Company
+  getUser(id: String!): User
+}
+
+input UpsertClientInput {
+  config: AWSJSON!
+  display_name: String!
+  id: String
+  lookup_name: String!
+}
+
+input UpsertCompanyInput {
+  any_additional_founders: String
+  burn_rate: Int
+  category: String
+  client_id: String!
+  company_name: String
+  competitors: String
+  differentiation_from_competitors: String
+  first_time_founder: Boolean
+  full_time: Boolean
+  funding_round: String
+  id: String
+  is_saas: Boolean
+  is_us_based: Boolean
+  location: String
+  next_steps: String
   university: String
   women_founded_or_owned: Boolean
 }
 
-type Query {
-  clients: [Client]
-  emails: [EmailData]
+input UpsertUserInput {
+  email: String!
+  id: String
+}
+
+type User {
+  companies: [Company!]
+  email: String!
+  id: String!
 }

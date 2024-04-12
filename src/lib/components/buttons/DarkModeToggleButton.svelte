@@ -10,7 +10,7 @@
 	on:click={() => {
 		themeStore.toggle();
 	}}
-	class="text-pink hover:scale-105 hover:drop-shadow-lg active:scale-95"
+	class="m-auto rounded-full text-pink"
 >
 	{#if theme === 'light'}
 		<MoonIcon />

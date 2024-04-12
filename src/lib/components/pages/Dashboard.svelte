@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { DashboardQueryStore, type DashboardQuery } from '$houdini';
 	import {
 		animatedTouchClasses,
 		selectBoxClasses,

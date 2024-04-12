@@ -1,7 +1,7 @@
 import { fail } from '@sveltejs/kit';
 
 export const actions = {
-	default: async ({ request }) => {
+	upload: async ({ request }) => {
 		const formData = Object.fromEntries(await request.formData());
 
 		if (

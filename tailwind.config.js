@@ -11,10 +11,14 @@ export default {
 			colors: {
 				black: '#020202',
 				'off-white': '#f2f2f2',
-				'off-black': '#333333',
+				'off-black': '#313131',
 				purple: '#4b4a78',
 				'light-purple': '#9f9efa',
-				pink: '#d0577b'
+				pink: '#d0577b',
+
+				'grey-08': '#525252',
+				'grey-04': '#414141',
+				'grey-01': '#313131'
 			},
 			boxShadow: {
 				DEFAULT: '0 1px 2px 0 rgba(0, 0, 0, 0.05), 0 4px 8px 0 rgba(0, 0, 0, 0.05)',

@@ -1,4 +1,4 @@
 {
-	"workbench.fontAliasing": "auto",
+	"workbench.fontAliasing": "antialiased",
 	"workbench.iconTheme": "vs-seti"
 }
