@@ -10,6 +10,7 @@ export const actions = {
 			return fail(400, { invalid: true });
 		}
 
+		console.log({ fileUrl });
 		return { success: true };
 	}
 };
