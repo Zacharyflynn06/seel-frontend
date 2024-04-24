@@ -1,4 +1,6 @@
 import type { Record } from "./public/record";
+import { GetUser$result, GetUser$input } from "../artifacts/GetUser";
+import { GetUserStore } from "../plugins/houdini-svelte/stores/GetUser";
 
 export declare type CacheTypeDef = {
     types: {
@@ -154,5 +156,5 @@ export declare type CacheTypeDef = {
         };
     };
     lists: {};
-    queries: [];
+    queries: [[GetUserStore, GetUser$result, GetUser$input]];
 };
