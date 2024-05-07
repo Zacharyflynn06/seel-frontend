@@ -7,3 +7,6 @@ export type Result<DataType> = {
 	data?: DataType | null
 	error?: Error | null
 }
+export * from './AskSeel'
+export * from './GetUser'
+export * from './UpsertUser'

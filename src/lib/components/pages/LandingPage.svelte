@@ -4,6 +4,7 @@
 	import ArrowIcon from '$lib/components/icons/ArrowIcon.svelte';
 	import Typewriter from 'svelte-typewriter';
 	import SeelIcon from '../icons/SeelIcon.svelte';
+	import { AskSeelStore } from '$houdini';
 
 	let loading = false;
 	let userInput = '';
@@ -13,34 +14,22 @@
 	async function handleSubmit() {
 		loading = !loading;
 
-		let apiResponse: undefined | { answer: string } = undefined;
-
 		if (!userInput) {
 			loading = false;
 			return;
 		}
 
 		try {
-			let request = new Request(`https://fanz3qdbx3.execute-api.us-east-1.amazonaws.com/api/ask`, {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json'
-				},
-				body: JSON.stringify({
-					question: userInput
-				})
+			let store = new AskSeelStore();
+
+			store.fetch().then((response) => {
+				loading = false;
+				console.log(response.data);
+				answer = response?.data?.ask;
 			});
-			let response = await fetch(request);
-			if (!response.ok) {
-				loading = false;
-				throw new Error(response.statusText);
-			} else {
-				apiResponse = await response.json();
-				answer = apiResponse?.answer;
-				loading = false;
-			}
 		} catch (error) {
-			console.log(error);
+			loading = false;
+			console.log({ error });
 		}
 	}
 </script>

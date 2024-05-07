@@ -11,8 +11,9 @@ type OutputDataShape<T> = MaybeWithVoid<Omit<App.PageData, RequiredKeys<T>> & Pa
 type EnsureDefined<T> = T extends null | undefined ? {} : T;
 type OptionalUnion<U extends Record<string, any>, A extends keyof U = U extends U ? keyof U : never> = U extends unknown ? { [P in Exclude<A, keyof U>]?: never } & U : never;
 export type Snapshot<T = any> = Kit.Snapshot<T>;
+type PageServerParentData = EnsureDefined<LayoutServerData>;
 type PageParentData = EnsureDefined<LayoutData>;
-type LayoutRouteId = RouteId | "/" | "/(auth)/forgot-password" | "/(auth)/log-in" | "/(auth)/log-out" | "/(auth)/new-password" | "/(auth)/sign-up" | "/(logged-in)/dashboard" | "/(logged-in)/documents" | "/(logged-in)/pipeline" | "/(logged-in)/review-deals" | "/(logged-in)/submit-deals" | "/api" | null
+type LayoutRouteId = RouteId | "/" | "/(auth)/forgot-password" | "/(auth)/log-in" | "/(auth)/log-out" | "/(auth)/new-password" | "/(auth)/sign-up" | "/(logged-in)/add-company" | "/(logged-in)/dashboard" | "/(logged-in)/documents" | "/(logged-in)/pipeline" | "/(logged-in)/review-deals" | "/(logged-in)/submit-deals" | "/api" | null
 type LayoutParams = RouteParams & {  }
 type LayoutServerParentData = EnsureDefined<{}>;
 type LayoutParentData = EnsureDefined<{}>;
@@ -21,10 +22,15 @@ type LayoutParentData = EnsureDefined<{}>;
 						}
 					
 
+export type PageServerLoad<OutputData extends Partial<App.PageData> & Record<string, any> | void = Partial<App.PageData> & Record<string, any> | void> = Kit.ServerLoad<RouteParams, PageServerParentData, OutputData, RouteId>;
+export type PageServerLoadEvent = Parameters<PageServerLoad>[0];
+export type ActionData = unknown;
 export type PageServerData = null;
 export type PageLoad<OutputData extends OutputDataShape<PageParentData> = OutputDataShape<PageParentData>> = Kit.Load<RouteParams, PageServerData, PageParentData, OutputData, RouteId>;
 export type PageLoadEvent = Parameters<PageLoad>[0];
 export type PageData = Expand<Expand<Omit<PageParentData, keyof PageParentData & EnsureDefined<PageServerData>> & OptionalUnion<EnsureDefined<PageParentData & EnsureDefined<PageServerData>>>> & {  }>;
+export type Action<OutputData extends Record<string, any> | void = Record<string, any> | void> = Kit.Action<RouteParams, OutputData, RouteId>
+export type Actions<OutputData extends Record<string, any> | void = Record<string, any> | void> = Kit.Actions<RouteParams, OutputData, RouteId>
 export type LayoutServerLoad<OutputData extends Partial<App.PageData> & Record<string, any> | void = Partial<App.PageData> & Record<string, any> | void> = Kit.ServerLoad<LayoutParams, LayoutServerParentData, OutputData, LayoutRouteId>;
 export type LayoutServerLoadEvent = Parameters<LayoutServerLoad>[0];
 export type LayoutServerData = null;

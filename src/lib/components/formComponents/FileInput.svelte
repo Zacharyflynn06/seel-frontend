@@ -9,7 +9,7 @@
 	import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css';
 	import { tick } from 'svelte';
 
-	let previewUrl: string;
+	export let previewUrl: string | undefined = undefined;
 	// Register the plugins
 	registerPlugin(
 		FilePondPluginImageExifOrientation,

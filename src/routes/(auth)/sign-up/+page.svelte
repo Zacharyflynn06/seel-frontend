@@ -55,9 +55,21 @@
 		</div>
 	</form>
 {:else}
-	<form use:enhance class="space-y-2.5" action="?/verifyEmail" method="POST">
+	<form
+		use:enhance={() => {
+			loading = true;
+			return async ({ update }) => {
+				loading = false;
+				update();
+			};
+		}}
+		class="space-y-2.5"
+		action="?/verifyEmail"
+		method="POST"
+	>
 		<h1>Enter Verification Code</h1>
-		<input name="email-address" value={form?.email} class="hidden" />
+		<input name="email-address" value={form?.email} hidden />
+		<input type="text" name="password" value={form?.password} hidden />
 		<TextInput type="text" name="code" label="Enter Verification Code" placeholder="" required />
 
 		<a href="/log-in" class="{anchorTagClasses} text-xs">Already have an account?</a>
