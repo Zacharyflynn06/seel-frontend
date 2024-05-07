@@ -1,0 +1,3 @@
+query AskSeel {
+	ask(question: "hello")
+}

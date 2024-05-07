@@ -1,5 +1,6 @@
 import { UpsertUserStore } from "../plugins/houdini-svelte/stores/UpsertUser";
 import { GetUserStore } from "../plugins/houdini-svelte/stores/GetUser";
+import { AskSeelStore } from "../plugins/houdini-svelte/stores/AskSeel";
 import type { Cache as InternalCache } from "./cache/cache";
 import type { CacheTypeDef } from "./generated";
 import { Cache } from "./public";
@@ -14,6 +15,7 @@ export function graphql(
     str: "query GetUser($id: String!) {\n\tgetUser(id: $id) {\n\t\tid\n\t\temail\n\t}\n}\n"
 ): GetUserStore;
 
+export function graphql(str: "query AskSeel {\n\task(question: \"hello\")\n}\n"): AskSeelStore;
 export declare function graphql<_Payload, _Result = _Payload>(str: TemplateStringsArray): _Result;
 export declare const cache: Cache<CacheTypeDef>;
 export declare function getCache(): InternalCache;

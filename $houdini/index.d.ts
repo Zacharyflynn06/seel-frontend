@@ -1,3 +1,4 @@
+export * from "./artifacts/AskSeel";
 export * from "./artifacts/GetUser";
 export * from "./artifacts/UpsertUser";
 export * from "./runtime";

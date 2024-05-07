@@ -1,4 +1,5 @@
 {
+    "9bb198a52f87a2a73c386056a89989d6833842dd4799c8fee814751e5ca1a649": "query AskSeel {\n  ask(question: \"hello\")\n}\n",
     "7f533cc46c6fadaa5ef8944ee516dbcaed64685d3aa825e0fe19feceec364eee": "query GetUser($id: String!) {\n  getUser(id: $id) {\n    id\n    email\n  }\n}\n",
     "0a27981a10d30b675861cf4860071b67399ae2cfcf03cd67126825c84ca0a13b": "mutation UpsertUser($email: String!, $id: String!) {\n  upsertUser(user: {email: $email, id: $id}) {\n    email\n    id\n  }\n}\n"
 }
