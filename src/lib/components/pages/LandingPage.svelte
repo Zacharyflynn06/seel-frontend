@@ -21,10 +21,9 @@
 
 		try {
 			let store = new AskSeelStore();
-
-			store.fetch().then((response) => {
+			store.variables = true;
+			await store.fetch({ variables: { question: userInput } }).then((response) => {
 				loading = false;
-				console.log(response.data);
 				answer = response?.data?.ask;
 			});
 		} catch (error) {

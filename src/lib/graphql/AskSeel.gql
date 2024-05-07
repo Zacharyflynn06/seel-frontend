@@ -1,3 +1,3 @@
-query AskSeel {
-	ask(question: "hello")
+query AskSeel($question: String!) {
+	ask(question: $question)
 }

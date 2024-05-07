@@ -15,7 +15,10 @@ export function graphql(
     str: "query GetUser($id: String!) {\n\tgetUser(id: $id) {\n\t\tid\n\t\temail\n\t}\n}\n"
 ): GetUserStore;
 
-export function graphql(str: "query AskSeel {\n\task(question: \"hello\")\n}\n"): AskSeelStore;
+export function graphql(
+    str: "query AskSeel($question: String!) {\n\task(question: $question)\n}\n"
+): AskSeelStore;
+
 export declare function graphql<_Payload, _Result = _Payload>(str: TemplateStringsArray): _Result;
 export declare const cache: Cache<CacheTypeDef>;
 export declare function getCache(): InternalCache;
