@@ -2,6 +2,11 @@ import type { Record } from "./public/record";
 import { GetUser$result, GetUser$input } from "../artifacts/GetUser";
 import { GetUserStore } from "../plugins/houdini-svelte/stores/GetUser";
 
+type KeyValuePair = {
+    key: string;
+    value: string;
+};
+
 export declare type CacheTypeDef = {
     types: {
         Client: {
@@ -119,6 +124,26 @@ export declare type CacheTypeDef = {
         __ROOT__: {
             idFields: {};
             fields: {
+                addDocumentToCollectionUrl: {
+                    type: string;
+                    args: {
+                        collectionName: string;
+                        metadata?: (KeyValuePair | null | undefined)[] | null | undefined;
+                    };
+                };
+                ask: {
+                    type: string;
+                    args: {
+                        question: string;
+                    };
+                };
+                documentUploadUrl: {
+                    type: string;
+                    args: {
+                        clientLookupName: string;
+                        userId: string;
+                    };
+                };
                 getCompany: {
                     type: Record<CacheTypeDef, "Company"> | null;
                     args: {

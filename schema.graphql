@@ -93,6 +93,11 @@ enum CompanySource {
   FRONTEND
 }
 
+input KeyValuePair {
+  key: String!
+  value: String!
+}
+
 type Mutation {
   addCompanyToUser(company_id: String!, user_id: String!): Boolean!
   removeCompanyFromUser(company_id: String!, user_id: String!): Boolean!
@@ -101,6 +106,9 @@ type Mutation {
 }
 
 type Query {
+  addDocumentToCollectionUrl(collectionName: String!, metadata: [KeyValuePair]): String!
+  ask(question: String!): String!
+  documentUploadUrl(clientLookupName: String!, userId: String!): String!
   getCompany(id: String!): Company
   getUser(id: String!): User
 }

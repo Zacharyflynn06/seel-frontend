@@ -16,13 +16,15 @@
 
 	{#if type === 'text'}
 		<input type="text" {value} {name} {placeholder} class={className} {minlength} {required} />
+	{:else if type === 'number'}
+		<input type="number" {name} {value} {required} />
 	{:else if type === 'password'}
 		<input
 			type="password"
+			class={className}
 			{value}
 			{name}
 			{placeholder}
-			class={className}
 			{minlength}
 			{required}
 			autocomplete="current-password"

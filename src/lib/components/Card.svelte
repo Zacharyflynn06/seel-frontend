@@ -2,7 +2,6 @@
 	import { cardHeadingClasses } from '$lib/classes';
 
 	export let className = '';
-
 	export let heading = '';
 	export let headingIsCentered = false;
 </script>
