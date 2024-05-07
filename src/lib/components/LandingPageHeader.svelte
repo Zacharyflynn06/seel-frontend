@@ -15,7 +15,7 @@
 		<div class="flex space-x-5">
 			<DarkModeToggleButton />
 
-			{#if $page.url.pathname === '/log-in'}
+			<!-- {#if $page.url.pathname === '/log-in'}
 				<a href="/sign-up">
 					<SmallButton label="Sign up" />
 				</a>
@@ -23,7 +23,7 @@
 				<a href="/log-in">
 					<SmallButton label="Log in" />
 				</a>
-			{/if}
+			{/if} -->
 		</div>
 	</div>
 </header>
