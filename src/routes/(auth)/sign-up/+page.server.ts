@@ -1,3 +1,4 @@
+import { UpsertUserStore } from '$houdini';
 import { fail, redirect } from '@sveltejs/kit';
 import { Auth } from 'aws-amplify';
 
@@ -22,25 +23,31 @@ export const actions = {
 				password: password
 			});
 
-			return { success: true, email: email };
+			return { success: true, email: email, password: password };
 		} catch (error) {
 			console.log((error as Error).message);
 			return fail(400, { error: error?.message });
 		}
 	},
 
-	verifyEmail: async ({ request }) => {
-		const data = await request.formData();
+	verifyEmail: async (event) => {
+		const data = await event.request.formData();
 		const code = data.get('code');
 		const email = data.get('email-address');
+		const password = data.get('password');
 		console.log({ code, email });
 		try {
-			await Auth.confirmSignUp(email, code);
+			const confirmation = await Auth.confirmSignUp(email, code);
+			const cognitoUser = await Auth.signIn(email, password);
+			const userId = cognitoUser.attributes.sub;
+			const userStore = new UpsertUserStore();
+
+			await userStore.mutate({ id: userId, email: email }, { event }).then((res) => {
+				console.log({ res });
+			});
 		} catch (error) {
 			console.log((error as Error).message);
 			return fail(400, { error: error?.message });
 		}
-
-		redirect(300, '/log-in');
 	}
 };

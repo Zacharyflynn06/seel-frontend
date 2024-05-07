@@ -2,19 +2,15 @@ import { fail } from '@sveltejs/kit';
 
 export const actions = {
 	upload: async ({ request }) => {
-		const formData = Object.fromEntries(await request.formData());
+		console.log('submit deal was run');
+		const formData = await request.formData();
+		const fileUrl = formData.get('fileUrl');
 
-		if (
-			!(formData.fileToUpload as File).name ||
-			(formData.fileToUpload as File).name === 'undefined'
-		) {
-			return fail(400, {
-				error: true,
-				message: 'You must provide a file to upload'
-			});
+		if (typeof fileUrl !== 'string' || !fileUrl) {
+			return fail(400, { invalid: true });
 		}
 
-		const { fileToUpload } = formData as { fileToUpload: File };
-		console.log({ fileToUpload });
+		console.log({ fileUrl });
+		return { success: true };
 	}
 };

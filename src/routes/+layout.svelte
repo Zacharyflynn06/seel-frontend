@@ -18,9 +18,6 @@
 			document.documentElement.classList.add('dark');
 		}
 	});
-
-	$: console.log($page);
-	$: console.log($themeStore);
 </script>
 
 <slot />

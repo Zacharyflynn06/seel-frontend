@@ -1,4 +1,4 @@
-import { setSession } from '$houdini';
+import { GetUserStore, setSession } from '$houdini';
 import { fail, redirect } from '@sveltejs/kit';
 import { Auth } from 'aws-amplify';
 
@@ -14,14 +14,17 @@ export const actions = {
 		}
 
 		try {
-			const user = await Auth.signIn(email, password);
-			const session = await Auth.userSession(user);
+			const cognitoUser = await Auth.signIn(email, password);
+			const session = await Auth.userSession(cognitoUser);
+
+			const userStore = await new GetUserStore();
+			console.log('userStore', userStore.variables);
 			console.log('successfully logged in', { session });
 		} catch (error) {
 			console.log((error as Error).message);
 			return fail(400, { error: 'Invalid email or password, please try again' });
 		}
 
-		redirect(300, '/submit-deals');
+		// redirect(300, '/submit-deals');
 	}
 };
