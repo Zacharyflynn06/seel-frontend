@@ -10,27 +10,32 @@
 	let loading = false;
 </script>
 
-<div class="flex h-[80dvh] w-full items-center justify-center">
-	<Card heading="Upload Documents" className="md:max-w-[500px] md:h-[500px]">
+<div class="flex h-full w-full items-center justify-center">
+	<Card heading="Upload Documents" className="h-full md:max-w-[500px] md:h-[500px]">
 		<FileInput bind:previewUrl={filePreviewUrl} />
-		{#if filePreviewUrl}
-			<!-- content here -->
-			<form
-				method="POST"
-				action="?/upload"
-				use:enhance={() => {
-					loading = true;
-					return async ({ update }) => {
-						loading = false;
-						update();
-					};
-				}}
-			>
-				<div class="flex h-fit w-full items-center justify-center">
-					<input type="text" hidden name="fileUrl" value={filePreviewUrl} />
-					<SmallButton type="submit" bind:loading label="Submit"><UploadIcon /></SmallButton>
-				</div>
-			</form>
-		{/if}
+		<!-- content here -->
+		<form
+			method="POST"
+			action="?/upload"
+			use:enhance={() => {
+				loading = true;
+				return async ({ update }) => {
+					loading = false;
+					update();
+				};
+			}}
+		>
+			<div class="flex h-fit w-full items-center justify-center">
+				<input type="text" hidden name="fileUrl" value={filePreviewUrl} />
+				<SmallButton
+					disabled={filePreviewUrl ? false : true}
+					type="submit"
+					bind:loading
+					label="Submit"
+				>
+					<UploadIcon />
+				</SmallButton>
+			</div>
+		</form>
 	</Card>
 </div>
