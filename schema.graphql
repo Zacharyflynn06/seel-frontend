@@ -108,6 +108,7 @@ type Mutation {
 type Query {
   addDocumentToCollectionUrl(collectionName: String!, metadata: [KeyValuePair]): String!
   ask(question: String!): String!
+  askCollection(collectionName: String!, query: String!): String!
   documentUploadUrl(clientLookupName: String!, userId: String!): String!
   getCompany(id: String!): Company
   getUser(id: String!): User

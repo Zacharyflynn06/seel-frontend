@@ -10,12 +10,8 @@
 	let loading = false;
 </script>
 
-<!-- <GridLayout columnSpacingClass=""> -->
-<div class=" flex h-full w-full justify-center md:items-center">
-	<Card
-		heading="Upload Documents"
-		className="h-[calc(100vh-113px)] md:min-h-[50%] md:max-w-[500px] md:max-h-[50%] overflow-none grid items center"
-	>
+<div class="flex h-[80dvh] w-full items-center justify-center">
+	<Card heading="Upload Documents" className="md:max-w-[500px] md:h-[500px]">
 		<FileInput bind:previewUrl={filePreviewUrl} />
 		{#if filePreviewUrl}
 			<!-- content here -->
@@ -38,4 +34,3 @@
 		{/if}
 	</Card>
 </div>
-<!-- </GridLayout> -->

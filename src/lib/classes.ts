@@ -24,7 +24,7 @@ export const textInputClasses =
 export const selectBoxClasses = `py-1 rounded-md border border-black/50 dark:border-white/50 dark:focus:border-light-purple focus:border-light-purple capitalize shadow-04dp `;
 
 export const cardHeadingClasses =
-	'font-spartan text-xl font-bold text-black dark:text-white leading-[100%]';
+	'font-spartan text-xl font-bold text-black dark:text-off-white leading-[100%]';
 
 // Buttons
 export const smallButtonClasses =

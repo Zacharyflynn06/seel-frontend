@@ -13,6 +13,7 @@
 <NavBar />
 
 <Header />
-<main class="h-[calc(100vh-80px)] md:ml-[10rem] {mainPanelWidth} overflow-hidden">
+
+<main class="overflow-hidden md:ml-[10rem] md:mt-[80px] md:p-5">
 	<slot />
 </main>
