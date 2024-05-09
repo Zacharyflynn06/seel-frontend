@@ -139,6 +139,13 @@ export declare type CacheTypeDef = {
                         question: string;
                     };
                 };
+                askCollection: {
+                    type: string;
+                    args: {
+                        collectionName: string;
+                        query: string;
+                    };
+                };
                 documentUploadUrl: {
                     type: string;
                     args: {

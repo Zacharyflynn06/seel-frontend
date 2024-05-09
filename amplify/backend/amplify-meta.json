@@ -42,7 +42,7 @@
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-seelfrontend-dev-b8b56-deployment/amplify-cfn-templates/auth/seelfrontend4b0d977e-cloudformation-template.json",
         "logicalId": "authseelfrontend4b0d977e"
       },
-      "lastPushTimeStamp": "2024-03-30T16:15:06.076Z",
+      "lastPushTimeStamp": "2024-05-08T16:21:16.216Z",
       "output": {
         "UserPoolId": "us-east-1_wrbYCy38v",
         "AppClientIDWeb": "66mm8ag5fj83asce4tuv2jqs0r",

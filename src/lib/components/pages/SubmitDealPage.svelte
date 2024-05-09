@@ -10,32 +10,32 @@
 	let loading = false;
 </script>
 
-<!-- <GridLayout columnSpacingClass=""> -->
-<div class=" flex h-full w-full justify-center md:items-center">
-	<Card
-		heading="Upload Documents"
-		className="h-[calc(100vh-113px)] md:min-h-[50%] md:max-w-[500px] md:max-h-[50%] overflow-none grid items center"
-	>
+<div class="flex h-full w-full items-center justify-center">
+	<Card heading="Upload Documents" className="h-full md:max-w-[500px] md:h-[500px]">
 		<FileInput bind:previewUrl={filePreviewUrl} />
-		{#if filePreviewUrl}
-			<!-- content here -->
-			<form
-				method="POST"
-				action="?/upload"
-				use:enhance={() => {
-					loading = true;
-					return async ({ update }) => {
-						loading = false;
-						update();
-					};
-				}}
-			>
-				<div class="flex h-fit w-full items-center justify-center">
-					<input type="text" hidden name="fileUrl" value={filePreviewUrl} />
-					<SmallButton type="submit" bind:loading label="Submit"><UploadIcon /></SmallButton>
-				</div>
-			</form>
-		{/if}
+		<!-- content here -->
+		<form
+			method="POST"
+			action="?/upload"
+			use:enhance={() => {
+				loading = true;
+				return async ({ update }) => {
+					loading = false;
+					update();
+				};
+			}}
+		>
+			<div class="flex h-fit w-full items-center justify-center">
+				<input type="text" hidden name="fileUrl" value={filePreviewUrl} />
+				<SmallButton
+					disabled={filePreviewUrl ? false : true}
+					type="submit"
+					bind:loading
+					label="Submit"
+				>
+					<UploadIcon />
+				</SmallButton>
+			</div>
+		</form>
 	</Card>
 </div>
-<!-- </GridLayout> -->

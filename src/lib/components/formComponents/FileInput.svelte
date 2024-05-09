@@ -70,9 +70,9 @@
 	:global(.dark .filepond--panel-root) {
 		@apply bg-grey-08;
 	}
-	:global(.filepond--panel-root) {
-		@apply border border-pink;
-	}
+	/* :global(.filepond--panel-root) {
+		@apply border border-;
+	} */
 	:global(.dark .filepond--drop-label) {
 		@apply text-off-white;
 	}
