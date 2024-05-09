@@ -8,7 +8,7 @@
 
 <div class="gradient-animation h-screen w-full pt-[64px] md:pt-[72px]">
 	<div class="h-full w-full {flexCenter}">
-		<Card className="max-w-[95%]" headingIsCentered>
+		<Card className="max-w-[95%] md:max-w-[750px] " headingIsCentered>
 			<h1>About Seel</h1>
 			<p class="dark:text-off-white">
 				Founded in 2024, Seel is an AI-powered platform designed to streamline private market deal
