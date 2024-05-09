@@ -42,7 +42,7 @@
 			<SeelIcon className="h-[15rem] w-[15rem] text-off-white drop-shadow-xl" />
 		</div>
 		<div
-			class="relative grid w-full items-center rounded-lg border border-transparent bg-off-white text-center shadow-08dp focus-within:border-light-purple focus:ring-purple dark:bg-off-black"
+			class="relative grid w-full items-center rounded-lg border border-transparent bg-off-white text-center shadow-08dp focus-within:border-pink focus:ring-pink dark:bg-off-black dark:shadow-pink"
 		>
 			<button
 				type="submit"
