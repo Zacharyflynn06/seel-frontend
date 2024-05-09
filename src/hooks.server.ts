@@ -3,8 +3,6 @@ import { sequence } from '@sveltejs/kit/hooks';
 import { Auth } from 'aws-amplify';
 
 async function authorize({ event, resolve }) {
-	// console.log({ 'hooks.server.ts event': event });
-
 	try {
 		const user = await Auth.currentAuthenticatedUser();
 	} catch (error) {
