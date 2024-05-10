@@ -22,6 +22,7 @@ async function authorize({ resolve, event }) {
 				email: currentUser.email,
 				id: currentUser.id
 			};
+			console.log('locals are set');
 			setSession(event, { currentUser });
 		} else {
 			// if (!unProtectedRoutes.includes(event.url.pathname)) {

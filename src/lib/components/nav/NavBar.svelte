@@ -7,11 +7,11 @@
 	import SeelIcon from '../icons/SeelIcon.svelte';
 
 	const navLinks: NavigationItem[] = [
-		{
-			name: 'Dashboard',
-			href: '/dashboard',
-			icon: RectangleGroupIcon
-		},
+		// {
+		// 	name: 'Dashboard',
+		// 	href: '/dashboard',
+		// 	icon: RectangleGroupIcon
+		// },
 		{
 			name: 'Review Deals',
 			href: '/review-deals',

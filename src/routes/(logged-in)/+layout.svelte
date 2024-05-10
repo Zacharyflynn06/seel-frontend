@@ -3,11 +3,11 @@
 	import Header from '$lib/components/Header.svelte';
 	import LandingPageHeader from '$lib/components/LandingPageHeader.svelte';
 	import NavBar from '$lib/components/nav/NavBar.svelte';
-	import { currentAuthenticatedUser } from '$lib/session/session';
+	// import { currentAuthenticatedUser } from '$lib/session/session';
 
-	$: if (!currentAuthenticatedUser()) {
-		console.log('no user');
-	}
+	// $: if (!currentAuthenticatedUser()) {
+	// 	console.log('no user');
+	// }
 </script>
 
 <NavBar />

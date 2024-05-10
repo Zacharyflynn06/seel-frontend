@@ -9,7 +9,7 @@ export const load: PageServerLoad = async () => {
 };
 
 export const actions: Actions = {
-	default({ cookies, locals }) {
+	default({ cookies }) {
 		Auth.signOut();
 		console.log('signed out');
 		throw redirect(302, '/');
