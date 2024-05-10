@@ -2,8 +2,6 @@
 	import '../app.css';
 	import { onMount } from 'svelte';
 	import { themeStore } from '$lib/stores/themeStore';
-	import { page } from '$app/stores';
-	import type { PageData } from './$types';
 
 	onMount(() => {
 		// this listens for the system to change dark mode preference

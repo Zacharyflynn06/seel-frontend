@@ -1,6 +1,5 @@
-import { error, fail, redirect, type Handle } from '@sveltejs/kit';
+import { redirect, type Handle } from '@sveltejs/kit';
 import { sequence } from '@sveltejs/kit/hooks';
-import { Auth } from 'aws-amplify';
 import { GetUserStore, setSession } from '$houdini';
 
 async function authorize({ resolve, event }) {
@@ -9,29 +8,31 @@ async function authorize({ resolve, event }) {
 	const cookieId = event.cookies.get('session_id');
 
 	if (!cookieId) {
-		// todo
+		return resolve(event);
 	}
 
 	const userStore = await new GetUserStore();
 
 	userStore.fetch({ event, variables: { id: cookieId } }).then((res) => {
-		currentUser = res.data?.getUser;
-		if (currentUser) {
-			event.locals.user = {
-				isAuthenticated: true,
-				email: currentUser.email,
-				id: currentUser.id
-			};
-			console.log('locals are set');
-			setSession(event, { currentUser });
-		} else {
-			// if (!unProtectedRoutes.includes(event.url.pathname)) {
-			throw redirect(303, '/');
-			// }
+		try {
+			currentUser = res.data?.getUser;
+			if (currentUser) {
+				event.locals.user = {
+					isAuthenticated: true,
+					email: currentUser.email,
+					id: currentUser.id
+				};
+				console.log('locals are set');
+				setSession(event, { currentUser });
+				// } else {
+				// 	// if (!unProtectedRoutes.includes(event.url.pathname)) {
+				// 	// }
+			}
+		} catch (error) {
+			console.error('error in hooks.server', error);
 		}
 	});
 
-	// console.log({ event, sessionId });
 	// setSession(event, { currentUser });
 	return resolve(event);
 }

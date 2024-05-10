@@ -1,13 +1,11 @@
-<script>
-	import { mainPanelWidth } from '$lib/classes';
+<script lang="ts">
 	import Header from '$lib/components/Header.svelte';
-	import LandingPageHeader from '$lib/components/LandingPageHeader.svelte';
 	import NavBar from '$lib/components/nav/NavBar.svelte';
-	// import { currentAuthenticatedUser } from '$lib/session/session';
+	import type { PageData } from '../$types';
 
-	// $: if (!currentAuthenticatedUser()) {
-	// 	console.log('no user');
-	// }
+	export let data: PageData;
+
+	$: console.log({ data });
 </script>
 
 <NavBar />

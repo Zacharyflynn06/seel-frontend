@@ -14,7 +14,7 @@ export const actions = {
 		try {
 			const forgotPasswordRequest = await Auth.forgotPassword(email);
 			if (forgotPasswordRequest) {
-				console.log({ forgotPasswordRequest });
+				// console.log({ forgotPasswordRequest });
 				return { success: true };
 			}
 		} catch (error) {

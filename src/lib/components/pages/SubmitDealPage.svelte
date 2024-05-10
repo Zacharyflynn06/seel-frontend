@@ -10,8 +10,8 @@
 	let loading = false;
 </script>
 
-<div class="flex h-full w-full items-center justify-center">
-	<Card heading="Upload Documents" className="h-full md:max-w-[500px] md:h-[500px]">
+<div class="flex h-full w-full justify-center">
+	<Card heading="Upload Documents" className="h-fit w-[95%] md:max-w-[500px] md:h-[500px]">
 		<FileInput bind:previewUrl={filePreviewUrl} />
 		<!-- content here -->
 		<form
