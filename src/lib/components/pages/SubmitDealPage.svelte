@@ -11,7 +11,7 @@
 </script>
 
 <div class="flex h-full w-full justify-center">
-	<Card heading="Upload Documents" className="h-fit w-[95%] md:max-w-[500px] md:h-[500px]">
+	<Card heading="Upload Documents" className="h-fit w-full md:max-w-[500px] md:h-[500px]">
 		<FileInput bind:previewUrl={filePreviewUrl} />
 		<!-- content here -->
 		<form

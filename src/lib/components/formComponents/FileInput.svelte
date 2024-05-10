@@ -32,17 +32,16 @@
 
 	async function handleLoad(params: string) {
 		console.log('FilePond has loaded');
-		const url = JSON.parse(params).data;
-		signedRequestUrl = JSON.parse(url)[0];
-		tick();
+		const data = JSON.parse(params).data;
+		signedRequestUrl = JSON.parse(data)[4];
+
 		const response = await fetch(signedRequestUrl, {
 			method: 'PUT',
 			headers: {
 				'Content-Type': 'multipart/form-data'
 			},
 			body: pond.getFiles()[0].file
-		});
-		previewUrl = signedRequestUrl.split('?')[0];
+		}).then((res) => res.json());
 
 		console.log(response);
 	}
