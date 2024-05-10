@@ -12,6 +12,10 @@
 
 <Header />
 
-<main class="mt-[80px] h-[calc(100vh-80px)] overflow-hidden p-5 md:ml-[10rem]">
+
+<main
+	class="mt-[72px] h-[calc(100dvh-72px)] overflow-hidden pt-5 sm:mt-[80px] md:ml-[10rem] md:h-[calc(100vh-80px)]"
+>
+
 	<slot />
 </main>
