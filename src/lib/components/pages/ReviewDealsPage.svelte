@@ -1,8 +1,5 @@
 <script lang="ts">
 	import Card from '../Card.svelte';
-
-	import GridLayout from '../layouts/GridLayout.svelte';
-	export let data;
 </script>
 
 <!-- <GridLayout columnSpacingClass="md:grid-cols-[40%_40%_20%] overflow-hidden"> -->

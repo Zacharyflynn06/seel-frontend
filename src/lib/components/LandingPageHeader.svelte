@@ -2,6 +2,9 @@
 	import { page } from '$app/stores';
 	import DarkModeToggleButton from './buttons/DarkModeToggleButton.svelte';
 	import SmallButton from './buttons/SmallButton.svelte';
+	import Menu from './nav/Menu.svelte';
+
+	let isMenuOpen = false;
 </script>
 
 <header class="fixed inset-0 h-16 w-full bg-off-white transition-all ease-linear dark:bg-off-black">
@@ -18,6 +21,7 @@
 					<SmallButton label="Sign up" />
 				</a>
 			{:else}
+				<!-- todo: check if user is logged in -->
 				<a href="/log-in">
 					<SmallButton label="Log in" />
 				</a>
@@ -25,3 +29,7 @@
 		</div>
 	</div>
 </header>
+
+{#if isMenuOpen}
+	<Menu></Menu>
+{/if}

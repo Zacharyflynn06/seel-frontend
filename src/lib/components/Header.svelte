@@ -1,11 +1,10 @@
 <script lang="ts">
 	import { page } from '$app/stores';
 	import DarkModeToggleButton from './buttons/DarkModeToggleButton.svelte';
-	import SmallButton from './buttons/SmallButton.svelte';
 	import { enhance } from '$app/forms';
 	import { fade, slide } from 'svelte/transition';
 	import { mainPanelWidth } from '$lib/classes';
-	import CogIcon from './icons/CogIcon.svelte';
+	import Menu from './nav/Menu.svelte';
 
 	let title: string;
 
@@ -23,6 +22,8 @@
 	}
 
 	let isMenuOpen = false;
+
+	$: console.log({ $page });
 </script>
 
 <header
@@ -72,20 +73,5 @@
 </header>
 
 {#if isMenuOpen}
-	<nav transition:slide class="absolute right-0 top-[72px] z-20 bg-grey-08 p-5">
-		<ul>
-			<li>Home</li>
-			<li>
-				<a href="/about">About</a>
-			</li>
-			<li>
-				Settings <div class="text-pink"><CogIcon /></div>
-			</li>
-			<li>
-				<form transition:fade action="/log-out" method="POST" use:enhance>
-					<SmallButton type="submit" label="Sign Out" />
-				</form>
-			</li>
-		</ul>
-	</nav>
+	<Menu></Menu>
 {/if}
