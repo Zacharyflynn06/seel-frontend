@@ -3,8 +3,9 @@
 	import DarkModeToggleButton from './buttons/DarkModeToggleButton.svelte';
 	import SmallButton from './buttons/SmallButton.svelte';
 	import { enhance } from '$app/forms';
-	import { fade } from 'svelte/transition';
+	import { fade, slide } from 'svelte/transition';
 	import { mainPanelWidth } from '$lib/classes';
+	import CogIcon from './icons/CogIcon.svelte';
 
 	let title: string;
 
@@ -20,6 +21,8 @@
 	} else {
 		title = 'Dashboard';
 	}
+
+	let isMenuOpen = false;
 </script>
 
 <header
@@ -59,14 +62,30 @@
 
 			<div class="flex w-fit flex-shrink-0 items-center space-x-2 md:mr-2.5">
 				<DarkModeToggleButton />
-				<form transition:fade action="/log-out" method="POST" use:enhance>
-					<SmallButton type="submit" label="Sign Out" />
-				</form>
-				<!-- <div class="text-pink"><CogIcon /></div>
-				<div class="text-pink"><BellIcon /></div>
-				<div class="font-bold">Username</div>
-				<div class="h-10 w-10 rounded-full bg-white dark:bg-off-black" /> -->
+
+				<button on:click|preventDefault={() => (isMenuOpen = !isMenuOpen)} class="underline">
+					<div class="font-sans">Menu</div>
+				</button>
 			</div>
 		</div>
 	</div>
 </header>
+
+{#if isMenuOpen}
+	<nav transition:slide class="absolute right-0 top-[72px] z-20 bg-grey-08 p-5">
+		<ul>
+			<li>Home</li>
+			<li>
+				<a href="/about">About</a>
+			</li>
+			<li>
+				Settings <div class="text-pink"><CogIcon /></div>
+			</li>
+			<li>
+				<form transition:fade action="/log-out" method="POST" use:enhance>
+					<SmallButton type="submit" label="Sign Out" />
+				</form>
+			</li>
+		</ul>
+	</nav>
+{/if}
