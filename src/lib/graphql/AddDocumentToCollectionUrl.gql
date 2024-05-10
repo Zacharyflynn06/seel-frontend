@@ -1,0 +1,3 @@
+query AddDocumentToCollectionUrl {
+	addDocumentToCollectionUrl(collectionName: "test-collection")
+}
