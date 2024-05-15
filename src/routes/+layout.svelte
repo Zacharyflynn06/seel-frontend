@@ -2,6 +2,7 @@
 	import '../app.css';
 	import { onMount } from 'svelte';
 	import { themeStore } from '$lib/stores/themeStore';
+	import Header from '$lib/components/Header.svelte';
 
 	onMount(() => {
 		// this listens for the system to change dark mode preference
@@ -18,5 +19,7 @@
 		}
 	});
 </script>
+
+<Header />
 
 <slot />

@@ -29,7 +29,8 @@ body {
 		background: linear-gradient(30deg, #d0577b, #4b4a78);
 		background-size: 200% 200%;
 		animation: gradient 15s cubic-bezier(0.075, 0.82, 0.165, 1) infinite;
-		height: 100dvh;
+		height: 100vh;
+		width: full;
 	}
 	@keyframes gradient {
 		0% {

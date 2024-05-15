@@ -4,9 +4,11 @@
 	import NavBar from '$lib/components/nav/NavBar.svelte';
 	import type { PageData } from '../$types';
 
+	import { page } from '$app/stores';
+
 	export let data: PageData;
 
-	$: console.log({ data });
+	$: console.log($page.url.pathname, data);
 </script>
 
 <NavBar />

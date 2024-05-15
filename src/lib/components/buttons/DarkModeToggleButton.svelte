@@ -14,11 +14,11 @@
 		themeStore.toggle();
 		dispatch('toggle');
 	}}
-	class="m-auto rounded-full text-pink"
+	class="m-auto flex items-center rounded-full"
 >
 	{#if $themeStore.theme === 'light'}
-		<MoonIcon className={sizeClasses} />
+		<MoonIcon className={sizeClasses + ' text-purple'} />
 	{:else}
-		<SunIcon className={sizeClasses} />
+		<SunIcon className={sizeClasses + ' text-pink'} />
 	{/if}
 </button>

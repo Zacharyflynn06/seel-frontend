@@ -18,21 +18,22 @@ export const zeroDp = 'shadow-01dp dark:shadow-01dp bg-off-white dark:bg-black';
 // Form Input Classes
 export const inputResetClasses =
 	'ring-0 focus-within:ring-0 shadow-04dp rounded-md bg-white dark:bg-grey-08 ';
-const inputBorderClasses =
-	'border-[.5px] border-off-black dark:border-grey-08 focus:border-purple dark:focus:border-pink focus:ring-purple  ';
+export const inputBorderClasses =
+	'border-[.5px] border-off-black dark:border-transparent focus:border-purple dark:focus:border-white/50 focus:ring-purple  ';
 export const textInputClasses =
 	inputResetClasses +
 	inputBorderClasses +
-	'w-full  dark:placeholder:text-off-white mt-1 block w-full  dark:text-off-white  ';
+	'w-full dark:placeholder:text-off-white mt-1 block w-full  dark:text-off-white  ';
+
 export const inputLabelClasses = '';
 export const selectBoxClasses = inputResetClasses + inputBorderClasses + `py-1   `;
 
 export const cardHeadingClasses =
-	'font-spartan text-xl font-bold text-black dark:text-off-white leading-[100%]';
+	'font-spartan text-2xl font-bold text-black dark:text-off-white leading-none';
 
 // Buttons
 export const smallButtonClasses =
 	animatedTouchClasses +
-	' w-full rounded-sm text-off-white py-1 text-xs leading-[100%] bg-light-purple ';
+	' w-full rounded-sm text-off-white py-1 text-xs leading-none bg-light-purple ';
 
 export const svgTouchClasses = 'ease-linear hover:scale-105 active:scale-95 duration-300';
