@@ -10,10 +10,6 @@ body {
 		@apply font-spartan text-2xl font-bold;
 	}
 
-	input [type='number'] {
-		@apply border border-red-700;
-	}
-
 	@font-face {
 		font-family: League Spartan;
 		src:

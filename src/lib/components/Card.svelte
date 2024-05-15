@@ -7,7 +7,7 @@
 </script>
 
 <section
-	class="mt-[80px] w-full rounded-2xl p-5 shadow-08dp dark:bg-grey-04 md:max-w-[500px] {className}"
+	class=" w-full rounded-3xl bg-off-white p-5 shadow-08dp dark:bg-grey-04 md:max-w-[500px] {className}"
 >
 	{#if heading}
 		<h2

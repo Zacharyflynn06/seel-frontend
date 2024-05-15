@@ -12,6 +12,12 @@
 		// 	href: '/dashboard',
 		// 	icon: RectangleGroupIcon
 		// },
+
+		{
+			name: 'Add Company',
+			href: '/add-company',
+			icon: RectangleGroupIcon
+		},
 		{
 			name: 'Review Deals',
 			href: '/review-deals',
@@ -21,12 +27,8 @@
 			name: 'Submit Deals',
 			href: '/submit-deals',
 			icon: CheckIcon
-		},
-		{
-			name: 'Add Company',
-			href: '/add-company',
-			icon: RectangleGroupIcon
 		}
+
 		// {
 		// 	name: 'Pipeline',
 		// 	href: '/pipeline',
@@ -41,16 +43,14 @@
 </script>
 
 <nav
-	class="fixed bottom-0 z-10 h-[7rem] w-full bg-gradient-to-b from-pink to-purple md:inset-0 md:h-screen md:w-[10rem]"
+	class="fixed bottom-0 z-10 h-[100px] w-full bg-gradient-to-b from-pink to-purple md:inset-0 md:h-screen md:w-[10rem]"
 >
 	<!-- logo and slogan -->
 	<div class="mx-auto hidden flex-col space-y-2.5 pt-5 text-center md:flex md:h-auto md:w-24">
 		<div class="grid justify-center">
 			<SeelIcon className="h-[10rem] w-[10rem] text-off-white dark:text-grey-01 " />
 		</div>
-		<div
-			class="line-clamp-1 text-[10px] uppercase tracking-[.1rem] text-white drop-shadow-2xl dark:text-black"
-		>
+		<div class="tracking-none line-clamp-1 text-[10px] uppercase drop-shadow-2xl">
 			seel the deal
 		</div>
 	</div>

@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Header from '$lib/components/Header.svelte';
 	import LandingPageHeader from '$lib/components/LandingPageHeader.svelte';
 	import LandingPage from '$lib/components/pages/LandingPage.svelte';
 	import type { PageData } from './$types';
@@ -7,5 +8,6 @@
 	$: console.log({ data });
 </script>
 
-<LandingPageHeader />
+<!-- <LandingPageHeader /> -->
+<Header isFullWidth />
 <LandingPage />

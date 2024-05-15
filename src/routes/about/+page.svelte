@@ -1,12 +1,18 @@
 <script lang="ts">
 	import { flexCenter } from '$lib/classes';
 	import Card from '$lib/components/Card.svelte';
-	import LandingPageHeader from '$lib/components/LandingPageHeader.svelte';
+	import Header from '$lib/components/Header.svelte';
+	import { onMount } from 'svelte';
+
+	onMount(() => {
+		document.body.classList.add('gradient-animation');
+	});
 </script>
 
-<LandingPageHeader />
+<Header isFullWidth />
 
-<div class="gradient-animation h-screen w-full pt-[64px] md:pt-[72px]">
+<div class=" h-screen w-full">
+	<div class="h-[80px]"></div>
 	<div class="h-full w-full {flexCenter}">
 		<Card className="max-w-[95%] md:max-w-[750px]  overflow-y-scroll" headingIsCentered>
 			<h1>About Seel</h1>
