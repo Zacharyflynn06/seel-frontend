@@ -8,7 +8,6 @@
 
 	let isMenuOpen = false;
 	let isLoggedIn = false;
-	$: console.log({ $page });
 
 	onMount(() => {
 		if ($page.data.user) {
@@ -21,25 +20,31 @@
 	};
 </script>
 
-<header class="fixed top-0 z-10 flex h-[80px] w-full justify-center bg-white dark:bg-grey-08">
-	<div class="relative flex h-full w-full max-w-[1200px] items-end justify-between p-5">
-		<a href="/" class="font-spartan text-5xl font-bold text-purple dark:text-pink">seel</a>
+<header
+	class="fixed top-0 z-10 flex h-[80px] w-full justify-center bg-white shadow-08dp dark:bg-grey-08"
+>
+	<div
+		class="relative flex h-full w-full max-w-[1200px] items-end justify-between p-5 xl:max-w-[1400px]"
+	>
+		<a href="/" class="font-spartan text-5xl font-bold leading-[.5] text-purple dark:text-pink"
+			>seel</a
+		>
 
+		<!-- <DarkModeToggleButton on:toggle={() => (isMenuOpen = false)} /> -->
 		<button
-			class="relative font-spartan text-2xl"
+			class="relative flex font-spartan text-3xl leading-[.5]"
 			on:click|preventDefault={() => (isMenuOpen = !isMenuOpen)}
 		>
 			Menu
 		</button>
+
 		{#if isMenuOpen}
 			<!-- content here -->
 			<nav
 				transition:slide
-				class="absolute right-0 top-[80px] z-20 flex flex-col bg-white p-5 text-right text-xl shadow-08dp dark:bg-grey-08"
+				class="absolute right-0 top-[80px] z-20 flex flex-col items-end justify-end space-y-2 bg-white p-5 text-right text-xl shadow-08dp dark:bg-grey-08"
 			>
-				<div class="justify-end">
-					<DarkModeToggleButton on:toggle={() => (isMenuOpen = false)} />
-				</div>
+				<DarkModeToggleButton on:toggle={() => (isMenuOpen = false)} />
 				<a on:click={closeMenu} href="/">Home</a>
 				<a on:click={closeMenu} href="/about">About</a>
 
@@ -57,4 +62,4 @@
 </header>
 
 <!-- this dummy div saves a bunch of headaches with padding -->
-<div class="absolute inset-0 flex h-[80px] w-full bg-transparent"></div>
+<div class="mt-[80px] w-full bg-transparent"></div>

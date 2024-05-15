@@ -1,5 +1,48 @@
 <script lang="ts">
-	import SubmitDealPage from '$lib/components/pages/SubmitDealPage.svelte';
+	import { padHeader } from '$lib/classes';
+	import Card from '$lib/components/Card.svelte';
+	import SmallButton from '$lib/components/buttons/SmallButton.svelte';
+	import FileInput from '$lib/components/formComponents/FileInput.svelte';
+	import UploadIcon from '$lib/components/icons/UploadIcon.svelte';
+
+	let filePreviewUrl: string | undefined = undefined;
+	let loading = false;
+	let file: File;
+
+	async function handleSubmit(event: SubmitEvent) {
+		loading = !loading;
+		console.log({ event });
+		if (!filePreviewUrl) {
+			loading = false;
+			return;
+		}
+
+		try {
+			await fetch(filePreviewUrl, {
+				method: 'PUT',
+				body: file
+			});
+		} catch (error) {
+			loading = false;
+			console.log(error);
+		}
+	}
 </script>
 
-<SubmitDealPage />
+<div class="flex {padHeader} w-full justify-center md:items-center">
+	<Card
+		heading="Upload Documents"
+		className="h-fit md:w-full w-[95%] md:max-w-[500px] md:h-[500px]"
+	>
+		<form on:submit|preventDefault={handleSubmit}>
+			<FileInput bind:file bind:signedUrl={filePreviewUrl} />
+
+			<input type="text" hidden name="fileUrl" value={filePreviewUrl} />
+			<div class="flex w-full justify-end">
+				<SmallButton type="submit" bind:loading label="Submit">
+					<UploadIcon />
+				</SmallButton>
+			</div>
+		</form>
+	</Card>
+</div>

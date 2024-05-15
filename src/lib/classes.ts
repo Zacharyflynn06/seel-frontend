@@ -1,6 +1,7 @@
 // Utilities
 export const mainPanelWidth = 'w-full md:w-[calc(100vw-10rem)]';
 export const flexCenter = 'flex items-center justify-center';
+export const padHeader = 'h-[calc(100dvh-80px)] ';
 
 export const standardHoverClasses = 'hover:bg-black/25 dark:hover:bg-white/25';
 
@@ -18,6 +19,7 @@ export const zeroDp = 'shadow-01dp dark:shadow-01dp bg-off-white dark:bg-black';
 // Form Input Classes
 export const inputResetClasses =
 	'ring-0 focus-within:ring-0 shadow-04dp rounded-md bg-white dark:bg-grey-08 ';
+
 export const inputBorderClasses =
 	'border-[.5px] border-off-black dark:border-transparent focus:border-purple dark:focus:border-white/50 focus:ring-purple  ';
 export const textInputClasses =
@@ -25,8 +27,8 @@ export const textInputClasses =
 	inputBorderClasses +
 	'w-full dark:placeholder:text-off-white mt-1 block w-full  dark:text-off-white  ';
 
-export const inputLabelClasses = '';
-export const selectBoxClasses = inputResetClasses + inputBorderClasses + `py-1   `;
+export const inputLabelClasses = 'block';
+export const selectBoxClasses = inputResetClasses + inputBorderClasses + ` py-1   `;
 
 export const cardHeadingClasses =
 	'font-spartan text-2xl font-bold text-black dark:text-off-white leading-none';

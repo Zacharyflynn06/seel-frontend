@@ -4,7 +4,7 @@
 	import MoonIcon from '../icons/MoonIcon.svelte';
 	import SunIcon from '../icons/SunIcon.svelte';
 
-	export let sizeClasses = 'w-6 h-6';
+	export let sizeClasses = 'w-7 h-7';
 
 	const dispatch = createEventDispatcher();
 </script>
@@ -14,7 +14,7 @@
 		themeStore.toggle();
 		dispatch('toggle');
 	}}
-	class="m-auto flex items-center rounded-full"
+	class=" flex items-center rounded-full"
 >
 	{#if $themeStore.theme === 'light'}
 		<MoonIcon className={sizeClasses + ' text-purple'} />

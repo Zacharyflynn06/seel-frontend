@@ -29,7 +29,6 @@ export default {
 				red: '0px 0px 4px 1px rgba(246, 102, 111, 0.25)',
 				gold: '0px 0px 4px 1px rgba(255, 122, 0, 0.45)',
 				pink: '0px 0px 4px 1px rgba(208, 87, 123, .45)'
-				// autofill: '0 0 0 30px var(--tw-shadow-color) inset !important '
 			},
 			dropShadow: {
 				pink: '0px 0px 4px 1px rgba(208, 87, 123, .45)'
