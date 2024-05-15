@@ -29,7 +29,7 @@
 	}
 </script>
 
-<div class="flex justify-center md:items-center">
+<div class="flex h-full justify-center p-5 md:items-center">
 	<Card heading="Upload Documents" className="h-fit md:w-full  md:max-w-[500px] md:h-[500px]">
 		<form on:submit|preventDefault={handleSubmit}>
 			<FileInput bind:file bind:signedUrl={filePreviewUrl} />

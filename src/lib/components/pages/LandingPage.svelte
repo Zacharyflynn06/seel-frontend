@@ -37,7 +37,7 @@
 	}
 </script>
 
-<main class="gradient-animation {flexCenter} mt-[80px] h-[calc(100dvh-80px)] flex-col">
+<main class="{flexCenter} mt-[60px] h-[calc(100dvh-80px)] w-full flex-col">
 	<form
 		on:submit|preventDefault={handleSubmit}
 		class=" flex w-full flex-col justify-center space-y-5 p-5 text-center md:w-[500px] md:max-w-[500px]"

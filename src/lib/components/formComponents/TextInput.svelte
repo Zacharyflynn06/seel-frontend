@@ -14,7 +14,7 @@
 	export let className =
 		inputResetClasses +
 		inputBorderClasses +
-		'w-full dark:placeholder:text-off-white mt-1 block w-full dark:text-off-white shadow-04dp shadow-autofill ' +
+		' dark:placeholder:text-off-white mt-1 block w-full dark:text-off-white shadow-04dp shadow-autofill ' +
 		extraClasses;
 </script>
 

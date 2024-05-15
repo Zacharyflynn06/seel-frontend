@@ -66,12 +66,12 @@
 				{/if}
 			</button>
 		</TextInput>
+		<div class=" text-left indent-4 md:max-w-[500px]">
+			{#if answer}
+				<Typewriter>
+					{answer}
+				</Typewriter>
+			{/if}
+		</div>
 	</form>
-	<div class="min-h-20 p-5 text-white md:max-w-[500px]">
-		{#if answer}
-			<Typewriter>
-				{answer}
-			</Typewriter>
-		{/if}
-	</div>
 </div>

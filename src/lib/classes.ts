@@ -1,7 +1,7 @@
 // Utilities
 export const mainPanelWidth = 'w-full md:w-[calc(100vw-10rem)]';
 export const flexCenter = 'flex items-center justify-center';
-export const padHeader = 'h-[calc(100dvh-80px)] ';
+export const padHeader = 'h-[calc(100dvh-60px)] ';
 
 export const standardHoverClasses = 'hover:bg-black/25 dark:hover:bg-white/25';
 

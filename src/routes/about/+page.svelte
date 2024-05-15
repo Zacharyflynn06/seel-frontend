@@ -11,7 +11,7 @@
 
 <GradientBg />
 
-<div class="{padHeader} flex w-full items-center justify-center p-5">
+<div class="flex w-full items-center justify-center p-5">
 	<Card className="md:max-w-[750px]" heading="About Seel">
 		<p class="">
 			Founded in 2024, Seel is an AI-powered platform designed to streamline private market deal

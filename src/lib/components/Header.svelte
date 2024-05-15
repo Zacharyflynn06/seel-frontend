@@ -5,9 +5,11 @@
 	import { slide } from 'svelte/transition';
 	import { enhance } from '$app/forms';
 	import { onMount } from 'svelte';
+	import { mainPanelWidth } from '$lib/classes';
 
 	let isMenuOpen = false;
 	let isLoggedIn = false;
+	export let marginForNav = false;
 
 	onMount(() => {
 		if ($page.data.user) {
@@ -21,7 +23,7 @@
 </script>
 
 <header
-	class="bg-light-grey-08 fixed top-0 z-10 flex h-[80px] w-full justify-center shadow-08dp dark:bg-grey-08"
+	class="bg-light-grey-08 fixed top-0 z-10 flex h-[60px] w-full justify-center shadow-08dp dark:bg-grey-08"
 >
 	<div
 		class="relative flex h-full w-full max-w-[1200px] items-end justify-between p-5 xl:max-w-[1400px]"
@@ -42,7 +44,7 @@
 			<!-- content here -->
 			<nav
 				transition:slide
-				class="absolute right-0 top-[80px] z-20 flex flex-col items-end justify-end space-y-2 bg-white p-5 text-right text-xl shadow-08dp dark:bg-grey-08"
+				class="absolute right-0 top-[60px] z-20 flex flex-col items-end justify-end space-y-2 bg-white p-5 text-right text-xl shadow-08dp dark:bg-grey-08"
 			>
 				<DarkModeToggleButton on:toggle={() => (isMenuOpen = false)} />
 				<a on:click={closeMenu} href="/">Home</a>
@@ -62,4 +64,4 @@
 </header>
 
 <!-- this dummy div saves a bunch of headaches with padding -->
-<div class="mt-[80px] w-full bg-transparent"></div>
+<div class="mt-[60px] w-full bg-transparent"></div>

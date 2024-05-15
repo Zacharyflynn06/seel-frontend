@@ -42,7 +42,7 @@
 </script>
 
 <nav
-	class=" fixed bottom-0 left-0 z-10 h-[100px] w-full border-r border-purple bg-gradient-to-t from-pink to-purple md:top-[80px] md:h-full md:w-[10rem]"
+	class=" fixed bottom-0 left-0 z-10 h-[100px] w-full border-r border-purple bg-gradient-to-t from-pink to-purple md:top-[60px] md:h-full md:w-[10rem]"
 >
 	<!-- logo and slogan -->
 	<!-- <div class="mx-auto hidden flex-col space-y-2.5 text-center md:flex md:h-auto md:w-24">
