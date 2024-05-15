@@ -1,9 +1,9 @@
 <script lang="ts">
 	import AuthWrapper from '$lib/components/AuthWrapper.svelte';
-	import LandingPageHeader from '$lib/components/LandingPageHeader.svelte';
+	import Header from '$lib/components/Header.svelte';
 </script>
 
-<LandingPageHeader />
+<Header />
 
 <AuthWrapper>
 	<slot />

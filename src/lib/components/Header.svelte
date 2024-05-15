@@ -1,50 +1,67 @@
 <script lang="ts">
 	import { page } from '$app/stores';
 	import DarkModeToggleButton from './buttons/DarkModeToggleButton.svelte';
+
+	import { slide } from 'svelte/transition';
+	import { enhance } from '$app/forms';
+	import { onMount } from 'svelte';
 	import { mainPanelWidth } from '$lib/classes';
-	import Menu from './nav/Menu.svelte';
-
-	let title: string;
-
-	function extractTitleFromPathname() {
-		return $page.url.pathname
-			.split('/')
-			.map((part) => part.replace('-', ' '))
-			.join(' ');
-	}
-
-	$: if ($page.url.pathname !== '/') {
-		title = extractTitleFromPathname();
-	} else {
-		title = 'Dashboard';
-	}
 
 	let isMenuOpen = false;
+	let isLoggedIn = false;
+	export let marginForNav = false;
 
-	$: console.log({ $page });
+	onMount(() => {
+		if ($page.data.user) {
+			isLoggedIn = true;
+		}
+	});
+
+	const closeMenu = () => {
+		isMenuOpen = false;
+	};
 </script>
 
 <header
-	class="{mainPanelWidth} fixed top-0 z-10 flex h-[80px] w-full items-center justify-between bg-white p-5 dark:bg-grey-08 md:left-[10rem]"
+	class="bg-light-grey-08 fixed top-0 z-10 flex h-[60px] w-full justify-center shadow-08dp dark:bg-grey-08"
 >
-	<div class="flex w-full items-center justify-between">
-		<h1 class="flex-shrink-0 items-end font-extrabold capitalize leading-none">
-			{title}
-		</h1>
-		<div class="flex w-full justify-between space-x-5">
-			<div class="flex md:space-x-5"></div>
+	<div
+		class="relative flex h-full w-full max-w-[1200px] items-end justify-between p-5 xl:max-w-[1400px]"
+	>
+		<a href="/" class="font-spartan text-5xl font-bold leading-[.5] text-purple dark:text-pink"
+			>seel</a
+		>
 
-			<div class="flex w-fit flex-shrink-0 items-center space-x-2 md:mr-2.5">
-				<DarkModeToggleButton />
+		<!-- <DarkModeToggleButton on:toggle={() => (isMenuOpen = false)} /> -->
+		<button
+			class="relative flex font-spartan text-3xl leading-[.5]"
+			on:click|preventDefault={() => (isMenuOpen = !isMenuOpen)}
+		>
+			Menu
+		</button>
 
-				<button on:click|preventDefault={() => (isMenuOpen = !isMenuOpen)} class="underline">
-					<div class="font-sans">Menu</div>
-				</button>
-			</div>
-		</div>
+		{#if isMenuOpen}
+			<!-- content here -->
+			<nav
+				transition:slide
+				class="absolute right-0 top-[60px] z-20 flex flex-col items-end justify-end space-y-2 bg-white p-5 text-right text-xl shadow-08dp dark:bg-grey-08"
+			>
+				<DarkModeToggleButton on:toggle={() => (isMenuOpen = false)} />
+				<a on:click={closeMenu} href="/">Home</a>
+				<a on:click={closeMenu} href="/about">About</a>
+
+				{#if isLoggedIn}
+					<form action="/log-out" method="POST" use:enhance>
+						<button on:click={closeMenu} type="submit">Sign Out</button>
+					</form>
+				{:else}
+					<a on:click={closeMenu} href="/log-in">Log In</a>
+					<a on:click={closeMenu} href="/sign-up">Sign Up</a>
+				{/if}
+			</nav>
+		{/if}
 	</div>
 </header>
 
-{#if isMenuOpen}
-	<Menu></Menu>
-{/if}
+<!-- this dummy div saves a bunch of headaches with padding -->
+<div class="mt-[60px] w-full bg-transparent"></div>

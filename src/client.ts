@@ -5,7 +5,7 @@ export default new HoudiniClient({
 	// for more information, please visit here: https://www.houdinigraphql.com/guides/authentication
 	url: 'https://fmfxd3pstrhzffv2nppqxedxa4.appsync-api.us-east-1.amazonaws.com/graphql',
 	fetchParams({ session }) {
-		// console.log({ session });
+		console.log({ session });
 		return {
 			headers: {
 				'Content-Type': 'application/graphql',

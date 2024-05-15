@@ -13,7 +13,7 @@ type OptionalUnion<U extends Record<string, any>, A extends keyof U = U extends 
 export type Snapshot<T = any> = Kit.Snapshot<T>;
 type PageServerParentData = EnsureDefined<LayoutServerData>;
 type PageParentData = EnsureDefined<LayoutData>;
-type LayoutRouteId = RouteId | "/" | "/(auth)/forgot-password" | "/(auth)/log-in" | "/(auth)/log-out" | "/(auth)/new-password" | "/(auth)/sign-up" | "/(logged-in)/add-company" | "/(logged-in)/dashboard" | "/(logged-in)/documents" | "/(logged-in)/pipeline" | "/(logged-in)/review-deals" | "/(logged-in)/submit-deals" | "/(public)/about" | "/api" | null
+type LayoutRouteId = RouteId | "/" | "/(auth)/forgot-password" | "/(auth)/log-in" | "/(auth)/log-out" | "/(auth)/new-password" | "/(auth)/sign-up" | "/(logged-in)/add-company" | "/(logged-in)/dashboard" | "/(logged-in)/documents" | "/(logged-in)/pipeline" | "/(logged-in)/review-deals" | "/(logged-in)/submit-deals" | "/about" | "/api" | null
 type LayoutParams = RouteParams & {  }
 type LayoutServerParentData = EnsureDefined<{}>;
 type LayoutParentData = EnsureDefined<{}>;
@@ -33,7 +33,7 @@ export type Action<OutputData extends Record<string, any> | void = Record<string
 export type Actions<OutputData extends Record<string, any> | void = Record<string, any> | void> = Kit.Actions<RouteParams, OutputData, RouteId>
 export type LayoutServerLoad<OutputData extends Partial<App.PageData> & Record<string, any> | void = Partial<App.PageData> & Record<string, any> | void> = Kit.ServerLoad<LayoutParams, LayoutServerParentData, OutputData, LayoutRouteId>;
 export type LayoutServerLoadEvent = Parameters<LayoutServerLoad>[0];
-export type LayoutServerData = null;
+export type LayoutServerData = Expand<OptionalUnion<EnsureDefined<Kit.LoadProperties<Awaited<ReturnType<typeof import('./proxy+layout.server.js').load>>>>>>;
 export type LayoutLoad<OutputData extends OutputDataShape<LayoutParentData> = OutputDataShape<LayoutParentData>> = Kit.Load<LayoutParams, LayoutServerData, LayoutParentData, OutputData, LayoutRouteId>;
 export type LayoutLoadEvent = Parameters<LayoutLoad>[0];
 export type LayoutData = Expand<Expand<Omit<LayoutParentData, keyof LayoutParentData & EnsureDefined<LayoutServerData>> & OptionalUnion<EnsureDefined<LayoutParentData & EnsureDefined<LayoutServerData>>>> & {  }>;

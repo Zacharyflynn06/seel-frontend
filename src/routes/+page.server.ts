@@ -1,8 +1,8 @@
 import type { PageServerLoad } from './$houdini';
 
-export const load: PageServerLoad = async ({ locals }) => {
-	// console.log({ locals });
+export const load: PageServerLoad = async (event) => {
+	console.log(event.locals);
 	return {
-		user: locals.user
+		user: event.locals.user
 	};
 };
