@@ -13,7 +13,8 @@
 		<div>
 			<!-- intentionally empty -->
 		</div>
-		<div class="flex space-x-5">
+		<div class="flex items-end space-x-5">
+			<a href="/about">About</a>
 			<DarkModeToggleButton />
 
 			{#if $page.url.pathname === '/log-in'}
