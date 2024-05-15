@@ -29,17 +29,15 @@
 	}
 </script>
 
-<div class="flex h-full justify-center p-5 md:items-center">
-	<Card heading="Upload Documents" className="h-fit md:w-full  md:max-w-[500px] md:h-[500px]">
-		<form on:submit|preventDefault={handleSubmit}>
-			<FileInput bind:file bind:signedUrl={filePreviewUrl} />
+<Card heading="Upload Documents">
+	<form on:submit|preventDefault={handleSubmit}>
+		<FileInput bind:file bind:signedUrl={filePreviewUrl} />
 
-			<input type="text" hidden name="fileUrl" value={filePreviewUrl} />
-			<div class="flex w-full justify-end">
-				<SmallButton type="submit" bind:loading label="Submit">
-					<UploadIcon />
-				</SmallButton>
-			</div>
-		</form>
-	</Card>
-</div>
+		<input type="text" hidden name="fileUrl" value={filePreviewUrl} />
+		<div class="flex w-full justify-end">
+			<SmallButton type="submit" bind:loading label="Submit">
+				<UploadIcon />
+			</SmallButton>
+		</div>
+	</form>
+</Card>

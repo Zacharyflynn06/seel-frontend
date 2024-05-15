@@ -8,7 +8,7 @@
 	import { mainPanelWidth } from '$lib/classes';
 
 	let isMenuOpen = false;
-	let isLoggedIn = false;
+	let isLoggedIn = $page.data.user ? true : false;
 	export let marginForNav = false;
 
 	onMount(() => {
@@ -26,9 +26,9 @@
 	class="bg-light-grey-08 fixed top-0 z-10 flex h-[60px] w-full justify-center shadow-08dp dark:bg-grey-08"
 >
 	<div
-		class="relative flex h-full w-full max-w-[1200px] items-end justify-between p-5 xl:max-w-[1400px]"
+		class="relative flex h-full w-full max-w-[1200px] items-center justify-between px-5 xl:max-w-[1400px]"
 	>
-		<a href="/" class="font-spartan text-5xl font-bold leading-[.5] text-purple dark:text-pink"
+		<a href="/" class="font-spartan text-5xl font-semibold leading-[.5] text-purple dark:text-pink"
 			>seel</a
 		>
 
