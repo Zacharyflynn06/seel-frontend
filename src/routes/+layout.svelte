@@ -25,6 +25,4 @@
 	$: console.log(`pathname is "${$page.url.pathname}", data is:`, data);
 </script>
 
-<Header />
-
-<slot />
+<slot><!-- optional fallback --></slot>

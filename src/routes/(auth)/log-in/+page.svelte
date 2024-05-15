@@ -44,7 +44,10 @@
 		label="Password"
 		placeholder=" minimum 6 characters"
 	/>
-	<a class="{anchorTagClasses} text-xs" href="/forgot-password">Forgot password?</a>
+	<div class="">
+		<a class="{anchorTagClasses} text-xs" href="/forgot-password">Forgot password?</a>
+		<a class="{anchorTagClasses} text-xs" href="/forgot-password">Already have an account?</a>
+	</div>
 
 	<div class="flex justify-end">
 		<SmallButton type="submit" {loading} label="Log in" />
