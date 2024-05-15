@@ -25,4 +25,4 @@
 	$: console.log(`pathname is "${$page.url.pathname}", data is:`, data);
 </script>
 
-<slot><!-- optional fallback --></slot>
+<slot />

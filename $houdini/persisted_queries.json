@@ -1,6 +1,6 @@
 {
-    "8c05bff0acc73e6ae81b7d4ceff7b542d2367a1e60426e81183ecca1c219b0eb": "query AskSeel($question: String!) {\n  ask(question: $question)\n}\n",
-    "0a27981a10d30b675861cf4860071b67399ae2cfcf03cd67126825c84ca0a13b": "mutation UpsertUser($email: String!, $id: String!) {\n  upsertUser(user: {email: $email, id: $id}) {\n    email\n    id\n  }\n}\n",
     "ea6184ba90262b629f82bb56f4d24ace35855ec34dd5d8609dcc98679e180fb6": "query AddDocumentToCollectionUrl($collectionName: String!) {\n  addDocumentToCollectionUrl(collectionName: $collectionName)\n}\n",
-    "7f533cc46c6fadaa5ef8944ee516dbcaed64685d3aa825e0fe19feceec364eee": "query GetUser($id: String!) {\n  getUser(id: $id) {\n    id\n    email\n  }\n}\n"
+    "7f533cc46c6fadaa5ef8944ee516dbcaed64685d3aa825e0fe19feceec364eee": "query GetUser($id: String!) {\n  getUser(id: $id) {\n    id\n    email\n  }\n}\n",
+    "0a27981a10d30b675861cf4860071b67399ae2cfcf03cd67126825c84ca0a13b": "mutation UpsertUser($email: String!, $id: String!) {\n  upsertUser(user: {email: $email, id: $id}) {\n    email\n    id\n  }\n}\n",
+    "8c05bff0acc73e6ae81b7d4ceff7b542d2367a1e60426e81183ecca1c219b0eb": "query AskSeel($question: String!) {\n  ask(question: $question)\n}\n"
 }

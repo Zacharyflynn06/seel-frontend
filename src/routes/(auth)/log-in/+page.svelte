@@ -44,12 +44,12 @@
 		label="Password"
 		placeholder=" minimum 6 characters"
 	/>
-	<div class="">
+	<div class="flex w-full justify-between">
 		<a class="{anchorTagClasses} text-xs" href="/forgot-password">Forgot password?</a>
-		<a class="{anchorTagClasses} text-xs" href="/forgot-password">Already have an account?</a>
+		<a class="{anchorTagClasses} text-xs" href="/sign-up">Need an account?</a>
 	</div>
 
-	<div class="flex justify-end">
+	<div class="flex justify-center">
 		<SmallButton type="submit" {loading} label="Log in" />
 	</div>
 </form>
