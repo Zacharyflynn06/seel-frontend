@@ -14,7 +14,7 @@
 	export let className =
 		inputResetClasses +
 		inputBorderClasses +
-		'w-full dark:placeholder:text-off-white mt-1 block w-full dark:text-off-white shadow-04dp shadow-autofill' +
+		'w-full dark:placeholder:text-off-white mt-1 block w-full dark:text-off-white shadow-04dp shadow-autofill ' +
 		extraClasses;
 </script>
 
@@ -50,7 +50,7 @@
 	{:else if type === 'email'}
 		<input type="email" bind:value {name} {placeholder} class={className} {minlength} {required} />
 	{/if}
-	<div class=" absolute bottom-0 right-1 z-10 h-fit">
+	<div class="absolute right-2.5 top-1/4 z-10">
 		<slot />
 	</div>
 </div>

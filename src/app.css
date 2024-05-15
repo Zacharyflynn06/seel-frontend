@@ -1,11 +1,29 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
 body {
-	@apply bg-off-white text-black dark:bg-black dark:text-white;
+	@apply bg-light-grey-01 text-off-black;
+}
+.dark body {
+	@apply bg-grey-01 text-off-white;
 }
 @layer base {
+	.gradient-animation {
+		background-size: 125% 125%;
+		animation: gradient 10s cubic-bezier(0.075, 0.82, 0.165, 1) infinite;
+	}
+	@keyframes gradient {
+		0% {
+			background-position: 0% 50%;
+		}
+		50% {
+			background-position: 100% 50%;
+		}
+		100% {
+			background-position: 0% 50%;
+		}
+	}
+
 	/* input:-webkit-autofill,
 	input:-webkit-autofill:hover,
 	input:-webkit-autofill:focus,
@@ -29,6 +47,9 @@ body {
 	h1 {
 		@apply font-spartan text-2xl font-bold leading-[.8];
 	}
+	h2 {
+		@apply font-spartan text-xl font-bold;
+	}
 
 	@font-face {
 		font-family: League Spartan;
@@ -43,22 +64,5 @@ body {
 			local('DM Sans'),
 			url('/fonts/DMSans-VariableFont_wght.ttf') format('truetype');
 		font-display: swap;
-	}
-
-	.gradient-animation {
-		background: linear-gradient(30deg, #d0577b, #4b4a78);
-		background-size: 200% 200%;
-		animation: gradient 10s cubic-bezier(0.075, 0.82, 0.165, 1) infinite;
-	}
-	@keyframes gradient {
-		0% {
-			background-position: 0% 50%;
-		}
-		50% {
-			background-position: 100% 50%;
-		}
-		100% {
-			background-position: 0% 50%;
-		}
 	}
 }

@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { flexCenter, padHeader } from '$lib/classes';
 	import Card from '$lib/components/Card.svelte';
+	import GradientBg from '$lib/components/GradientBg.svelte';
 	import { onMount } from 'svelte';
 
 	onMount(() => {
@@ -8,23 +9,24 @@
 	});
 </script>
 
+<GradientBg />
+
 <div class="{padHeader} flex w-full items-center justify-center p-5">
-	<Card className="md:max-w-[750px]  overflow-y-scroll" headingIsCentered>
-		<h1>About Seel</h1>
-		<p class="dark:text-off-white">
+	<Card className="md:max-w-[750px]" heading="About Seel">
+		<p class="">
 			Founded in 2024, Seel is an AI-powered platform designed to streamline private market deal
 			execution. Our mission is to simplify and enhance the investment process through automation
 			and data-driven insights. Our Vision
 		</p>
 		<br />
-		<h1>Our Vision</h1>
+		<h2>Our Vision</h2>
 		<p>
 			Seel aims to revolutionize the private equity and venture capital space by providing an
 			end-to-end solution for deal execution. Leveraging AI and machine learning, we streamline
 			tasks like deal qualification, due diligence, and investment memo creation.
 		</p>
 		<br />
-		<h1>What We Offer</h1>
+		<h2>What We Offer</h2>
 		<ul class="list-disc">
 			Intelligent Platform:
 			<li class="ml-5">

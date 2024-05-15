@@ -21,7 +21,7 @@ export const inputResetClasses =
 	'ring-0 focus-within:ring-0 shadow-04dp rounded-md bg-white dark:bg-grey-08 ';
 
 export const inputBorderClasses =
-	'border-[.5px] border-off-black dark:border-transparent focus:border-purple dark:focus:border-white/50 focus:ring-purple  ';
+	'border-[.5px] border-off-black dark:border-transparent focus:border-purple dark:focus:shadow-pink dark:focus:border-pink focus:ring-purple  ';
 export const textInputClasses =
 	inputResetClasses +
 	inputBorderClasses +

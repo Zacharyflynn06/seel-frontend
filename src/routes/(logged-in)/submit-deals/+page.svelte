@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { padHeader } from '$lib/classes';
+	import { mainPanelWidth, padHeader } from '$lib/classes';
 	import Card from '$lib/components/Card.svelte';
 	import SmallButton from '$lib/components/buttons/SmallButton.svelte';
 	import FileInput from '$lib/components/formComponents/FileInput.svelte';
@@ -29,11 +29,8 @@
 	}
 </script>
 
-<div class="flex {padHeader} w-full justify-center md:items-center">
-	<Card
-		heading="Upload Documents"
-		className="h-fit md:w-full w-[95%] md:max-w-[500px] md:h-[500px]"
-	>
+<div class="flex justify-center md:items-center">
+	<Card heading="Upload Documents" className="h-fit md:w-full  md:max-w-[500px] md:h-[500px]">
 		<form on:submit|preventDefault={handleSubmit}>
 			<FileInput bind:file bind:signedUrl={filePreviewUrl} />
 

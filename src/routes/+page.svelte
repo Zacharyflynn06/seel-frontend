@@ -1,10 +1,12 @@
 <script lang="ts">
 	import { AskSeelStore } from '$houdini';
 	import { flexCenter, padHeader } from '$lib/classes';
+	import GradientBg from '$lib/components/GradientBg.svelte';
 	import Spinner from '$lib/components/Spinner.svelte';
 	import TextInput from '$lib/components/formComponents/TextInput.svelte';
 	import ArrowIcon from '$lib/components/icons/ArrowIcon.svelte';
 	import SeelIcon from '$lib/components/icons/SeelIcon.svelte';
+	import { onMount } from 'svelte';
 	import Typewriter from 'svelte-typewriter';
 
 	let loading = false;
@@ -34,7 +36,9 @@
 	}
 </script>
 
-<div class="gradient-animation flex flex-col {padHeader} w-full md:items-center">
+<GradientBg />
+
+<div class="flex flex-col {padHeader} w-full md:items-center">
 	<form
 		on:submit|preventDefault={handleSubmit}
 		class="flex h-full flex-col justify-center space-y-5 p-5 text-center md:w-[500px]"
@@ -56,7 +60,7 @@
 					: 'text-grey-08 dark:text-white/50'}"
 			>
 				{#if !loading}
-					<ArrowIcon className="h-8 w-8 " />
+					<ArrowIcon className="h-6 w-6 " />
 				{:else}
 					<Spinner className="h-6 w-6 " />
 				{/if}
