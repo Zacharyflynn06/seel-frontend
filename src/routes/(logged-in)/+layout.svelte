@@ -1,19 +1,23 @@
-<script>
-	import { mainPanelWidth } from '$lib/classes';
+<script lang="ts">
+	import { flexCenter, padHeader } from '$lib/classes';
 	import Header from '$lib/components/Header.svelte';
-	import LandingPageHeader from '$lib/components/LandingPageHeader.svelte';
 	import NavBar from '$lib/components/nav/NavBar.svelte';
-	import { currentAuthenticatedUser } from '$lib/session/session';
+	import type { PageData } from '../$types';
 
-	$: if (!currentAuthenticatedUser()) {
-		console.log('no user');
-	}
+	import { page } from '$app/stores';
+
+	export let data: PageData;
+
+	$: console.log($page.url.pathname, data);
 </script>
 
 <NavBar />
 
-<Header />
+<Header marginForNav={true} />
 
-<main class="mt-[72px] h-[calc(100vh-80px)] overflow-hidden sm:mt-[80px] md:ml-[10rem] md:p-5">
+<main class="w-full md:pl-[calc(10rem+20px)] md:{flexCenter}">
 	<slot />
+
+	<!-- Empty div for bottom nav -->
+	<div class="h-[100px] w-full md:hidden"></div>
 </main>

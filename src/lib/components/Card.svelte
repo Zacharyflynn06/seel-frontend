@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { cardHeadingClasses } from '$lib/classes';
+	import { cardHeadingClasses, flexCenter } from '$lib/classes';
 
 	export let className = '';
 	export let heading = '';
@@ -7,14 +7,14 @@
 </script>
 
 <section
-	class="space-y-5 rounded-2xl bg-white p-5 shadow-08dp dark:bg-grey-04 dark:shadow-pink {className}"
+	class="bg-light-grey-04 shadow-0dp h-full w-full space-y-5 rounded-lg p-5 dark:bg-grey-04 md:max-w-[500px] {className} "
 >
 	{#if heading}
-		<h2 class="{cardHeadingClasses} {headingIsCentered ? 'text-center' : ''} h-[10%] leading-none">
+		<h1 class="{cardHeadingClasses} {headingIsCentered ? 'text-center' : 'text-left'}">
 			{heading}
-		</h2>
+		</h1>
 	{/if}
-	<div class={heading ? 'h-fit ' : 'h-full'}>
+	<div class={heading ? 'h-fit ' : 'h-full '}>
 		<slot />
 	</div>
 </section>

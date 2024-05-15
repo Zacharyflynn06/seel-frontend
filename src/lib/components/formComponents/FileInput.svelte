@@ -7,9 +7,9 @@
 	import FilePondPluginFileEncode from 'filepond-plugin-file-encode';
 	import 'filepond/dist/filepond.min.css';
 	import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css';
-	import { tick } from 'svelte';
+	import { AddDocumentToCollectionUrlStore } from '$houdini';
 
-	export let previewUrl: string | undefined = undefined;
+	export let signedUrl: string | undefined = undefined;
 	// Register the plugins
 	registerPlugin(
 		FilePondPluginImageExifOrientation,
@@ -20,50 +20,41 @@
 	// a reference to the component, used to call FilePond methods
 	let pond: FilePond;
 	// pond.getFiles() will return the active files
-
+	export let file;
 	// the name to use for the internal file input
 	let name = 'filepond';
-
-	let signedRequestUrl: string;
 
 	function handleInit() {
 		console.log('FilePond has initialised');
 	}
+	async function handleAddFile(err, fileItem) {
+		console.log(err, fileItem);
+		try {
+			console.log('A file has been added', fileItem);
+			const store = new AddDocumentToCollectionUrlStore();
+			store;
+			store.variables = true;
 
-	async function handleLoad(params: string) {
-		console.log('FilePond has loaded');
-		const url = JSON.parse(params).data;
-		signedRequestUrl = JSON.parse(url)[0];
-		tick();
-		const response = await fetch(signedRequestUrl, {
-			method: 'PUT',
-			headers: {
-				'Content-Type': 'multipart/form-data'
-			},
-			body: pond.getFiles()[0].file
-		});
-		previewUrl = signedRequestUrl.split('?')[0];
+			// Get the signed url
+			await store
+				.fetch({ variables: { collectionName: 'zac-test-1' } })
+				.then((res) => (signedUrl = res.data?.addDocumentToCollectionUrl));
 
-		console.log(response);
+			// Fetch using PUT
+			if (signedUrl) {
+				await fetch(signedUrl, {
+					method: 'PUT',
+					body: fileItem.getFiles()[0].file
+				});
+			}
+		} catch (error) {
+			console.log((error as Error).message);
+		}
 	}
 </script>
 
 <div class="app">
-	<FilePond
-		bind:this={pond}
-		{name}
-		server={{
-			process: {
-				onload: handleLoad,
-				url: `/api`,
-				headers: {
-					Accept: 'application/json'
-				}
-			}
-		}}
-		credits={false}
-		oninit={handleInit}
-	/>
+	<FilePond bind:this={pond} {name} credits={false} oninit={handleInit} onaddfile={handleAddFile} />
 </div>
 
 <style lang="postcss">

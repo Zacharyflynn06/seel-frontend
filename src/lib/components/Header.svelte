@@ -1,72 +1,67 @@
 <script lang="ts">
 	import { page } from '$app/stores';
 	import DarkModeToggleButton from './buttons/DarkModeToggleButton.svelte';
-	import SmallButton from './buttons/SmallButton.svelte';
+
+	import { slide } from 'svelte/transition';
 	import { enhance } from '$app/forms';
-	import { fade } from 'svelte/transition';
+	import { onMount } from 'svelte';
 	import { mainPanelWidth } from '$lib/classes';
 
-	let title: string;
+	let isMenuOpen = false;
+	let isLoggedIn = false;
+	export let marginForNav = false;
 
-	function extractTitleFromPathname() {
-		return $page.url.pathname
-			.split('/')
-			.map((part) => part.replace('-', ' '))
-			.join(' ');
-	}
+	onMount(() => {
+		if ($page.data.user) {
+			isLoggedIn = true;
+		}
+	});
 
-	$: if ($page.url.pathname !== '/') {
-		title = extractTitleFromPathname();
-	} else {
-		title = 'Dashboard';
-	}
+	const closeMenu = () => {
+		isMenuOpen = false;
+	};
 </script>
 
 <header
-	class="{mainPanelWidth} fixed top-0 z-10 flex w-full items-center justify-between bg-white p-5 dark:bg-grey-08 md:left-[10rem]"
+	class="bg-light-grey-08 fixed top-0 z-10 flex h-[60px] w-full justify-center shadow-08dp dark:bg-grey-08"
 >
-	<div class="flex w-full items-center justify-between">
-		<h1 class="flex-shrink-0 items-end text-3xl font-extrabold capitalize leading-none">
-			{title}
-		</h1>
-		<div class="flex w-full justify-between space-x-5">
-			<div class="flex md:space-x-5">
-				<!-- <div class="grid items-center xl:flex xl:space-x-2.5 xl:space-y-0">
-					<span
-						class="hidden text-xs uppercase tracking-[.3rem] text-black/50 dark:text-white/50 xl:block"
-						>organization</span
-					>
-					<select name="" id="" class={selectBoxClasses}>
-						<option value="">platy partners</option>
-						<option value="">option 1</option>
-						<option value="">option 2</option>
-						<option value="">option 3</option>
-						<option value="">option 4</option>
-						<option value="">option 5</option>
-					</select>
-				</div>
+	<div
+		class="relative flex h-full w-full max-w-[1200px] items-end justify-between p-5 xl:max-w-[1400px]"
+	>
+		<a href="/" class="font-spartan text-5xl font-bold leading-[.5] text-purple dark:text-pink"
+			>seel</a
+		>
 
-				<div class="grid items-center xl:flex xl:space-x-2.5">
-					<span
-						class="hidden text-xs uppercase tracking-[.3rem] text-black/50 dark:text-white/50 xl:block"
-						>vehicles</span
-					>
-					<select name="" id="" class={selectBoxClasses}>
-						<option value="">platy partners fund</option>
-					</select>
-				</div> -->
-			</div>
+		<!-- <DarkModeToggleButton on:toggle={() => (isMenuOpen = false)} /> -->
+		<button
+			class="relative flex font-spartan text-3xl leading-[.5]"
+			on:click|preventDefault={() => (isMenuOpen = !isMenuOpen)}
+		>
+			Menu
+		</button>
 
-			<div class="flex w-fit flex-shrink-0 items-center space-x-2 md:mr-2.5">
-				<DarkModeToggleButton />
-				<form transition:fade action="/log-out" method="POST" use:enhance>
-					<SmallButton type="submit" label="Sign Out" />
-				</form>
-				<!-- <div class="text-pink"><CogIcon /></div>
-				<div class="text-pink"><BellIcon /></div>
-				<div class="font-bold">Username</div>
-				<div class="h-10 w-10 rounded-full bg-white dark:bg-off-black" /> -->
-			</div>
-		</div>
+		{#if isMenuOpen}
+			<!-- content here -->
+			<nav
+				transition:slide
+				class="absolute right-0 top-[60px] z-20 flex flex-col items-end justify-end space-y-2 bg-white p-5 text-right text-xl shadow-08dp dark:bg-grey-08"
+			>
+				<DarkModeToggleButton on:toggle={() => (isMenuOpen = false)} />
+				<a on:click={closeMenu} href="/">Home</a>
+				<a on:click={closeMenu} href="/about">About</a>
+
+				{#if isLoggedIn}
+					<form action="/log-out" method="POST" use:enhance>
+						<button on:click={closeMenu} type="submit">Sign Out</button>
+					</form>
+				{:else}
+					<a on:click={closeMenu} href="/log-in">Log In</a>
+					<a on:click={closeMenu} href="/sign-up">Sign Up</a>
+				{/if}
+			</nav>
+		{/if}
 	</div>
 </header>
+
+<!-- this dummy div saves a bunch of headaches with padding -->
+<div class="mt-[60px] w-full bg-transparent"></div>

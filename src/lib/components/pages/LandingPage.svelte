@@ -5,13 +5,17 @@
 	import Typewriter from 'svelte-typewriter';
 	import SeelIcon from '../icons/SeelIcon.svelte';
 	import { AskSeelStore } from '$houdini';
+	import TextInput from '../formComponents/TextInput.svelte';
 
 	let loading = false;
 	let userInput = '';
 
+	$: console.log({ userInput });
+
 	let answer: string | undefined = '';
 
-	async function handleSubmit() {
+	async function handleSubmit(event: SubmitEvent) {
+		console.log({ event });
 		loading = !loading;
 
 		if (!userInput) {
@@ -33,40 +37,36 @@
 	}
 </script>
 
-<main class="gradient-animation grid h-[100dvh] w-screen items-center md:justify-center">
+<main class="{flexCenter} mt-[60px] h-[calc(100dvh-80px)] w-full flex-col">
 	<form
 		on:submit|preventDefault={handleSubmit}
-		class="{flexCenter} flex-col space-y-5 p-5 md:w-[500px] md:max-w-[500px]"
+		class=" flex w-full flex-col justify-center space-y-5 p-5 text-center md:w-[500px] md:max-w-[500px]"
 	>
-		<div>
+		<div class="relative w-full">
 			<SeelIcon className="h-[15rem] w-[15rem] text-off-white drop-shadow-xl" />
-		</div>
-		<div
-			class="relative grid w-full items-center rounded-lg border border-transparent bg-off-white text-center shadow-08dp focus-within:border-light-purple focus:ring-purple dark:bg-off-black"
-		>
-			<button
-				type="submit"
-				class="{svgTouchClasses} absolute right-2.5 z-10 h-full bg-transparent pl-1 text-purple dark:text-pink"
-			>
-				{#if !loading}
-					<ArrowIcon className="h-6 w-6 " />
-				{:else}
-					<Spinner className="h-6 w-6 text-light-purple" />
-				{/if}
-			</button>
-			<input
-				placeholder="Ask me about Seel..."
-				bind:value={userInput}
-				type="text"
-				class="group mr-8 rounded-l-lg border-transparent bg-transparent px-3 py-1.5 ring-transparent focus:border-transparent focus:ring-transparent dark:text-white dark:placeholder:text-off-white"
-			/>
-		</div>
-		<div class="mx-3.5 min-h-20 text-white">
-			{#if answer}
-				<Typewriter>
-					{answer}
-				</Typewriter>
-			{/if}
+			<TextInput bind:value={userInput} placeholder="Ask me about Seel..." name="user_input">
+				<button
+					type="submit"
+					disabled={!userInput || loading}
+					class="group absolute right-2.5 top-0 z-10 h-full bg-transparent pl-1 {userInput &&
+					userInput.length > 4
+						? 'text-purple dark:text-pink'
+						: 'text-grey-08 dark:text-white/50'}"
+				>
+					{#if !loading}
+						<ArrowIcon className="h-6 w-6 " />
+					{:else}
+						<Spinner className="h-6 w-6 text-light-purple" />
+					{/if}
+				</button>
+			</TextInput>
 		</div>
 	</form>
+	<div class="mx-3.5 min-h-20 text-white">
+		{#if answer}
+			<Typewriter>
+				{answer}
+			</Typewriter>
+		{/if}
+	</div>
 </main>

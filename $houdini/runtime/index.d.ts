@@ -1,3 +1,4 @@
+import { AddDocumentToCollectionUrlStore } from "../plugins/houdini-svelte/stores/AddDocumentToCollectionUrl";
 import { UpsertUserStore } from "../plugins/houdini-svelte/stores/UpsertUser";
 import { GetUserStore } from "../plugins/houdini-svelte/stores/GetUser";
 import { AskSeelStore } from "../plugins/houdini-svelte/stores/AskSeel";
@@ -6,6 +7,10 @@ import type { CacheTypeDef } from "./generated";
 import { Cache } from "./public";
 export * from "./client";
 export * from "./lib";
+
+export function graphql(
+    str: "query AddDocumentToCollectionUrl($collectionName: String!) {\n\taddDocumentToCollectionUrl(collectionName: $collectionName)\n}\n"
+): AddDocumentToCollectionUrlStore;
 
 export function graphql(
     str: "mutation UpsertUser($email: String!, $id: String!) {\n\tupsertUser(user: { email: $email, id: $id }) {\n\t\temail\n\t\tid\n\t}\n}\n"

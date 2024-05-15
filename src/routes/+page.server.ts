@@ -1,7 +1,8 @@
-import type { Actions } from '@sveltejs/kit';
+import type { PageServerLoad } from './$houdini';
 
-export const actions: Actions = {
-	default: () => {
-		console.log('hello');
-	}
+export const load: PageServerLoad = async (event) => {
+	console.log(event.locals);
+	return {
+		user: event.locals.user
+	};
 };

@@ -11,6 +11,8 @@ export const load: PageServerLoad = async () => {
 export const actions: Actions = {
 	default({ cookies, locals }) {
 		Auth.signOut();
+		cookies.delete('session_id', { path: '/' });
+		locals.user = undefined;
 		console.log('signed out');
 		throw redirect(302, '/');
 	}

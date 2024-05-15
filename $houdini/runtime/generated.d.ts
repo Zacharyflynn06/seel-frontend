@@ -1,4 +1,6 @@
 import type { Record } from "./public/record";
+import { AddDocumentToCollectionUrl$result, AddDocumentToCollectionUrl$input } from "../artifacts/AddDocumentToCollectionUrl";
+import { AddDocumentToCollectionUrlStore } from "../plugins/houdini-svelte/stores/AddDocumentToCollectionUrl";
 import { GetUser$result, GetUser$input } from "../artifacts/GetUser";
 import { GetUserStore } from "../plugins/houdini-svelte/stores/GetUser";
 import { AskSeel$result, AskSeel$input } from "../artifacts/AskSeel";
@@ -190,5 +192,5 @@ export declare type CacheTypeDef = {
         };
     };
     lists: {};
-    queries: [[AskSeelStore, AskSeel$result, AskSeel$input], [GetUserStore, GetUser$result, GetUser$input]];
+    queries: [[AskSeelStore, AskSeel$result, AskSeel$input], [GetUserStore, GetUser$result, GetUser$input], [AddDocumentToCollectionUrlStore, AddDocumentToCollectionUrl$result, AddDocumentToCollectionUrl$input]];
 };

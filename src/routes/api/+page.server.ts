@@ -1,8 +1,12 @@
-import { generateUploadURL } from '$lib/utilities/GenerateSignedUrl.js';
+import { AddDocumentToCollectionUrlStore } from '$houdini';
 
 export const actions = {
-	default: async () => {
-		const url = await generateUploadURL();
-		return url;
+	default: async (event) => {
+		const store = new AddDocumentToCollectionUrlStore();
+		const url = await store.fetch({ event });
+		if (url.data?.addDocumentToCollectionUrl) {
+			return { url: url.data?.addDocumentToCollectionUrl };
+		}
+		return;
 	}
 };
