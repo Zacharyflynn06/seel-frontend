@@ -1,12 +1,15 @@
 <script lang="ts">
 	import { padHeader } from '$lib/classes';
 	import Card from './Card.svelte';
+	import GradientBg from './GradientBg.svelte';
 	import SeelIcon from './icons/SeelIcon.svelte';
 
 	export let label = '';
 </script>
 
-<div class="gradient-animation flex {padHeader} w-full items-center justify-center">
+<GradientBg />
+
+<div class="flex {padHeader} w-full items-center justify-center p-5">
 	<Card>
 		<div class="flex h-48 w-full items-center justify-center">
 			<SeelIcon className="h-full w-auto text-purple dark:text-off-white" />

@@ -11,8 +11,8 @@
 
 <GradientBg />
 
-<div class="flex w-full items-center justify-center p-5">
-	<Card className="md:max-w-[750px]" heading="About Seel">
+<div class="flex {padHeader} h-full w-full items-center justify-center p-5">
+	<Card heading="About Seel">
 		<p class="">
 			Founded in 2024, Seel is an AI-powered platform designed to streamline private market deal
 			execution. Our mission is to simplify and enhance the investment process through automation

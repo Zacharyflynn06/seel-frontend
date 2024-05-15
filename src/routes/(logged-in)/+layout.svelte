@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { flexCenter, padHeader } from '$lib/classes';
+	import { flexCenter, mainPanelWidth, padHeader } from '$lib/classes';
 	import Header from '$lib/components/Header.svelte';
 	import NavBar from '$lib/components/nav/NavBar.svelte';
 	import type { PageData } from '../$types';
@@ -15,7 +15,9 @@
 
 <Header marginForNav={true} />
 
-<main class="w-full md:pl-[calc(10rem+20px)] md:{flexCenter}">
+<main
+	class="flex min-h-[calc(100vh-60px)] items-center justify-center p-5 md:ml-[10rem] {mainPanelWidth} "
+>
 	<slot />
 
 	<!-- Empty div for bottom nav -->

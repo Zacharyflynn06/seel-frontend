@@ -5,7 +5,7 @@ Amplify.configure(awsConfigObject);
 
 export const load: PageServerLoad = async ({ locals }) => {
 	return {
-		user: true,
+		user: locals.user,
 		locals: locals
 	};
 };
