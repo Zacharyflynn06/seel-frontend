@@ -1,22 +1,23 @@
 <script lang="ts">
-	import { flexCenter, selectBoxClasses } from '$lib/classes';
+	import { flexCenter, inputLabelClasses, selectBoxClasses } from '$lib/classes';
 	import Card from '$lib/components/Card.svelte';
+	import SmallButton from '$lib/components/buttons/SmallButton.svelte';
 	import CheckboxInput from '$lib/components/formComponents/CheckboxInput.svelte';
+	import NumberInput from '$lib/components/formComponents/NumberInput.svelte';
 	import TextInput from '$lib/components/formComponents/TextInput.svelte';
 </script>
 
 <div class="{flexCenter} h-full">
-	<Card className="w-[50%] space-y-5">
-		<form action="">
-			<TextInput label="Burn Rate" name="burn_rate" type="number" />
+	<Card heading="Add Company">
+		<form on:submit|preventDefault class="space-y-5">
+			<NumberInput label="Burn Rate" name="burn_rate" />
 
-			<label for="category" class="block">
+			<label for="category" class="block {inputLabelClasses}">
 				Category
 				<select class={selectBoxClasses} name="category">
-					<option value="1">1</option>
-					<option value="2">2</option>
-					<option value="3">3</option>
-					<option value="4">4</option>
+					{#each [1.1, 1.2, 1.3, 1.4] as item}
+						<option value={item}>{item}</option>
+					{/each}
 				</select>
 			</label>
 
@@ -28,24 +29,27 @@
 				name="differentiation_from_competitors "
 				label="Differentiation from competitors"
 			/>
-
-			<CheckboxInput name="first_time_founder" label="First time founder" />
-
-			<CheckboxInput name="full_time" label="Full time" />
-
 			<TextInput name="funding_round" label="Funding round" />
 
 			<TextInput name="location" label="Location" />
 
-			<CheckboxInput name="is_saas" label="Is saas" />
+			<CheckboxInput name="first_time_founder" label="First time founder?" />
 
-			<CheckboxInput name="is_us_based" label="Is US based" />
+			<CheckboxInput name="full_time" label="Full time?" />
+
+			<CheckboxInput name="is_saas" label="Is saas?" />
+
+			<CheckboxInput name="is_us_based" label="Is US based?" />
 
 			<TextInput name="next_steps" label="Next Steps" />
 
 			<TextInput name="university" label="University" />
 
 			<CheckboxInput name="women_founded_or_owned" label="Women founded or founded" />
+
+			<div class="flex w-full justify-end">
+				<SmallButton type="submit" label="Submit" />
+			</div>
 		</form>
 	</Card>
 </div>

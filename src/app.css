@@ -10,8 +10,8 @@ body {
 		@apply font-spartan text-2xl font-bold;
 	}
 
-	.input {
-		@apply rounded-md border-[0.5px] border-purple text-[16px];
+	input [type='number'] {
+		@apply border border-red-700;
 	}
 
 	@font-face {

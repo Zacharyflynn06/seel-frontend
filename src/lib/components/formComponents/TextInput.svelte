@@ -1,5 +1,5 @@
 <script>
-	import { textInputClasses } from '$lib/classes';
+	import { inputLabelClasses, textInputClasses } from '$lib/classes';
 
 	export let label = '';
 	export let value = '';
@@ -12,12 +12,10 @@
 </script>
 
 <label class="block">
-	<span class="font-spartan text-off-black dark:text-off-white">{label}</span>
+	<span class={inputLabelClasses}>{label}</span>
 
 	{#if type === 'text'}
 		<input type="text" {value} {name} {placeholder} class={className} {minlength} {required} />
-	{:else if type === 'number'}
-		<input type="number" {name} {value} {required} />
 	{:else if type === 'password'}
 		<input
 			type="password"

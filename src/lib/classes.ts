@@ -16,12 +16,16 @@ export const animatedTouchClasses =
 export const zeroDp = 'shadow-01dp dark:shadow-01dp bg-off-white dark:bg-black';
 
 // Form Input Classes
-export const inputResetClasses = 'ring-0 focus-within:ring-0 border-purple border-[1.5px]';
-
+export const inputResetClasses =
+	'ring-0 focus-within:ring-0 shadow-04dp rounded-md bg-white dark:bg-grey-08 ';
+const inputBorderClasses =
+	'border-[.5px] border-off-black dark:border-grey-08 focus:border-purple dark:focus:border-pink focus:ring-purple  ';
 export const textInputClasses =
-	'w-full bg-white dark:bg-grey-04 dark:placeholder:text-off-white mt-1 block w-full rounded-md border-0 dark:text-off-white shadow-sm focus:border-light-purple focus:ring focus:ring-light-purple focus:ring-opacity-50';
-
-export const selectBoxClasses = `py-1 rounded-md border border-black/50 dark:border-white/50 dark:focus:border-light-purple focus:border-light-purple capitalize shadow-04dp `;
+	inputResetClasses +
+	inputBorderClasses +
+	'w-full  dark:placeholder:text-off-white mt-1 block w-full  dark:text-off-white  ';
+export const inputLabelClasses = '';
+export const selectBoxClasses = inputResetClasses + inputBorderClasses + `py-1   `;
 
 export const cardHeadingClasses =
 	'font-spartan text-xl font-bold text-black dark:text-off-white leading-[100%]';

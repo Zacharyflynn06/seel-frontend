@@ -21,6 +21,11 @@
 			name: 'Submit Deals',
 			href: '/submit-deals',
 			icon: CheckIcon
+		},
+		{
+			name: 'Add Company',
+			href: '/add-company',
+			icon: RectangleGroupIcon
 		}
 		// {
 		// 	name: 'Pipeline',
