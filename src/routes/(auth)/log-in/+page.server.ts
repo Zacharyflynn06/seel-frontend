@@ -23,7 +23,7 @@ export const actions = {
 			maxAge: 60 * 60 // one hour
 		});
 
-		redirect(300, '/submit-deals');
+		redirect(300, '/chat-demo');
 		// } catch (error) {
 		// 	console.log('page.server.ts', (error as Error).message);
 		// }
