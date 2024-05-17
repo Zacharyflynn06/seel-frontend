@@ -66,7 +66,7 @@
 				{/if}
 			</button>
 		</TextInput>
-		<div class=" text-left indent-4 md:max-w-[500px]">
+		<div class="text-left md:max-w-[500px]">
 			{#if answer}
 				<Typewriter>
 					{answer}

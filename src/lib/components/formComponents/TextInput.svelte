@@ -18,12 +18,12 @@
 		extraClasses;
 </script>
 
-{#if label}
-	<label for={name} class={inputLabelClasses}>
-		{label}
-	</label>
-{/if}
 <div class="relative">
+	{#if label}
+		<label for={name} class={inputLabelClasses}>
+			{label}
+		</label>
+	{/if}
 	{#if type === 'text'}
 		<input
 			type="text"

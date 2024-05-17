@@ -60,13 +60,16 @@
 		});
 	};
 
-	async function handleAddFile(err, fileItem) {
+	const handleAddFile = async (err, fileItem: object) => {
+		if (err) {
+			console.error(err);
+		}
 		const url = await getPresignedUrl();
 		const buffer = await readFile(fileItem.file);
 		await uploadFileToS3(url, buffer).then((res) => {
 			console.log({ res });
 		});
-	}
+	};
 </script>
 
 <FilePond
