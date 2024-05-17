@@ -31,13 +31,13 @@
 
 <Card heading="Upload Documents">
 	<form on:submit|preventDefault={handleSubmit}>
-		<FileInput bind:file bind:signedUrl={filePreviewUrl} />
+		<FileInput />
 
-		<input type="text" hidden name="fileUrl" value={filePreviewUrl} />
-		<div class="flex w-full justify-end">
+		<!-- <input type="text" hidden name="fileUrl" value={filePreviewUrl} /> -->
+		<!-- <div class="flex w-full justify-end">
 			<SmallButton type="submit" bind:loading label="Submit">
 				<UploadIcon />
 			</SmallButton>
-		</div>
+		</div> -->
 	</form>
 </Card>

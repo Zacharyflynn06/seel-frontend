@@ -20,42 +20,62 @@
 	// a reference to the component, used to call FilePond methods
 	let pond: FilePond;
 	// pond.getFiles() will return the active files
-	export let file;
-	// the name to use for the internal file input
+
 	let name = 'filepond';
 
-	function handleInit() {
-		console.log('FilePond has initialised');
-	}
-	async function handleAddFile(err, fileItem) {
-		console.log(err, fileItem);
-		try {
-			console.log('A file has been added', fileItem);
-			const store = new AddDocumentToCollectionUrlStore();
-			store;
-			store.variables = true;
+	const getPresignedUrl = async (): Promise<string> => {
+		let url = '';
+		const store = new AddDocumentToCollectionUrlStore();
 
-			// Get the signed url
-			await store
-				.fetch({ variables: { collectionName: 'zac-test-1' } })
-				.then((res) => (signedUrl = res.data?.addDocumentToCollectionUrl));
-
-			// Fetch using PUT
-			if (signedUrl) {
-				await fetch(signedUrl, {
-					method: 'PUT',
-					body: fileItem.getFiles()[0].file
-				});
+		await store.fetch({ variables: { collectionName: 'zac-test-1' } }).then((res) => {
+			if (res?.data?.addDocumentToCollectionUrl) {
+				url = res?.data?.addDocumentToCollectionUrl;
 			}
-		} catch (error) {
-			console.log((error as Error).message);
+		});
+		return url;
+	};
+
+	const readFile = (file: File) =>
+		new Promise<ArrayBuffer | string | null>((resolve, reject) => {
+			const reader = new FileReader();
+			reader.onload = () => {
+				resolve(reader.result);
+			};
+			reader.onerror = (e) => reject(e);
+			reader.readAsArrayBuffer(file);
+		});
+
+	function handleInit() {
+		console.log('FilePond has initialized');
+	}
+
+	const uploadFileToS3 = (url: string, data: ArrayBuffer | string | null) => {
+		if (!data) {
+			return Promise.resolve();
 		}
+
+		return fetch(url, {
+			method: 'PUT',
+			body: data
+		});
+	};
+
+	async function handleAddFile(err, fileItem) {
+		const url = await getPresignedUrl();
+		const buffer = await readFile(fileItem.file);
+		await uploadFileToS3(url, buffer).then((res) => {
+			console.log({ res });
+		});
 	}
 </script>
 
-<div class="app">
-	<FilePond bind:this={pond} {name} credits={false} oninit={handleInit} onaddfile={handleAddFile} />
-</div>
+<FilePond
+	server="/api"
+	allowMultiple={true}
+	oninit={handleInit}
+	onaddfile={handleAddFile}
+	credits={false}
+/>
 
 <style lang="postcss">
 	:global(.dark .filepond--panel-root) {

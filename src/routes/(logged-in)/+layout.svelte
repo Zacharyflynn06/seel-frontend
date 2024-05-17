@@ -1,10 +1,7 @@
 <script lang="ts">
-	import { flexCenter, mainPanelWidth, padHeader } from '$lib/classes';
+	import { mainPanelWidth } from '$lib/classes';
 	import Header from '$lib/components/Header.svelte';
 	import NavBar from '$lib/components/nav/NavBar.svelte';
-	import { redirect } from '@sveltejs/kit';
-
-	export let data;
 </script>
 
 <NavBar />
