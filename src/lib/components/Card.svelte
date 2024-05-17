@@ -7,7 +7,7 @@
 </script>
 
 <section
-	class="bg-light-grey-04 h-fit w-full space-y-5 rounded-lg p-5 shadow-08dp dark:bg-grey-04 md:max-w-[500px] xl:max-w-[750px] {className} "
+	class="h-fit w-full space-y-5 rounded-lg bg-light-grey-04 p-5 shadow-08dp dark:bg-grey-04 md:max-w-[500px] xl:max-w-[650px] {className} "
 >
 	{#if heading}
 		<h1 class="{cardHeadingClasses} {headingIsCentered ? 'text-center' : 'text-left'}">

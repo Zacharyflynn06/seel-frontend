@@ -6,7 +6,6 @@
 	import TextInput from '$lib/components/formComponents/TextInput.svelte';
 	import ArrowIcon from '$lib/components/icons/ArrowIcon.svelte';
 	import SeelIcon from '$lib/components/icons/SeelIcon.svelte';
-	import { onMount } from 'svelte';
 	import Typewriter from 'svelte-typewriter';
 
 	let loading = false;
@@ -66,7 +65,7 @@
 				{/if}
 			</button>
 		</TextInput>
-		<div class=" text-left indent-4 md:max-w-[500px]">
+		<div class="text-left md:max-w-[500px]">
 			{#if answer}
 				<Typewriter>
 					{answer}

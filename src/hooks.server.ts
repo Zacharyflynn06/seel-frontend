@@ -9,14 +9,14 @@ async function authorize({ resolve, event }) {
 	const cookieId = event.cookies.get('session_id');
 
 	if (!cookieId) {
-		console.log('no cookie');
+		// console.log('no cookie');
 		return resolve(event);
 	}
-	console.log({ cookieId });
+	// console.log({ cookieId });
 	const userStore = new GetUserStore();
 
 	await userStore.fetch({ event, variables: { id: cookieId } }).then((res) => {
-		console.log({ res });
+		// console.log({ res });
 		const userResponse = res.data?.getUser;
 		currentUser = {
 			isAuthenticated: true,

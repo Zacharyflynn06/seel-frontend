@@ -11,7 +11,7 @@
 
 	async function handleSubmit(event: SubmitEvent) {
 		loading = !loading;
-		console.log({ event });
+		// console.log({ event });
 		debugger;
 		if (!filePreviewUrl) {
 			loading = false;

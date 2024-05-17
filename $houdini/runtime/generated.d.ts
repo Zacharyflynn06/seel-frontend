@@ -1,8 +1,10 @@
 import type { Record } from "./public/record";
-import { AskSeel$result, AskSeel$input } from "../artifacts/AskSeel";
-import { AskSeelStore } from "../plugins/houdini-svelte/stores/AskSeel";
 import { GetUser$result, GetUser$input } from "../artifacts/GetUser";
 import { GetUserStore } from "../plugins/houdini-svelte/stores/GetUser";
+import { AskSeel$result, AskSeel$input } from "../artifacts/AskSeel";
+import { AskSeelStore } from "../plugins/houdini-svelte/stores/AskSeel";
+import { AskCollection$result, AskCollection$input } from "../artifacts/AskCollection";
+import { AskCollectionStore } from "../plugins/houdini-svelte/stores/AskCollection";
 import { AddDocumentToCollectionUrl$result, AddDocumentToCollectionUrl$input } from "../artifacts/AddDocumentToCollectionUrl";
 import { AddDocumentToCollectionUrlStore } from "../plugins/houdini-svelte/stores/AddDocumentToCollectionUrl";
 
@@ -192,5 +194,5 @@ export declare type CacheTypeDef = {
         };
     };
     lists: {};
-    queries: [[AddDocumentToCollectionUrlStore, AddDocumentToCollectionUrl$result, AddDocumentToCollectionUrl$input], [GetUserStore, GetUser$result, GetUser$input], [AskSeelStore, AskSeel$result, AskSeel$input]];
+    queries: [[AddDocumentToCollectionUrlStore, AddDocumentToCollectionUrl$result, AddDocumentToCollectionUrl$input], [AskCollectionStore, AskCollection$result, AskCollection$input], [AskSeelStore, AskSeel$result, AskSeel$input], [GetUserStore, GetUser$result, GetUser$input]];
 };

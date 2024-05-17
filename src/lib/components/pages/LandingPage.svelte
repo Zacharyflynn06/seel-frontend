@@ -15,7 +15,7 @@
 	let answer: string | undefined = '';
 
 	async function handleSubmit(event: SubmitEvent) {
-		console.log({ event });
+		// console.log({ event });
 		loading = !loading;
 
 		if (!userInput) {
@@ -32,7 +32,7 @@
 			});
 		} catch (error) {
 			loading = false;
-			console.log({ error });
+			// console.log({ error });
 		}
 	}
 </script>

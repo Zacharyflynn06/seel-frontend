@@ -23,7 +23,7 @@
 </script>
 
 <header
-	class="bg-light-grey-08 fixed top-0 z-10 flex h-[60px] w-full justify-center shadow-08dp dark:bg-grey-08"
+	class="fixed top-0 z-10 flex h-[60px] w-full justify-center bg-light-grey-08 shadow-08dp dark:bg-grey-08"
 >
 	<div
 		class="relative flex h-full w-full max-w-[1200px] items-center justify-between px-5 xl:max-w-[1400px]"
@@ -44,7 +44,7 @@
 			<!-- content here -->
 			<nav
 				transition:slide
-				class="absolute right-0 top-[60px] z-20 flex flex-col items-end justify-end space-y-2 bg-white p-5 text-right text-xl shadow-08dp dark:bg-grey-08"
+				class="absolute right-0 top-[60px] z-20 flex flex-col items-end justify-end space-y-2 bg-light-grey-08 p-5 text-right text-xl shadow-08dp dark:bg-grey-08"
 			>
 				<DarkModeToggleButton on:toggle={() => (isMenuOpen = false)} />
 				<a on:click={closeMenu} href="/">Home</a>
