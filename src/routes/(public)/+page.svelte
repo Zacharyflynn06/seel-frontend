@@ -6,7 +6,6 @@
 	import TextInput from '$lib/components/formComponents/TextInput.svelte';
 	import ArrowIcon from '$lib/components/icons/ArrowIcon.svelte';
 	import SeelIcon from '$lib/components/icons/SeelIcon.svelte';
-	import { onMount } from 'svelte';
 	import Typewriter from 'svelte-typewriter';
 
 	let loading = false;

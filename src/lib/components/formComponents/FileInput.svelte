@@ -8,6 +8,7 @@
 	import 'filepond/dist/filepond.min.css';
 	import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css';
 	import { AddDocumentToCollectionUrlStore } from '$houdini';
+	import { page } from '$app/stores';
 
 	export let signedUrl: string | undefined = undefined;
 	// Register the plugins
@@ -22,12 +23,13 @@
 	// pond.getFiles() will return the active files
 
 	let name = 'filepond';
+	export let fileIsReady = false;
 
 	const getPresignedUrl = async (): Promise<string> => {
 		let url = '';
 		const store = new AddDocumentToCollectionUrlStore();
 
-		await store.fetch({ variables: { collectionName: 'zac-test-1' } }).then((res) => {
+		await store.fetch({ variables: { collectionName: $page.data.user.id } }).then((res) => {
 			if (res?.data?.addDocumentToCollectionUrl) {
 				url = res?.data?.addDocumentToCollectionUrl;
 			}
@@ -46,7 +48,7 @@
 		});
 
 	function handleInit() {
-		console.log('FilePond has initialized');
+		// console.log('FilePond has initialized');
 	}
 
 	const uploadFileToS3 = (url: string, data: ArrayBuffer | string | null) => {
@@ -67,7 +69,8 @@
 		const url = await getPresignedUrl();
 		const buffer = await readFile(fileItem.file);
 		await uploadFileToS3(url, buffer).then((res) => {
-			console.log({ res });
+			// console.log({ res });
+			fileIsReady = true;
 		});
 	};
 </script>

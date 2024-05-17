@@ -12,19 +12,24 @@
 		// 	icon: RectangleGroupIcon
 		// },
 
+		// {
+		// 	name: 'Add Company',
+		// 	href: '/add-company',
+		// 	icon: RectangleGroupIcon
+		// },
+		// {
+		// 	name: 'Review Deals',
+		// 	href: '/review-deals',
+		// 	icon: RocketIcon
+		// },
+		// {
+		// 	name: 'Submit Deals',
+		// 	href: '/submit-deals',
+		// 	icon: CheckIcon
+		// }
 		{
-			name: 'Add Company',
-			href: '/add-company',
-			icon: RectangleGroupIcon
-		},
-		{
-			name: 'Review Deals',
-			href: '/review-deals',
-			icon: RocketIcon
-		},
-		{
-			name: 'Submit Deals',
-			href: '/submit-deals',
+			name: 'Chat with Deck',
+			href: '/chat-demo',
 			icon: CheckIcon
 		}
 

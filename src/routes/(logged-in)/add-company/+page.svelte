@@ -6,6 +6,12 @@
 	import CheckboxInput from '$lib/components/formComponents/CheckboxInput.svelte';
 	import NumberInput from '$lib/components/formComponents/NumberInput.svelte';
 	import TextInput from '$lib/components/formComponents/TextInput.svelte';
+	import type { ActionData } from './$types';
+
+	export let form: ActionData;
+	$: if (form?.success) {
+		console.log(form);
+	}
 </script>
 
 <Card heading="Add Company">

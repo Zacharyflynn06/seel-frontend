@@ -26,7 +26,7 @@ export const actions: Actions = {
 		};
 
 		await companyStore.mutate({ company }, { event }).then((res) => {
-			console.log(JSON.stringify({ res }));
+			console.log({ res });
 		});
 	}
 };

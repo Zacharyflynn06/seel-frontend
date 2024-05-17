@@ -2,6 +2,7 @@ import { UpsertUserStore } from "../plugins/houdini-svelte/stores/UpsertUser";
 import { UpsertCompanyStore } from "../plugins/houdini-svelte/stores/UpsertCompany";
 import { GetUserStore } from "../plugins/houdini-svelte/stores/GetUser";
 import { AskSeelStore } from "../plugins/houdini-svelte/stores/AskSeel";
+import { AskCollectionStore } from "../plugins/houdini-svelte/stores/AskCollection";
 import { AddDocumentToCollectionUrlStore } from "../plugins/houdini-svelte/stores/AddDocumentToCollectionUrl";
 import type { Cache as InternalCache } from "./cache/cache";
 import type { CacheTypeDef } from "./generated";
@@ -24,6 +25,10 @@ export function graphql(
 export function graphql(
     str: "query AskSeel($question: String!) {\n\task(question: $question)\n}\n"
 ): AskSeelStore;
+
+export function graphql(
+    str: "query AskCollection($collectionName: String!, $query: String!) {\n\taskCollection(collectionName: $collectionName, query: $query)\n}\n"
+): AskCollectionStore;
 
 export function graphql(
     str: "query AddDocumentToCollectionUrl($collectionName: String!) {\n\taddDocumentToCollectionUrl(collectionName: $collectionName)\n}\n"

@@ -1,4 +1,5 @@
 export * from './AddDocumentToCollectionUrl'
+export * from './AskCollection'
 export * from './AskSeel'
 export * from './GetUser'
 export * from './UpsertCompany'
