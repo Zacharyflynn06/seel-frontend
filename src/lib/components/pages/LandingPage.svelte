@@ -1,4 +1,4 @@
-<script lang="ts">
+<!-- <script lang="ts">
 	import { flexCenter, svgTouchClasses } from '$lib/classes';
 	import Spinner from '$lib/components/Spinner.svelte';
 	import ArrowIcon from '$lib/components/icons/ArrowIcon.svelte';
@@ -37,7 +37,7 @@
 	}
 </script>
 
-<main class="{flexCenter} mt-[60px] h-[calc(100dvh-80px)] w-full flex-col">
+<main class="{flexCenter} mt-[60px] h-[calc(100vh-60px)] w-full flex-col">
 	<form
 		on:submit|preventDefault={handleSubmit}
 		class=" flex w-full flex-col justify-center space-y-5 p-5 text-center md:w-[500px] md:max-w-[500px]"
@@ -69,4 +69,4 @@
 			</Typewriter>
 		{/if}
 	</div>
-</main>
+</main> -->

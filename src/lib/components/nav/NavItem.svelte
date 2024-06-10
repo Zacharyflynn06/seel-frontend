@@ -14,7 +14,7 @@
 		<svelte:component this={navObj.icon} className="h-auto w-full text-pink" />
 	</div>
 
-	<div class=" text-center text-[12px] text-off-white md:block md:font-extrabold md:tracking-[6px]">
+	<div class=" text-center text-[12px] tracking-tight text-off-white md:block md:font-extrabold">
 		{navObj.name}
 	</div>
 </a>

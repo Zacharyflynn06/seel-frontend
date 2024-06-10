@@ -14,8 +14,9 @@
 	}
 </script>
 
-<Card heading="Add Company">
+<Card heading="Add Investment Criteria">
 	<form use:enhance action="?/add_company" method="POST" class="space-y-5">
+		TODO Add custom criteria field
 		<TextInput name="company_name" label="Company Name" />
 
 		<NumberInput label="Burn Rate" name="burn_rate" />

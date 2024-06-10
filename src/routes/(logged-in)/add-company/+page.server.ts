@@ -7,7 +7,7 @@ export const actions: Actions = {
 		const companyStore = new UpsertCompanyStore();
 
 		const company: UpsertCompanyInput = {
-			client_id: event.locals.user?.id,
+			client_id: event.locals.user?.id || '',
 			any_additional_founders: data.get('any_additional_founders')?.toString(),
 			burn_rate: Number(data.get('burn_rate')),
 			category: data.get('category')?.toString(),

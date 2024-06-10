@@ -15,19 +15,24 @@ async function authorize({ resolve, event }) {
 	// console.log({ cookieId });
 	const userStore = new GetUserStore();
 
-	await userStore.fetch({ event, variables: { id: cookieId } }).then((res) => {
-		// console.log({ res });
-		const userResponse = res.data?.getUser;
-		currentUser = {
-			isAuthenticated: true,
-			email: userResponse?.email,
-			id: userResponse?.id
-		};
-		event.locals.user = currentUser;
-		setSession(event, { currentUser });
-	});
+	await userStore
+		.fetch({ event, variables: { id: cookieId } })
+		.then((res) => {
+			// console.log({ res });
+			const userResponse = res.data?.getUser;
+			currentUser = {
+				isAuthenticated: true,
+				email: userResponse?.email,
+				id: userResponse?.id
+			};
+			event.locals.user = currentUser;
+			setSession(event, { currentUser });
+		})
+		.finally(() => {
+			// console.log({ currentUser });})
 
-	return resolve(event);
+			return resolve(event);
+		});
 }
 async function logger({ event, resolve }) {
 	const startTime = Date.now();

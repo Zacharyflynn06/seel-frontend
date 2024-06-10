@@ -6,29 +6,25 @@
 	import RocketIcon from '../icons/RocketIcon.svelte';
 
 	const navLinks: NavigationItem[] = [
-		// {
-		// 	name: 'Dashboard',
-		// 	href: '/dashboard',
-		// 	icon: RectangleGroupIcon
-		// },
-
-		// {
-		// 	name: 'Add Company',
-		// 	href: '/add-company',
-		// 	icon: RectangleGroupIcon
-		// },
-		// {
-		// 	name: 'Review Deals',
-		// 	href: '/review-deals',
-		// 	icon: RocketIcon
-		// },
-		// {
-		// 	name: 'Submit Deals',
-		// 	href: '/submit-deals',
-		// 	icon: CheckIcon
-		// }
 		{
-			name: 'Chat with Deck',
+			name: 'Dashboard',
+			href: '/dashboard',
+			icon: RectangleGroupIcon
+		},
+
+		{
+			name: 'Add Company',
+			href: '/add-company',
+			icon: RectangleGroupIcon
+		},
+		{
+			name: 'Review Deals',
+			href: '/review-deals',
+			icon: RocketIcon
+		},
+
+		{
+			name: 'Chat with Pitch Deck',
 			href: '/chat-demo',
 			icon: CheckIcon
 		}

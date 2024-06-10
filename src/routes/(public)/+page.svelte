@@ -37,7 +37,7 @@
 
 <GradientBg />
 
-<div class="flex flex-col {padHeader} w-full md:items-center">
+<div class="flex w-full flex-col md:items-center">
 	<form
 		on:submit|preventDefault={handleSubmit}
 		class="flex h-full flex-col justify-center space-y-5 p-5 text-center md:w-[500px]"
@@ -65,7 +65,7 @@
 				{/if}
 			</button>
 		</TextInput>
-		<div class="text-left md:max-w-[500px]">
+		<div class="text-left text-off-white md:max-w-[500px]">
 			{#if answer}
 				<Typewriter>
 					{answer}
