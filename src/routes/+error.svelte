@@ -10,7 +10,7 @@
 			<h1 class="text-5xl">We're Sorry!</h1>
 			<h1>Something Went Wrong</h1>
 
-			<p>{$page.status} - {$page.error?.message}</p>
+			<p>{$page.status ? $page.status : ''} - {$page.error?.message}</p>
 		</div>
 	</div>
 </div>

@@ -10,11 +10,11 @@
 
 	let loading = false;
 	let userInput = '';
+	let chatBotResponses: chatObject[] = [];
 	interface chatObject {
 		question: string;
 		answer: string;
 	}
-	let chatBotResponses: chatObject[] = [];
 
 	async function handleSubmit(event: SubmitEvent) {
 		console.log({ event });

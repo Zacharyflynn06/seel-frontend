@@ -1,6 +1,7 @@
 export * from "./artifacts/AddDocumentToCollectionUrl";
 export * from "./artifacts/AskCollection";
 export * from "./artifacts/AskSeel";
+export * from "./artifacts/GetUser";
 export * from "./artifacts/UpsertUser";
 export * from "./runtime";
 export * from "./graphql";
