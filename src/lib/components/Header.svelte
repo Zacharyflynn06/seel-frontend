@@ -42,12 +42,8 @@
 			<!-- content here -->
 			<nav
 				transition:slide
-				class="absolute right-0 top-[60px] z-20 flex flex-col items-end justify-end space-y-2 bg-light-grey-08 p-5 text-right text-xl shadow-08dp dark:bg-grey-08"
+				class="absolute right-0 top-[60px] z-20 flex flex-col space-y-2 bg-light-grey-08 p-5 text-lg shadow-08dp dark:bg-grey-08"
 			>
-				<DarkModeToggleButton on:toggle={() => (isMenuOpen = false)} />
-				<a on:click={closeMenu} href="/">Home</a>
-				<a on:click={closeMenu} href="/about">About</a>
-
 				{#if isLoggedIn}
 					<form action="/log-out" method="POST" use:enhance>
 						<button on:click={closeMenu} type="submit">Sign Out</button>
@@ -56,6 +52,12 @@
 					<a on:click={closeMenu} href="/log-in">Log In</a>
 					<a on:click={closeMenu} href="/sign-up">Sign Up</a>
 				{/if}
+				<a on:click={closeMenu} href="/">Home</a>
+				<a on:click={closeMenu} href="/about">About</a>
+				<a on:click={closeMenu} href="/privacy-policy">Privacy</a>
+				<div class="flex w-full">
+					<DarkModeToggleButton on:toggle={() => (isMenuOpen = false)} />
+				</div>
 			</nav>
 		{/if}
 	</div>

@@ -21,8 +21,10 @@ async function authorize({ resolve, event }) {
 		currentUser = {
 			isAuthenticated: true,
 			email: res.email,
-			id: res.id
+			id: res.id,
+			investingEntities: res.investingEntities
 		};
+		console.log(res);
 		event.locals.user = currentUser;
 		setSession(event, { currentUser });
 		return resolve(event);

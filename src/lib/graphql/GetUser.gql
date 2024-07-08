@@ -1,6 +1,13 @@
 query GetUser($id: ID!) {
 	getUser(id: $id) {
-		id
+		investingEntities {
+			name
+			address
+			entityType
+			strategy
+			id
+		}
 		email
+		id
 	}
 }

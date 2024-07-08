@@ -1,7 +1,7 @@
 {
+    "89f6c8801b312788f1d6d32ff3092a5a922bf96ffdb67ddb66ff1354690809ce": "query AskCollection($collectionName: String!, $query: String!) {\n  askCollection(collectionName: $collectionName, query: $query)\n}\n",
     "ea6184ba90262b629f82bb56f4d24ace35855ec34dd5d8609dcc98679e180fb6": "query AddDocumentToCollectionUrl($collectionName: String!) {\n  addDocumentToCollectionUrl(collectionName: $collectionName)\n}\n",
     "8c05bff0acc73e6ae81b7d4ceff7b542d2367a1e60426e81183ecca1c219b0eb": "query AskSeel($question: String!) {\n  ask(question: $question)\n}\n",
-    "89f6c8801b312788f1d6d32ff3092a5a922bf96ffdb67ddb66ff1354690809ce": "query AskCollection($collectionName: String!, $query: String!) {\n  askCollection(collectionName: $collectionName, query: $query)\n}\n",
-    "52ce88c79e1ff0db31b9c88af24a51a40f9d90e0a39f9a2d104a14598c22d5f1": "query GetUser($id: ID!) {\n  getUser(id: $id) {\n    id\n    email\n  }\n}\n",
-    "0a27981a10d30b675861cf4860071b67399ae2cfcf03cd67126825c84ca0a13b": "mutation UpsertUser($email: String!, $id: String!) {\n  upsertUser(user: {email: $email, id: $id}) {\n    email\n    id\n  }\n}\n"
+    "0a27981a10d30b675861cf4860071b67399ae2cfcf03cd67126825c84ca0a13b": "mutation UpsertUser($email: String!, $id: String!) {\n  upsertUser(user: {email: $email, id: $id}) {\n    email\n    id\n  }\n}\n",
+    "3bf78ce8cf2e3dab13639c1e43733cf05a0f3ee863af6ed9d2e80bd4478e3898": "query GetUser($id: ID!) {\n  getUser(id: $id) {\n    investingEntities {\n      name\n      address\n      entityType\n      strategy\n      id\n    }\n    email\n    id\n  }\n}\n"
 }

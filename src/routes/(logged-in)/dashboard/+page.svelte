@@ -7,7 +7,11 @@
 	import TextInput from '$lib/components/formComponents/TextInput.svelte';
 	import ArrowIcon from '$lib/components/icons/ArrowIcon.svelte';
 	import Typewriter from 'svelte-typewriter';
+	import type { PageData } from './$types';
 
+	export let data: PageData;
+
+	$: ({ user } = data);
 	let loading = false;
 	let userInput = '';
 	let answer: string | undefined = '';
@@ -35,8 +39,10 @@
 </script>
 
 <div class="flex w-full flex-col items-center justify-center space-y-5">
-	<Card heading="Add Fund">
-		<p>TODO add fund form</p>
+	<Card heading="Your Funds">
+		{#each Object.entries(user?.investingEntities[0]) as [k, v]}
+			<p>{k}: {v}</p>
+		{/each}
 	</Card>
 
 	<Card heading="Submit-Deals">

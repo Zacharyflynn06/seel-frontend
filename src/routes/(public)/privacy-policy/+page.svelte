@@ -1,10 +1,12 @@
 <script lang="ts">
 	// your script goes here
+
+	import Card from '$lib/components/Card.svelte';
+	import GradientBg from '$lib/components/GradientBg.svelte';
 </script>
 
-<div class="container mx-auto p-5">
-	<h1 class="mb-5 text-4xl font-bold">Privacy Policy</h1>
-
+<GradientBg />
+<Card heading="Privacy Policy">
 	<section class="mb-5">
 		<h2 class="mb-2.5 text-2xl font-semibold">1. Introduction</h2>
 		<p class="mb-5">
@@ -148,4 +150,4 @@
 			<a href="mailto:support@seeldeals.com">support@seeldeals.com</a>
 		</p>
 	</section>
-</div>
+</Card>
