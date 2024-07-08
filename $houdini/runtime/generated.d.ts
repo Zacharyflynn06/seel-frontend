@@ -1,10 +1,10 @@
 import type { Record } from "./public/record";
 import { GetUser$result, GetUser$input } from "../artifacts/GetUser";
 import { GetUserStore } from "../plugins/houdini-svelte/stores/GetUser";
-import { AskSeel$result, AskSeel$input } from "../artifacts/AskSeel";
-import { AskSeelStore } from "../plugins/houdini-svelte/stores/AskSeel";
 import { AskCollection$result, AskCollection$input } from "../artifacts/AskCollection";
 import { AskCollectionStore } from "../plugins/houdini-svelte/stores/AskCollection";
+import { AskSeel$result, AskSeel$input } from "../artifacts/AskSeel";
+import { AskSeelStore } from "../plugins/houdini-svelte/stores/AskSeel";
 import { AddDocumentToCollectionUrl$result, AddDocumentToCollectionUrl$input } from "../artifacts/AddDocumentToCollectionUrl";
 import { AddDocumentToCollectionUrlStore } from "../plugins/houdini-svelte/stores/AddDocumentToCollectionUrl";
 
@@ -13,78 +13,77 @@ type KeyValuePair = {
     value: string;
 };
 
+type CompanyAttributeIdInput = {
+    companyId: string;
+    fieldId: string;
+};
+
 export declare type CacheTypeDef = {
     types: {
-        Client: {
+        Company: {
             idFields: {
                 id: string;
             };
             fields: {
-                companies: {
-                    type: (Record<CacheTypeDef, "Company">)[] | null;
-                    args: never;
-                };
-                config: {
-                    type: object;
-                    args: never;
-                };
-                display_name: {
-                    type: string;
+                attributes: {
+                    type: (Record<CacheTypeDef, "FieldValueAWSDate"> | Record<CacheTypeDef, "FieldValueAWSDateTime"> | Record<CacheTypeDef, "FieldValueAWSEmail"> | Record<CacheTypeDef, "FieldValueAWSIPAddress"> | Record<CacheTypeDef, "FieldValueAWSJSON"> | Record<CacheTypeDef, "FieldValueAWSPhone"> | Record<CacheTypeDef, "FieldValueAWSTime"> | Record<CacheTypeDef, "FieldValueAWSTimestamp"> | Record<CacheTypeDef, "FieldValueAWSURL"> | Record<CacheTypeDef, "FieldValueBoolean"> | Record<CacheTypeDef, "FieldValueFloat"> | Record<CacheTypeDef, "FieldValueInt"> | Record<CacheTypeDef, "FieldValueString">)[];
                     args: never;
                 };
                 id: {
-                    type: string;
-                    args: never;
-                };
-                lookup_name: {
                     type: string;
                     args: never;
                 };
             };
             fragments: [];
         };
-        Company: {
+        CompanyAttribute: {
+            idFields: never;
+            fields: {
+                field: {
+                    type: Record<CacheTypeDef, "Field">;
+                    args: never;
+                };
+                value: {
+                    type: Record<CacheTypeDef, "FieldValueAWSDate"> | Record<CacheTypeDef, "FieldValueAWSDateTime"> | Record<CacheTypeDef, "FieldValueAWSEmail"> | Record<CacheTypeDef, "FieldValueAWSIPAddress"> | Record<CacheTypeDef, "FieldValueAWSJSON"> | Record<CacheTypeDef, "FieldValueAWSPhone"> | Record<CacheTypeDef, "FieldValueAWSTime"> | Record<CacheTypeDef, "FieldValueAWSTimestamp"> | Record<CacheTypeDef, "FieldValueAWSURL"> | Record<CacheTypeDef, "FieldValueBoolean"> | Record<CacheTypeDef, "FieldValueFloat"> | Record<CacheTypeDef, "FieldValueInt"> | Record<CacheTypeDef, "FieldValueString">;
+                    args: never;
+                };
+            };
+            fragments: [];
+        };
+        Field: {
             idFields: {
                 id: string;
             };
             fields: {
-                any_additional_founders: {
-                    type: string | null;
+                description: {
+                    type: string;
                     args: never;
                 };
-                burn_rate: {
-                    type: number | null;
+                fieldType: {
+                    type: Record<CacheTypeDef, "FieldType">;
                     args: never;
                 };
-                category: {
-                    type: string | null;
+                id: {
+                    type: string;
                     args: never;
                 };
-                client: {
-                    type: Record<CacheTypeDef, "Client">;
+                name: {
+                    type: string;
                     args: never;
                 };
-                company_name: {
-                    type: string | null;
+            };
+            fragments: [];
+        };
+        FieldType: {
+            idFields: {
+                id: string;
+            };
+            fields: {
+                description: {
+                    type: string;
                     args: never;
                 };
-                competitors: {
-                    type: string | null;
-                    args: never;
-                };
-                differentiation_from_competitors: {
-                    type: string | null;
-                    args: never;
-                };
-                first_time_founder: {
-                    type: boolean | null;
-                    args: never;
-                };
-                full_time: {
-                    type: boolean | null;
-                    args: never;
-                };
-                funding_round: {
+                formatString: {
                     type: string | null;
                     args: never;
                 };
@@ -92,36 +91,252 @@ export declare type CacheTypeDef = {
                     type: string;
                     args: never;
                 };
-                is_saas: {
-                    type: boolean | null;
+                name: {
+                    type: string;
                     args: never;
                 };
-                is_us_based: {
-                    type: boolean | null;
+                typeGraphQL: {
+                    type: FieldValueType;
                     args: never;
                 };
-                location: {
-                    type: string | null;
+                typePostgres: {
+                    type: FieldTypePostgres;
                     args: never;
                 };
-                next_steps: {
-                    type: string | null;
+            };
+            fragments: [];
+        };
+        FieldValueAWSDate: {
+            idFields: never;
+            fields: {
+                value: {
+                    type: any;
                     args: never;
                 };
-                source: {
-                    type: CompanySource;
+                valueType: {
+                    type: FieldValueType;
                     args: never;
                 };
-                university: {
-                    type: string | null;
+            };
+            fragments: [];
+        };
+        FieldValueAWSDateTime: {
+            idFields: never;
+            fields: {
+                value: {
+                    type: any;
+                    args: never;
+                };
+                valueType: {
+                    type: FieldValueType;
+                    args: never;
+                };
+            };
+            fragments: [];
+        };
+        FieldValueAWSEmail: {
+            idFields: never;
+            fields: {
+                value: {
+                    type: any;
+                    args: never;
+                };
+                valueType: {
+                    type: FieldValueType;
+                    args: never;
+                };
+            };
+            fragments: [];
+        };
+        FieldValueAWSIPAddress: {
+            idFields: never;
+            fields: {
+                value: {
+                    type: any;
+                    args: never;
+                };
+                valueType: {
+                    type: FieldValueType;
+                    args: never;
+                };
+            };
+            fragments: [];
+        };
+        FieldValueAWSJSON: {
+            idFields: never;
+            fields: {
+                value: {
+                    type: object;
+                    args: never;
+                };
+                valueType: {
+                    type: FieldValueType;
+                    args: never;
+                };
+            };
+            fragments: [];
+        };
+        FieldValueAWSPhone: {
+            idFields: never;
+            fields: {
+                value: {
+                    type: any;
+                    args: never;
+                };
+                valueType: {
+                    type: FieldValueType;
+                    args: never;
+                };
+            };
+            fragments: [];
+        };
+        FieldValueAWSTime: {
+            idFields: never;
+            fields: {
+                value: {
+                    type: any;
+                    args: never;
+                };
+                valueType: {
+                    type: FieldValueType;
+                    args: never;
+                };
+            };
+            fragments: [];
+        };
+        FieldValueAWSTimestamp: {
+            idFields: never;
+            fields: {
+                value: {
+                    type: any;
+                    args: never;
+                };
+                valueType: {
+                    type: FieldValueType;
+                    args: never;
+                };
+            };
+            fragments: [];
+        };
+        FieldValueAWSURL: {
+            idFields: never;
+            fields: {
+                value: {
+                    type: any;
+                    args: never;
+                };
+                valueType: {
+                    type: FieldValueType;
+                    args: never;
+                };
+            };
+            fragments: [];
+        };
+        FieldValueBoolean: {
+            idFields: never;
+            fields: {
+                value: {
+                    type: boolean;
+                    args: never;
+                };
+                valueType: {
+                    type: FieldValueType;
+                    args: never;
+                };
+            };
+            fragments: [];
+        };
+        FieldValueFloat: {
+            idFields: never;
+            fields: {
+                value: {
+                    type: number;
+                    args: never;
+                };
+                valueType: {
+                    type: FieldValueType;
+                    args: never;
+                };
+            };
+            fragments: [];
+        };
+        FieldValueInt: {
+            idFields: never;
+            fields: {
+                value: {
+                    type: number;
+                    args: never;
+                };
+                valueType: {
+                    type: FieldValueType;
+                    args: never;
+                };
+            };
+            fragments: [];
+        };
+        FieldValueString: {
+            idFields: never;
+            fields: {
+                value: {
+                    type: string;
+                    args: never;
+                };
+                valueType: {
+                    type: FieldValueType;
+                    args: never;
+                };
+            };
+            fragments: [];
+        };
+        InvestingEntity: {
+            idFields: {
+                id: string;
+            };
+            fields: {
+                address: {
+                    type: string;
+                    args: never;
+                };
+                entityType: {
+                    type: InvestingEntityType;
+                    args: never;
+                };
+                id: {
+                    type: string;
+                    args: never;
+                };
+                investmentCriteria: {
+                    type: (Record<CacheTypeDef, "InvestmentCriterion">)[];
+                    args: never;
+                };
+                name: {
+                    type: string;
+                    args: never;
+                };
+                strategy: {
+                    type: InvestingEntityStrategy;
                     args: never;
                 };
                 users: {
-                    type: (Record<CacheTypeDef, "User">)[] | null;
+                    type: (Record<CacheTypeDef, "User">)[];
                     args: never;
                 };
-                women_founded_or_owned: {
-                    type: boolean | null;
+            };
+            fragments: [];
+        };
+        InvestmentCriterion: {
+            idFields: never;
+            fields: {
+                field: {
+                    type: Record<CacheTypeDef, "Field">;
+                    args: never;
+                };
+                investingEntity: {
+                    type: Record<CacheTypeDef, "InvestingEntity">;
+                    args: never;
+                };
+                required: {
+                    type: boolean;
                     args: never;
                 };
             };
@@ -157,8 +372,48 @@ export declare type CacheTypeDef = {
                         userId: string;
                     };
                 };
+                getCompanies: {
+                    type: (Record<CacheTypeDef, "Company">)[];
+                    args: never;
+                };
                 getCompany: {
                     type: Record<CacheTypeDef, "Company"> | null;
+                    args: {
+                        id: string;
+                    };
+                };
+                getCompanyAttribute: {
+                    type: Record<CacheTypeDef, "CompanyAttribute"> | null;
+                    args: {
+                        input: CompanyAttributeIdInput;
+                    };
+                };
+                getField: {
+                    type: Record<CacheTypeDef, "Field"> | null;
+                    args: {
+                        id: string;
+                    };
+                };
+                getFieldType: {
+                    type: Record<CacheTypeDef, "FieldType"> | null;
+                    args: {
+                        id: string;
+                    };
+                };
+                getFieldTypes: {
+                    type: (Record<CacheTypeDef, "FieldType">)[];
+                    args: never;
+                };
+                getFields: {
+                    type: (Record<CacheTypeDef, "Field">)[];
+                    args: never;
+                };
+                getInvestingEntities: {
+                    type: (Record<CacheTypeDef, "InvestingEntity">)[];
+                    args: never;
+                };
+                getInvestingEntity: {
+                    type: Record<CacheTypeDef, "InvestingEntity"> | null;
                     args: {
                         id: string;
                     };
@@ -169,6 +424,10 @@ export declare type CacheTypeDef = {
                         id: string;
                     };
                 };
+                getUsers: {
+                    type: (Record<CacheTypeDef, "User">)[];
+                    args: never;
+                };
             };
             fragments: [];
         };
@@ -177,10 +436,6 @@ export declare type CacheTypeDef = {
                 id: string;
             };
             fields: {
-                companies: {
-                    type: (Record<CacheTypeDef, "Company">)[] | null;
-                    args: never;
-                };
                 email: {
                     type: string;
                     args: never;
@@ -189,10 +444,14 @@ export declare type CacheTypeDef = {
                     type: string;
                     args: never;
                 };
+                investingEntities: {
+                    type: (Record<CacheTypeDef, "InvestingEntity">)[];
+                    args: never;
+                };
             };
             fragments: [];
         };
     };
     lists: {};
-    queries: [[AddDocumentToCollectionUrlStore, AddDocumentToCollectionUrl$result, AddDocumentToCollectionUrl$input], [AskCollectionStore, AskCollection$result, AskCollection$input], [AskSeelStore, AskSeel$result, AskSeel$input], [GetUserStore, GetUser$result, GetUser$input]];
+    queries: [[AddDocumentToCollectionUrlStore, AddDocumentToCollectionUrl$result, AddDocumentToCollectionUrl$input], [AskSeelStore, AskSeel$result, AskSeel$input], [AskCollectionStore, AskCollection$result, AskCollection$input], [GetUserStore, GetUser$result, GetUser$input]];
 };
