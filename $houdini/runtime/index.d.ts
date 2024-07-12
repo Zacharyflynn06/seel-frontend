@@ -1,8 +1,8 @@
 import { GetUserStore } from "../plugins/houdini-svelte/stores/GetUser";
 import { UpsertUserStore } from "../plugins/houdini-svelte/stores/UpsertUser";
 import { AskSeelStore } from "../plugins/houdini-svelte/stores/AskSeel";
-import { AddDocumentToCollectionUrlStore } from "../plugins/houdini-svelte/stores/AddDocumentToCollectionUrl";
 import { AskCollectionStore } from "../plugins/houdini-svelte/stores/AskCollection";
+import { AddDocumentToCollectionUrlStore } from "../plugins/houdini-svelte/stores/AddDocumentToCollectionUrl";
 import type { Cache as InternalCache } from "./cache/cache";
 import type { CacheTypeDef } from "./generated";
 import { Cache } from "./public";
@@ -22,12 +22,12 @@ export function graphql(
 ): AskSeelStore;
 
 export function graphql(
-    str: "query AddDocumentToCollectionUrl($collectionName: String!) {\n\taddDocumentToCollectionUrl(collectionName: $collectionName)\n}\n"
-): AddDocumentToCollectionUrlStore;
-
-export function graphql(
     str: "query AskCollection($collectionName: String!, $query: String!) {\n\taskCollection(collectionName: $collectionName, query: $query)\n}\n"
 ): AskCollectionStore;
+
+export function graphql(
+    str: "query AddDocumentToCollectionUrl($collectionName: String!) {\n\taddDocumentToCollectionUrl(collectionName: $collectionName)\n}\n"
+): AddDocumentToCollectionUrlStore;
 
 export declare function graphql<_Payload, _Result = _Payload>(str: TemplateStringsArray): _Result;
 export declare const cache: Cache<CacheTypeDef>;
