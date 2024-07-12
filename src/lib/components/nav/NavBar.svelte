@@ -27,8 +27,13 @@
 			name: 'Chat with Pitch Deck',
 			href: '/chat-demo',
 			icon: CheckIcon
-		}
+		},
 
+		{
+			name: 'Admin console',
+			href: '/admin',
+			icon: RectangleGroupIcon
+		}
 		// {
 		// 	name: 'Pipeline',
 		// 	href: '/pipeline',
