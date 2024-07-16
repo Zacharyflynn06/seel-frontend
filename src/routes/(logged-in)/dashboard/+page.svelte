@@ -15,27 +15,27 @@
 	let loading = false;
 	let userInput = '';
 	let answer: string | undefined = '';
-	async function handleSubmit(event: SubmitEvent) {
-		console.log({ event });
-		loading = true;
-		if (!userInput) {
-			loading = false;
-			return;
-		}
+	// async function handleSubmit(event: SubmitEvent) {
+	// 	console.log({ event });
+	// 	loading = true;
+	// 	if (!userInput) {
+	// 		loading = false;
+	// 		return;
+	// 	}
 
-		try {
-			let store = new AskCollectionStore();
-			await store
-				.fetch({ variables: { collectionName: $page.data.user.id, query: userInput } })
-				.then((response) => {
-					answer = response.data?.askCollection;
-					loading = false;
-				});
-		} catch (error) {
-			loading = false;
-			console.log({ error });
-		}
-	}
+	// 	try {
+	// 		let store = new AskCollectionStore();
+	// 		await store
+	// 			.fetch({ variables: { collectionName: $page.data.user.id, query: userInput } })
+	// 			.then((response) => {
+	// 				answer = response.data?.askCollection;
+	// 				loading = false;
+	// 			});
+	// 	} catch (error) {
+	// 		loading = false;
+	// 		console.log({ error });
+	// 	}
+	// }
 </script>
 
 <div>

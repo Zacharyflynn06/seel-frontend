@@ -51,9 +51,10 @@
 		"filepond-plugin-image-exif-orientation": "^1.0.11",
 		"filepond-plugin-image-preview": "^4.6.12",
 		"houdini": "^1.2.45",
-		"houdini-svelte": "^1.2.5",
 		"houdini-plugin-svelte-global-stores": "1.2.49",
+		"houdini-svelte": "^1.2.5",
 		"svelte-filepond": "^0.2.2",
+		"svelte-french-toast": "^1.2.0",
 		"svelte-typewriter": "^3.2.3",
 		"sveltekit@next": "link:auth/sveltekit@next"
 	}
