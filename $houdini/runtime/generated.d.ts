@@ -1,16 +1,16 @@
 import type { Record } from "./public/record";
-import { GetUser$result, GetUser$input } from "../artifacts/GetUser";
-import { GetUserStore } from "../plugins/houdini-svelte/stores/GetUser";
-import { AddDocumentToCollectionUrl$result, AddDocumentToCollectionUrl$input } from "../artifacts/AddDocumentToCollectionUrl";
-import { AddDocumentToCollectionUrlStore } from "../plugins/houdini-svelte/stores/AddDocumentToCollectionUrl";
-import { GetUsers$result, GetUsers$input } from "../artifacts/GetUsers";
-import { GetUsersStore } from "../plugins/houdini-svelte/stores/GetUsers";
 import { GetInvestingEntities$result, GetInvestingEntities$input } from "../artifacts/GetInvestingEntities";
 import { GetInvestingEntitiesStore } from "../plugins/houdini-svelte/stores/GetInvestingEntities";
-import { AskSeel$result, AskSeel$input } from "../artifacts/AskSeel";
-import { AskSeelStore } from "../plugins/houdini-svelte/stores/AskSeel";
+import { GetUser$result, GetUser$input } from "../artifacts/GetUser";
+import { GetUserStore } from "../plugins/houdini-svelte/stores/GetUser";
+import { GetUsers$result, GetUsers$input } from "../artifacts/GetUsers";
+import { GetUsersStore } from "../plugins/houdini-svelte/stores/GetUsers";
 import { AskCollection$result, AskCollection$input } from "../artifacts/AskCollection";
 import { AskCollectionStore } from "../plugins/houdini-svelte/stores/AskCollection";
+import { AskSeel$result, AskSeel$input } from "../artifacts/AskSeel";
+import { AskSeelStore } from "../plugins/houdini-svelte/stores/AskSeel";
+import { AddDocumentToCollectionUrl$result, AddDocumentToCollectionUrl$input } from "../artifacts/AddDocumentToCollectionUrl";
+import { AddDocumentToCollectionUrlStore } from "../plugins/houdini-svelte/stores/AddDocumentToCollectionUrl";
 
 type KeyValuePair = {
     key: string;
@@ -329,5 +329,5 @@ export declare type CacheTypeDef = {
         };
     };
     lists: {};
-    queries: [[AskCollectionStore, AskCollection$result, AskCollection$input], [AskSeelStore, AskSeel$result, AskSeel$input], [GetInvestingEntitiesStore, GetInvestingEntities$result, GetInvestingEntities$input], [GetUsersStore, GetUsers$result, GetUsers$input], [AddDocumentToCollectionUrlStore, AddDocumentToCollectionUrl$result, AddDocumentToCollectionUrl$input], [GetUserStore, GetUser$result, GetUser$input]];
+    queries: [[AddDocumentToCollectionUrlStore, AddDocumentToCollectionUrl$result, AddDocumentToCollectionUrl$input], [AskSeelStore, AskSeel$result, AskSeel$input], [AskCollectionStore, AskCollection$result, AskCollection$input], [GetUsersStore, GetUsers$result, GetUsers$input], [GetUserStore, GetUser$result, GetUser$input], [GetInvestingEntitiesStore, GetInvestingEntities$result, GetInvestingEntities$input]];
 };
