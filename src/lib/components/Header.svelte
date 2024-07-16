@@ -6,10 +6,10 @@
 	import { enhance } from '$app/forms';
 	import { onMount } from 'svelte';
 	import { mainPanelWidth } from '$lib/classes';
+	export let marginForNav = false;
 
 	let isMenuOpen = false;
 	let isLoggedIn = $page.data.user ? true : false;
-	export let marginForNav = false;
 
 	onMount(() => {
 		if ($page.data.user) {
