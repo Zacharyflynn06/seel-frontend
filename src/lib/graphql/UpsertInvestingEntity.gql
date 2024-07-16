@@ -1,0 +1,9 @@
+mutation UpsertInvestingEntity($input: UpsertInvestingEntityInput!) {
+	upsertInvestingEntity(input: $input) {
+		address
+		entityType
+		id
+		name
+		strategy
+	}
+}

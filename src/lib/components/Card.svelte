@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { cardHeadingClasses, flexCenter, padHeader } from '$lib/classes';
+	import { cardHeadingClasses } from '$lib/classes';
 
 	export let className = '';
 	export let heading = '';

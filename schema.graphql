@@ -100,7 +100,7 @@ scalar AWSURL
 
 """  A Company is just a collection of attributes"""
 type Company {
-  attributes: [FieldValue!]!
+  attributes: [CompanyAttribute!]!
   id: ID!
 }
 
@@ -144,12 +144,7 @@ type FieldType {
 
   """  Name must be unique across all users"""
   name: String!
-
-  """  TODO: Indicates the GraphQL type this field is serialized with"""
   typeGraphQL: FieldValueType!
-
-  """  Indicates the type of the DB column this value is stored in"""
-  typePostgres: FieldTypePostgres!
 }
 
 """
@@ -172,95 +167,20 @@ enum FieldTypePostgres {
   A Field's value can be serialized as any AppSync Scalar value. The AWS*
  extension Scalars are serialized as JavaScript strings.
 """
-union FieldValue = FieldValueAWSDate | FieldValueAWSDateTime | FieldValueAWSEmail | FieldValueAWSIPAddress | FieldValueAWSJSON | FieldValueAWSPhone | FieldValueAWSTime | FieldValueAWSTimestamp | FieldValueAWSURL | FieldValueBoolean | FieldValueFloat | FieldValueInt | FieldValueString
-
-"""  An extended ISO 8601 date string in the format YYYY-MM-DD."""
-type FieldValueAWSDate {
-  value: AWSDate!
-  valueType: FieldValueType!
-}
-
-"""  An extended ISO 8601 date and time string in the format YYYY-MM-DDThh:mm:ss.sssZ.
-"""
-type FieldValueAWSDateTime {
-  value: AWSDateTime!
-  valueType: FieldValueType!
-}
-
-"""  An email address in the format local-part@domain-part as defined by RFC 822.
-"""
-type FieldValueAWSEmail {
-  value: AWSEmail!
-  valueType: FieldValueType!
-}
-
-"""
-  A URL as defined by RFC 1738. For example,
- https://www.amazon.com/dp/B000NZW3KC/ or mailto:example@example.com. URLs must
- contain a schema (http, mailto) and can't contain two forward slashes (//) in
- the path part.
-"""
-type FieldValueAWSIPAddress {
-  value: AWSIPAddress!
-  valueType: FieldValueType!
-}
-
-"""
-  A JSON string. Any valid JSON construct is automatically parsed and loaded in
- the resolver code as maps, lists, or scalar values rather than as the literal
- input strings. Unquoted strings or otherwise invalid JSON result in a GraphQL
- validation error.
-"""
-type FieldValueAWSJSON {
-  value: AWSJSON!
-  valueType: FieldValueType!
-}
-
-"""
-  A phone number. This value is stored as a string. Phone numbers can contain
- either spaces or hyphens to separate digit groups. Phone numbers without a
- country code are assumed to be US/North American numbers adhering to the North
- American Numbering Plan (NANP).
-"""
-type FieldValueAWSPhone {
-  value: AWSPhone!
-  valueType: FieldValueType!
-}
-
-"""  An extended ISO 8601 time string in the format hh:mm:ss.sss."""
-type FieldValueAWSTime {
-  value: AWSTime!
-  valueType: FieldValueType!
-}
-
-"""  An extended ISO 8601 date and time string in the format YYYY-MM-DDThh:mm:ss.sssZ.
-"""
-type FieldValueAWSTimestamp {
-  value: AWSTimestamp!
-  valueType: FieldValueType!
-}
-
-"""
-  A URL as defined by RFC 1738. For example,
- https://www.amazon.com/dp/B000NZW3KC/ or mailto:example@example.com. URLs must
- contain a schema (http, mailto) and can't contain two forward slashes (//) in
- the path part.
-"""
-type FieldValueAWSURL {
-  value: AWSURL!
-  valueType: FieldValueType!
-}
-
-"""  A Boolean value, either true or false."""
-type FieldValueBoolean {
-  value: Boolean!
-  valueType: FieldValueType!
-}
-
-"""  An IEEE 754 floating point value."""
-type FieldValueFloat {
-  value: Float!
-  valueType: FieldValueType!
+type FieldValue {
+  booleanValue: Boolean
+  dateTimeValue: AWSDateTime
+  dateValue: AWSDate
+  emailValue: AWSEmail
+  floatValue: Float
+  intValue: Int
+  ipAddressValue: AWSIPAddress
+  jsonValue: AWSJSON
+  phoneValue: AWSPhone
+  stringValue: String
+  timeValue: AWSTime
+  timestampValue: AWSTimestamp
+  urlValue: AWSURL
 }
 
 """  Only one of these fields should be set"""
@@ -278,18 +198,6 @@ input FieldValueInput {
   time: AWSTime
   timestamp: AWSTimestamp
   url: AWSURL
-}
-
-"""  An integer value between -(2^31) and 2^31-1."""
-type FieldValueInt {
-  value: Int!
-  valueType: FieldValueType!
-}
-
-"""  A UTF-8 character sequence."""
-type FieldValueString {
-  value: String!
-  valueType: FieldValueType!
 }
 
 """
@@ -370,10 +278,7 @@ input LinkInvestingEntityToUserInput {
 }
 
 type Mutation {
-  """ TODO"""
   deleteCompany(id: ID!): Company
-
-  """ TODO"""
   deleteCompanyAttribute(input: CompanyAttributeIdInput!): CompanyAttribute
   deleteField(id: ID!): Field
   deleteFieldType(id: ID!): FieldType
@@ -382,11 +287,7 @@ type Mutation {
   deleteUser(id: ID!): User
   linkInvestingEntityToUser(input: LinkInvestingEntityToUserInput!): User
   unlinkInvestingEntityFromUser(input: UnlinkInvestingEntityFromUserInput!): User
-
-  """ TODO"""
   upsertCompany(input: UpsertCompanyInput!): Company!
-
-  """ TODO"""
   upsertCompanyAttribute(input: UpsertSingleCompanyAttributeInput!): CompanyAttribute!
   upsertField(input: UpsertFieldInput!): Field!
   upsertFieldType(input: UpsertFieldTypeInput!): FieldType!
@@ -400,14 +301,8 @@ type Query {
   ask(question: String!): String!
   askCollection(collectionName: String!, query: String!): String!
   documentUploadUrl(clientLookupName: String!, userId: String!): String!
-
-  """  TODO"""
   getCompanies: [Company!]!
-
-  """  TODO"""
   getCompany(id: ID!): Company
-
-  """  TODO"""
   getCompanyAttribute(input: CompanyAttributeIdInput!): CompanyAttribute
   getField(id: ID!): Field
   getFieldType(id: ID!): FieldType

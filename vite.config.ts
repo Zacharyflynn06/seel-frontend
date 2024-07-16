@@ -7,7 +7,7 @@ import { nodeLoaderPlugin } from '@vavite/node-loader/plugin';
 export default defineConfig(({ mode }) => {
 	let plugins = [houdini(), sveltekit()];
 	if (mode === 'development') {
-		plugins = [nodeLoaderPlugin(), ...plugins];
+		plugins = [houdini(), nodeLoaderPlugin(), sveltekit()];
 	}
 
 	return {

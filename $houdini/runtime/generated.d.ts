@@ -1,12 +1,16 @@
 import type { Record } from "./public/record";
 import { GetUser$result, GetUser$input } from "../artifacts/GetUser";
 import { GetUserStore } from "../plugins/houdini-svelte/stores/GetUser";
-import { AskSeel$result, AskSeel$input } from "../artifacts/AskSeel";
-import { AskSeelStore } from "../plugins/houdini-svelte/stores/AskSeel";
+import { GetInvestingEntities$result, GetInvestingEntities$input } from "../artifacts/GetInvestingEntities";
+import { GetInvestingEntitiesStore } from "../plugins/houdini-svelte/stores/GetInvestingEntities";
+import { GetUsers$result, GetUsers$input } from "../artifacts/GetUsers";
+import { GetUsersStore } from "../plugins/houdini-svelte/stores/GetUsers";
 import { AddDocumentToCollectionUrl$result, AddDocumentToCollectionUrl$input } from "../artifacts/AddDocumentToCollectionUrl";
 import { AddDocumentToCollectionUrlStore } from "../plugins/houdini-svelte/stores/AddDocumentToCollectionUrl";
 import { AskCollection$result, AskCollection$input } from "../artifacts/AskCollection";
 import { AskCollectionStore } from "../plugins/houdini-svelte/stores/AskCollection";
+import { AskSeel$result, AskSeel$input } from "../artifacts/AskSeel";
+import { AskSeelStore } from "../plugins/houdini-svelte/stores/AskSeel";
 
 type KeyValuePair = {
     key: string;
@@ -26,7 +30,7 @@ export declare type CacheTypeDef = {
             };
             fields: {
                 attributes: {
-                    type: (Record<CacheTypeDef, "FieldValueAWSDate"> | Record<CacheTypeDef, "FieldValueAWSDateTime"> | Record<CacheTypeDef, "FieldValueAWSEmail"> | Record<CacheTypeDef, "FieldValueAWSIPAddress"> | Record<CacheTypeDef, "FieldValueAWSJSON"> | Record<CacheTypeDef, "FieldValueAWSPhone"> | Record<CacheTypeDef, "FieldValueAWSTime"> | Record<CacheTypeDef, "FieldValueAWSTimestamp"> | Record<CacheTypeDef, "FieldValueAWSURL"> | Record<CacheTypeDef, "FieldValueBoolean"> | Record<CacheTypeDef, "FieldValueFloat"> | Record<CacheTypeDef, "FieldValueInt"> | Record<CacheTypeDef, "FieldValueString">)[];
+                    type: (Record<CacheTypeDef, "CompanyAttribute">)[];
                     args: never;
                 };
                 id: {
@@ -44,7 +48,7 @@ export declare type CacheTypeDef = {
                     args: never;
                 };
                 value: {
-                    type: Record<CacheTypeDef, "FieldValueAWSDate"> | Record<CacheTypeDef, "FieldValueAWSDateTime"> | Record<CacheTypeDef, "FieldValueAWSEmail"> | Record<CacheTypeDef, "FieldValueAWSIPAddress"> | Record<CacheTypeDef, "FieldValueAWSJSON"> | Record<CacheTypeDef, "FieldValueAWSPhone"> | Record<CacheTypeDef, "FieldValueAWSTime"> | Record<CacheTypeDef, "FieldValueAWSTimestamp"> | Record<CacheTypeDef, "FieldValueAWSURL"> | Record<CacheTypeDef, "FieldValueBoolean"> | Record<CacheTypeDef, "FieldValueFloat"> | Record<CacheTypeDef, "FieldValueInt"> | Record<CacheTypeDef, "FieldValueString">;
+                    type: Record<CacheTypeDef, "FieldValue">;
                     args: never;
                 };
             };
@@ -99,190 +103,62 @@ export declare type CacheTypeDef = {
                     type: FieldValueType;
                     args: never;
                 };
-                typePostgres: {
-                    type: FieldTypePostgres;
-                    args: never;
-                };
             };
             fragments: [];
         };
-        FieldValueAWSDate: {
+        FieldValue: {
             idFields: never;
             fields: {
-                value: {
-                    type: any;
+                booleanValue: {
+                    type: boolean | null;
                     args: never;
                 };
-                valueType: {
-                    type: FieldValueType;
+                dateTimeValue: {
+                    type: any | null;
                     args: never;
                 };
-            };
-            fragments: [];
-        };
-        FieldValueAWSDateTime: {
-            idFields: never;
-            fields: {
-                value: {
-                    type: any;
+                dateValue: {
+                    type: any | null;
                     args: never;
                 };
-                valueType: {
-                    type: FieldValueType;
+                emailValue: {
+                    type: any | null;
                     args: never;
                 };
-            };
-            fragments: [];
-        };
-        FieldValueAWSEmail: {
-            idFields: never;
-            fields: {
-                value: {
-                    type: any;
+                floatValue: {
+                    type: number | null;
                     args: never;
                 };
-                valueType: {
-                    type: FieldValueType;
+                intValue: {
+                    type: number | null;
                     args: never;
                 };
-            };
-            fragments: [];
-        };
-        FieldValueAWSIPAddress: {
-            idFields: never;
-            fields: {
-                value: {
-                    type: any;
+                ipAddressValue: {
+                    type: any | null;
                     args: never;
                 };
-                valueType: {
-                    type: FieldValueType;
+                jsonValue: {
+                    type: any | null;
                     args: never;
                 };
-            };
-            fragments: [];
-        };
-        FieldValueAWSJSON: {
-            idFields: never;
-            fields: {
-                value: {
-                    type: object;
+                phoneValue: {
+                    type: any | null;
                     args: never;
                 };
-                valueType: {
-                    type: FieldValueType;
+                stringValue: {
+                    type: string | null;
                     args: never;
                 };
-            };
-            fragments: [];
-        };
-        FieldValueAWSPhone: {
-            idFields: never;
-            fields: {
-                value: {
-                    type: any;
+                timeValue: {
+                    type: any | null;
                     args: never;
                 };
-                valueType: {
-                    type: FieldValueType;
+                timestampValue: {
+                    type: any | null;
                     args: never;
                 };
-            };
-            fragments: [];
-        };
-        FieldValueAWSTime: {
-            idFields: never;
-            fields: {
-                value: {
-                    type: any;
-                    args: never;
-                };
-                valueType: {
-                    type: FieldValueType;
-                    args: never;
-                };
-            };
-            fragments: [];
-        };
-        FieldValueAWSTimestamp: {
-            idFields: never;
-            fields: {
-                value: {
-                    type: any;
-                    args: never;
-                };
-                valueType: {
-                    type: FieldValueType;
-                    args: never;
-                };
-            };
-            fragments: [];
-        };
-        FieldValueAWSURL: {
-            idFields: never;
-            fields: {
-                value: {
-                    type: any;
-                    args: never;
-                };
-                valueType: {
-                    type: FieldValueType;
-                    args: never;
-                };
-            };
-            fragments: [];
-        };
-        FieldValueBoolean: {
-            idFields: never;
-            fields: {
-                value: {
-                    type: boolean;
-                    args: never;
-                };
-                valueType: {
-                    type: FieldValueType;
-                    args: never;
-                };
-            };
-            fragments: [];
-        };
-        FieldValueFloat: {
-            idFields: never;
-            fields: {
-                value: {
-                    type: number;
-                    args: never;
-                };
-                valueType: {
-                    type: FieldValueType;
-                    args: never;
-                };
-            };
-            fragments: [];
-        };
-        FieldValueInt: {
-            idFields: never;
-            fields: {
-                value: {
-                    type: number;
-                    args: never;
-                };
-                valueType: {
-                    type: FieldValueType;
-                    args: never;
-                };
-            };
-            fragments: [];
-        };
-        FieldValueString: {
-            idFields: never;
-            fields: {
-                value: {
-                    type: string;
-                    args: never;
-                };
-                valueType: {
-                    type: FieldValueType;
+                urlValue: {
+                    type: any | null;
                     args: never;
                 };
             };
@@ -453,5 +329,5 @@ export declare type CacheTypeDef = {
         };
     };
     lists: {};
-    queries: [[AskCollectionStore, AskCollection$result, AskCollection$input], [AddDocumentToCollectionUrlStore, AddDocumentToCollectionUrl$result, AddDocumentToCollectionUrl$input], [AskSeelStore, AskSeel$result, AskSeel$input], [GetUserStore, GetUser$result, GetUser$input]];
+    queries: [[AskSeelStore, AskSeel$result, AskSeel$input], [AskCollectionStore, AskCollection$result, AskCollection$input], [AddDocumentToCollectionUrlStore, AddDocumentToCollectionUrl$result, AddDocumentToCollectionUrl$input], [GetUsersStore, GetUsers$result, GetUsers$input], [GetInvestingEntitiesStore, GetInvestingEntities$result, GetInvestingEntities$input], [GetUserStore, GetUser$result, GetUser$input]];
 };

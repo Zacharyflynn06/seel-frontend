@@ -1,12 +1,12 @@
 <script lang="ts">
+	import { enhance } from '$app/forms';
 	import { page } from '$app/stores';
 	import { AskCollectionStore } from '$houdini';
+	import SmallButton from '$lib/components/buttons/SmallButton.svelte';
 	import Card from '$lib/components/Card.svelte';
-	import Spinner from '$lib/components/Spinner.svelte';
 	import FileInput from '$lib/components/formComponents/FileInput.svelte';
 	import TextInput from '$lib/components/formComponents/TextInput.svelte';
-	import ArrowIcon from '$lib/components/icons/ArrowIcon.svelte';
-	import Typewriter from 'svelte-typewriter';
+
 	import type { PageData } from './$types';
 
 	export let data: PageData;
@@ -38,47 +38,25 @@
 	}
 </script>
 
-<div class="flex w-full flex-col items-center justify-center space-y-5">
-	<Card heading="Your Funds">
-		{#each Object.entries(user?.investingEntities[0]) as [k, v]}
-			<p>{k}: {v}</p>
-		{/each}
+<div>
+	<Card heading="Add Company">
+		<form use:enhance action="?/add_company" method="POST" class="space-y-5">
+			<TextInput name="company_name" label="Company Name" />
+			<SmallButton type="submit">Submit</SmallButton>
+		</form>
 	</Card>
+</div>
+
+<div class="flex w-full flex-col items-center justify-center space-y-5">
+	{#each user.investingEntities as entity}
+		<Card heading="Your Funds">
+			{#each Object.entries(entity) as [k, v]}
+				<p>{k}: {v}</p>
+			{/each}
+		</Card>
+	{/each}
 
 	<Card heading="Submit-Deals">
 		<FileInput />
-
-		<!-- <form
-			on:submit|preventDefault={handleSubmit}
-			class="flex h-full flex-col justify-center space-y-5 text-center"
-		>
-			<TextInput
-				bind:value={userInput}
-				bind:disabled={loading}
-				placeholder="Ask your collection..."
-				name="user_input"
-			>
-				<button
-					type="submit"
-					disabled={!userInput || loading}
-					class=" {userInput && userInput.length > 4
-						? 'text-purple dark:text-pink'
-						: 'text-grey-08 dark:text-white/50'}"
-				>
-					{#if !loading}
-						<ArrowIcon className="h-6 w-6 " />
-					{:else}
-						<Spinner className="h-6 w-6 " />
-					{/if}
-				</button>
-			</TextInput>
-			<div class="text-left md:max-w-[500px]">
-				{#if answer}
-					<Typewriter>
-						{answer}
-					</Typewriter>
-				{/if}
-			</div>
-		</form> -->
 	</Card>
 </div>
