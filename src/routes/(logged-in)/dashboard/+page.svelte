@@ -11,14 +11,15 @@
 
 <div class="flex w-full flex-col items-center justify-center space-y-5">
 	{#if user.investingEntities.length}
-		<!-- content here -->
-		{#each user.investingEntities as entity}
-			<Card heading="Your Funds">
-				{#each Object.entries(entity) as [k, v]}
-					<p>{k}: {v}</p>
-				{/each}
-			</Card>
-		{/each}
+		<Card heading="Your Funds">
+			{#each user.investingEntities as entity}
+				<div class="mb-5">
+					{#each Object.entries(entity) as [k, v]}
+						<p>{k}: {v}</p>
+					{/each}
+				</div>
+			{/each}
+		</Card>
 	{:else}
 		<Card heading="Your Funds">Reach out to our admin team to get started</Card>
 	{/if}

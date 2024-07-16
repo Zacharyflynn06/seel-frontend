@@ -1,10 +1,10 @@
 import type { Record } from "./public/record";
-import { GetInvestingEntities$result, GetInvestingEntities$input } from "../artifacts/GetInvestingEntities";
-import { GetInvestingEntitiesStore } from "../plugins/houdini-svelte/stores/GetInvestingEntities";
 import { GetUser$result, GetUser$input } from "../artifacts/GetUser";
 import { GetUserStore } from "../plugins/houdini-svelte/stores/GetUser";
 import { GetUsers$result, GetUsers$input } from "../artifacts/GetUsers";
 import { GetUsersStore } from "../plugins/houdini-svelte/stores/GetUsers";
+import { GetInvestingEntities$result, GetInvestingEntities$input } from "../artifacts/GetInvestingEntities";
+import { GetInvestingEntitiesStore } from "../plugins/houdini-svelte/stores/GetInvestingEntities";
 import { AskCollection$result, AskCollection$input } from "../artifacts/AskCollection";
 import { AskCollectionStore } from "../plugins/houdini-svelte/stores/AskCollection";
 import { AskSeel$result, AskSeel$input } from "../artifacts/AskSeel";
@@ -329,5 +329,5 @@ export declare type CacheTypeDef = {
         };
     };
     lists: {};
-    queries: [[AddDocumentToCollectionUrlStore, AddDocumentToCollectionUrl$result, AddDocumentToCollectionUrl$input], [AskSeelStore, AskSeel$result, AskSeel$input], [AskCollectionStore, AskCollection$result, AskCollection$input], [GetUsersStore, GetUsers$result, GetUsers$input], [GetUserStore, GetUser$result, GetUser$input], [GetInvestingEntitiesStore, GetInvestingEntities$result, GetInvestingEntities$input]];
+    queries: [[AddDocumentToCollectionUrlStore, AddDocumentToCollectionUrl$result, AddDocumentToCollectionUrl$input], [AskSeelStore, AskSeel$result, AskSeel$input], [AskCollectionStore, AskCollection$result, AskCollection$input], [GetInvestingEntitiesStore, GetInvestingEntities$result, GetInvestingEntities$input], [GetUsersStore, GetUsers$result, GetUsers$input], [GetUserStore, GetUser$result, GetUser$input]];
 };

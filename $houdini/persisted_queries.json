@@ -2,10 +2,10 @@
     "ea6184ba90262b629f82bb56f4d24ace35855ec34dd5d8609dcc98679e180fb6": "query AddDocumentToCollectionUrl($collectionName: String!) {\n  addDocumentToCollectionUrl(collectionName: $collectionName)\n}\n",
     "8c05bff0acc73e6ae81b7d4ceff7b542d2367a1e60426e81183ecca1c219b0eb": "query AskSeel($question: String!) {\n  ask(question: $question)\n}\n",
     "89f6c8801b312788f1d6d32ff3092a5a922bf96ffdb67ddb66ff1354690809ce": "query AskCollection($collectionName: String!, $query: String!) {\n  askCollection(collectionName: $collectionName, query: $query)\n}\n",
-    "f4e97b886dc423049d7a67d255a9f57de9bea7cf88d2aa4a57434dfffa3d88f2": "mutation linkInvestingEntityToUser($input: LinkInvestingEntityToUserInput!) {\n  linkInvestingEntityToUser(input: $input) {\n    id\n  }\n}\n",
+    "072f19d8835c6ef25fdf4c1356fcedd7619e3a3c8a892f0f1cd7c139d6a55a87": "query GetInvestingEntities {\n  getInvestingEntities {\n    address\n    entityType\n    id\n    name\n    strategy\n    users {\n      email\n      id\n    }\n  }\n}\n",
     "f33537e672e1350654001237b62d4690a09b4ad601b2dbec978df3e9614f99e5": "query GetUsers {\n  getUsers {\n    email\n    id\n  }\n}\n",
+    "f4e97b886dc423049d7a67d255a9f57de9bea7cf88d2aa4a57434dfffa3d88f2": "mutation linkInvestingEntityToUser($input: LinkInvestingEntityToUserInput!) {\n  linkInvestingEntityToUser(input: $input) {\n    id\n  }\n}\n",
     "3bf78ce8cf2e3dab13639c1e43733cf05a0f3ee863af6ed9d2e80bd4478e3898": "query GetUser($id: ID!) {\n  getUser(id: $id) {\n    investingEntities {\n      name\n      address\n      entityType\n      strategy\n      id\n    }\n    email\n    id\n  }\n}\n",
     "4002f115e69f61d0c00e201e3f361c4b26093802193af199f1bcdfe250a030bb": "mutation UpsertInvestingEntity($input: UpsertInvestingEntityInput!) {\n  upsertInvestingEntity(input: $input) {\n    address\n    entityType\n    id\n    name\n    strategy\n  }\n}\n",
-    "072f19d8835c6ef25fdf4c1356fcedd7619e3a3c8a892f0f1cd7c139d6a55a87": "query GetInvestingEntities {\n  getInvestingEntities {\n    address\n    entityType\n    id\n    name\n    strategy\n    users {\n      email\n      id\n    }\n  }\n}\n",
     "0a27981a10d30b675861cf4860071b67399ae2cfcf03cd67126825c84ca0a13b": "mutation UpsertUser($email: String!, $id: String!) {\n  upsertUser(user: {email: $email, id: $id}) {\n    email\n    id\n  }\n}\n"
 }
