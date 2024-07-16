@@ -6,6 +6,7 @@
 	import { enhance } from '$app/forms';
 	import { onMount } from 'svelte';
 	import { mainPanelWidth } from '$lib/classes';
+	import toast from 'svelte-french-toast';
 	export let marginForNav = false;
 
 	let isMenuOpen = false;
@@ -20,6 +21,8 @@
 	const closeMenu = () => {
 		isMenuOpen = false;
 	};
+
+	$: url = $page.url;
 </script>
 
 <header
@@ -48,13 +51,24 @@
 					<form action="/log-out" method="POST" use:enhance>
 						<button on:click={closeMenu} type="submit">Sign Out</button>
 					</form>
+					<a on:click={closeMenu} href="/dashboard">Dashboard</a>
 				{:else}
-					<a on:click={closeMenu} href="/log-in">Log In</a>
-					<a on:click={closeMenu} href="/sign-up">Sign Up</a>
+					{#if !url.pathname.includes('log-in')}
+						<a on:click={closeMenu} href="/log-in">Log In</a>
+					{/if}
+					{#if !url.pathname.includes('sign-up')}
+						<a on:click={closeMenu} href="/sign-up">Sign Up</a>
+					{/if}
 				{/if}
-				<a on:click={closeMenu} href="/">Home</a>
-				<a on:click={closeMenu} href="/about">About</a>
-				<a on:click={closeMenu} href="/privacy-policy">Privacy</a>
+				{#if !url.pathname.includes('sign-up')}
+					<a on:click={closeMenu} href="/">Home</a>
+				{/if}
+				{#if !url.pathname.includes('about')}
+					<a on:click={closeMenu} href="/about">About</a>
+				{/if}
+				{#if !url.pathname.includes('privacy-policy')}
+					<a on:click={closeMenu} href="/privacy-policy">Privacy</a>
+				{/if}
 				<div class="flex w-full">
 					<DarkModeToggleButton on:toggle={() => (isMenuOpen = false)} />
 				</div>
