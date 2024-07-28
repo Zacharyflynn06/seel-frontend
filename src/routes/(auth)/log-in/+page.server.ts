@@ -12,20 +12,20 @@ export const actions = {
 			return fail(400, { invalid: true });
 		}
 
-		// try {
-		const cognitoUser = await Auth.signIn(email, password);
+		try {
+			const cognitoUser = await Auth.signIn(email, password);
 
-		cookies?.set('session_id', cognitoUser.username, {
-			path: '/',
-			httpOnly: true,
-			sameSite: 'strict',
-			secure: dev,
-			maxAge: 60 * 60 // one hour
-		});
-
-		redirect(300, '/chat-demo');
-		// } catch (error) {
-		// 	console.log('page.server.ts', (error as Error).message);
-		// }
+			cookies?.set('session_id', cognitoUser.username, {
+				path: '/',
+				httpOnly: true,
+				sameSite: 'strict',
+				secure: dev,
+				maxAge: 60 * 60 // one hour
+			});
+			return { success: true };
+			// redirect(300, '/dashboard');
+		} catch (error) {
+			return { error: error.message };
+		}
 	}
 };
