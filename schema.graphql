@@ -98,10 +98,29 @@ The `AWSURL` scalar type provided by AWS AppSync, represents a valid URL string 
 """
 scalar AWSURL
 
+type Chat {
+  documentCollection: DocumentCollection!
+  history: [ChatMessage!]!
+  id: ID!
+  user: User!
+}
+
+type ChatMessage {
+  response: String
+  userMessage: String!
+}
+
 """  A Company is just a collection of attributes"""
 type Company {
   attributes: [CompanyAttribute!]!
+
+  """  TODO"""
+  documentCollections: [DocumentCollection!]!
+
+  """  TODO"""
+  documents: [DocumentMetadata!]!
   id: ID!
+  investingEntity: InvestingEntity
 }
 
 """  Associates a value with its type and field"""
@@ -118,6 +137,43 @@ input CompanyAttributeIdInput {
 input DeleteInvestmentCriterionInput {
   fieldId: ID!
   investingEntityId: ID!
+}
+
+type DocumentCollection {
+  company: Company
+  description: String
+  documents: [DocumentMetadata!]!
+  id: ID!
+  investingEntity: InvestingEntity
+  name: String!
+  user: User
+}
+
+"""
+ ##############################################################################
+                                   Document                                  #
+##############################################################################
+"""
+type DocumentMetadata {
+  company: Company
+  description: String
+
+  """
+    URL to download the body of this document. NULL if no document has
+   been uploaded yet.
+  """
+  downloadUrl: AWSURL
+  id: ID!
+  investingEntity: InvestingEntity
+  mimeType: String
+  name: String!
+
+  """
+    URL to make a PUT request to with the body of the document. See:
+   https://docs.aws.amazon.com/AmazonS3/latest/userguide/PresignedUrlUploadObject.html
+  """
+  uploadUrl: AWSURL!
+  user: User
 }
 
 type Field {
@@ -224,6 +280,13 @@ enum FieldValueType {
 
 type InvestingEntity {
   address: String!
+  companies: [Company!]!
+
+  """  TODO"""
+  documentCollections: [DocumentCollection!]!
+
+  """  TODO"""
+  documents: [DocumentMetadata!]!
   entityType: InvestingEntityType!
   id: ID!
   investmentCriteria: [InvestmentCriterion!]!
@@ -267,11 +330,6 @@ type InvestmentCriterion {
   required: Boolean!
 }
 
-input KeyValuePair {
-  key: String!
-  value: String!
-}
-
 input LinkInvestingEntityToUserInput {
   investingEntityId: ID!
   userId: ID!
@@ -280,6 +338,7 @@ input LinkInvestingEntityToUserInput {
 type Mutation {
   deleteCompany(id: ID!): Company
   deleteCompanyAttribute(input: CompanyAttributeIdInput!): CompanyAttribute
+  deleteDocumentMetadata(id: ID!): DocumentMetadata
   deleteField(id: ID!): Field
   deleteFieldType(id: ID!): FieldType
   deleteInvestingEntity(id: ID!): InvestingEntity
@@ -289,6 +348,7 @@ type Mutation {
   unlinkInvestingEntityFromUser(input: UnlinkInvestingEntityFromUserInput!): User
   upsertCompany(input: UpsertCompanyInput!): Company!
   upsertCompanyAttribute(input: UpsertSingleCompanyAttributeInput!): CompanyAttribute!
+  upsertDocumentMetadata(input: UpsertDocumentMetadataInput): DocumentMetadata
   upsertField(input: UpsertFieldInput!): Field!
   upsertFieldType(input: UpsertFieldTypeInput!): FieldType!
   upsertInvestingEntity(input: UpsertInvestingEntityInput!): InvestingEntity!
@@ -297,10 +357,11 @@ type Mutation {
 }
 
 type Query {
-  addDocumentToCollectionUrl(collectionName: String!, metadata: [KeyValuePair]): String!
+  addDocumentToCollectionUrl(collectionName: String!): String!
   ask(question: String!): String!
   askCollection(collectionName: String!, query: String!): String!
   documentUploadUrl(clientLookupName: String!, userId: String!): String!
+  getAllDocumentMetadata: [DocumentMetadata!]!
   getCompanies: [Company!]!
   getCompany(id: ID!): Company
   getCompanyAttribute(input: CompanyAttributeIdInput!): CompanyAttribute
@@ -310,6 +371,7 @@ type Query {
   getFields: [Field!]!
   getInvestingEntities: [InvestingEntity!]!
   getInvestingEntity(id: ID!): InvestingEntity
+  getSingleDocumentMetadata(id: ID!): DocumentMetadata
   getUser(id: ID!): User
   getUsers: [User!]!
 }
@@ -326,7 +388,35 @@ input UpsertCompanyAttributeInput {
 
 input UpsertCompanyInput {
   attributes: [UpsertCompanyAttributeInput!]!
+
+  """
+    If specified, indicates the ID of the company to update. If this
+   is not specified, then an investingEntityId must be provided.
+  """
   id: ID
+
+  """
+    If `id` is not given, this is used to create a new Company
+   associated with this investing entity
+  """
+  investingEntityId: ID
+}
+
+input UpsertDocumentMetadataInput {
+  companyId: ID
+  description: String
+
+  """  If provided, the upsert request modifies an existing document."""
+  id: ID
+  investingEntityId: ID
+
+  """
+    If this is not provided, the back end will infer a meme type after
+   uploading a new file.
+  """
+  mimeType: String
+  name: String!
+  userId: ID
 }
 
 input UpsertFieldInput {
@@ -360,8 +450,18 @@ input UpsertInvestmentCriterionInput {
 }
 
 input UpsertSingleCompanyAttributeInput {
-  companyId: ID!
+  """
+    If specified, indicates the ID of the company to update. If this
+   is not specified, then an investingEntityId must be provided.
+  """
+  companyId: ID
   fieldId: ID!
+
+  """
+    If `id` is not given, this is used to create a new Company
+   associated with this investing entity
+  """
+  investingEntityId: ID
   value: FieldValueInput!
 }
 
@@ -376,6 +476,11 @@ input UpsertUserInput {
 ##############################################################################
 """
 type User {
+  """  TODO"""
+  documentCollections: [DocumentCollection!]!
+
+  """  TODO"""
+  documents: [DocumentMetadata!]!
   email: String!
   id: String!
   investingEntities: [InvestingEntity!]!

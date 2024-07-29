@@ -11,8 +11,8 @@ type OutputDataShape<T> = MaybeWithVoid<Omit<App.PageData, RequiredKeys<T>> & Pa
 type EnsureDefined<T> = T extends null | undefined ? {} : T;
 type OptionalUnion<U extends Record<string, any>, A extends keyof U = U extends U ? keyof U : never> = U extends unknown ? { [P in Exclude<A, keyof U>]?: never } & U : never;
 export type Snapshot<T = any> = Kit.Snapshot<T>;
-type LayoutRouteId = RouteId | "/(logged-in)/add-company" | "/(logged-in)/admin" | "/(logged-in)/chat-demo" | "/(logged-in)/dashboard" | "/(logged-in)/documents" | "/(logged-in)/pipeline" | "/(logged-in)/review-deals" | "/(logged-in)/submit-deals"
-type LayoutParams = RouteParams & {  }
+type LayoutRouteId = RouteId | "/(logged-in)/add-company" | "/(logged-in)/admin" | "/(logged-in)/chat-demo" | "/(logged-in)/dashboard" | "/(logged-in)/dashboard/[investingEntityId]" | "/(logged-in)/documents" | "/(logged-in)/pipeline" | "/(logged-in)/review-deals" | "/(logged-in)/submit-deals"
+type LayoutParams = RouteParams & { investingEntityId?: string }
 type LayoutServerParentData = EnsureDefined<import('../$houdini').LayoutServerData>;
 type LayoutParentData = EnsureDefined<import('../$houdini').LayoutData>;
 						type MakeOptional<Target, Keys extends keyof Target> = Omit<Target, Keys> & {

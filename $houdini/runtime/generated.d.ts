@@ -1,21 +1,20 @@
 import type { Record } from "./public/record";
-import { GetUser$result, GetUser$input } from "../artifacts/GetUser";
-import { GetUserStore } from "../plugins/houdini-svelte/stores/GetUser";
-import { GetUsers$result, GetUsers$input } from "../artifacts/GetUsers";
-import { GetUsersStore } from "../plugins/houdini-svelte/stores/GetUsers";
 import { GetInvestingEntities$result, GetInvestingEntities$input } from "../artifacts/GetInvestingEntities";
 import { GetInvestingEntitiesStore } from "../plugins/houdini-svelte/stores/GetInvestingEntities";
+import { GetCompany$result, GetCompany$input } from "../artifacts/GetCompany";
+import { GetCompanyStore } from "../plugins/houdini-svelte/stores/GetCompany";
+import { GetUsers$result, GetUsers$input } from "../artifacts/GetUsers";
+import { GetUsersStore } from "../plugins/houdini-svelte/stores/GetUsers";
+import { GetUser$result, GetUser$input } from "../artifacts/GetUser";
+import { GetUserStore } from "../plugins/houdini-svelte/stores/GetUser";
+import { GetInvestingEntity$result, GetInvestingEntity$input } from "../artifacts/GetInvestingEntity";
+import { GetInvestingEntityStore } from "../plugins/houdini-svelte/stores/GetInvestingEntity";
 import { AskCollection$result, AskCollection$input } from "../artifacts/AskCollection";
 import { AskCollectionStore } from "../plugins/houdini-svelte/stores/AskCollection";
-import { AskSeel$result, AskSeel$input } from "../artifacts/AskSeel";
-import { AskSeelStore } from "../plugins/houdini-svelte/stores/AskSeel";
 import { AddDocumentToCollectionUrl$result, AddDocumentToCollectionUrl$input } from "../artifacts/AddDocumentToCollectionUrl";
 import { AddDocumentToCollectionUrlStore } from "../plugins/houdini-svelte/stores/AddDocumentToCollectionUrl";
-
-type KeyValuePair = {
-    key: string;
-    value: string;
-};
+import { AskSeel$result, AskSeel$input } from "../artifacts/AskSeel";
+import { AskSeelStore } from "../plugins/houdini-svelte/stores/AskSeel";
 
 type CompanyAttributeIdInput = {
     companyId: string;
@@ -24,6 +23,44 @@ type CompanyAttributeIdInput = {
 
 export declare type CacheTypeDef = {
     types: {
+        Chat: {
+            idFields: {
+                id: string;
+            };
+            fields: {
+                documentCollection: {
+                    type: Record<CacheTypeDef, "DocumentCollection">;
+                    args: never;
+                };
+                history: {
+                    type: (Record<CacheTypeDef, "ChatMessage">)[];
+                    args: never;
+                };
+                id: {
+                    type: string;
+                    args: never;
+                };
+                user: {
+                    type: Record<CacheTypeDef, "User">;
+                    args: never;
+                };
+            };
+            fragments: [];
+        };
+        ChatMessage: {
+            idFields: never;
+            fields: {
+                response: {
+                    type: string | null;
+                    args: never;
+                };
+                userMessage: {
+                    type: string;
+                    args: never;
+                };
+            };
+            fragments: [];
+        };
         Company: {
             idFields: {
                 id: string;
@@ -33,8 +70,20 @@ export declare type CacheTypeDef = {
                     type: (Record<CacheTypeDef, "CompanyAttribute">)[];
                     args: never;
                 };
+                documentCollections: {
+                    type: (Record<CacheTypeDef, "DocumentCollection">)[];
+                    args: never;
+                };
+                documents: {
+                    type: (Record<CacheTypeDef, "DocumentMetadata">)[];
+                    args: never;
+                };
                 id: {
                     type: string;
+                    args: never;
+                };
+                investingEntity: {
+                    type: Record<CacheTypeDef, "InvestingEntity"> | null;
                     args: never;
                 };
             };
@@ -49,6 +98,86 @@ export declare type CacheTypeDef = {
                 };
                 value: {
                     type: Record<CacheTypeDef, "FieldValue">;
+                    args: never;
+                };
+            };
+            fragments: [];
+        };
+        DocumentCollection: {
+            idFields: {
+                id: string;
+            };
+            fields: {
+                company: {
+                    type: Record<CacheTypeDef, "Company"> | null;
+                    args: never;
+                };
+                description: {
+                    type: string | null;
+                    args: never;
+                };
+                documents: {
+                    type: (Record<CacheTypeDef, "DocumentMetadata">)[];
+                    args: never;
+                };
+                id: {
+                    type: string;
+                    args: never;
+                };
+                investingEntity: {
+                    type: Record<CacheTypeDef, "InvestingEntity"> | null;
+                    args: never;
+                };
+                name: {
+                    type: string;
+                    args: never;
+                };
+                user: {
+                    type: Record<CacheTypeDef, "User"> | null;
+                    args: never;
+                };
+            };
+            fragments: [];
+        };
+        DocumentMetadata: {
+            idFields: {
+                id: string;
+            };
+            fields: {
+                company: {
+                    type: Record<CacheTypeDef, "Company"> | null;
+                    args: never;
+                };
+                description: {
+                    type: string | null;
+                    args: never;
+                };
+                downloadUrl: {
+                    type: any | null;
+                    args: never;
+                };
+                id: {
+                    type: string;
+                    args: never;
+                };
+                investingEntity: {
+                    type: Record<CacheTypeDef, "InvestingEntity"> | null;
+                    args: never;
+                };
+                mimeType: {
+                    type: string | null;
+                    args: never;
+                };
+                name: {
+                    type: string;
+                    args: never;
+                };
+                uploadUrl: {
+                    type: any;
+                    args: never;
+                };
+                user: {
+                    type: Record<CacheTypeDef, "User"> | null;
                     args: never;
                 };
             };
@@ -173,6 +302,18 @@ export declare type CacheTypeDef = {
                     type: string;
                     args: never;
                 };
+                companies: {
+                    type: (Record<CacheTypeDef, "Company">)[];
+                    args: never;
+                };
+                documentCollections: {
+                    type: (Record<CacheTypeDef, "DocumentCollection">)[];
+                    args: never;
+                };
+                documents: {
+                    type: (Record<CacheTypeDef, "DocumentMetadata">)[];
+                    args: never;
+                };
                 entityType: {
                     type: InvestingEntityType;
                     args: never;
@@ -225,7 +366,6 @@ export declare type CacheTypeDef = {
                     type: string;
                     args: {
                         collectionName: string;
-                        metadata?: (KeyValuePair | null | undefined)[] | null | undefined;
                     };
                 };
                 ask: {
@@ -247,6 +387,10 @@ export declare type CacheTypeDef = {
                         clientLookupName: string;
                         userId: string;
                     };
+                };
+                getAllDocumentMetadata: {
+                    type: (Record<CacheTypeDef, "DocumentMetadata">)[];
+                    args: never;
                 };
                 getCompanies: {
                     type: (Record<CacheTypeDef, "Company">)[];
@@ -294,6 +438,12 @@ export declare type CacheTypeDef = {
                         id: string;
                     };
                 };
+                getSingleDocumentMetadata: {
+                    type: Record<CacheTypeDef, "DocumentMetadata"> | null;
+                    args: {
+                        id: string;
+                    };
+                };
                 getUser: {
                     type: Record<CacheTypeDef, "User"> | null;
                     args: {
@@ -312,6 +462,14 @@ export declare type CacheTypeDef = {
                 id: string;
             };
             fields: {
+                documentCollections: {
+                    type: (Record<CacheTypeDef, "DocumentCollection">)[];
+                    args: never;
+                };
+                documents: {
+                    type: (Record<CacheTypeDef, "DocumentMetadata">)[];
+                    args: never;
+                };
                 email: {
                     type: string;
                     args: never;
@@ -329,5 +487,5 @@ export declare type CacheTypeDef = {
         };
     };
     lists: {};
-    queries: [[AddDocumentToCollectionUrlStore, AddDocumentToCollectionUrl$result, AddDocumentToCollectionUrl$input], [AskSeelStore, AskSeel$result, AskSeel$input], [AskCollectionStore, AskCollection$result, AskCollection$input], [GetInvestingEntitiesStore, GetInvestingEntities$result, GetInvestingEntities$input], [GetUsersStore, GetUsers$result, GetUsers$input], [GetUserStore, GetUser$result, GetUser$input]];
+    queries: [[AskSeelStore, AskSeel$result, AskSeel$input], [AddDocumentToCollectionUrlStore, AddDocumentToCollectionUrl$result, AddDocumentToCollectionUrl$input], [AskCollectionStore, AskCollection$result, AskCollection$input], [GetInvestingEntityStore, GetInvestingEntity$result, GetInvestingEntity$input], [GetUserStore, GetUser$result, GetUser$input], [GetUsersStore, GetUsers$result, GetUsers$input], [GetCompanyStore, GetCompany$result, GetCompany$input], [GetInvestingEntitiesStore, GetInvestingEntities$result, GetInvestingEntities$input]];
 };
