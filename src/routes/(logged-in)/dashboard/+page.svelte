@@ -10,12 +10,12 @@
 </script>
 
 <div class="flex w-full flex-col items-center justify-center space-y-5">
-	{#if user.investingEntities.length}
+	{#if user?.investingEntities?.length}
 		<Card heading="Your Funds">
 			{#each user.investingEntities as entity}
 				<div class="mb-5">
 					{#each Object.entries(entity) as [k, v]}
-						<p>{k}: {v}</p>
+						<a class="block" href="/dashboard/{entity.id}">{k}: {v}</a>
 					{/each}
 				</div>
 			{/each}

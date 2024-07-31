@@ -18,7 +18,7 @@
 		extraClasses;
 </script>
 
-<div class="relative">
+<fieldset class="relative">
 	{#if label}
 		<label for={name} class={inputLabelClasses}>
 			{label}
@@ -53,4 +53,4 @@
 	<div class="absolute right-2.5 top-1/4 z-10">
 		<slot />
 	</div>
-</div>
+</fieldset>
