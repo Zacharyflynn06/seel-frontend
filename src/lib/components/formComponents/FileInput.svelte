@@ -1,16 +1,19 @@
 <script lang="ts">
 	// This type error is a known issue, (https://github.com/pqina/svelte-filepond/issues/13) does not seem to be fixed yet
 	import FilePond, { registerPlugin } from 'svelte-filepond';
-
 	import FilePondPluginImageExifOrientation from 'filepond-plugin-image-exif-orientation';
 	import FilePondPluginImagePreview from 'filepond-plugin-image-preview';
 	import FilePondPluginFileEncode from 'filepond-plugin-file-encode';
 	import 'filepond/dist/filepond.min.css';
 	import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css';
-	import { AddDocumentToCollectionUrlStore } from '$houdini';
+	import { UpsertDocumentMetadataStore } from '$houdini';
 	import { page } from '$app/stores';
+	import type { Object } from 'aws-sdk/clients/appflow';
 
-	export let signedUrl: string | undefined = undefined;
+	export let companyId: string;
+	export let investingEntityId: string;
+	export let userId: string = '';
+
 	// Register the plugins
 	registerPlugin(
 		FilePondPluginImageExifOrientation,
@@ -22,19 +25,20 @@
 	let pond: FilePond;
 	// pond.getFiles() will return the active files
 
-	let name = 'filepond';
+	// let name = 'filepond';
 	export let fileIsReady = false;
 
-	const getPresignedUrl = async (): Promise<string> => {
-		let url = '';
-		const store = new AddDocumentToCollectionUrlStore();
+	const getPresignedUrl = async (filename: string): Promise<string> => {
+		let uploadUrl = '';
+		const store = new UpsertDocumentMetadataStore();
+		await store
+			.mutate({ input: { name: filename, investingEntityId, companyId, userId } })
+			.then((res) => {
+				console.log({ res });
+				uploadUrl = res?.data?.upsertDocumentMetadata?.uploadUrl;
+			});
 
-		await store.fetch({ variables: { collectionName: $page.data.user.id } }).then((res) => {
-			if (res?.data?.addDocumentToCollectionUrl) {
-				url = res?.data?.addDocumentToCollectionUrl;
-			}
-		});
-		return url;
+		return uploadUrl;
 	};
 
 	const readFile = (file: File) =>
@@ -47,10 +51,6 @@
 			reader.readAsArrayBuffer(file);
 		});
 
-	function handleInit() {
-		// console.log('FilePond has initialized');
-	}
-
 	const uploadFileToS3 = (url: string, data: ArrayBuffer | string | null) => {
 		if (!data) {
 			return Promise.resolve();
@@ -62,26 +62,60 @@
 		});
 	};
 
-	const handleAddFile = async (err, fileItem: object) => {
-		if (err) {
-			console.error(err);
+	// const handleAddFile = async (err: Error, fileItem: object) => {
+	// 	if (err) {
+	// 		throw new Error('FilePond error: ' + err.message);
+	// 	}
+
+	// 	console.log('File added', fileItem);
+	// 	const uploadUrl = await getPresignedUrl(fileItem.filename);
+	// 	console.log({ uploadUrl });
+	// 	const buffer = await readFile(fileItem.file);
+	// 	console.log({ buffer });
+	// 	await uploadFileToS3(uploadUrl, buffer).then((res) => {
+	// 		console.log('uploadFileToS3', { res });
+	// 	});
+	// };
+
+	const filepondServer = {
+		process(fieldName, file, metadata, load, error, progress, abort, transfer, options) {
+			console.log({ fieldName, file, metadata, load, error, progress, abort, transfer, options });
+			const init = async () => {
+				const uploadUrl = await getPresignedUrl(file.name);
+				console.log({ uploadUrl });
+				const buffer = await readFile(file);
+				console.log({ buffer });
+				await uploadFileToS3(uploadUrl, buffer).then((res) => {
+					console.log('uploadFileToS3', { res });
+					load(uploadUrl);
+				});
+			};
+
+			init();
+
+			// Should expose an abort method so the request can be cancelled
+			return {
+				abort: () => {
+					// This function is entered if the user has tapped the cancel button
+					request.abort();
+
+					// Let FilePond know the request has been cancelled
+					abort();
+				}
+			};
 		}
-		const url = await getPresignedUrl();
-		const buffer = await readFile(fileItem.file);
-		await uploadFileToS3(url, buffer).then((res) => {
-			// console.log({ res });
-			fileIsReady = true;
-		});
+		// fetch: async (url, load, error, progress, abort, headers) => {
+		// 	console.log('fetch', { url, load, error, progress, abort, headers });
+		// },
+		// load: (source, load, error, progress, abort, headers) => {
+		// 	console.log('source in load - ', source);
+		// }
 	};
 </script>
 
-<FilePond
-	server="/api"
-	allowMultiple={true}
-	oninit={handleInit}
-	onaddfile={handleAddFile}
-	credits={false}
-/>
+<FilePond server={filepondServer} allowMultiple={true} credits={false} />
+
+<!-- <FilePond bind:this={pond} server="/api/file-upload" allowMultiple={true} credits={false} /> -->
 
 <style lang="postcss">
 	:global(.dark .filepond--panel-root) {

@@ -9,5 +9,6 @@
  export { default as GetUsers} from './GetUsers'
  export { default as linkInvestingEntityToUser} from './linkInvestingEntityToUser'
  export { default as UpsertCompany} from './UpsertCompany'
+ export { default as UpsertDocumentMetadata} from './UpsertDocumentMetadata'
  export { default as UpsertInvestingEntity} from './UpsertInvestingEntity'
  export { default as UpsertUser} from './UpsertUser'

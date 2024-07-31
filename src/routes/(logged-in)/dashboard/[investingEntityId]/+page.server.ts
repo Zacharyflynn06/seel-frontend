@@ -13,7 +13,7 @@ export const load: PageLoad = async (event) => {
 	const store = new GetInvestingEntityStore();
 
 	const { data } = await store.fetch({ event, variables: { id: investingEntityId } });
-	console.log(data.getInvestingEntity.companies);
+	// console.log(data.getInvestingEntity.companies);
 	return {
 		investingEntity: data?.getInvestingEntity
 	};

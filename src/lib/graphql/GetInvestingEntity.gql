@@ -2,6 +2,11 @@ query GetInvestingEntity($id: ID!) {
 	getInvestingEntity(id: $id) {
 		address
 		companies {
+			documents {
+				name
+				downloadUrl
+				id
+			}
 			attributes {
 				field {
 					description

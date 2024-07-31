@@ -35,7 +35,7 @@
 </script>
 
 <Card heading="Submit-Deals">
-	<FileInput />
+	<!-- <FileInput /> -->
 
 	<form
 		on:submit|preventDefault={handleSubmit}

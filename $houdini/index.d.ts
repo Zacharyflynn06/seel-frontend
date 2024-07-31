@@ -8,6 +8,7 @@ export * from "./artifacts/GetUser";
 export * from "./artifacts/GetUsers";
 export * from "./artifacts/linkInvestingEntityToUser";
 export * from "./artifacts/UpsertCompany";
+export * from "./artifacts/UpsertDocumentMetadata";
 export * from "./artifacts/UpsertInvestingEntity";
 export * from "./artifacts/UpsertUser";
 export * from "./runtime";

@@ -2,10 +2,12 @@
 	import { enhance } from '$app/forms';
 	import SmallButton from '$lib/components/buttons/SmallButton.svelte';
 	import Card from '$lib/components/Card.svelte';
+	import FileInput from '$lib/components/formComponents/FileInput.svelte';
 	import TextInput from '$lib/components/formComponents/TextInput.svelte';
 	import type { PageData } from '../$types';
 
 	export let data: PageData;
+	$: console.log({ data });
 
 	$: ({ investingEntity } = data);
 
@@ -29,6 +31,11 @@
 						placeholder={attribute.field.description}
 						value={attribute.value.stringValue}
 					></TextInput> -->
+					<FileInput
+						companyId={company.id}
+						investingEntityId={investingEntity.id}
+						userId={data?.user?.id}
+					/>
 				{/each}
 			</div>
 		{/each}

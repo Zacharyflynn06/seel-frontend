@@ -1,20 +1,20 @@
 import type { Record } from "./public/record";
-import { GetInvestingEntities$result, GetInvestingEntities$input } from "../artifacts/GetInvestingEntities";
-import { GetInvestingEntitiesStore } from "../plugins/houdini-svelte/stores/GetInvestingEntities";
-import { GetCompany$result, GetCompany$input } from "../artifacts/GetCompany";
-import { GetCompanyStore } from "../plugins/houdini-svelte/stores/GetCompany";
-import { GetUsers$result, GetUsers$input } from "../artifacts/GetUsers";
-import { GetUsersStore } from "../plugins/houdini-svelte/stores/GetUsers";
 import { GetUser$result, GetUser$input } from "../artifacts/GetUser";
 import { GetUserStore } from "../plugins/houdini-svelte/stores/GetUser";
+import { GetUsers$result, GetUsers$input } from "../artifacts/GetUsers";
+import { GetUsersStore } from "../plugins/houdini-svelte/stores/GetUsers";
+import { GetInvestingEntities$result, GetInvestingEntities$input } from "../artifacts/GetInvestingEntities";
+import { GetInvestingEntitiesStore } from "../plugins/houdini-svelte/stores/GetInvestingEntities";
 import { GetInvestingEntity$result, GetInvestingEntity$input } from "../artifacts/GetInvestingEntity";
 import { GetInvestingEntityStore } from "../plugins/houdini-svelte/stores/GetInvestingEntity";
+import { AskSeel$result, AskSeel$input } from "../artifacts/AskSeel";
+import { AskSeelStore } from "../plugins/houdini-svelte/stores/AskSeel";
+import { GetCompany$result, GetCompany$input } from "../artifacts/GetCompany";
+import { GetCompanyStore } from "../plugins/houdini-svelte/stores/GetCompany";
 import { AskCollection$result, AskCollection$input } from "../artifacts/AskCollection";
 import { AskCollectionStore } from "../plugins/houdini-svelte/stores/AskCollection";
 import { AddDocumentToCollectionUrl$result, AddDocumentToCollectionUrl$input } from "../artifacts/AddDocumentToCollectionUrl";
 import { AddDocumentToCollectionUrlStore } from "../plugins/houdini-svelte/stores/AddDocumentToCollectionUrl";
-import { AskSeel$result, AskSeel$input } from "../artifacts/AskSeel";
-import { AskSeelStore } from "../plugins/houdini-svelte/stores/AskSeel";
 
 type CompanyAttributeIdInput = {
     companyId: string;
@@ -487,5 +487,5 @@ export declare type CacheTypeDef = {
         };
     };
     lists: {};
-    queries: [[AskSeelStore, AskSeel$result, AskSeel$input], [AddDocumentToCollectionUrlStore, AddDocumentToCollectionUrl$result, AddDocumentToCollectionUrl$input], [AskCollectionStore, AskCollection$result, AskCollection$input], [GetInvestingEntityStore, GetInvestingEntity$result, GetInvestingEntity$input], [GetUserStore, GetUser$result, GetUser$input], [GetUsersStore, GetUsers$result, GetUsers$input], [GetCompanyStore, GetCompany$result, GetCompany$input], [GetInvestingEntitiesStore, GetInvestingEntities$result, GetInvestingEntities$input]];
+    queries: [[AddDocumentToCollectionUrlStore, AddDocumentToCollectionUrl$result, AddDocumentToCollectionUrl$input], [AskCollectionStore, AskCollection$result, AskCollection$input], [GetCompanyStore, GetCompany$result, GetCompany$input], [AskSeelStore, AskSeel$result, AskSeel$input], [GetInvestingEntityStore, GetInvestingEntity$result, GetInvestingEntity$input], [GetInvestingEntitiesStore, GetInvestingEntities$result, GetInvestingEntities$input], [GetUsersStore, GetUsers$result, GetUsers$input], [GetUserStore, GetUser$result, GetUser$input]];
 };
