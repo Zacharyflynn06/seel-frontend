@@ -99,25 +99,20 @@ The `AWSURL` scalar type provided by AWS AppSync, represents a valid URL string 
 scalar AWSURL
 
 type Chat {
-  documentCollection: DocumentCollection!
-  history: [ChatMessage!]!
+  company: Company
+  description: String
+  documentCollection: DocumentCollection
   id: ID!
-  user: User!
-}
-
-type ChatMessage {
-  response: String
-  userMessage: String!
+  investingEntity: InvestingEntity
+  name: String!
+  user: User
 }
 
 """  A Company is just a collection of attributes"""
 type Company {
   attributes: [CompanyAttribute!]!
-
-  """  TODO"""
+  chats: [Chat!]!
   documentCollections: [DocumentCollection!]!
-
-  """  TODO"""
   documents: [DocumentMetadata!]!
   id: ID!
   investingEntity: InvestingEntity
@@ -140,6 +135,7 @@ input DeleteInvestmentCriterionInput {
 }
 
 type DocumentCollection {
+  chats: [Chat!]!
   company: Company
   description: String
   documents: [DocumentMetadata!]!
@@ -147,6 +143,11 @@ type DocumentCollection {
   investingEntity: InvestingEntity
   name: String!
   user: User
+}
+
+input DocumentCollectionAssociationIds {
+  documentCollectionId: ID!
+  documentMetadataId: ID!
 }
 
 """
@@ -157,6 +158,7 @@ type DocumentCollection {
 type DocumentMetadata {
   company: Company
   description: String
+  documentCollections: [DocumentCollection!]!
 
   """
     URL to download the body of this document. NULL if no document has
@@ -280,12 +282,9 @@ enum FieldValueType {
 
 type InvestingEntity {
   address: String!
+  chats: [Chat!]!
   companies: [Company!]!
-
-  """  TODO"""
   documentCollections: [DocumentCollection!]!
-
-  """  TODO"""
   documents: [DocumentMetadata!]!
   entityType: InvestingEntityType!
   id: ID!
@@ -336,8 +335,11 @@ input LinkInvestingEntityToUserInput {
 }
 
 type Mutation {
+  addDocumentToCollection(input: DocumentCollectionAssociationIds): DocumentCollection
+  deleteChat(id: ID!): Chat
   deleteCompany(id: ID!): Company
   deleteCompanyAttribute(input: CompanyAttributeIdInput!): CompanyAttribute
+  deleteDocumentCollection(id: ID!): DocumentCollection
   deleteDocumentMetadata(id: ID!): DocumentMetadata
   deleteField(id: ID!): Field
   deleteFieldType(id: ID!): FieldType
@@ -345,10 +347,14 @@ type Mutation {
   deleteInvestmentCriterion(input: DeleteInvestmentCriterionInput!): InvestmentCriterion
   deleteUser(id: ID!): User
   linkInvestingEntityToUser(input: LinkInvestingEntityToUserInput!): User
+  removeDocumentFromCollection(input: DocumentCollectionAssociationIds): DocumentCollection
+  sendMessageToChat(id: ID!, message: String): String
   unlinkInvestingEntityFromUser(input: UnlinkInvestingEntityFromUserInput!): User
+  upsertChat(input: UpsertChatInput): Chat!
   upsertCompany(input: UpsertCompanyInput!): Company!
   upsertCompanyAttribute(input: UpsertSingleCompanyAttributeInput!): CompanyAttribute!
-  upsertDocumentMetadata(input: UpsertDocumentMetadataInput): DocumentMetadata
+  upsertDocumentCollection(input: UpsertDocumentCollectionInput!): DocumentCollection!
+  upsertDocumentMetadata(input: UpsertDocumentMetadataInput!): DocumentMetadata
   upsertField(input: UpsertFieldInput!): Field!
   upsertFieldType(input: UpsertFieldTypeInput!): FieldType!
   upsertInvestingEntity(input: UpsertInvestingEntityInput!): InvestingEntity!
@@ -357,14 +363,15 @@ type Mutation {
 }
 
 type Query {
-  addDocumentToCollectionUrl(collectionName: String!): String!
   ask(question: String!): String!
-  askCollection(collectionName: String!, query: String!): String!
-  documentUploadUrl(clientLookupName: String!, userId: String!): String!
   getAllDocumentMetadata: [DocumentMetadata!]!
+  getChat(id: ID!): Chat
+  getChats: [Chat!]!
   getCompanies: [Company!]!
   getCompany(id: ID!): Company
   getCompanyAttribute(input: CompanyAttributeIdInput!): CompanyAttribute
+  getDocumentCollection(id: ID!): DocumentCollection
+  getDocumentCollections: [DocumentCollection!]!
   getField(id: ID!): Field
   getFieldType(id: ID!): FieldType
   getFieldTypes: [FieldType!]!
@@ -379,6 +386,16 @@ type Query {
 input UnlinkInvestingEntityFromUserInput {
   investingEntityId: ID!
   userId: ID!
+}
+
+input UpsertChatInput {
+  companyId: ID
+  description: String
+  documentCollectionId: ID
+  id: ID
+  investingEntityId: ID
+  name: String!
+  userId: ID
 }
 
 input UpsertCompanyAttributeInput {
@@ -400,6 +417,15 @@ input UpsertCompanyInput {
    associated with this investing entity
   """
   investingEntityId: ID
+}
+
+input UpsertDocumentCollectionInput {
+  companyId: ID
+  description: String
+  id: ID
+  investingEntityId: ID
+  name: String!
+  userId: ID
 }
 
 input UpsertDocumentMetadataInput {
@@ -476,10 +502,8 @@ input UpsertUserInput {
 ##############################################################################
 """
 type User {
-  """  TODO"""
+  chats: [Chat!]!
   documentCollections: [DocumentCollection!]!
-
-  """  TODO"""
   documents: [DocumentMetadata!]!
   email: String!
   id: String!

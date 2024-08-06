@@ -23,8 +23,4 @@
 	{:else}
 		<Card heading="Your Funds">Reach out to our admin team to get started</Card>
 	{/if}
-
-	<Card heading="Submit-Deals">
-		<FileInput />
-	</Card>
 </div>
