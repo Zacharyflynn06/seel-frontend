@@ -1,49 +1,70 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
+	import ConfirmDeleteButton from '$lib/components/buttons/ConfirmDeleteButton.svelte';
 	import SmallButton from '$lib/components/buttons/SmallButton.svelte';
 	import Card from '$lib/components/Card.svelte';
 	import FileInput from '$lib/components/formComponents/FileInput.svelte';
 	import TextInput from '$lib/components/formComponents/TextInput.svelte';
-	import type { PageData } from '../$types';
+	import { fly, slide } from 'svelte/transition';
+	import type { ActionData, PageData } from '../$types';
+	import toast from 'svelte-french-toast';
+	import ManageCompanyForm from './ManageCompanyForm.svelte';
 
 	export let data: PageData;
-	$: console.log({ data });
+	export let form: ActionData;
 
-	$: ({ investingEntity } = data);
+	let loading = false;
 
-	$: console.log('companies', investingEntity.companies);
-	function capitalizeFirstLetter(string: string) {
-		return string.charAt(0).toUpperCase() + string.slice(1);
+	$: console.log({ form });
+
+	$: investingEntity = data.investingEntity;
+
+	$: if (form?.success) {
+		console.log('success', form);
+		toast.success(form.message, { position: 'top-center' });
+	}
+
+	$: if (form?.error) {
+		toast.error('Invalid email or password', { position: 'bottom-center' });
 	}
 </script>
 
+<Card heading="Add a new company to {investingEntity?.name}" className="mb-5">
+	<form
+		use:enhance={() => {
+			loading = true;
+			return async ({ update }) => {
+				update();
+				loading = false;
+			};
+		}}
+		action="?/add_new_company"
+		method="POST"
+		class="space-y-5"
+	>
+		<TextInput label="Company Name" name="company_name" type="text" required></TextInput>
+		<input type="hidden" name="investingEntityId" value={investingEntity.id} />
+		<SmallButton type="submit" label="Add Company" {loading}></SmallButton>
+	</form>
+</Card>
+
 <Card heading="{investingEntity?.name}'s Companies">
 	{#if investingEntity}
-		{#each investingEntity.companies as company}
-			<div class="mb-5">
+		{#each investingEntity.companies as company (company.id)}
+			<div in:fly={{ y: 20 }} out:slide class="flex w-full space-y-5">
+				<!-- this is the roundabout way we are getting the company name for now -->
 				{#each company.attributes as attribute}
-					<div>Company: {attribute.value.stringValue}</div>
-
-					<!-- <TextInput
-						label={capitalizeFirstLetter(attribute.field.name)}
-						name={attribute.field.name}
-						type="text"
-						placeholder={attribute.field.description}
-						value={attribute.value.stringValue}
-					></TextInput> -->
-					<FileInput
-						companyId={company.id}
-						investingEntityId={investingEntity.id}
-						userId={data?.user?.id}
-					/>
+					<div class="flex w-full items-center justify-between">
+						<div class="flex text-lg">
+							Company: {attribute.value.stringValue}
+						</div>
+					</div>
 				{/each}
+
+				<ManageCompanyForm {company} />
 			</div>
+		{:else}
+			<p>No companies yet, add one above!</p>
 		{/each}
-		<h2>Add New Company</h2>
-		<form use:enhance action="?/add_new_company" method="POST" class="space-y-5">
-			<TextInput label="Company Name" name="company_name" type="text"></TextInput>
-			<input type="hidden" name="investingEntityId" value={investingEntity.id} />
-			<SmallButton type="submit">Submit</SmallButton>
-		</form>
 	{/if}
 </Card>

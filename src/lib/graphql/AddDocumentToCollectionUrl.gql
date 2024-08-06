@@ -1,3 +1,0 @@
-query AddDocumentToCollectionUrl($collectionName: String!) {
-	addDocumentToCollectionUrl(collectionName: $collectionName)
-}

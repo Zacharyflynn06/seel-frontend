@@ -1,3 +1,0 @@
-query AskCollection($collectionName: String!, $query: String!) {
-	askCollection(collectionName: $collectionName, query: $query)
-}

@@ -9,6 +9,9 @@ export default {
 				99: '99%'
 			},
 			colors: {
+				red: '#ff334a',
+				yellow: '#ffd12e',
+				green: '#10c660',
 				black: '#020202',
 				'off-white': '#fafafa',
 				'off-black': '#0a0a0a',

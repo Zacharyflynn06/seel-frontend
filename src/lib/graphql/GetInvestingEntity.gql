@@ -15,18 +15,6 @@ query GetInvestingEntity($id: ID!) {
 				}
 				value {
 					stringValue
-					booleanValue
-					dateValue
-					emailValue
-					floatValue
-					intValue
-					ipAddressValue
-					phoneValue
-					jsonValue
-					timeValue
-					timestampValue
-					urlValue
-					dateTimeValue
 				}
 			}
 			id

@@ -1,6 +1,5 @@
-export * from './AddDocumentToCollectionUrl'
-export * from './AskCollection'
 export * from './AskSeel'
+export * from './DeleteCompany'
 export * from './GetCompany'
 export * from './GetInvestingEntities'
 export * from './GetInvestingEntity'

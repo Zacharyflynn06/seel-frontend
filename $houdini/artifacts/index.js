@@ -1,7 +1,6 @@
 
- export { default as AddDocumentToCollectionUrl} from './AddDocumentToCollectionUrl'
- export { default as AskCollection} from './AskCollection'
  export { default as AskSeel} from './AskSeel'
+ export { default as DeleteCompany} from './DeleteCompany'
  export { default as GetCompany} from './GetCompany'
  export { default as GetInvestingEntities} from './GetInvestingEntities'
  export { default as GetInvestingEntity} from './GetInvestingEntity'

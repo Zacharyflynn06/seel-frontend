@@ -1,6 +1,5 @@
-export * from "./artifacts/AddDocumentToCollectionUrl";
-export * from "./artifacts/AskCollection";
 export * from "./artifacts/AskSeel";
+export * from "./artifacts/DeleteCompany";
 export * from "./artifacts/GetCompany";
 export * from "./artifacts/GetInvestingEntities";
 export * from "./artifacts/GetInvestingEntity";
