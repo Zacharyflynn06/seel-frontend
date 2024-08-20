@@ -1,9 +1,7 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
-	import ConfirmDeleteButton from '$lib/components/buttons/ConfirmDeleteButton.svelte';
 	import SmallButton from '$lib/components/buttons/SmallButton.svelte';
 	import Card from '$lib/components/Card.svelte';
-	import FileInput from '$lib/components/formComponents/FileInput.svelte';
 	import TextInput from '$lib/components/formComponents/TextInput.svelte';
 	import { fly, slide } from 'svelte/transition';
 	import type { ActionData, PageData } from '../$types';
@@ -14,8 +12,6 @@
 	export let form: ActionData;
 
 	let loading = false;
-
-	$: console.log({ form });
 
 	$: investingEntity = data.investingEntity;
 
@@ -54,11 +50,14 @@
 			<div in:fly={{ y: 20 }} out:slide class="flex w-full space-y-5">
 				<!-- this is the roundabout way we are getting the company name for now -->
 				{#each company.attributes as attribute}
-					<div class="flex w-full items-center justify-between">
+					<a
+						href="/dashboard/{investingEntity.id}/{company.id}"
+						class="flex w-full items-center justify-between"
+					>
 						<div class="flex text-lg">
 							Company: {attribute.value.stringValue}
 						</div>
-					</div>
+					</a>
 				{/each}
 
 				<ManageCompanyForm {company} />

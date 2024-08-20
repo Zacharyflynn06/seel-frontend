@@ -1,0 +1,12 @@
+query GetDocumentCollection($id: ID!) {
+	getDocumentCollection(id: $id) {
+		chats {
+			id
+		}
+		name
+		documents {
+			id
+			name
+		}
+	}
+}

@@ -1,6 +1,13 @@
 
 type ValuesOf<T> = T[keyof T]
 	
+export declare const ChatEventType: {
+    readonly ACKNOWLEDGE: "ACKNOWLEDGE";
+    readonly REPLY: "REPLY";
+}
+
+export type ChatEventType$options = ValuesOf<typeof ChatEventType>
+ 
 /**  ##############################################################################
                                     Fields                                   #
 ##############################################################################

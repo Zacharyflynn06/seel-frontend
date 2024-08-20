@@ -1,6 +1,8 @@
 <script lang="ts">
+	import { flexCenter } from '$lib/classes';
 	import Card from '$lib/components/Card.svelte';
 	import FileInput from '$lib/components/formComponents/FileInput.svelte';
+	import RectangleGroupIcon from '$lib/components/icons/RectangleGroupIcon.svelte';
 
 	import type { PageData } from './$types';
 
@@ -12,13 +14,14 @@
 <div class="flex w-full flex-col items-center justify-center space-y-5">
 	{#if user?.investingEntities?.length}
 		<Card heading="Your Funds">
-			{#each user.investingEntities as entity}
-				<div class="mb-5">
-					{#each Object.entries(entity) as [k, v]}
-						<a class="block" href="/dashboard/{entity.id}">{k}: {v}</a>
-					{/each}
-				</div>
-			{/each}
+			<div class="space-y-5">
+				{#each user.investingEntities as entity}
+					<a href="/dashboard/{entity.id}" class="flex items-center space-x-2">
+						<div class="h-10 w-10 rounded-full bg-pink {flexCenter}"><RectangleGroupIcon /></div>
+						<div class="block">{entity.name}</div>
+					</a>
+				{/each}
+			</div>
 		</Card>
 	{:else}
 		<Card heading="Your Funds">Reach out to our admin team to get started</Card>

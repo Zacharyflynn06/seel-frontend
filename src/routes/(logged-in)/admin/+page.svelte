@@ -13,8 +13,8 @@
 	$: entities = data.entities?.sort((a, b) => (a.name > b.name ? 1 : -1));
 </script>
 
-<div class="flex w-full space-x-5">
-	<div class="flex w-1/3 flex-col space-y-5">
+<div class="flex w-full flex-col space-y-5 lg:flex-row lg:space-x-5 lg:space-y-0">
+	<div class="flex w-full flex-col space-y-5 lg:w-1/3">
 		<Card heading="Add New Investing Entity">
 			<form class="space-y-5" use:enhance action="?/add_investing_entity" method="POST">
 				<TextInput name="name" label="Name" />
@@ -45,7 +45,7 @@
 		</Card>
 	</div>
 
-	<Card heading="Investing Entities" className="w-1/3">
+	<Card heading="Investing Entities" className="w-full lg:w-1/3">
 		<div>
 			{#each entities as entity}
 				{#if entity.name && entity.id}
@@ -68,7 +68,7 @@
 		</div>
 	</Card>
 
-	<Card heading="Users" className="w-1/3">
+	<Card heading="Users" className="w-full lg:w-1/3">
 		{#each users as user}
 			{#if user.email && user.id}
 				<dl class="divide-y divide-light-grey-01">

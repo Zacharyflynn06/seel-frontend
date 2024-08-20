@@ -7,12 +7,10 @@
 	import 'filepond/dist/filepond.min.css';
 	import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css';
 	import { UpsertDocumentMetadataStore } from '$houdini';
-	import { page } from '$app/stores';
-	import type { Object } from 'aws-sdk/clients/appflow';
 
 	export let companyId: string;
 	export let investingEntityId: string;
-	export let userId: string = '';
+	export let userId: string;
 
 	// Register the plugins
 	registerPlugin(
@@ -113,7 +111,7 @@
 	};
 </script>
 
-<FilePond server={filepondServer} allowMultiple={true} credits={false} />
+<FilePond server={filepondServer} allowMultiple={false} credits={false} />
 
 <!-- <FilePond bind:this={pond} server="/api/file-upload" allowMultiple={true} credits={false} /> -->
 

@@ -23,5 +23,10 @@ query GetCompany($id: ID!) {
 				dateTimeValue
 			}
 		}
+
+		documentCollections {
+			name
+			id
+		}
 	}
 }

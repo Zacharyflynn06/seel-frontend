@@ -108,6 +108,17 @@ type Chat {
   user: User
 }
 
+type ChatEvent {
+  chatId: ID!
+  eventType: ChatEventType!
+  text: String
+}
+
+enum ChatEventType {
+  ACKNOWLEDGE
+  REPLY
+}
+
 """  A Company is just a collection of attributes"""
 type Company {
   attributes: [CompanyAttribute!]!
@@ -347,12 +358,19 @@ type Mutation {
   deleteInvestmentCriterion(input: DeleteInvestmentCriterionInput!): InvestmentCriterion
   deleteUser(id: ID!): User
   linkInvestingEntityToUser(input: LinkInvestingEntityToUserInput!): User
+  postChatEvent(input: PostChatEventInput!): ChatEvent
   removeDocumentFromCollection(input: DocumentCollectionAssociationIds): DocumentCollection
   sendMessageToChat(id: ID!, message: String): String
   unlinkInvestingEntityFromUser(input: UnlinkInvestingEntityFromUserInput!): User
   upsertChat(input: UpsertChatInput): Chat!
   upsertCompany(input: UpsertCompanyInput!): Company!
   upsertCompanyAttribute(input: UpsertSingleCompanyAttributeInput!): CompanyAttribute!
+
+  """
+    Create or update a company by having the AI model extract
+   information from a set of documents.
+  """
+  upsertCompanyFromDocumentCollection(input: UpsertCompanyFromDocumentCollectionInput!): ID!
   upsertDocumentCollection(input: UpsertDocumentCollectionInput!): DocumentCollection!
   upsertDocumentMetadata(input: UpsertDocumentMetadataInput!): DocumentMetadata
   upsertField(input: UpsertFieldInput!): Field!
@@ -360,6 +378,13 @@ type Mutation {
   upsertInvestingEntity(input: UpsertInvestingEntityInput!): InvestingEntity!
   upsertInvestmentCriterion(input: UpsertInvestmentCriterionInput!): InvestmentCriterion!
   upsertUser(user: UpsertUserInput!): User!
+}
+
+"""  Internal, used by chat_handler to send events"""
+input PostChatEventInput {
+  chatId: ID!
+  eventType: ChatEventType!
+  text: String
 }
 
 type Query {
@@ -383,6 +408,10 @@ type Query {
   getUsers: [User!]!
 }
 
+type Subscription {
+  chatEvent(chatId: ID!): ChatEvent
+}
+
 input UnlinkInvestingEntityFromUserInput {
   investingEntityId: ID!
   userId: ID!
@@ -401,6 +430,41 @@ input UpsertChatInput {
 input UpsertCompanyAttributeInput {
   fieldId: ID!
   value: FieldValueInput!
+}
+
+"""
+  Create or update a company by having the AI Model extract
+ information from a document collection
+"""
+input UpsertCompanyFromDocumentCollectionInput {
+  """
+    The ID of a company to update. If not provided, then a new company
+   will be created.
+  """
+  companyId: ID
+
+  """  The document collection to send to the model"""
+  documentCollectionId: ID!
+
+  """
+    If an investingEntityId is not provided, the model will be sent
+   this list of fields to search for instead.
+  """
+  fieldIds: [ID!]
+
+  """
+    If provided, the model will look for fields based on the
+   investment criteria for this investing entity and will associate
+   the resulting company with it. This takes precedence over the
+   fieldIds option.
+  """
+  investingEntityId: ID
+
+  """
+    If true, then any existing field values that are not re-confirmed
+   by the model will be deleted. Defaults to false.
+  """
+  removeExtraFields: Boolean
 }
 
 input UpsertCompanyInput {
