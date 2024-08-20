@@ -1,4 +1,4 @@
-<script lang="ts">
+<!-- <script lang="ts">
 	import { page } from '$app/stores';
 	import { AskCollectionStore } from '$houdini';
 	import Card from '$lib/components/Card.svelte';
@@ -35,7 +35,6 @@
 </script>
 
 <Card heading="Submit-Deals">
-	<!-- <FileInput /> -->
 
 	<form
 		on:submit|preventDefault={handleSubmit}
@@ -69,4 +68,4 @@
 			{/if}
 		</div>
 	</form>
-</Card>
+</Card> -->
