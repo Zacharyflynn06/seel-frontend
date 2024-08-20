@@ -8,6 +8,7 @@ declare global {
 				isAuthenticated: boolean;
 				email: string;
 				id: string;
+				investingEntities: InvestingEntity[];
 			};
 		}
 		// interface PageData {}

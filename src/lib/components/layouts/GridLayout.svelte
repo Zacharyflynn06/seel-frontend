@@ -3,7 +3,7 @@
 </script>
 
 <div
-	class="{columnSpacingClass} grid h-[calc(100dvh-72px)] space-y-5 px-5 pb-[120px] pt-5 dark:bg-black md:max-h-full md:space-x-5 md:space-y-0 md:pb-5"
+	class="{columnSpacingClass} grid h-[calc(100dvh-72px)] w-full space-y-5 px-5 pb-[120px] pt-5 dark:bg-black md:max-h-full md:space-x-5 md:space-y-0 md:pb-5"
 >
 	<slot />
 </div>

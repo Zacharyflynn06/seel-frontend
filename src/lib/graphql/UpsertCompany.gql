@@ -1,20 +1,5 @@
-mutation UpsertCompany($company: UpsertCompanyInput!) {
-	upsertCompany(company: $company) {
-		any_additional_founders
-		burn_rate
-		category
-		company_name
-		competitors
-		differentiation_from_competitors
-		full_time
-		funding_round
+mutation UpsertCompany($input: UpsertCompanyInput!) {
+	upsertCompany(input: $input) {
 		id
-		is_us_based
-		is_saas
-		location
-		next_steps
-		source
-		university
-		women_founded_or_owned
 	}
 }

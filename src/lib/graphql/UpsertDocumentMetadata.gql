@@ -1,0 +1,9 @@
+mutation UpsertDocumentMetadata($input: UpsertDocumentMetadataInput!) {
+	upsertDocumentMetadata(input: $input) {
+		id
+		uploadUrl
+		downloadUrl
+		mimeType
+		name
+	}
+}

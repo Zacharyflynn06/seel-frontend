@@ -7,9 +7,17 @@ export type Result<DataType> = {
 	data?: DataType | null
 	error?: Error | null
 }
-export * from './AddDocumentToCollectionUrl'
-export * from './AskCollection'
 export * from './AskSeel'
+export * from './DeleteCompany'
+export * from './GetCompany'
+export * from './GetDocumentCollection'
+export * from './GetInvestingEntities'
+export * from './GetInvestingEntity'
 export * from './GetUser'
+export * from './GetUsers'
+export * from './linkInvestingEntityToUser'
 export * from './UpsertCompany'
+export * from './UpsertDocumentCollection'
+export * from './UpsertDocumentMetadata'
+export * from './UpsertInvestingEntity'
 export * from './UpsertUser'

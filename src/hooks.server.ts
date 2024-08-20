@@ -15,17 +15,20 @@ async function authorize({ resolve, event }) {
 	// console.log({ cookieId });
 	const userStore = new GetUserStore();
 
-	await userStore.fetch({ event, variables: { id: cookieId } }).then((res) => {
-		// console.log({ res });
-		const userResponse = res.data?.getUser;
+	const req = await userStore.fetch({ event, variables: { id: cookieId } });
+	const res = req.data.getUser;
+	if (res) {
 		currentUser = {
 			isAuthenticated: true,
-			email: userResponse?.email,
-			id: userResponse?.id
+			email: res.email,
+			id: res.id,
+			investingEntities: res.investingEntities
 		};
+		console.log(res);
 		event.locals.user = currentUser;
 		setSession(event, { currentUser });
-	});
+		return resolve(event);
+	}
 
 	return resolve(event);
 }

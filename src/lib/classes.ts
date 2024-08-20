@@ -28,7 +28,7 @@ export const textInputClasses =
 	'w-full dark:placeholder:text-off-white mt-1 block w-full  dark:text-off-white  ';
 
 export const inputLabelClasses = 'block';
-export const selectBoxClasses = inputResetClasses + inputBorderClasses + ` py-1   `;
+export const selectBoxClasses = inputResetClasses + inputBorderClasses + ` py-1   max-w-fit`;
 
 export const cardHeadingClasses =
 	'font-spartan text-2xl font-bold text-black dark:text-off-white leading-none';

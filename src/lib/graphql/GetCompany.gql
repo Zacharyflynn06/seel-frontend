@@ -1,0 +1,32 @@
+query GetCompany($id: ID!) {
+	getCompany(id: $id) {
+		id
+		attributes {
+			field {
+				description
+				id
+				name
+			}
+			value {
+				stringValue
+				booleanValue
+				dateValue
+				emailValue
+				floatValue
+				intValue
+				ipAddressValue
+				phoneValue
+				jsonValue
+				timeValue
+				timestampValue
+				urlValue
+				dateTimeValue
+			}
+		}
+
+		documentCollections {
+			name
+			id
+		}
+	}
+}

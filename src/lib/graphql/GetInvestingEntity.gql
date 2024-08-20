@@ -1,0 +1,30 @@
+query GetInvestingEntity($id: ID!) {
+	getInvestingEntity(id: $id) {
+		address
+		companies {
+			documents {
+				name
+				downloadUrl
+				id
+			}
+			attributes {
+				field {
+					description
+					id
+					name
+				}
+				value {
+					stringValue
+				}
+			}
+			id
+		}
+		entityType
+		name
+		strategy
+		investmentCriteria {
+			required
+		}
+		id
+	}
+}

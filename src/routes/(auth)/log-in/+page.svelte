@@ -1,12 +1,24 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
+	import { goto } from '$app/navigation';
 	import { anchorTagClasses } from '$lib/classes';
 	import SmallButton from '$lib/components/buttons/SmallButton.svelte';
 	import TextInput from '$lib/components/formComponents/TextInput.svelte';
+	import toast from 'svelte-french-toast';
+	import type { ActionData } from './$types';
 
-	export let form: { error: string; success: boolean } | undefined;
+	export let form: ActionData;
 
 	let loading = false;
+
+	$: if (form?.success) {
+		toast.success('Logged in successfully', { position: 'bottom-center' });
+		goto('/dashboard');
+	}
+
+	$: if (form?.error) {
+		toast.error('Invalid email or password', { position: 'bottom-center' });
+	}
 </script>
 
 <form
@@ -24,9 +36,6 @@
 	<h1>Log in</h1>
 	<label for="email-address" class="sr-only">Email </label>
 
-	{#if form?.error}
-		<p class="text-red-500">{form.error}</p>
-	{/if}
 	<TextInput
 		required
 		type="email"

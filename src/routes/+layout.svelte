@@ -2,6 +2,7 @@
 	import '../app.css';
 	import { onMount } from 'svelte';
 	import { themeStore } from '$lib/stores/themeStore';
+	import { Toaster } from 'svelte-french-toast';
 
 	onMount(() => {
 		// this listens for the system to change dark mode preference
@@ -19,5 +20,7 @@
 	});
 	// $: console.log(`pathname is "${$page.url.pathname}", data is:`, data);
 </script>
+
+<Toaster />
 
 <slot />
