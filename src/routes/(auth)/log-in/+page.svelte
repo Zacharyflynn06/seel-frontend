@@ -6,18 +6,19 @@
 	import TextInput from '$lib/components/formComponents/TextInput.svelte';
 	import toast from 'svelte-french-toast';
 	import type { ActionData } from './$types';
+	import { page } from '$app/stores';
 
 	export let form: ActionData;
 
 	let loading = false;
 
 	$: if (form?.success) {
-		toast.success('Logged in successfully', { position: 'bottom-center' });
+		toast.success('Logged in successfully', { position: 'top-center' });
 		goto('/dashboard');
 	}
 
 	$: if (form?.error) {
-		toast.error('Invalid email or password', { position: 'bottom-center' });
+		toast.error('Invalid email or password', { position: 'top-center' });
 	}
 </script>
 

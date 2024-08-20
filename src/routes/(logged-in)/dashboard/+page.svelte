@@ -14,10 +14,14 @@
 <div class="flex w-full flex-col items-center justify-center space-y-5">
 	{#if user?.investingEntities?.length}
 		<Card heading="Your Funds">
-			<div class="space-y-5">
+			<div class="divide-y">
 				{#each user.investingEntities as entity}
-					<a href="/dashboard/{entity.id}" class="flex items-center space-x-2">
-						<div class="h-10 w-10 rounded-full bg-pink {flexCenter}"><RectangleGroupIcon /></div>
+					<a href="/dashboard/{entity.id}" class="flex items-center space-x-2 py-5">
+						<div
+							class="h-10 w-10 rounded-full bg-pink hover:scale-105 hover:duration-300 {flexCenter}"
+						>
+							<RectangleGroupIcon />
+						</div>
 						<div class="block">{entity.name}</div>
 					</a>
 				{/each}

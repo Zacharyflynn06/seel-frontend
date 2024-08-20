@@ -7,6 +7,8 @@
 	import type { ActionData, PageData } from '../$types';
 	import toast from 'svelte-french-toast';
 	import ManageCompanyForm from './ManageCompanyForm.svelte';
+	import RectangleGroupIcon from '$lib/components/icons/RectangleGroupIcon.svelte';
+	import { flexCenter } from '$lib/classes';
 
 	export let data: PageData;
 	export let form: ActionData;
@@ -46,24 +48,33 @@
 
 <Card heading="{investingEntity?.name}'s Companies">
 	{#if investingEntity}
-		{#each investingEntity.companies as company (company.id)}
-			<div in:fly={{ y: 20 }} out:slide class="flex w-full space-y-5">
-				<!-- this is the roundabout way we are getting the company name for now -->
-				{#each company.attributes as attribute}
-					<a
-						href="/dashboard/{investingEntity.id}/{company.id}"
-						class="flex w-full items-center justify-between"
-					>
-						<div class="flex text-lg">
-							Company: {attribute.value.stringValue}
-						</div>
-					</a>
-				{/each}
+		<div class="divide-y">
+			{#each investingEntity.companies as company (company.id)}
+				<div in:fly={{ y: 20 }} out:slide class="flex w-full py-5">
+					<!-- this is the roundabout way we are getting the company name for now -->
+					{#each company.attributes as attribute}
+						<a
+							href="/dashboard/{investingEntity.id}/{company.id}"
+							class="flex w-full items-center justify-between"
+						>
+							<div class="flex items-center space-x-5 text-lg">
+								<div
+									class="h-10 w-10 rounded-full bg-pink hover:scale-105 hover:duration-300 {flexCenter}"
+								>
+									<RectangleGroupIcon />
+								</div>
+								<div>
+									{attribute.value.stringValue}
+								</div>
+							</div>
+						</a>
+					{/each}
 
-				<ManageCompanyForm {company} />
-			</div>
-		{:else}
-			<p>No companies yet, add one above!</p>
-		{/each}
+					<ManageCompanyForm {company} />
+				</div>
+			{:else}
+				<p>No companies yet, add one above!</p>
+			{/each}
+		</div>
 	{/if}
 </Card>

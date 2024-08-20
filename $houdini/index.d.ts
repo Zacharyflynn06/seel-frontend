@@ -1,3 +1,4 @@
+export * from "./artifacts/AddDocumentToCollection";
 export * from "./artifacts/AskSeel";
 export * from "./artifacts/DeleteCompany";
 export * from "./artifacts/GetCompany";

@@ -7,6 +7,8 @@
 	import type { PageData } from './$types';
 	import ManageDocumentCollectionForm from './ManageDocumentCollectionForm.svelte';
 	import type { ActionData } from '../$types';
+	import RectangleGroupIcon from '$lib/components/icons/RectangleGroupIcon.svelte';
+	import { flexCenter } from '$lib/classes';
 	export let data: PageData;
 	export let form: ActionData;
 	// your script goes here
@@ -44,24 +46,31 @@
 	</Card>
 
 	<Card heading="{company?.attributes[0].value.stringValue}'s Document Collections">
-		{#each company.documentCollections as documentCollection}
-			<div in:fly={{ y: 20 }} out:slide class="flex w-full space-y-5">
-				<!-- this is the roundabout way we are getting the company name for now -->
-				{#each company.attributes as attribute}
+		<div class="divide-y">
+			{#each company.documentCollections as documentCollection}
+				<div in:fly={{ y: 20 }} out:slide class="flex w-full py-5">
+					<!-- this is the roundabout way we are getting the company name for now -->
 					<a
 						href="/dashboard/{investingEntityId}/{company.id}/{documentCollection.id}"
 						class="flex w-full items-center justify-between"
 					>
-						<div class="flex text-lg">
-							Collection: {attribute.value.stringValue}
+						<div class="flex items-center space-x-5 text-lg">
+							<div
+								class="h-10 w-10 rounded-full bg-pink hover:scale-105 hover:duration-300 {flexCenter}"
+							>
+								<RectangleGroupIcon />
+							</div>
+							<div>
+								{documentCollection.name}
+							</div>
 						</div>
 					</a>
-				{/each}
 
-				<ManageDocumentCollectionForm {documentCollection} />
-			</div>
-		{:else}
-			<p>No document collections added yet, add one above!</p>
-		{/each}
+					<ManageDocumentCollectionForm {documentCollection} />
+				</div>
+			{:else}
+				<p>No document collections added yet, add one above!</p>
+			{/each}
+		</div>
 	</Card>
 {/if}

@@ -1,4 +1,4 @@
-import { GetDocumentCollectionStore } from '$houdini';
+import { AddDocumentToCollectionStore, GetDocumentCollectionStore } from '$houdini';
 import type { Actions } from '@sveltejs/kit';
 import type { PageLoad } from './$types';
 
@@ -25,34 +25,29 @@ export const load: PageLoad = async (event) => {
 	};
 };
 
-// export const actions: Actions = {
-// 	add_new_company: async (event) => {
-// 		const data = await event.request.formData();
+export const actions: Actions = {
+	save_document_to_collection: async (event) => {
+		const data = await event.request.formData();
 
-// 		const name = data.get('documentCollectionName')?.toString();
-// 		const investingEntityId = data.get('investingEntityId')?.toString();
-// 		const companyId = data.get('companyId')?.toString();
-// 		const userId = event.locals.user.id;
-// 		const store = new UpsertDocumentCollectionStore();
+		const documentCollectionId = data.get('documentCollectionId')?.toString();
 
-// 		const input = {
-// 			name: name,
-// 			investingEntityId: investingEntityId,
-// 			companyId: companyId,
-// 			userId: userId
-// 		};
+		const input = {
+			documentCollectionId: documentCollectionId
+		};
 
-// 		try {
-// 			await store.mutate({ input }, { event }).then((res) => {
-// 				console.log('yes', { res });
-// 			});
+		const store = new AddDocumentToCollectionStore();
 
-// 			return {
-// 				success: true,
-// 				message: 'Successfully added new company'
-// 			};
-// 		} catch (error) {
-// 			console.log((error as Error).message);
-// 		}
-// 	}
-// };
+		try {
+			await store.mutate({ input }, { event }).then((res) => {
+				console.log({ res });
+			});
+
+			return {
+				success: true,
+				message: 'Successfully saved document to collection'
+			};
+		} catch (error) {
+			console.log((error as Error).message);
+		}
+	}
+};

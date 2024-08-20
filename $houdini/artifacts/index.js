@@ -1,4 +1,5 @@
 
+ export { default as AddDocumentToCollection} from './AddDocumentToCollection'
  export { default as AskSeel} from './AskSeel'
  export { default as DeleteCompany} from './DeleteCompany'
  export { default as GetCompany} from './GetCompany'

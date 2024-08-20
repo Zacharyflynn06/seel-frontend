@@ -7,6 +7,7 @@ export type Result<DataType> = {
 	data?: DataType | null
 	error?: Error | null
 }
+export * from './AddDocumentToCollection'
 export * from './AskSeel'
 export * from './DeleteCompany'
 export * from './GetCompany'

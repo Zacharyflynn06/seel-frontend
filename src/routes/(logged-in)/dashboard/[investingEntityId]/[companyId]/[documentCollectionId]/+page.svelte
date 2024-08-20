@@ -13,6 +13,7 @@
 	// your script goes here
 
 	let loading = false;
+	let documentMetadataId = '';
 
 	console.log({ data });
 	$: userId = data.user.id;
@@ -24,6 +25,13 @@
 
 {#if documentCollection}
 	<Card heading="Add a new file to {documentCollection?.name}" className="mb-5">
+		<FileInput
+			{userId}
+			{investingEntityId}
+			{companyId}
+			bind:upsertDocumentMetadataId={documentMetadataId}
+		></FileInput>
+		<!-- content here -->
 		<form
 			use:enhance={() => {
 				loading = true;
@@ -36,10 +44,14 @@
 			method="POST"
 			class="space-y-5"
 		>
-			<FileInput {userId} {investingEntityId} {companyId}></FileInput>
-			<!-- <input type="hidden" name="investingEntityId" value={investingEntityId} />
-			<input type="hidden" name="companyId" value={companyId} />
-			<SmallButton type="submit" label="Add Company" {loading}></SmallButton> -->
+			<input type="hidden" name="documentMetadataId" value={documentCollection.id} />
+			<input type="hidden" name="companyId" value={documentMetadataId} />
+			<SmallButton
+				type="submit"
+				disabled={!documentMetadataId}
+				label="Save Document to Collection"
+				{loading}
+			></SmallButton>
 		</form>
 	</Card>
 
@@ -48,15 +60,13 @@
 			<div in:fly={{ y: 20 }} out:slide class="flex w-full space-y-5">
 				<!-- this is the roundabout way we are getting the company name for now -->
 				<a
-					href="/dashboard/{investingEntityId}/{company.id}/{documentCollection.id}"
+					href="/dashboard/{investingEntityId}/{companyId}/{documentCollection.id}"
 					class="flex w-full items-center justify-between"
 				>
 					<div class="flex text-lg">
 						Document: {document.name}
 					</div>
 				</a>
-
-				<!-- <ManageDocumentCollectionForm {documentCollection} /> -->
 			</div>
 		{:else}
 			<p>No documents added yet, add one above!</p>
