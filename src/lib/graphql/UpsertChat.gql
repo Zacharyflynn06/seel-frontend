@@ -1,0 +1,5 @@
+mutation UpsertChat($input: UpsertChatInput!) {
+	upsertChat(input: $input) {
+		id
+	}
+}

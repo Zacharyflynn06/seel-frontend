@@ -27,7 +27,7 @@
 	}
 </script>
 
-<Card heading="Add a new company to {investingEntity?.name}" className="mb-5">
+<Card heading="Add a new investment to {investingEntity?.name}" className="mb-5">
 	<form
 		use:enhance={() => {
 			loading = true;
@@ -40,13 +40,13 @@
 		method="POST"
 		class="space-y-5"
 	>
-		<TextInput label="Company Name" name="company_name" type="text" required></TextInput>
+		<TextInput label="Investment Name" name="company_name" type="text" required></TextInput>
 		<input type="hidden" name="investingEntityId" value={investingEntity.id} />
-		<SmallButton type="submit" label="Add Company" {loading}></SmallButton>
+		<SmallButton type="submit" label="Add Investment" {loading}></SmallButton>
 	</form>
 </Card>
 
-<Card heading="{investingEntity?.name}'s Companies">
+<Card heading="{investingEntity?.name}'s Investments">
 	{#if investingEntity}
 		<div class="divide-y">
 			{#each investingEntity.companies as company (company.id)}

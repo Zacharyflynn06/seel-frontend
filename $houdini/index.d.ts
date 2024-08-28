@@ -1,5 +1,6 @@
 export * from "./artifacts/AddDocumentToCollection";
 export * from "./artifacts/AskSeel";
+export * from "./artifacts/ChatEvent";
 export * from "./artifacts/DeleteCompany";
 export * from "./artifacts/GetCompany";
 export * from "./artifacts/GetDocumentCollection";
@@ -8,6 +9,7 @@ export * from "./artifacts/GetInvestingEntity";
 export * from "./artifacts/GetUser";
 export * from "./artifacts/GetUsers";
 export * from "./artifacts/linkInvestingEntityToUser";
+export * from "./artifacts/UpsertChat";
 export * from "./artifacts/UpsertCompany";
 export * from "./artifacts/UpsertDocumentCollection";
 export * from "./artifacts/UpsertDocumentMetadata";

@@ -12,16 +12,16 @@
 			icon: CheckIcon
 		},
 
-		// {
-		// 	name: 'submit Deals',
-		// 	href: '/submit-deals',
-		// 	icon: RocketIcon
-		// },
+		{
+			name: 'My Investments',
+			href: '/submit-deals',
+			icon: RocketIcon
+		},
 
 		{
 			name: 'Admin console',
 			href: '/admin',
-			icon: RocketIcon
+			icon: RectangleGroupIcon
 		}
 		// {
 		// 	name: 'Pipeline',
