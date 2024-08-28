@@ -5,7 +5,6 @@ import {
 	UpsertInvestingEntityStore,
 	type InvestingEntityType$options,
 	type LinkInvestingEntityToUserInput,
-	type UpsertInvestingEntity$input,
 	type UpsertInvestingEntityInput
 } from '$houdini';
 import type { Actions } from '@sveltejs/kit';
@@ -27,10 +26,10 @@ export const actions: Actions = {
 		const store = new UpsertInvestingEntityStore();
 
 		const input: UpsertInvestingEntityInput = {
-			name: data.get('name')?.toString(),
-			address: data.get('address')?.toString(),
+			name: data.get('name')?.toString() as InvestingEntityType$options,
+			address: data.get('address')?.toString() as InvestingEntityType$options,
 			entityType: data.get('entityType')?.toString() as InvestingEntityType$options,
-			strategy: data.get('strategy')?.toString()
+			strategy: data.get('strategy')?.toString() as InvestingEntityType$options
 		};
 
 		return await store.mutate({ input }, { event });

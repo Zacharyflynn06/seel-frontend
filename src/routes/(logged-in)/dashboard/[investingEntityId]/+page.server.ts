@@ -2,8 +2,10 @@ import {
 	DeleteCompanyStore,
 	GetInvestingEntityStore,
 	UpsertCompanyStore,
+	UpsertFieldStore,
 	type UpsertCompanyAttributeInput,
-	type UpsertCompanyInput
+	type UpsertCompanyInput,
+	type UpsertFieldInput
 } from '$houdini';
 import type { Actions } from '@sveltejs/kit';
 import type { PageLoad } from '../$types';
