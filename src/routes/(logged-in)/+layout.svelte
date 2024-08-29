@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { mainPanelWidth } from '$lib/classes';
 	import Header from '$lib/components/Header.svelte';
+	import Breadcrumb from '$lib/components/nav/Breadcrumb.svelte';
 	import NavBar from '$lib/components/nav/NavBar.svelte';
 </script>
 

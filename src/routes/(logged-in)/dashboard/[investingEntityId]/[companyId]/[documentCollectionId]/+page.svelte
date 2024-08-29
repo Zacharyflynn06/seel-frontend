@@ -2,64 +2,149 @@
 	import { enhance } from '$app/forms';
 	import SmallButton from '$lib/components/buttons/SmallButton.svelte';
 	import Card from '$lib/components/Card.svelte';
-	import TextInput from '$lib/components/formComponents/TextInput.svelte';
 	import { fly, slide } from 'svelte/transition';
 	import type { PageData } from './$types';
 	import type { ActionData } from '../$types';
 	import FileInput from '$lib/components/formComponents/FileInput.svelte';
-	import { page } from '$app/stores';
+	import TextInput from '$lib/components/formComponents/TextInput.svelte';
+	import ArrowIcon from '$lib/components/icons/ArrowIcon.svelte';
+	import Spinner from '$lib/components/Spinner.svelte';
+	import toast from 'svelte-french-toast';
+	import { ChatEventStore, SendMessageToChatStore } from '$houdini';
+	import LineItem from '$lib/components/LineItem.svelte';
+
 	export let data: PageData;
 	export let form: ActionData;
 	// your script goes here
 
 	let loading = false;
+	let chatLoading = false;
 
-	console.log({ data });
+	let documentMetadataId = '';
+	let userInput = '';
+
+	let chatId = '';
+
+	let subscription = new ChatEventStore();
+	let messageStore = new SendMessageToChatStore();
+
+	const handleSendMessage = async (event) => {
+		const res = await messageStore.mutate({ id: chatId, message: userInput });
+		console.log({ res });
+		const message = await res.data?.sendMessageToChat;
+
+		console.log({ message });
+	};
+
 	$: userId = data.user.id;
-
 	$: investingEntityId = data.investingEntityId;
 	$: companyId = data.companyId;
 	$: documentCollection = data.documentCollection;
+
+	$: if (form?.success) {
+		chatId = form.chatId;
+		subscription.listen({ chatId: chatId });
+	}
+
+	$: if (form?.error) {
+		toast.error('Something went wrong', { position: 'bottom-center' });
+	}
+
+	$: console.log({ $subscription });
 </script>
 
 {#if documentCollection}
-	<Card heading="Add a new file to {documentCollection?.name}" className="mb-5">
-		<form
-			use:enhance={() => {
-				loading = true;
-				return async ({ update }) => {
-					update();
-					loading = false;
-				};
-			}}
-			action="?/add_new_document"
-			method="POST"
-			class="space-y-5"
-		>
-			<FileInput {userId} {investingEntityId} {companyId}></FileInput>
-			<!-- <input type="hidden" name="investingEntityId" value={investingEntityId} />
-			<input type="hidden" name="companyId" value={companyId} />
-			<SmallButton type="submit" label="Add Company" {loading}></SmallButton> -->
-		</form>
-	</Card>
+	<div class="space-y-5">
+		<Card heading="Add a new file to {documentCollection?.name}" className="mb-5">
+			<FileInput
+				{userId}
+				{investingEntityId}
+				{companyId}
+				bind:upsertDocumentMetadataId={documentMetadataId}
+			></FileInput>
+			<form
+				use:enhance={() => {
+					loading = true;
+					return async ({ update }) => {
+						update();
+						loading = false;
+					};
+				}}
+				action="?/save_document_to_collection"
+				method="POST"
+				class="space-y-5"
+			>
+				<input type="hidden" name="documentCollectionId" value={documentCollection.id} />
+				<input type="hidden" name="documentMetadataId" value={documentMetadataId} />
+				<SmallButton
+					type="submit"
+					disabled={!documentMetadataId}
+					label="Save Document to Collection"
+					{loading}
+				></SmallButton>
+			</form>
+		</Card>
 
-	<Card heading="{documentCollection?.name}'s Document Collections">
-		{#each documentCollection.documents as document}
-			<div in:fly={{ y: 20 }} out:slide class="flex w-full space-y-5">
-				<!-- this is the roundabout way we are getting the company name for now -->
-				<a
-					href="/dashboard/{investingEntityId}/{company.id}/{documentCollection.id}"
-					class="flex w-full items-center justify-between"
-				>
-					<div class="flex text-lg">
-						Document: {document.name}
+		<Card heading="{documentCollection?.name}'s Documents">
+			<div class="space-y-5">
+				{#each documentCollection.documents as document}
+					<!-- this is the roundabout way we are getting the company name for now -->
+					<div in:fly={{ y: 20 }} out:slide class="flex w-full divide-y">
+						<a
+							href="/dashboard/{investingEntityId}/{companyId}/{documentCollection.id}"
+							class="flex w-full items-center justify-between"
+						>
+							<LineItem>
+								Document: {document.name}
+							</LineItem>
+						</a>
 					</div>
-				</a>
-
-				<!-- <ManageDocumentCollectionForm {documentCollection} /> -->
+				{:else}
+					<p>No documents added yet, add one above!</p>
+				{/each}
 			</div>
-		{:else}
-			<p>No documents added yet, add one above!</p>
-		{/each}
-	</Card>
+		</Card>
+
+		<Card heading="Chat with {documentCollection?.name}">
+			{#if !chatId}
+				<!-- content here -->
+				<form
+					use:enhance={() => {
+						chatLoading = true;
+						return async ({ update }) => {
+							update();
+							chatLoading = false;
+						};
+					}}
+					action="?/start_chat"
+					method="POST"
+				>
+					<input type="hidden" name="documentCollectionId" value={documentCollection.id} />
+					<input type="hidden" name="companyId" value={companyId} />
+					<input type="hidden" name="userId" value={userId} />
+					<input type="hidden" name="investingEntityId" value={investingEntityId} />
+					<SmallButton type="submit" label="Start Chat" loading={chatLoading}></SmallButton>
+				</form>
+			{:else}
+				<TextInput
+					bind:value={userInput}
+					placeholder="Ask me about the documents in this collection"
+					name="user_input"
+				>
+					<button
+						on:click={handleSendMessage}
+						class=" {userInput && userInput.length > 4
+							? 'text-purple dark:text-pink'
+							: 'text-grey-08 dark:text-white/50'}"
+					>
+						{#if !chatLoading}
+							<ArrowIcon className="h-6 w-6 " />
+						{:else}
+							<Spinner className="h-6 w-6 " />
+						{/if}
+					</button>
+				</TextInput>
+			{/if}
+		</Card>
+	</div>
 {/if}

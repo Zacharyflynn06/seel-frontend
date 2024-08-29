@@ -47,7 +47,7 @@
 		<a href="/log-in" class="{anchorTagClasses} text-xs">Already have an account?</a>
 
 		{#if form?.error}
-			<p class="text-red-500">{form.error}</p>
+			<p class="text-red">{form.error}</p>
 		{/if}
 
 		<div class="flex justify-end">
@@ -67,7 +67,7 @@
 		action="?/verifyEmail"
 		method="POST"
 	>
-		<h1>Enter Verification Code</h1>
+		<h1>Enter the verification code sent to your email</h1>
 		<input name="email-address" value={form?.email} hidden />
 		<input type="text" name="password" value={form?.password} hidden />
 		<TextInput type="text" name="code" label="Enter Verification Code" placeholder="" required />

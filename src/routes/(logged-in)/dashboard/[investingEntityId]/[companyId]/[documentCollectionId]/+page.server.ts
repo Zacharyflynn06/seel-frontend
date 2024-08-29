@@ -1,4 +1,8 @@
-import { GetDocumentCollectionStore } from '$houdini';
+import {
+	AddDocumentToCollectionStore,
+	GetDocumentCollectionStore,
+	UpsertChatStore
+} from '$houdini';
 import type { Actions } from '@sveltejs/kit';
 import type { PageLoad } from './$types';
 
@@ -16,7 +20,7 @@ export const load: PageLoad = async (event) => {
 		}
 	});
 
-	console.log(data);
+	// console.log(data);
 
 	return {
 		documentCollection: data?.getDocumentCollection,
@@ -25,34 +29,81 @@ export const load: PageLoad = async (event) => {
 	};
 };
 
-// export const actions: Actions = {
-// 	add_new_company: async (event) => {
-// 		const data = await event.request.formData();
+export const actions: Actions = {
+	save_document_to_collection: async (event) => {
+		const data = await event.request.formData();
 
-// 		const name = data.get('documentCollectionName')?.toString();
-// 		const investingEntityId = data.get('investingEntityId')?.toString();
-// 		const companyId = data.get('companyId')?.toString();
-// 		const userId = event.locals.user.id;
-// 		const store = new UpsertDocumentCollectionStore();
+		const documentCollectionId = data.get('documentCollectionId')?.toString();
+		const documentMetadataId = data.get('documentMetadataId')?.toString();
 
-// 		const input = {
-// 			name: name,
-// 			investingEntityId: investingEntityId,
-// 			companyId: companyId,
-// 			userId: userId
-// 		};
+		const input = {
+			documentMetadataId: documentMetadataId,
+			documentCollectionId: documentCollectionId
+		};
 
-// 		try {
-// 			await store.mutate({ input }, { event }).then((res) => {
-// 				console.log('yes', { res });
-// 			});
+		const store = new AddDocumentToCollectionStore();
 
-// 			return {
-// 				success: true,
-// 				message: 'Successfully added new company'
-// 			};
-// 		} catch (error) {
-// 			console.log((error as Error).message);
-// 		}
-// 	}
-// };
+		if (!documentCollectionId || !documentMetadataId) {
+			return {
+				success: false,
+				message: 'Document collection id or document metadata id not found'
+			};
+		}
+
+		try {
+			await store.mutate({ input }, { event }).then((res) => {
+				console.log({ res });
+			});
+
+			return {
+				success: true,
+				message: 'Successfully saved document to collection'
+			};
+		} catch (error) {
+			console.log((error as Error).message);
+		}
+	},
+
+	start_chat: async (event) => {
+		const data = await event.request.formData();
+		const userInput = data.get('user_input')?.toString();
+
+		const documentCollectionId = data.get('documentCollectionId')?.toString();
+		const userId = data.get('userId')?.toString();
+		const investingEntityId = data.get('investingEntityId')?.toString();
+		const companyId = data.get('companyId')?.toString();
+
+		const store = new UpsertChatStore();
+
+		const input = {
+			companyId: companyId,
+			documentCollectionId: documentCollectionId,
+			investingEntityId: investingEntityId,
+			name: 'test',
+			userId: userId
+			// not sure what to use for a name
+		};
+
+		if (!documentCollectionId) {
+			return {
+				success: false,
+				message: 'Document collection id not found'
+			};
+		}
+
+		const res = await store.mutate({ input }, { event });
+
+		const chatId = res.data?.upsertChat?.id;
+
+		if (res.errors) {
+			return {
+				error: true,
+				message: res.errors[0].message
+			};
+		}
+		return {
+			success: true,
+			chatId: chatId
+		};
+	}
+};

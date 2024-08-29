@@ -12,6 +12,13 @@ declare global {
 			};
 		}
 		// interface PageData {}
+		// interface ActionData {
+		// 	form?: {
+		// 		error?: string;
+		// 		success?: string;
+		// 		message?: string;
+		// 	};
+		// }
 		// interface PageState {}
 		// interface Platform {}
 	}

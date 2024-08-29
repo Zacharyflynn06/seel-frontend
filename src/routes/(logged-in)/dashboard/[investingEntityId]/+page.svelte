@@ -7,6 +7,7 @@
 	import type { ActionData, PageData } from '../$types';
 	import toast from 'svelte-french-toast';
 	import ManageCompanyForm from './ManageCompanyForm.svelte';
+	import LineItem from '$lib/components/LineItem.svelte';
 
 	export let data: PageData;
 	export let form: ActionData;
@@ -21,49 +22,54 @@
 	}
 
 	$: if (form?.error) {
-		toast.error('Invalid email or password', { position: 'bottom-center' });
+		toast.error(form?.error, { position: 'top-center' });
 	}
 </script>
 
-<Card heading="Add a new company to {investingEntity?.name}" className="mb-5">
-	<form
-		use:enhance={() => {
-			loading = true;
-			return async ({ update }) => {
-				update();
-				loading = false;
-			};
-		}}
-		action="?/add_new_company"
-		method="POST"
-		class="space-y-5"
-	>
-		<TextInput label="Company Name" name="company_name" type="text" required></TextInput>
-		<input type="hidden" name="investingEntityId" value={investingEntity.id} />
-		<SmallButton type="submit" label="Add Company" {loading}></SmallButton>
-	</form>
-</Card>
+<div class="space-y-5">
+	<Card heading="{investingEntity?.name}'s Investments">
+		{#if investingEntity}
+			<div class="divide-y">
+				{#each investingEntity.companies as company (company.id)}
+					<div in:fly={{ y: 20 }} out:slide class="flex w-full py-5">
+						<!-- this is the roundabout way we are getting the company name for now -->
+						{#each company.attributes as attribute}
+							<a
+								href="/dashboard/{investingEntity.id}/{company.id}"
+								class="flex w-full items-center justify-between"
+							>
+								<div class="flex items-center space-x-5 text-lg">
+									<LineItem>
+										{attribute.value.stringValue}
+									</LineItem>
+								</div>
+							</a>
+						{/each}
 
-<Card heading="{investingEntity?.name}'s Companies">
-	{#if investingEntity}
-		{#each investingEntity.companies as company (company.id)}
-			<div in:fly={{ y: 20 }} out:slide class="flex w-full space-y-5">
-				<!-- this is the roundabout way we are getting the company name for now -->
-				{#each company.attributes as attribute}
-					<a
-						href="/dashboard/{investingEntity.id}/{company.id}"
-						class="flex w-full items-center justify-between"
-					>
-						<div class="flex text-lg">
-							Company: {attribute.value.stringValue}
-						</div>
-					</a>
+						<ManageCompanyForm {company} />
+					</div>
+				{:else}
+					<p>No companies yet, add one above!</p>
 				{/each}
-
-				<ManageCompanyForm {company} />
 			</div>
-		{:else}
-			<p>No companies yet, add one above!</p>
-		{/each}
-	{/if}
-</Card>
+		{/if}
+	</Card>
+	<Card heading="Add a new investment to {investingEntity?.name}" className="mb-5">
+		<form
+			use:enhance={() => {
+				loading = true;
+				return async ({ update }) => {
+					update();
+					loading = false;
+				};
+			}}
+			action="?/add_new_company"
+			method="POST"
+			class="space-y-5"
+		>
+			<TextInput label="Investment Name" name="company_name" type="text" required></TextInput>
+			<input type="hidden" name="investingEntityId" value={investingEntity.id} />
+			<SmallButton type="submit" label="Add Investment" {loading}></SmallButton>
+		</form>
+	</Card>
+</div>
