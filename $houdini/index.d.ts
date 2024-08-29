@@ -10,6 +10,7 @@ export * from "./artifacts/GetInvestingEntity";
 export * from "./artifacts/GetUser";
 export * from "./artifacts/GetUsers";
 export * from "./artifacts/linkInvestingEntityToUser";
+export * from "./artifacts/SendMessageToChat";
 export * from "./artifacts/UpsertChat";
 export * from "./artifacts/UpsertCompany";
 export * from "./artifacts/UpsertDocumentCollection";

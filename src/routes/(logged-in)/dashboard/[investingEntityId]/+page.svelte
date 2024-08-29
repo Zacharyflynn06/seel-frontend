@@ -7,16 +7,12 @@
 	import type { ActionData, PageData } from '../$types';
 	import toast from 'svelte-french-toast';
 	import ManageCompanyForm from './ManageCompanyForm.svelte';
-	import RectangleGroupIcon from '$lib/components/icons/RectangleGroupIcon.svelte';
-	import { flexCenter } from '$lib/classes';
-	import TextAreaInput from '$lib/components/formComponents/TextAreaInput.svelte';
-	import SelectInput from '$lib/components/formComponents/SelectInput.svelte';
+	import LineItem from '$lib/components/LineItem.svelte';
 
 	export let data: PageData;
 	export let form: ActionData;
 
 	let loading = false;
-	let isAddFieldFormLoading = false;
 
 	$: investingEntity = data.investingEntity;
 
@@ -30,58 +26,50 @@
 	}
 </script>
 
-<div class="flex w-full justify-center gap-5">
-	<div>
-		<Card heading="Add a new investment to {investingEntity?.name}" className="mb-5">
-			<form
-				use:enhance={() => {
-					loading = true;
-					return async ({ update }) => {
-						update();
-						loading = false;
-					};
-				}}
-				action="?/add_new_company"
-				method="POST"
-				class="space-y-5"
-			>
-				<TextInput label="Investment Name" name="company_name" type="text" required></TextInput>
-				<input type="hidden" name="investingEntityId" value={investingEntity.id} />
-				<SmallButton type="submit" label="Add Investment" {loading}></SmallButton>
-			</form>
-		</Card>
+<div class="space-y-5">
+	<Card heading="{investingEntity?.name}'s Investments">
+		{#if investingEntity}
+			<div class="divide-y">
+				{#each investingEntity.companies as company (company.id)}
+					<div in:fly={{ y: 20 }} out:slide class="flex w-full py-5">
+						<!-- this is the roundabout way we are getting the company name for now -->
+						{#each company.attributes as attribute}
+							<a
+								href="/dashboard/{investingEntity.id}/{company.id}"
+								class="flex w-full items-center justify-between"
+							>
+								<div class="flex items-center space-x-5 text-lg">
+									<LineItem>
+										{attribute.value.stringValue}
+									</LineItem>
+								</div>
+							</a>
+						{/each}
 
-		<Card heading="{investingEntity?.name}'s Investments">
-			{#if investingEntity}
-				<div class="divide-y">
-					{#each investingEntity.companies as company (company.id)}
-						<div in:fly={{ y: 20 }} out:slide class="flex w-full py-5">
-							<!-- this is the roundabout way we are getting the company name for now -->
-							{#each company.attributes as attribute}
-								<a
-									href="/dashboard/{investingEntity.id}/{company.id}"
-									class="flex w-full items-center justify-between"
-								>
-									<div class="flex items-center space-x-5 text-lg">
-										<div
-											class="h-10 w-10 rounded-full bg-pink hover:scale-105 hover:duration-300 {flexCenter}"
-										>
-											<RectangleGroupIcon />
-										</div>
-										<div>
-											{attribute.value.stringValue}
-										</div>
-									</div>
-								</a>
-							{/each}
-
-							<ManageCompanyForm {company} />
-						</div>
-					{:else}
-						<p>No companies yet, add one above!</p>
-					{/each}
-				</div>
-			{/if}
-		</Card>
-	</div>
+						<ManageCompanyForm {company} />
+					</div>
+				{:else}
+					<p>No companies yet, add one above!</p>
+				{/each}
+			</div>
+		{/if}
+	</Card>
+	<Card heading="Add a new investment to {investingEntity?.name}" className="mb-5">
+		<form
+			use:enhance={() => {
+				loading = true;
+				return async ({ update }) => {
+					update();
+					loading = false;
+				};
+			}}
+			action="?/add_new_company"
+			method="POST"
+			class="space-y-5"
+		>
+			<TextInput label="Investment Name" name="company_name" type="text" required></TextInput>
+			<input type="hidden" name="investingEntityId" value={investingEntity.id} />
+			<SmallButton type="submit" label="Add Investment" {loading}></SmallButton>
+		</form>
+	</Card>
 </div>

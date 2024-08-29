@@ -27,7 +27,7 @@
 	}
 </script>
 
-<div class="w-1/2 space-y-5">
+<div class="flex w-full space-x-5">
 	<Card heading="Add a new Field">
 		<form
 			use:enhance={() => {
@@ -58,7 +58,7 @@
 	<Card heading="Manage Fields">
 		{#each fields as field}
 			<div class="mb-5">
-				<h3 class="mb-5 text-lg font-bold">{field.name}</h3>
+				<h3 class="text-lg font-bold">{field.name}</h3>
 				<p class="text-sm">{field.description}</p>
 			</div>
 		{/each}

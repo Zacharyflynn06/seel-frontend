@@ -9,6 +9,7 @@
 	import type { ActionData } from '../$types';
 	import RectangleGroupIcon from '$lib/components/icons/RectangleGroupIcon.svelte';
 	import { flexCenter } from '$lib/classes';
+	import LineItem from '$lib/components/LineItem.svelte';
 	export let data: PageData;
 	export let form: ActionData;
 	// your script goes here
@@ -21,56 +22,56 @@
 </script>
 
 {#if company}
-	<Card
-		heading="Add a new document collection to {company?.attributes[0].value.stringValue ?? ''}"
-		className="mb-5"
-	>
-		<form
-			use:enhance={() => {
-				loading = true;
-				return async ({ update }) => {
-					update();
-					loading = false;
-				};
-			}}
-			action="?/add_new_document_collection"
-			method="POST"
-			class="space-y-5"
+	<div class="space-y-5">
+		<Card heading="{company?.attributes[0].value.stringValue}'s Document Collections">
+			<div class="divide-y">
+				{#each company.documentCollections as documentCollection}
+					<div in:fly={{ y: 20 }} out:slide class="flex w-full py-5">
+						<!-- this is the roundabout way we are getting the company name for now -->
+						<a
+							href="/dashboard/{investingEntityId}/{company.id}/{documentCollection.id}"
+							class="flex w-full items-center justify-between"
+						>
+							<div class="flex items-center space-x-5 text-lg">
+								<LineItem>
+									{documentCollection.name}
+								</LineItem>
+							</div>
+						</a>
+
+						<ManageDocumentCollectionForm {documentCollection} />
+					</div>
+				{:else}
+					<p>No document collections added yet, add one above!</p>
+				{/each}
+			</div>
+		</Card>
+
+		<Card
+			heading="Add a new document collection to {company?.attributes[0].value.stringValue ?? ''}"
 		>
-			<TextInput label="Document Collection Name" name="documentCollectionName" type="text" required
-			></TextInput>
-			<input type="hidden" name="investingEntityId" value={investingEntityId} />
-			<input type="hidden" name="companyId" value={company.id ?? ''} />
-			<SmallButton type="submit" label="Add Company" {loading}></SmallButton>
-		</form>
-	</Card>
-
-	<Card heading="{company?.attributes[0].value.stringValue}'s Document Collections">
-		<div class="divide-y">
-			{#each company.documentCollections as documentCollection}
-				<div in:fly={{ y: 20 }} out:slide class="flex w-full py-5">
-					<!-- this is the roundabout way we are getting the company name for now -->
-					<a
-						href="/dashboard/{investingEntityId}/{company.id}/{documentCollection.id}"
-						class="flex w-full items-center justify-between"
-					>
-						<div class="flex items-center space-x-5 text-lg">
-							<div
-								class="h-10 w-10 rounded-full bg-pink hover:scale-105 hover:duration-300 {flexCenter}"
-							>
-								<RectangleGroupIcon />
-							</div>
-							<div>
-								{documentCollection.name}
-							</div>
-						</div>
-					</a>
-
-					<ManageDocumentCollectionForm {documentCollection} />
-				</div>
-			{:else}
-				<p>No document collections added yet, add one above!</p>
-			{/each}
-		</div>
-	</Card>
+			<form
+				use:enhance={() => {
+					loading = true;
+					return async ({ update }) => {
+						update();
+						loading = false;
+					};
+				}}
+				action="?/add_new_document_collection"
+				method="POST"
+				class="space-y-5"
+			>
+				<TextInput
+					label="Document Collection Name"
+					name="documentCollectionName"
+					type="text"
+					required
+				></TextInput>
+				<input type="hidden" name="investingEntityId" value={investingEntityId} />
+				<input type="hidden" name="companyId" value={company.id ?? ''} />
+				<SmallButton type="submit" label="Add Company" {loading}></SmallButton>
+			</form>
+		</Card>
+	</div>
 {/if}

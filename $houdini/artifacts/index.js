@@ -11,6 +11,7 @@
  export { default as GetUser} from './GetUser'
  export { default as GetUsers} from './GetUsers'
  export { default as linkInvestingEntityToUser} from './linkInvestingEntityToUser'
+ export { default as SendMessageToChat} from './SendMessageToChat'
  export { default as UpsertChat} from './UpsertChat'
  export { default as UpsertCompany} from './UpsertCompany'
  export { default as UpsertDocumentCollection} from './UpsertDocumentCollection'

@@ -10,7 +10,7 @@ export default new HoudiniClient({
 	plugins: [
 		subscription(() =>
 			createClient({
-				url: 'ws://api.url'
+				url: 'fmfxd3pstrhzffv2nppqxedxa4.appsync-realtime-api.us-east-1.amazonaws.com/graphql'
 			})
 		)
 	],

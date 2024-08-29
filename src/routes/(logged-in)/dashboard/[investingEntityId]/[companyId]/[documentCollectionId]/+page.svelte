@@ -10,7 +10,8 @@
 	import ArrowIcon from '$lib/components/icons/ArrowIcon.svelte';
 	import Spinner from '$lib/components/Spinner.svelte';
 	import toast from 'svelte-french-toast';
-	import { ChatEventStore, graphql } from '$houdini';
+	import { ChatEventStore, SendMessageToChatStore } from '$houdini';
+	import LineItem from '$lib/components/LineItem.svelte';
 
 	export let data: PageData;
 	export let form: ActionData;
@@ -24,27 +25,32 @@
 
 	let chatId = '';
 
+	let subscription = new ChatEventStore();
+	let messageStore = new SendMessageToChatStore();
+
+	const handleSendMessage = async (event) => {
+		const res = await messageStore.mutate({ id: chatId, message: userInput });
+		console.log({ res });
+		const message = await res.data?.sendMessageToChat;
+
+		console.log({ message });
+	};
+
 	$: userId = data.user.id;
 	$: investingEntityId = data.investingEntityId;
 	$: companyId = data.companyId;
 	$: documentCollection = data.documentCollection;
 
 	$: if (form?.success) {
-		console.log('success', form);
 		chatId = form.chatId;
-		toast.success(form.chatId, { position: 'top-center' });
+		subscription.listen({ chatId: chatId });
 	}
 
 	$: if (form?.error) {
 		toast.error('Something went wrong', { position: 'bottom-center' });
 	}
 
-	$: if (form?.chatId) {
-		// console.log('chatId', form.chatId);
-		// let subscription = new ChatEventStore();
-		// subscription.listen({ chatId: chatId });
-		// console.log('latest value', subscription);
-	}
+	$: console.log({ $subscription });
 </script>
 
 {#if documentCollection}
@@ -88,9 +94,9 @@
 							href="/dashboard/{investingEntityId}/{companyId}/{documentCollection.id}"
 							class="flex w-full items-center justify-between"
 						>
-							<div class="flex text-lg">
+							<LineItem>
 								Document: {document.name}
-							</div>
+							</LineItem>
 						</a>
 					</div>
 				{:else}
@@ -100,25 +106,33 @@
 		</Card>
 
 		<Card heading="Chat with {documentCollection?.name}">
-			<form
-				use:enhance={() => {
-					chatLoading = true;
-					return async ({ update }) => {
-						update();
-						chatLoading = false;
-					};
-				}}
-				action="?/ask_collection"
-				method="POST"
-			>
+			{#if !chatId}
+				<!-- content here -->
+				<form
+					use:enhance={() => {
+						chatLoading = true;
+						return async ({ update }) => {
+							update();
+							chatLoading = false;
+						};
+					}}
+					action="?/start_chat"
+					method="POST"
+				>
+					<input type="hidden" name="documentCollectionId" value={documentCollection.id} />
+					<input type="hidden" name="companyId" value={companyId} />
+					<input type="hidden" name="userId" value={userId} />
+					<input type="hidden" name="investingEntityId" value={investingEntityId} />
+					<SmallButton type="submit" label="Start Chat" loading={chatLoading}></SmallButton>
+				</form>
+			{:else}
 				<TextInput
 					bind:value={userInput}
 					placeholder="Ask me about the documents in this collection"
 					name="user_input"
 				>
 					<button
-						formaction="?/ask_collection"
-						type="submit"
+						on:click={handleSendMessage}
 						class=" {userInput && userInput.length > 4
 							? 'text-purple dark:text-pink'
 							: 'text-grey-08 dark:text-white/50'}"
@@ -130,12 +144,7 @@
 						{/if}
 					</button>
 				</TextInput>
-
-				<input type="hidden" name="documentCollectionId" value={documentCollection.id} />
-				<input type="hidden" name="companyId" value={companyId} />
-				<input type="hidden" name="userId" value={userId} />
-				<input type="hidden" name="investingEntityId" value={investingEntityId} />
-			</form>
+			{/if}
 		</Card>
 	</div>
 {/if}

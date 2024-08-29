@@ -64,7 +64,7 @@ export const actions: Actions = {
 		}
 	},
 
-	ask_collection: async (event) => {
+	start_chat: async (event) => {
 		const data = await event.request.formData();
 		const userInput = data.get('user_input')?.toString();
 

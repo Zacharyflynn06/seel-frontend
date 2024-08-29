@@ -3,6 +3,7 @@
 	import Card from '$lib/components/Card.svelte';
 	import FileInput from '$lib/components/formComponents/FileInput.svelte';
 	import RectangleGroupIcon from '$lib/components/icons/RectangleGroupIcon.svelte';
+	import LineItem from '$lib/components/LineItem.svelte';
 
 	import type { PageData } from './$types';
 
@@ -16,14 +17,11 @@
 		<Card heading="Your Funds">
 			<div class="divide-y">
 				{#each user.investingEntities as entity}
-					<a href="/dashboard/{entity.id}" class="flex items-center space-x-2 py-5">
-						<div
-							class="h-10 w-10 rounded-full bg-pink hover:scale-105 hover:duration-300 {flexCenter}"
-						>
-							<RectangleGroupIcon />
-						</div>
-						<div class="block">{entity.name}</div>
-					</a>
+					<div>
+						<a href="/dashboard/{entity.id}" class="flex items-center space-x-2 py-5">
+							<LineItem>{entity.name}</LineItem>
+						</a>
+					</div>
 				{/each}
 			</div>
 		</Card>
