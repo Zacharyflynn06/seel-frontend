@@ -14,7 +14,7 @@
 </script>
 
 <div class="flex w-full flex-col space-y-5 lg:flex-row lg:space-x-5 lg:space-y-0">
-	<div class="flex w-full flex-col space-y-5 lg:w-1/3">
+	<div class="flex w-full flex-col space-y-5 lg:w-1/2">
 		<Card heading="Add New Investing Entity">
 			<form class="space-y-5" use:enhance action="?/add_investing_entity" method="POST">
 				<TextInput name="name" label="Name" />
@@ -45,43 +45,49 @@
 		</Card>
 	</div>
 
-	<Card heading="Investing Entities" className="w-full lg:w-1/3">
-		<div>
-			{#each entities as entity}
-				{#if entity.name && entity.id}
-					<dl class="divide-y divide-black">
+	<div class="w-full space-y-5 lg:w-1/2">
+		<Card heading="Investing Entities">
+			<div>
+				{#each entities as entity}
+					{#if entity.name && entity.id}
+						<dl class="divide-y divide-black">
+							<div class="px-4 py-2 sm:grid sm:grid-cols-2 sm:gap-2 sm:px-0">
+								<dt class=" font-bold leading-6">{entity.name}</dt>
+								<dd
+									class="ml-5 mt-1 text-sm leading-6 text-grey-08 dark:text-light-grey-08 sm:col-span-2 sm:mt-0"
+								>
+									{entity.id}
+								</dd>
+								<ul class="ml-5 list-disc">
+									Users:
+									{#each entity.users as entityUser}
+										<li class="ml-5">{entityUser.email}</li>
+									{/each}
+								</ul>
+							</div>
+						</dl>
+					{/if}
+				{/each}
+			</div>
+		</Card>
+
+		<Card heading="Users">
+			{#each users as user}
+				{#if user.email && user.id}
+					<dl class="divide-y divide-light-grey-01">
 						<div class="px-4 py-2 sm:grid sm:grid-cols-2 sm:gap-2 sm:px-0">
-							<dt class=" font-bold leading-6">{entity.name}</dt>
-							<dd class="mt-1 text-sm leading-6 text-grey-08 sm:col-span-2 sm:mt-0">
-								ID: {entity.id}
+							<dt class="text-sm font-bold leading-6">{user.email}</dt>
+							<dd
+								class="mt-1 indent-5 text-sm leading-6 text-grey-08 dark:text-light-grey-08 sm:col-span-2 sm:mt-0"
+							>
+								{user.id}
 							</dd>
-							<ul class="list-disc">
-								Users:
-								{#each entity.users as entityUser}
-									<li class="ml-5">{entityUser.email}</li>
-								{/each}
-							</ul>
 						</div>
 					</dl>
 				{/if}
+			{:else}
+				...loading
 			{/each}
-		</div>
-	</Card>
-
-	<Card heading="Users" className="w-full lg:w-1/3">
-		{#each users as user}
-			{#if user.email && user.id}
-				<dl class="divide-y divide-light-grey-01">
-					<div class="px-4 py-2 sm:grid sm:grid-cols-2 sm:gap-2 sm:px-0">
-						<dt class="text-sm font-bold leading-6">{user.email}</dt>
-						<dd class="mt-1 text-sm leading-6 text-grey-08 sm:col-span-2 sm:mt-0">
-							{user.id}
-						</dd>
-					</div>
-				</dl>
-			{/if}
-		{:else}
-			...loading
-		{/each}
-	</Card>
+		</Card>
+	</div>
 </div>

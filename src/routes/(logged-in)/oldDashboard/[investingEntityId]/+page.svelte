@@ -6,7 +6,7 @@
 	import { fly, slide } from 'svelte/transition';
 	import type { ActionData, PageData } from '../$types';
 	import toast from 'svelte-french-toast';
-	import ManageCompanyForm from './ManageCompanyForm.svelte';
+	import ManageCompanyForm from '../../dashboard/ManageCompanyForm.svelte';
 	import LineItem from '$lib/components/LineItem.svelte';
 
 	export let data: PageData;
