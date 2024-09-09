@@ -1,17 +1,42 @@
 <script lang="ts">
 	import { mainPanelWidth } from '$lib/classes';
 	import Header from '$lib/components/Header.svelte';
-	import Breadcrumb from '$lib/components/nav/Breadcrumb.svelte';
 	import NavBar from '$lib/components/nav/NavBar.svelte';
+
+	import SelectInput from '$lib/components/formComponents/SelectInput.svelte';
+	import type { PageData } from './$types';
+	export let data: PageData;
+	$: ({ user } = data);
+
+	import { page } from '$app/stores';
+
+	function formatTitleFromPath(path: string) {
+		return path
+			.split('/')
+			.map((p) => p.replace(/-/g, ' ').replace(/(^|\s)\S/g, (l) => l.toUpperCase()))
+			.join(' ');
+	}
 </script>
 
 <NavBar />
 
 <Header marginForNav={true} />
 
-<main
-	class="flex min-h-[calc(100vh-60px)] flex-col items-center justify-center p-5 md:ml-[10rem] {mainPanelWidth} "
->
+<main class="flex min-h-[calc(100vh-60px)] flex-col p-5 md:ml-[10rem] {mainPanelWidth} ">
+	<div class="flex items-end justify-between">
+		<h1>{formatTitleFromPath($page.url.pathname)}</h1>
+
+		<div class="flex items-end space-x-5">
+			<span class="inline-flex font-spartan uppercase tracking-widest">Investing Entity</span>
+			{#if user && user.investingEntities}
+				<SelectInput name="investingEntity">
+					{#each user.investingEntities as entity}
+						<option value={entity.id}>{entity.name}</option>
+					{/each}
+				</SelectInput>
+			{/if}
+		</div>
+	</div>
 	<slot />
 
 	<!-- Empty div for bottom nav -->

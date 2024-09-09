@@ -1,12 +1,12 @@
 import type { Record } from "./public/record";
 import { GetUsers$result, GetUsers$input } from "../artifacts/GetUsers";
 import { GetUsersStore } from "../plugins/houdini-svelte/stores/GetUsers";
+import { GetInvestingEntities$result, GetInvestingEntities$input } from "../artifacts/GetInvestingEntities";
+import { GetInvestingEntitiesStore } from "../plugins/houdini-svelte/stores/GetInvestingEntities";
 import { GetUser$result, GetUser$input } from "../artifacts/GetUser";
 import { GetUserStore } from "../plugins/houdini-svelte/stores/GetUser";
 import { GetInvestingEntity$result, GetInvestingEntity$input } from "../artifacts/GetInvestingEntity";
 import { GetInvestingEntityStore } from "../plugins/houdini-svelte/stores/GetInvestingEntity";
-import { GetInvestingEntities$result, GetInvestingEntities$input } from "../artifacts/GetInvestingEntities";
-import { GetInvestingEntitiesStore } from "../plugins/houdini-svelte/stores/GetInvestingEntities";
 import { GetFields$result, GetFields$input } from "../artifacts/GetFields";
 import { GetFieldsStore } from "../plugins/houdini-svelte/stores/GetFields";
 import { GetDocumentCollection$result, GetDocumentCollection$input } from "../artifacts/GetDocumentCollection";
@@ -103,7 +103,7 @@ export declare type CacheTypeDef = {
                     args: never;
                 };
                 investingEntity: {
-                    type: Record<CacheTypeDef, "InvestingEntity"> | null;
+                    type: Record<CacheTypeDef, "InvestingEntity">;
                     args: never;
                 };
             };
@@ -112,12 +112,60 @@ export declare type CacheTypeDef = {
         CompanyAttribute: {
             idFields: never;
             fields: {
+                booleanValue: {
+                    type: boolean | null;
+                    args: never;
+                };
+                dateTimeValue: {
+                    type: any | null;
+                    args: never;
+                };
+                dateValue: {
+                    type: any | null;
+                    args: never;
+                };
+                emailValue: {
+                    type: any | null;
+                    args: never;
+                };
                 field: {
                     type: Record<CacheTypeDef, "Field">;
                     args: never;
                 };
-                value: {
-                    type: Record<CacheTypeDef, "FieldValue">;
+                floatValue: {
+                    type: number | null;
+                    args: never;
+                };
+                intValue: {
+                    type: number | null;
+                    args: never;
+                };
+                ipAddressValue: {
+                    type: any | null;
+                    args: never;
+                };
+                jsonValue: {
+                    type: any | null;
+                    args: never;
+                };
+                phoneValue: {
+                    type: any | null;
+                    args: never;
+                };
+                stringValue: {
+                    type: string | null;
+                    args: never;
+                };
+                timeValue: {
+                    type: any | null;
+                    args: never;
+                };
+                timestampValue: {
+                    type: any | null;
+                    args: never;
+                };
+                urlValue: {
+                    type: any | null;
                     args: never;
                 };
             };
@@ -241,23 +289,107 @@ export declare type CacheTypeDef = {
             };
             fields: {
                 description: {
-                    type: string;
+                    type: string | null;
                     args: never;
                 };
                 formatString: {
                     type: string | null;
                     args: never;
                 };
+                graphqlScalar: {
+                    type: FieldValueType;
+                    args: never;
+                };
                 id: {
                     type: string;
+                    args: never;
+                };
+                isMultiSelect: {
+                    type: boolean;
+                    args: never;
+                };
+                isSingleSelect: {
+                    type: boolean;
                     args: never;
                 };
                 name: {
                     type: string;
                     args: never;
                 };
-                typeGraphQL: {
-                    type: FieldValueType;
+                options: {
+                    type: (Record<CacheTypeDef, "FieldTypeOption">)[];
+                    args: never;
+                };
+            };
+            fragments: [];
+        };
+        FieldTypeOption: {
+            idFields: {
+                id: string;
+            };
+            fields: {
+                booleanValue: {
+                    type: boolean | null;
+                    args: never;
+                };
+                dateTimeValue: {
+                    type: any | null;
+                    args: never;
+                };
+                dateValue: {
+                    type: any | null;
+                    args: never;
+                };
+                emailValue: {
+                    type: any | null;
+                    args: never;
+                };
+                fieldType: {
+                    type: Record<CacheTypeDef, "FieldType">;
+                    args: never;
+                };
+                floatValue: {
+                    type: number | null;
+                    args: never;
+                };
+                id: {
+                    type: string;
+                    args: never;
+                };
+                intValue: {
+                    type: number | null;
+                    args: never;
+                };
+                ipAddressValue: {
+                    type: any | null;
+                    args: never;
+                };
+                jsonValue: {
+                    type: any | null;
+                    args: never;
+                };
+                name: {
+                    type: string;
+                    args: never;
+                };
+                phoneValue: {
+                    type: any | null;
+                    args: never;
+                };
+                stringValue: {
+                    type: string | null;
+                    args: never;
+                };
+                timeValue: {
+                    type: any | null;
+                    args: never;
+                };
+                timestampValue: {
+                    type: any | null;
+                    args: never;
+                };
+                urlValue: {
+                    type: any | null;
                     args: never;
                 };
             };
@@ -376,6 +508,10 @@ export declare type CacheTypeDef = {
         InvestmentCriterion: {
             idFields: never;
             fields: {
+                enabled: {
+                    type: boolean;
+                    args: never;
+                };
                 field: {
                     type: Record<CacheTypeDef, "Field">;
                     args: never;
@@ -452,6 +588,13 @@ export declare type CacheTypeDef = {
                         id: string;
                     };
                 };
+                getFieldTypeOption: {
+                    type: Record<CacheTypeDef, "FieldTypeOption"> | null;
+                    args: {
+                        fieldTypeId: string;
+                        fieldTypeOptionId: string;
+                    };
+                };
                 getFieldTypes: {
                     type: (Record<CacheTypeDef, "FieldType">)[];
                     args: never;
@@ -523,5 +666,5 @@ export declare type CacheTypeDef = {
         };
     };
     lists: {};
-    queries: [[AskSeelStore, AskSeel$result, AskSeel$input], [GetCompanyStore, GetCompany$result, GetCompany$input], [GetDocumentCollectionStore, GetDocumentCollection$result, GetDocumentCollection$input], [GetFieldsStore, GetFields$result, GetFields$input], [GetInvestingEntitiesStore, GetInvestingEntities$result, GetInvestingEntities$input], [GetInvestingEntityStore, GetInvestingEntity$result, GetInvestingEntity$input], [GetUserStore, GetUser$result, GetUser$input], [GetUsersStore, GetUsers$result, GetUsers$input]];
+    queries: [[AskSeelStore, AskSeel$result, AskSeel$input], [GetCompanyStore, GetCompany$result, GetCompany$input], [GetDocumentCollectionStore, GetDocumentCollection$result, GetDocumentCollection$input], [GetFieldsStore, GetFields$result, GetFields$input], [GetInvestingEntityStore, GetInvestingEntity$result, GetInvestingEntity$input], [GetUserStore, GetUser$result, GetUser$input], [GetInvestingEntitiesStore, GetInvestingEntities$result, GetInvestingEntities$input], [GetUsersStore, GetUsers$result, GetUsers$input]];
 };

@@ -41,6 +41,9 @@ importers:
       houdini-svelte:
         specifier: ^1.2.5
         version: 1.2.45(@types/node@20.11.30)(terser@5.30.0)
+      lucide-svelte:
+        specifier: ^0.439.0
+        version: 0.439.0(svelte@4.2.9)
       svelte-filepond:
         specifier: ^0.2.2
         version: 0.2.2(filepond@4.30.6)
@@ -3688,6 +3691,11 @@ packages:
   lru-cache@6.0.0:
     resolution: {integrity: sha512-Jo6dJ04CmSjuznwJSS3pUeWmd/H0ffTlkXXgwZi+eq1UCmqQwCh+eLsYOYCwY991i2Fah4h1BEMCx4qThGbsiA==}
     engines: {node: '>=10'}
+
+  lucide-svelte@0.439.0:
+    resolution: {integrity: sha512-1ZyOJT7zHpw72OKyiG/jcCpQJVMSREo1etQYbYCUBbBJ2ATs5lqK/UI2J+LtvZFbyBNxpuhG3F4fOBIPYwOHHg==}
+    peerDependencies:
+      svelte: ^3 || ^4 || ^5.0.0-next.42
 
   magic-string@0.30.6:
     resolution: {integrity: sha512-n62qCLbPjNjyo+owKtveQxZFZTBm+Ms6YoGD23Wew6Vw337PElFNifQpknPruVRQV57kVShPnLGo9vWxVhpPvA==}
@@ -10238,6 +10246,10 @@ snapshots:
   lru-cache@6.0.0:
     dependencies:
       yallist: 4.0.0
+
+  lucide-svelte@0.439.0(svelte@4.2.9):
+    dependencies:
+      svelte: 4.2.9
 
   magic-string@0.30.6:
     dependencies:

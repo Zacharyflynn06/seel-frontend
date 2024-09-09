@@ -1,11 +1,13 @@
 <script lang="ts">
 	import { selectBoxClasses } from '$lib/classes';
 	export let name: string;
-	export let label: string;
+	export let label = '';
 </script>
 
 <label for={name} class="grid space-y-2">
-	<span>{label}</span>
+	{#if label}
+		<span>{label}</span>
+	{/if}
 	<select class={selectBoxClasses} {name}>
 		<slot />
 	</select>

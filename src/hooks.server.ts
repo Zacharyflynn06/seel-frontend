@@ -1,4 +1,4 @@
-import { redirect, type Handle } from '@sveltejs/kit';
+import type { Handle } from '@sveltejs/kit';
 
 import { sequence } from '@sveltejs/kit/hooks';
 import { GetUserStore, setSession } from '$houdini';
@@ -9,14 +9,18 @@ async function authorize({ resolve, event }) {
 	const cookieId = event.cookies.get('session_id');
 
 	if (!cookieId) {
-		// console.log('no cookie');
+		console.log('no cookie');
 		return resolve(event);
 	}
-	// console.log({ cookieId });
+	console.log({ cookieId });
 	const userStore = new GetUserStore();
 
 	const req = await userStore.fetch({ event, variables: { id: cookieId } });
+	console.log({ req });
 	const res = req.data.getUser;
+
+	console.log({ res });
+
 	if (res) {
 		currentUser = {
 			isAuthenticated: true,
@@ -24,7 +28,7 @@ async function authorize({ resolve, event }) {
 			id: res.id,
 			investingEntities: res.investingEntities
 		};
-		// console.log(res);
+		console.log(res);
 		event.locals.user = currentUser;
 		setSession(event, { currentUser });
 		return resolve(event);
@@ -32,6 +36,7 @@ async function authorize({ resolve, event }) {
 
 	return resolve(event);
 }
+
 async function logger({ event, resolve }) {
 	const startTime = Date.now();
 	const humanFormatDate = new Date(startTime).toLocaleString();

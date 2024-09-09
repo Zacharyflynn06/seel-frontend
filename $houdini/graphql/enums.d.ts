@@ -9,26 +9,6 @@ export declare const ChatEventType: {
 export type ChatEventType$options = ValuesOf<typeof ChatEventType>
  
 /**  ##############################################################################
-                                    Fields                                   #
-##############################################################################
- The type used to store this field in the DB */
-export declare const FieldTypePostgres: {
-    readonly BOOL: "BOOL";
-    readonly DATE: "DATE";
-    readonly DOUBLE: "DOUBLE";
-    readonly INT: "INT";
-    readonly TEXT: "TEXT";
-    readonly TIME: "TIME";
-    readonly TIMESTAMP: "TIMESTAMP";
-}
-
-/**  ##############################################################################
-                                    Fields                                   #
-##############################################################################
- The type used to store this field in the DB */
-export type FieldTypePostgres$options = ValuesOf<typeof FieldTypePostgres>
- 
-/**  ##############################################################################
                                    Company                                   #
 ##############################################################################
  Used as the Tag part of a tagged union */
