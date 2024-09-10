@@ -20,7 +20,7 @@ export const actions = {
 				httpOnly: true,
 				sameSite: 'strict',
 				secure: dev,
-				maxAge: 60 * 60 // one hour
+				maxAge: 60 * 60 * 12 // 12 hours
 			});
 			return { success: true };
 			// redirect(300, '/dashboard');

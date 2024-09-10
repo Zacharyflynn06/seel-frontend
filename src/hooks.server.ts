@@ -1,4 +1,4 @@
-import { redirect, type Handle } from '@sveltejs/kit';
+import { type Handle } from '@sveltejs/kit';
 
 import { sequence } from '@sveltejs/kit/hooks';
 import { GetUserStore, setSession } from '$houdini';

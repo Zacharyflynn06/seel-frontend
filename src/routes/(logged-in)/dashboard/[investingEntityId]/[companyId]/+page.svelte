@@ -42,7 +42,7 @@
 						<ManageDocumentCollectionForm {documentCollection} />
 					</div>
 				{:else}
-					<p>No document collections added yet, add one above!</p>
+					<p>No document collections added yet, add one below!</p>
 				{/each}
 			</div>
 		</Card>

@@ -2,11 +2,15 @@
 	import { mainPanelWidth } from '$lib/classes';
 
 	import { page } from '$app/stores';
+
+	$: url = $page.url;
+
+	$: segments = url.pathname.split('/').filter((segment) => segment !== '');
 </script>
 
-<div class="flex flex-wrap items-center bg-white p-4 md:ml-[10rem] {mainPanelWidth}">
+<div class="flex flex-wrap items-center p-4">
 	<ul class="flex items-center">
-		<li class="inline-flex items-center">
+		<!-- <li class="inline-flex items-center">
 			<a href="#" class="text-gray-600 hover:text-blue-500">
 				<svg
 					class="mx-2 h-auto w-5 fill-current text-gray-400"
@@ -20,12 +24,18 @@
 			</a>
 
 			<span class="mx-4 h-auto font-medium text-gray-400">/</span>
-		</li>
+		</li> -->
+		{#each segments as segment, i}
+			<li class="inline-flex items-center">
+				<a
+					href={`/${segments.slice(0, i + 1).join('/')}`}
+					class="text-gray-600 hover:text-blue-500"
+				>
+					{segment}
+				</a>
 
-		<li class="inline-flex items-center">
-			<a href="#" class="text-gray-600 hover:text-blue-500"> Page 1 </a>
-
-			<span class="mx-4 h-auto font-medium text-gray-400">/</span>
-		</li>
+				<span class="mx-4 h-auto font-medium text-gray-400">/</span>
+			</li>
+		{/each}
 	</ul>
 </div>

@@ -1,18 +1,13 @@
 <script lang="ts">
-	import { flexCenter } from '$lib/classes';
 	import Card from '$lib/components/Card.svelte';
-	import FileInput from '$lib/components/formComponents/FileInput.svelte';
-	import RectangleGroupIcon from '$lib/components/icons/RectangleGroupIcon.svelte';
 	import LineItem from '$lib/components/LineItem.svelte';
-
 	import type { PageData } from './$types';
-
 	export let data: PageData;
 
 	$: ({ user } = data);
 </script>
 
-<div class="flex w-full flex-col items-center justify-center space-y-5">
+<div class="flex w-full space-y-5">
 	{#if user?.investingEntities?.length}
 		<Card heading="Your Funds">
 			<div class="divide-y">
