@@ -7,11 +7,12 @@
 	import type { ActionData, PageData } from './$types';
 	import toast from 'svelte-french-toast';
 	import ManageCompanyForm from './ManageCompanyForm.svelte';
-	import LineItem from '$lib/components/LineItem.svelte';
-	import { currentInvestingEntityStore } from '$lib/stores/currentInvestingEntityStore';
-
+	import { page } from '$app/stores';
+	import SelectInput from '$lib/components/formComponents/SelectInput.svelte';
 	export let data: PageData;
 	export let form: ActionData;
+
+	let currentInvestingEntity = data.user.investingEntities[0];
 
 	let loading = false;
 
@@ -24,17 +25,59 @@
 		toast.error(form?.error, { position: 'top-center' });
 	}
 
-	$: console.log({ $currentInvestingEntityStore });
+	$: user = data.user;
+
+	function formatTitleFromPath(path: string) {
+		return path
+			.split('/')
+			.map((p) => p.replace(/-/g, ' ').replace(/(^|\s)\S/g, (l) => l.toUpperCase()))
+			.join(' ');
+	}
+
+	function handleChangeInvestingEntity(event) {
+		currentInvestingEntity = data.user.investingEntities.filter(
+			(entity) => entity.id === event.target.value
+		);
+	}
 </script>
 
 <div class="space-y-5">
-	{#if $currentInvestingEntityStore}
-		{@const investingEntity = $currentInvestingEntityStore}
-		<Card heading="{investingEntity.name}'s Investments">
-			<div class="divide-y"></div>
-		</Card>
-	{/if}
-	<!-- <Card heading="Add a new investment to {investingEntity?.name}" className="mb-5">
+	<!-- this is the header bar with the title and dropdown for the investing entity -->
+	<div class="flex items-end justify-between">
+		<h1>{formatTitleFromPath($page.url.pathname)}</h1>
+
+		<div class="flex items-end space-x-5">
+			<span class="inline-flex font-spartan uppercase tracking-widest">Investing Entity</span>
+			{#if user && user.investingEntities}
+				<SelectInput name="investingEntity" on:change={handleChangeInvestingEntity}>
+					{#each user.investingEntities as entity}
+						<option value={entity.id}>{entity.name}</option>
+					{/each}
+				</SelectInput>
+			{/if}
+		</div>
+	</div>
+	<Card heading="{currentInvestingEntity.name}'s Investments">
+		{#if currentInvestingEntity}
+			<div class="divide-y">
+				{#each currentInvestingEntity.companies as company (company.id)}
+					<div in:fly={{ y: 20 }} out:slide class="flex w-full py-5">
+						{#each company.attributes as attribute}
+							<a href="/investments/{company.id}" class="flex w-full items-center justify-between">
+								<div class="flex w-full items-center justify-between space-x-5 text-lg">
+									{attribute.stringValue}
+								</div>
+							</a>
+							<ManageCompanyForm {company} />
+						{/each}
+					</div>
+				{:else}
+					<p>No ivestments yet, add one below!</p>
+				{/each}
+			</div>
+		{/if}
+	</Card>
+	<Card heading="Add a new investment to {currentInvestingEntity?.name}" className="mb-5">
 		<form
 			use:enhance={() => {
 				loading = true;
@@ -48,8 +91,8 @@
 			class="space-y-5"
 		>
 			<TextInput label="Investment Name" name="company_name" type="text" required></TextInput>
-			<input type="hidden" name="investingEntityId" value={investingEntity.id} />
+			<input type="hidden" name="investingEntityId" value={currentInvestingEntity.id} />
 			<SmallButton type="submit" label="Add Investment" {loading}></SmallButton>
 		</form>
-	</Card> -->
+	</Card>
 </div>

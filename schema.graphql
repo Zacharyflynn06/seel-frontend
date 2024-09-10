@@ -152,6 +152,24 @@ input CompanyAttributeIdInput {
   fieldId: ID!
 }
 
+"""
+  Used to communicate which fields match or don't match an Investing
+ Entity's investing critiera
+"""
+type CompanyAttributeValidation {
+  """
+    A string with an error message or null if the field passed its
+   check
+  """
+  error: String
+
+  """  the Field this validation was for"""
+  field: Field
+
+  """  True if the field passed, False otherwise"""
+  status: Boolean!
+}
+
 type DocumentCollection {
   chats: [Chat!]!
   company: Company
@@ -460,6 +478,7 @@ type Query {
   getSingleDocumentMetadata(id: ID!): DocumentMetadata
   getUser(id: ID!): User
   getUsers: [User!]!
+  validateCompany(companyId: ID!): [CompanyAttributeValidation!]!
 }
 
 type Subscription {

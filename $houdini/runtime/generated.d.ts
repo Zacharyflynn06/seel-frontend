@@ -171,6 +171,24 @@ export declare type CacheTypeDef = {
             };
             fragments: [];
         };
+        CompanyAttributeValidation: {
+            idFields: never;
+            fields: {
+                error: {
+                    type: string | null;
+                    args: never;
+                };
+                field: {
+                    type: Record<CacheTypeDef, "Field"> | null;
+                    args: never;
+                };
+                status: {
+                    type: boolean;
+                    args: never;
+                };
+            };
+            fragments: [];
+        };
         DocumentCollection: {
             idFields: {
                 id: string;
@@ -628,6 +646,12 @@ export declare type CacheTypeDef = {
                 getUsers: {
                     type: (Record<CacheTypeDef, "User">)[];
                     args: never;
+                };
+                validateCompany: {
+                    type: (Record<CacheTypeDef, "CompanyAttributeValidation">)[];
+                    args: {
+                        companyId: string;
+                    };
                 };
             };
             fragments: [];

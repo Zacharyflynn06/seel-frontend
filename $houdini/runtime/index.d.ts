@@ -45,7 +45,7 @@ export function graphql(
 ): UpsertDocumentCollectionStore;
 
 export function graphql(
-    str: "mutation UpsertCompany($input: UpsertCompanyInput!) {\n\tupsertCompany(input: $input) {\n\t\tid\n\t}\n}\n"
+    str: "mutation UpsertCompany($input: UpsertCompanyInput!) {\n\tupsertCompany(input: $input) {\n\t\tid\n\t\tattributes {\n\t\t\tstringValue\n\t\t}\n\t}\n}\n"
 ): UpsertCompanyStore;
 
 export function graphql(
@@ -63,7 +63,7 @@ export function graphql(
 export function graphql(str: "query GetUsers {\n\tgetUsers {\n\t\temail\n\t\tid\n\t}\n}\n"): GetUsersStore;
 
 export function graphql(
-    str: "query GetUser($id: ID!) {\n\tgetUser(id: $id) {\n\t\temail\n\t\tid\n\t\tinvestingEntities {\n\t\t\tname\n\t\t\taddress\n\t\t\tentityType\n\t\t\tstrategy\n\t\t\tid\n\t\t}\n\t}\n}\n"
+    str: "query GetUser($id: ID!) {\n\tgetUser(id: $id) {\n\t\temail\n\t\tid\n\t\tinvestingEntities {\n\t\t\tname\n\t\t\taddress\n\t\t\tentityType\n\t\t\tstrategy\n\t\t\tid\n\t\t\tcompanies {\n\t\t\t\tid\n\t\t\t\tattributes {\n\t\t\t\t\tbooleanValue\n\t\t\t\t\tstringValue\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n}\n"
 ): GetUserStore;
 
 export function graphql(

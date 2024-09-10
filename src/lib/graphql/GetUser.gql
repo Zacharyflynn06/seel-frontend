@@ -8,6 +8,13 @@ query GetUser($id: ID!) {
 			entityType
 			strategy
 			id
+			companies {
+				id
+				attributes {
+					booleanValue
+					stringValue
+				}
+			}
 		}
 	}
 }

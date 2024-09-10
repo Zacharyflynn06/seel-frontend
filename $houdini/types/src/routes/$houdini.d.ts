@@ -11,8 +11,8 @@ type OutputDataShape<T> = MaybeWithVoid<Omit<App.PageData, RequiredKeys<T>> & Pa
 type EnsureDefined<T> = T extends null | undefined ? {} : T;
 type OptionalUnion<U extends Record<string, any>, A extends keyof U = U extends U ? keyof U : never> = U extends unknown ? { [P in Exclude<A, keyof U>]?: never } & U : never;
 export type Snapshot<T = any> = Kit.Snapshot<T>;
-type LayoutRouteId = RouteId | "/(auth)/forgot-password" | "/(auth)/log-in" | "/(auth)/log-out" | "/(auth)/new-password" | "/(auth)/sign-up" | "/(logged-in)/admin" | "/(logged-in)/admin/manage-fields" | "/(logged-in)/admin/manage-investing-entities" | "/(logged-in)/chat-demo" | "/(logged-in)/dashboard" | "/(logged-in)/oldDashboard" | "/(logged-in)/oldDashboard/[investingEntityId]" | "/(logged-in)/oldDashboard/[investingEntityId]/[companyId]" | "/(logged-in)/oldDashboard/[investingEntityId]/[companyId]/[documentCollectionId]" | "/(logged-in)/oldSubmit-deals" | "/(logged-in)/submit-deals" | "/(public)" | "/(public)/about" | "/(public)/privacy-policy" | null
-type LayoutParams = RouteParams & { investingEntityId?: string; companyId?: string; documentCollectionId?: string }
+type LayoutRouteId = RouteId | "/(auth)/forgot-password" | "/(auth)/log-in" | "/(auth)/log-out" | "/(auth)/new-password" | "/(auth)/sign-up" | "/(logged-in)/admin" | "/(logged-in)/admin/manage-fields" | "/(logged-in)/admin/manage-investing-entities" | "/(logged-in)/chat-demo" | "/(logged-in)/dashboard" | "/(logged-in)/investments/[companyId]" | "/(logged-in)/oldDashboard" | "/(logged-in)/oldDashboard/[investingEntityId]" | "/(logged-in)/oldDashboard/[investingEntityId]/[companyId]" | "/(logged-in)/oldDashboard/[investingEntityId]/[companyId]/[documentCollectionId]" | "/(logged-in)/oldSubmit-deals" | "/(logged-in)/submit-deals" | "/(public)" | "/(public)/about" | "/(public)/privacy-policy" | null
+type LayoutParams = RouteParams & { companyId?: string; investingEntityId?: string; documentCollectionId?: string }
 type LayoutServerParentData = EnsureDefined<{}>;
 type LayoutParentData = EnsureDefined<{}>;
 						type MakeOptional<Target, Keys extends keyof Target> = Omit<Target, Keys> & {
