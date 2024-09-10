@@ -16,9 +16,8 @@ query GetUser($id: ID!) {
 						name
 						description
 					}
-					value {
-						stringValue
-					}
+
+					stringValue
 				}
 			}
 		}

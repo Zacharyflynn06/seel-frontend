@@ -7,21 +7,7 @@ query GetCompany($id: ID!) {
 				id
 				name
 			}
-			value {
-				stringValue
-				booleanValue
-				dateValue
-				emailValue
-				floatValue
-				intValue
-				ipAddressValue
-				phoneValue
-				jsonValue
-				timeValue
-				timestampValue
-				urlValue
-				dateTimeValue
-			}
+			stringValue
 		}
 
 		documentCollections {

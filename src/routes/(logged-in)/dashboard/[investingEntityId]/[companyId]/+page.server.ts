@@ -32,17 +32,17 @@ export const actions: Actions = {
 			userId: userId
 		};
 
-		try {
-			await store.mutate({ input }, { event }).then((res) => {
-				console.log('yes', { res });
-			});
+		const res = await store.mutate({ input }, { event });
 
-			return {
-				success: true,
-				message: 'Successfully added new company'
-			};
-		} catch (error) {
-			console.log((error as Error).message);
+		console.log({ res });
+
+		if (res.errors) {
+			return { error: res.errors[0].message };
 		}
+
+		return {
+			success: true,
+			message: 'Successfully added new document collection'
+		};
 	}
 };

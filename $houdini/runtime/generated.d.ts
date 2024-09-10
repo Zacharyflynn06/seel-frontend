@@ -103,7 +103,7 @@ export declare type CacheTypeDef = {
                     args: never;
                 };
                 investingEntity: {
-                    type: Record<CacheTypeDef, "InvestingEntity"> | null;
+                    type: Record<CacheTypeDef, "InvestingEntity">;
                     args: never;
                 };
             };
@@ -112,12 +112,78 @@ export declare type CacheTypeDef = {
         CompanyAttribute: {
             idFields: never;
             fields: {
+                booleanValue: {
+                    type: boolean | null;
+                    args: never;
+                };
+                dateTimeValue: {
+                    type: any | null;
+                    args: never;
+                };
+                dateValue: {
+                    type: any | null;
+                    args: never;
+                };
+                emailValue: {
+                    type: any | null;
+                    args: never;
+                };
                 field: {
                     type: Record<CacheTypeDef, "Field">;
                     args: never;
                 };
-                value: {
-                    type: Record<CacheTypeDef, "FieldValue">;
+                floatValue: {
+                    type: number | null;
+                    args: never;
+                };
+                intValue: {
+                    type: number | null;
+                    args: never;
+                };
+                ipAddressValue: {
+                    type: any | null;
+                    args: never;
+                };
+                jsonValue: {
+                    type: any | null;
+                    args: never;
+                };
+                phoneValue: {
+                    type: any | null;
+                    args: never;
+                };
+                stringValue: {
+                    type: string | null;
+                    args: never;
+                };
+                timeValue: {
+                    type: any | null;
+                    args: never;
+                };
+                timestampValue: {
+                    type: any | null;
+                    args: never;
+                };
+                urlValue: {
+                    type: any | null;
+                    args: never;
+                };
+            };
+            fragments: [];
+        };
+        CompanyAttributeValidation: {
+            idFields: never;
+            fields: {
+                error: {
+                    type: string | null;
+                    args: never;
+                };
+                field: {
+                    type: Record<CacheTypeDef, "Field"> | null;
+                    args: never;
+                };
+                status: {
+                    type: boolean;
                     args: never;
                 };
             };
@@ -241,23 +307,107 @@ export declare type CacheTypeDef = {
             };
             fields: {
                 description: {
-                    type: string;
+                    type: string | null;
                     args: never;
                 };
                 formatString: {
                     type: string | null;
                     args: never;
                 };
+                graphqlScalar: {
+                    type: FieldValueType;
+                    args: never;
+                };
                 id: {
                     type: string;
+                    args: never;
+                };
+                isMultiSelect: {
+                    type: boolean;
+                    args: never;
+                };
+                isSingleSelect: {
+                    type: boolean;
                     args: never;
                 };
                 name: {
                     type: string;
                     args: never;
                 };
-                typeGraphQL: {
-                    type: FieldValueType;
+                options: {
+                    type: (Record<CacheTypeDef, "FieldTypeOption">)[];
+                    args: never;
+                };
+            };
+            fragments: [];
+        };
+        FieldTypeOption: {
+            idFields: {
+                id: string;
+            };
+            fields: {
+                booleanValue: {
+                    type: boolean | null;
+                    args: never;
+                };
+                dateTimeValue: {
+                    type: any | null;
+                    args: never;
+                };
+                dateValue: {
+                    type: any | null;
+                    args: never;
+                };
+                emailValue: {
+                    type: any | null;
+                    args: never;
+                };
+                fieldType: {
+                    type: Record<CacheTypeDef, "FieldType">;
+                    args: never;
+                };
+                floatValue: {
+                    type: number | null;
+                    args: never;
+                };
+                id: {
+                    type: string;
+                    args: never;
+                };
+                intValue: {
+                    type: number | null;
+                    args: never;
+                };
+                ipAddressValue: {
+                    type: any | null;
+                    args: never;
+                };
+                jsonValue: {
+                    type: any | null;
+                    args: never;
+                };
+                name: {
+                    type: string;
+                    args: never;
+                };
+                phoneValue: {
+                    type: any | null;
+                    args: never;
+                };
+                stringValue: {
+                    type: string | null;
+                    args: never;
+                };
+                timeValue: {
+                    type: any | null;
+                    args: never;
+                };
+                timestampValue: {
+                    type: any | null;
+                    args: never;
+                };
+                urlValue: {
+                    type: any | null;
                     args: never;
                 };
             };
@@ -376,6 +526,10 @@ export declare type CacheTypeDef = {
         InvestmentCriterion: {
             idFields: never;
             fields: {
+                enabled: {
+                    type: boolean;
+                    args: never;
+                };
                 field: {
                     type: Record<CacheTypeDef, "Field">;
                     args: never;
@@ -452,6 +606,13 @@ export declare type CacheTypeDef = {
                         id: string;
                     };
                 };
+                getFieldTypeOption: {
+                    type: Record<CacheTypeDef, "FieldTypeOption"> | null;
+                    args: {
+                        fieldTypeId: string;
+                        fieldTypeOptionId: string;
+                    };
+                };
                 getFieldTypes: {
                     type: (Record<CacheTypeDef, "FieldType">)[];
                     args: never;
@@ -485,6 +646,12 @@ export declare type CacheTypeDef = {
                 getUsers: {
                     type: (Record<CacheTypeDef, "User">)[];
                     args: never;
+                };
+                validateCompany: {
+                    type: (Record<CacheTypeDef, "CompanyAttributeValidation">)[];
+                    args: {
+                        companyId: string;
+                    };
                 };
             };
             fragments: [];

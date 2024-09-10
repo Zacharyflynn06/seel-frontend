@@ -33,10 +33,8 @@ export const actions: Actions = {
 
 		const attributes: UpsertCompanyAttributeInput = {
 			// this is the id for the company name attribute in the database
-			fieldId: '67876143-44aa-47cb-9a89-b189fa53392d',
-			value: {
-				string: name
-			}
+			fieldId: 'ad172e80-05ca-4e8b-a071-b4bbd3e85d2c',
+			stringValue: name
 		};
 		const input: UpsertCompanyInput = {
 			attributes: [attributes],

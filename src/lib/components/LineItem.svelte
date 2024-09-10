@@ -1,9 +1,8 @@
 <script>
 	import { flexCenter } from '$lib/classes';
-	import RectangleGroupIcon from './icons/RectangleGroupIcon.svelte';
 </script>
 
-<div class="flex items-center space-x-5 duration-300 ease-in-out hover:scale-105">
+<div class="flex items-center space-x-5 duration-300 ease-in-out hover:scale-[102.5%]">
 	<div class="h-10 w-10 rounded-full bg-pink text-off-white {flexCenter}">
 		<svg
 			xmlns="http://www.w3.org/2000/svg"

@@ -44,6 +44,7 @@
 	$: if (form?.success) {
 		chatId = form.chatId;
 		subscription.listen({ chatId: chatId });
+		console.log({ chatId });
 	}
 
 	$: if (form?.error) {

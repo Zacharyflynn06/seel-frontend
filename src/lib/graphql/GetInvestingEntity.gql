@@ -13,9 +13,8 @@ query GetInvestingEntity($id: ID!) {
 					id
 					name
 				}
-				value {
-					stringValue
-				}
+
+				stringValue
 			}
 			id
 		}

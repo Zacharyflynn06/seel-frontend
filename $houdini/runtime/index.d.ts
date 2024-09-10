@@ -13,8 +13,8 @@ import { GetInvestingEntityStore } from "../plugins/houdini-svelte/stores/GetInv
 import { GetInvestingEntitiesStore } from "../plugins/houdini-svelte/stores/GetInvestingEntities";
 import { GetFieldsStore } from "../plugins/houdini-svelte/stores/GetFields";
 import { GetDocumentCollectionStore } from "../plugins/houdini-svelte/stores/GetDocumentCollection";
-import { DeleteCompanyStore } from "../plugins/houdini-svelte/stores/DeleteCompany";
 import { GetCompanyStore } from "../plugins/houdini-svelte/stores/GetCompany";
+import { DeleteCompanyStore } from "../plugins/houdini-svelte/stores/DeleteCompany";
 import { ChatEventStore } from "../plugins/houdini-svelte/stores/ChatEvent";
 import { AskSeelStore } from "../plugins/houdini-svelte/stores/AskSeel";
 import { AddDocumentToCollectionStore } from "../plugins/houdini-svelte/stores/AddDocumentToCollection";
@@ -63,11 +63,11 @@ export function graphql(
 export function graphql(str: "query GetUsers {\n\tgetUsers {\n\t\temail\n\t\tid\n\t}\n}\n"): GetUsersStore;
 
 export function graphql(
-    str: "query GetUser($id: ID!) {\n\tgetUser(id: $id) {\n\t\temail\n\t\tid\n\t\tinvestingEntities {\n\t\t\tname\n\t\t\taddress\n\t\t\tentityType\n\t\t\tstrategy\n\t\t\tid\n\t\t\tcompanies {\n\t\t\t\tid\n\t\t\t\tattributes {\n\t\t\t\t\tfield {\n\t\t\t\t\t\tid\n\t\t\t\t\t\tname\n\t\t\t\t\t\tdescription\n\t\t\t\t\t}\n\t\t\t\t\tvalue {\n\t\t\t\t\t\tstringValue\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n}\n"
+    str: "query GetUser($id: ID!) {\n\tgetUser(id: $id) {\n\t\temail\n\t\tid\n\t\tinvestingEntities {\n\t\t\tname\n\t\t\taddress\n\t\t\tentityType\n\t\t\tstrategy\n\t\t\tid\n\t\t\tcompanies {\n\t\t\t\tid\n\t\t\t\tattributes {\n\t\t\t\t\tfield {\n\t\t\t\t\t\tid\n\t\t\t\t\t\tname\n\t\t\t\t\t\tdescription\n\t\t\t\t\t}\n\n\t\t\t\t\tstringValue\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n}\n"
 ): GetUserStore;
 
 export function graphql(
-    str: "query GetInvestingEntity($id: ID!) {\n\tgetInvestingEntity(id: $id) {\n\t\taddress\n\t\tcompanies {\n\t\t\tdocuments {\n\t\t\t\tname\n\t\t\t\tdownloadUrl\n\t\t\t\tid\n\t\t\t}\n\t\t\tattributes {\n\t\t\t\tfield {\n\t\t\t\t\tdescription\n\t\t\t\t\tid\n\t\t\t\t\tname\n\t\t\t\t}\n\t\t\t\tvalue {\n\t\t\t\t\tstringValue\n\t\t\t\t}\n\t\t\t}\n\t\t\tid\n\t\t}\n\t\tentityType\n\t\tname\n\t\tstrategy\n\t\tinvestmentCriteria {\n\t\t\trequired\n\t\t}\n\t\tid\n\t}\n}\n"
+    str: "query GetInvestingEntity($id: ID!) {\n\tgetInvestingEntity(id: $id) {\n\t\taddress\n\t\tcompanies {\n\t\t\tdocuments {\n\t\t\t\tname\n\t\t\t\tdownloadUrl\n\t\t\t\tid\n\t\t\t}\n\t\t\tattributes {\n\t\t\t\tfield {\n\t\t\t\t\tdescription\n\t\t\t\t\tid\n\t\t\t\t\tname\n\t\t\t\t}\n\n\t\t\t\tstringValue\n\t\t\t}\n\t\t\tid\n\t\t}\n\t\tentityType\n\t\tname\n\t\tstrategy\n\t\tinvestmentCriteria {\n\t\t\trequired\n\t\t}\n\t\tid\n\t}\n}\n"
 ): GetInvestingEntityStore;
 
 export function graphql(
@@ -83,12 +83,12 @@ export function graphql(
 ): GetDocumentCollectionStore;
 
 export function graphql(
-    str: "mutation DeleteCompany($id: ID!) {\n\tdeleteCompany(id: $id) {\n\t\tid\n\t}\n}\n"
-): DeleteCompanyStore;
+    str: "query GetCompany($id: ID!) {\n\tgetCompany(id: $id) {\n\t\tid\n\t\tattributes {\n\t\t\tfield {\n\t\t\t\tdescription\n\t\t\t\tid\n\t\t\t\tname\n\t\t\t}\n\t\t\tstringValue\n\t\t}\n\n\t\tdocumentCollections {\n\t\t\tname\n\t\t\tid\n\t\t}\n\t}\n}\n"
+): GetCompanyStore;
 
 export function graphql(
-    str: "query GetCompany($id: ID!) {\n\tgetCompany(id: $id) {\n\t\tid\n\t\tattributes {\n\t\t\tfield {\n\t\t\t\tdescription\n\t\t\t\tid\n\t\t\t\tname\n\t\t\t}\n\t\t\tvalue {\n\t\t\t\tstringValue\n\t\t\t\tbooleanValue\n\t\t\t\tdateValue\n\t\t\t\temailValue\n\t\t\t\tfloatValue\n\t\t\t\tintValue\n\t\t\t\tipAddressValue\n\t\t\t\tphoneValue\n\t\t\t\tjsonValue\n\t\t\t\ttimeValue\n\t\t\t\ttimestampValue\n\t\t\t\turlValue\n\t\t\t\tdateTimeValue\n\t\t\t}\n\t\t}\n\n\t\tdocumentCollections {\n\t\t\tname\n\t\t\tid\n\t\t}\n\t}\n}\n"
-): GetCompanyStore;
+    str: "mutation DeleteCompany($id: ID!) {\n\tdeleteCompany(id: $id) {\n\t\tid\n\t}\n}\n"
+): DeleteCompanyStore;
 
 export function graphql(
     str: "subscription ChatEvent($chatId: ID!) {\n\tchatEvent(chatId: $chatId) {\n\t\tchatId\n\t\teventType\n\t\ttext\n\t}\n}\n"

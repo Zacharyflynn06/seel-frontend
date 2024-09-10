@@ -126,13 +126,25 @@ type Company {
   documentCollections: [DocumentCollection!]!
   documents: [DocumentMetadata!]!
   id: ID!
-  investingEntity: InvestingEntity
+  investingEntity: InvestingEntity!
 }
 
 """  Associates a value with its type and field"""
 type CompanyAttribute {
+  booleanValue: Boolean
+  dateTimeValue: AWSDateTime
+  dateValue: AWSDate
+  emailValue: AWSEmail
   field: Field!
-  value: FieldValue!
+  floatValue: Float
+  intValue: Int
+  ipAddressValue: AWSIPAddress
+  jsonValue: AWSJSON
+  phoneValue: AWSPhone
+  stringValue: String
+  timeValue: AWSTime
+  timestampValue: AWSTimestamp
+  urlValue: AWSURL
 }
 
 input CompanyAttributeIdInput {
@@ -140,9 +152,22 @@ input CompanyAttributeIdInput {
   fieldId: ID!
 }
 
-input DeleteInvestmentCriterionInput {
-  fieldId: ID!
-  investingEntityId: ID!
+"""
+  Used to communicate which fields match or don't match an Investing
+ Entity's investing critiera
+"""
+type CompanyAttributeValidation {
+  """
+    A string with an error message or null if the field passed its
+   check
+  """
+  error: String
+
+  """  the Field this validation was for"""
+  field: Field
+
+  """  True if the field passed, False otherwise"""
+  status: Boolean!
 }
 
 type DocumentCollection {
@@ -197,39 +222,71 @@ type Field {
 }
 
 """
-  Represents a type that a user can associate with a custom field. This will be
+ ##############################################################################
+                                    Fields                                   #
+##############################################################################
+ Represents a type that a user can associate with a custom field. This will be
  used for formatting the different internal postgres types to strings that will
  be displayed in the UI.
 """
 type FieldType {
-  description: String!
+  description: String
 
   """
     If not null, this is a format string suitable for a printf- or strfime-style
    function
   """
   formatString: String
+  graphqlScalar: FieldValueType!
   id: ID!
+  isMultiSelect: Boolean!
+  isSingleSelect: Boolean!
 
   """  Name must be unique across all users"""
   name: String!
-  typeGraphQL: FieldValueType!
+  options: [FieldTypeOption!]!
 }
 
 """
- ##############################################################################
-                                    Fields                                   #
-##############################################################################
- The type used to store this field in the DB
+  Represents a particular choice for a multi- or single-select field
+ type
 """
-enum FieldTypePostgres {
-  BOOL
-  DATE
-  DOUBLE
-  INT
-  TEXT
-  TIME
-  TIMESTAMP
+type FieldTypeOption {
+  booleanValue: Boolean
+  dateTimeValue: AWSDateTime
+  dateValue: AWSDate
+  emailValue: AWSEmail
+  fieldType: FieldType!
+  floatValue: Float
+  id: ID!
+  intValue: Int
+  ipAddressValue: AWSIPAddress
+  jsonValue: AWSJSON
+  name: String!
+  phoneValue: AWSPhone
+  stringValue: String
+  timeValue: AWSTime
+  timestampValue: AWSTimestamp
+  urlValue: AWSURL
+}
+
+input FieldTypeOptionInput {
+  booleanValue: Boolean
+  dateTimeValue: AWSDateTime
+  dateValue: AWSDate
+  emailValue: AWSEmail
+  fieldTypeId: ID!
+  floatValue: Float
+  id: ID
+  intValue: Int
+  ipAddressValue: AWSIPAddress
+  jsonValue: AWSJSON
+  name: String!
+  phoneValue: AWSPhone
+  stringValue: String
+  timeValue: AWSTime
+  timestampValue: AWSTimestamp
+  urlValue: AWSURL
 }
 
 """
@@ -331,12 +388,20 @@ enum InvestingEntityType {
  ##############################################################################
                          Investment Criteria                                 #
 ##############################################################################
- Joins an investing entity to a field. If required is true, then email ingester
- will reply to emails asking for this information.
+ Joins an investing entity to a field.
 """
 type InvestmentCriterion {
+  """  If false, then this field will be ignored"""
+  enabled: Boolean!
+
+  """  The field this criterion applies to"""
   field: Field!
+
+  """  The entity imposing the criterion"""
   investingEntity: InvestingEntity!
+
+  """  If true, then this field must have a value for a company to be accepted
+  """
   required: Boolean!
 }
 
@@ -346,7 +411,7 @@ input LinkInvestingEntityToUserInput {
 }
 
 type Mutation {
-  addDocumentToCollection(input: DocumentCollectionAssociationIds): DocumentCollection
+  addDocumentToCollection(input: DocumentCollectionAssociationIds!): [DocumentMetadata!]!
   deleteChat(id: ID!): Chat
   deleteCompany(id: ID!): Company
   deleteCompanyAttribute(input: CompanyAttributeIdInput!): CompanyAttribute
@@ -354,14 +419,17 @@ type Mutation {
   deleteDocumentMetadata(id: ID!): DocumentMetadata
   deleteField(id: ID!): Field
   deleteFieldType(id: ID!): FieldType
+  deleteFieldTypeOption(fieldTypeId: ID!, fieldTypeOptionId: ID!): FieldTypeOption
   deleteInvestingEntity(id: ID!): InvestingEntity
-  deleteInvestmentCriterion(input: DeleteInvestmentCriterionInput!): InvestmentCriterion
+
+  """  Delete an investment criterion"""
+  deleteInvestmentCriterion(fieldId: ID!, investingEntityId: ID!): InvestmentCriterion
   deleteUser(id: ID!): User
-  linkInvestingEntityToUser(input: LinkInvestingEntityToUserInput!): User
+  linkInvestingEntityToUser(input: LinkInvestingEntityToUserInput!): [User!]!
   postChatEvent(input: PostChatEventInput!): ChatEvent
-  removeDocumentFromCollection(input: DocumentCollectionAssociationIds): DocumentCollection
+  removeDocumentFromCollection(input: DocumentCollectionAssociationIds!): [DocumentMetadata!]!
   sendMessageToChat(id: ID!, message: String): String
-  unlinkInvestingEntityFromUser(input: UnlinkInvestingEntityFromUserInput!): User
+  unlinkInvestingEntityFromUser(input: UnlinkInvestingEntityFromUserInput!): [User!]!
   upsertChat(input: UpsertChatInput): Chat!
   upsertCompany(input: UpsertCompanyInput!): Company!
   upsertCompanyAttribute(input: UpsertSingleCompanyAttributeInput!): CompanyAttribute!
@@ -375,8 +443,11 @@ type Mutation {
   upsertDocumentMetadata(input: UpsertDocumentMetadataInput!): DocumentMetadata
   upsertField(input: UpsertFieldInput!): Field!
   upsertFieldType(input: UpsertFieldTypeInput!): FieldType!
+  upsertFieldTypeOption(input: FieldTypeOptionInput!): FieldTypeOption!
   upsertInvestingEntity(input: UpsertInvestingEntityInput!): InvestingEntity!
-  upsertInvestmentCriterion(input: UpsertInvestmentCriterionInput!): InvestmentCriterion!
+
+  """  Create or change an investment criterion"""
+  upsertInvestmentCriterion(fieldId: ID!, input: UpsertInvestmentCriterionInput!, investingEntityId: ID!): InvestmentCriterion!
   upsertUser(user: UpsertUserInput!): User!
 }
 
@@ -399,6 +470,7 @@ type Query {
   getDocumentCollections: [DocumentCollection!]!
   getField(id: ID!): Field
   getFieldType(id: ID!): FieldType
+  getFieldTypeOption(fieldTypeId: ID!, fieldTypeOptionId: ID!): FieldTypeOption
   getFieldTypes: [FieldType!]!
   getFields: [Field!]!
   getInvestingEntities: [InvestingEntity!]!
@@ -406,6 +478,7 @@ type Query {
   getSingleDocumentMetadata(id: ID!): DocumentMetadata
   getUser(id: ID!): User
   getUsers: [User!]!
+  validateCompany(companyId: ID!): [CompanyAttributeValidation!]!
 }
 
 type Subscription {
@@ -428,8 +501,20 @@ input UpsertChatInput {
 }
 
 input UpsertCompanyAttributeInput {
+  booleanValue: Boolean
+  dateTimeValue: AWSDateTime
+  dateValue: AWSDate
+  emailValue: AWSEmail
   fieldId: ID!
-  value: FieldValueInput!
+  floatValue: Float
+  intValue: Int
+  ipAddressValue: AWSIPAddress
+  jsonValue: AWSJSON
+  phoneValue: AWSPhone
+  stringValue: String
+  timeValue: AWSTime
+  timestampValue: AWSTimestamp
+  urlValue: AWSURL
 }
 
 """
@@ -517,12 +602,13 @@ input UpsertFieldInput {
 }
 
 input UpsertFieldTypeInput {
-  description: String!
+  description: String
   formatString: String
+  graphqlScalar: FieldValueType!
   id: ID
+  isMultiSelect: Boolean
+  isSingleSelect: Boolean
   name: String!
-  typeGraphQL: FieldValueType!
-  typePostgres: FieldTypePostgres!
 }
 
 input UpsertInvestingEntityInput {
@@ -533,26 +619,44 @@ input UpsertInvestingEntityInput {
   strategy: InvestingEntityStrategy!
 }
 
+"""  Metadata attached to the association between fields and investing entities
+"""
 input UpsertInvestmentCriterionInput {
-  fieldId: ID!
-  investingEntityId: ID!
+  """  If false, then this field will be ignored"""
+  enabled: Boolean!
+
+  """  If true, then this field must have a value for a company to be accepted
+  """
   required: Boolean!
 }
 
 input UpsertSingleCompanyAttributeInput {
+  booleanValue: Boolean
+
   """
     If specified, indicates the ID of the company to update. If this
    is not specified, then an investingEntityId must be provided.
   """
   companyId: ID
+  dateTimeValue: AWSDateTime
+  dateValue: AWSDate
+  emailValue: AWSEmail
   fieldId: ID!
+  floatValue: Float
+  intValue: Int
 
   """
     If `id` is not given, this is used to create a new Company
    associated with this investing entity
   """
   investingEntityId: ID
-  value: FieldValueInput!
+  ipAddressValue: AWSIPAddress
+  jsonValue: AWSJSON
+  phoneValue: AWSPhone
+  stringValue: String
+  timeValue: AWSTime
+  timestampValue: AWSTimestamp
+  urlValue: AWSURL
 }
 
 input UpsertUserInput {

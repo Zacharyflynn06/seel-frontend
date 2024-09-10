@@ -40,7 +40,7 @@
 							>
 								<div class="flex items-center space-x-5 text-lg">
 									<LineItem>
-										{attribute.value.stringValue}
+										{attribute.stringValue}
 									</LineItem>
 								</div>
 							</a>

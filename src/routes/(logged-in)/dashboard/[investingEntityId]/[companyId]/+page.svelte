@@ -23,7 +23,7 @@
 
 {#if company}
 	<div class="space-y-5">
-		<Card heading="{company?.attributes[0].value.stringValue}'s Document Collections">
+		<Card heading="{company?.attributes[0].stringValue}'s Document Collections">
 			<div class="divide-y">
 				{#each company.documentCollections as documentCollection}
 					<div in:fly={{ y: 20 }} out:slide class="flex w-full py-5">
@@ -47,9 +47,7 @@
 			</div>
 		</Card>
 
-		<Card
-			heading="Add a new document collection to {company?.attributes[0].value.stringValue ?? ''}"
-		>
+		<Card heading="Add a new document collection to {company?.attributes[0].stringValue ?? ''}">
 			<form
 				use:enhance={() => {
 					loading = true;
@@ -69,8 +67,8 @@
 					required
 				></TextInput>
 				<input type="hidden" name="investingEntityId" value={investingEntityId} />
-				<input type="hidden" name="companyId" value={company.id ?? ''} />
-				<SmallButton type="submit" label="Add Company" {loading}></SmallButton>
+				<input type="hidden" name="companyId" value={company.id} />
+				<SmallButton type="submit" label="Add Document Collection" {loading}></SmallButton>
 			</form>
 		</Card>
 	</div>
