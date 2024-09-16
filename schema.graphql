@@ -475,6 +475,7 @@ type Query {
   getFields: [Field!]!
   getInvestingEntities: [InvestingEntity!]!
   getInvestingEntity(id: ID!): InvestingEntity
+  getInvestmentCriteriaRuleSet(description: String!): AWSJSON!
   getSingleDocumentMetadata(id: ID!): DocumentMetadata
   getUser(id: ID!): User
   getUsers: [User!]!
@@ -628,6 +629,7 @@ input UpsertInvestmentCriterionInput {
   """  If true, then this field must have a value for a company to be accepted
   """
   required: Boolean!
+  rules: AWSJSON
 }
 
 input UpsertSingleCompanyAttributeInput {
