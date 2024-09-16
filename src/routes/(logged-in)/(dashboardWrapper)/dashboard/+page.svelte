@@ -4,12 +4,12 @@
 	import { selectedCompanyStore } from '$lib/stores/selectedCompanyStore';
 	import { selectedEntityStore } from '$lib/stores/selectedEntityStore';
 	import { fly, slide } from 'svelte/transition';
-	import ManageCompanyForm from '../dashboard/[investingEntityId]/ManageCompanyForm.svelte';
 	import { enhance } from '$app/forms';
 	import type { ActionData } from './$types';
 	import TextInput from '$lib/components/formComponents/TextInput.svelte';
 	import SmallButton from '$lib/components/buttons/SmallButton.svelte';
 	import toast from 'svelte-french-toast';
+	import ManageCompanyForm from '../../olddashboard/[investingEntityId]/ManageCompanyForm.svelte';
 
 	export let form: ActionData;
 

@@ -6,7 +6,6 @@
 	import { selectedCompanyStore } from '$lib/stores/selectedCompanyStore.js';
 
 	export let data;
-
 	function formatTitleFromPath(path: string) {
 		return path
 			.split('/')
