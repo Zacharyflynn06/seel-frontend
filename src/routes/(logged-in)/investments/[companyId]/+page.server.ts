@@ -1,6 +1,6 @@
 import { GetCompanyStore, UpsertDocumentCollectionStore } from '$houdini';
 import type { Actions } from '@sveltejs/kit';
-import type { PageLoad } from '../$types';
+import type { PageLoad } from './$types';
 
 export const load: PageLoad = async (event) => {
 	const companyId = event.params.companyId;

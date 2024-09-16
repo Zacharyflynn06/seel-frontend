@@ -5,14 +5,11 @@
 	import TextInput from '$lib/components/formComponents/TextInput.svelte';
 	import { fly, slide } from 'svelte/transition';
 	import type { PageData } from './$types';
-	import ManageDocumentCollectionForm from './ManageDocumentCollectionForm.svelte';
-	import type { ActionData } from '../$types';
-	import RectangleGroupIcon from '$lib/components/icons/RectangleGroupIcon.svelte';
-	import { flexCenter } from '$lib/classes';
+	import type { ActionData } from './$types';
 	import LineItem from '$lib/components/LineItem.svelte';
+	import ManageDocumentCollectionForm from './ManageDocumentCollectionForm.svelte';
 	export let data: PageData;
-	export let form: ActionData;
-	// your script goes here
+	// export let form: ActionData;
 
 	let loading = false;
 
