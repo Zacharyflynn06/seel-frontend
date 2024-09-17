@@ -1,6 +1,8 @@
 query GetInvestingEntity($id: ID!) {
 	getInvestingEntity(id: $id) {
 		address
+		id
+
 		companies {
 			documents {
 				name
@@ -22,8 +24,12 @@ query GetInvestingEntity($id: ID!) {
 		name
 		strategy
 		investmentCriteria {
+			enabled
+			field {
+				name
+				id
+			}
 			required
 		}
-		id
 	}
 }

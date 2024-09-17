@@ -1,5 +1,6 @@
 import {
 	DeleteCompanyStore,
+	GetIvestmentCriteriaRulsetStore,
 	UpsertCompanyStore,
 	type UpsertCompanyAttributeInput,
 	type UpsertCompanyInput
@@ -7,6 +8,28 @@ import {
 import type { Actions } from '@sveltejs/kit';
 
 export const actions: Actions = {
+	get_investment_rulset: async (event) => {
+		const formData = await event.request.formData();
+		const description = formData.get('description')?.toString();
+
+		const store = new GetIvestmentCriteriaRulsetStore();
+
+		if (!description) {
+			return { error: 'Description not found' };
+		}
+		const req = await store.fetch({ event, variables: { input: description } });
+
+		if (req.errors) {
+			return { error: req.errors[0].message };
+		}
+
+		console.log(req.data?.getInvestmentCriteriaRuleSet);
+
+		return {
+			success: true,
+			message: 'Successfully fetched investment criteria rulset'
+		};
+	},
 	add_new_company: async (event) => {
 		const data = await event.request.formData();
 		const name = data.get('company_name')?.toString();

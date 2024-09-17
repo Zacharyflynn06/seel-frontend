@@ -8,6 +8,7 @@ export * from "./artifacts/GetDocumentCollection";
 export * from "./artifacts/GetFields";
 export * from "./artifacts/GetInvestingEntities";
 export * from "./artifacts/GetInvestingEntity";
+export * from "./artifacts/GetIvestmentCriteriaRulset";
 export * from "./artifacts/GetUser";
 export * from "./artifacts/GetUsers";
 export * from "./artifacts/linkInvestingEntityToUser";

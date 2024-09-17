@@ -22,7 +22,7 @@
 		$selectedEntityStore = data?.user?.investingEntities[0].id;
 	}
 
-	$: console.log('layout', { $selectedEntityStore });
+	$: console.log('layout', { user });
 </script>
 
 <div class="mb-5 flex items-end justify-between">

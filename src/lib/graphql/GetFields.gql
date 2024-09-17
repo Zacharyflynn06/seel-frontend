@@ -3,5 +3,9 @@ query GetFields {
 		name
 		id
 		description
+		fieldType {
+			name
+			id
+		}
 	}
 }

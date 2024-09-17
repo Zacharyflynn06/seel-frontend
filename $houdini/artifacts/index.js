@@ -9,6 +9,7 @@
  export { default as GetFields} from './GetFields'
  export { default as GetInvestingEntities} from './GetInvestingEntities'
  export { default as GetInvestingEntity} from './GetInvestingEntity'
+ export { default as GetIvestmentCriteriaRulset} from './GetIvestmentCriteriaRulset'
  export { default as GetUser} from './GetUser'
  export { default as GetUsers} from './GetUsers'
  export { default as linkInvestingEntityToUser} from './linkInvestingEntityToUser'

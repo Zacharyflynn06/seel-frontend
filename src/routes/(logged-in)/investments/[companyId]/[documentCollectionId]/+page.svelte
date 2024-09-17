@@ -25,7 +25,7 @@
 
 	let chatId = '';
 
-	let subscription = new ChatEventStore();
+	// let subscription = new ChatEventStore();
 	let messageStore = new SendMessageToChatStore();
 
 	const handleSendMessage = async (event) => {
@@ -46,8 +46,6 @@
 	$: if (form?.chatId) {
 		chatId = form.chatId;
 	}
-
-	$: console.log({ data, $subscription });
 </script>
 
 {#if documentCollection}
