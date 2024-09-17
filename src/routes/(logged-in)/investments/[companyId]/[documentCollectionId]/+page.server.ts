@@ -8,7 +8,6 @@ import type { PageLoad } from './$types';
 
 export const load: PageLoad = async (event) => {
 	const documentCollectionId = event.params.documentCollectionId;
-	const investingEntityId = event.params.investingEntityId;
 	const companyId = event.params.companyId;
 
 	const store = new GetDocumentCollectionStore();
@@ -20,12 +19,12 @@ export const load: PageLoad = async (event) => {
 		}
 	});
 
-	// console.log(data);
+	console.log({ data });
 
 	return {
 		documentCollection: data?.getDocumentCollection,
-		investingEntityId,
-		companyId
+		investingEntity: data?.getDocumentCollection?.investingEntity,
+		companyId: companyId
 	};
 };
 
@@ -66,8 +65,6 @@ export const actions: Actions = {
 
 	start_chat: async (event) => {
 		const data = await event.request.formData();
-		const userInput = data.get('user_input')?.toString();
-
 		const documentCollectionId = data.get('documentCollectionId')?.toString();
 		const userId = data.get('userId')?.toString();
 		const investingEntityId = data.get('investingEntityId')?.toString();

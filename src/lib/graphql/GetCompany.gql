@@ -14,5 +14,9 @@ query GetCompany($id: ID!) {
 			name
 			id
 		}
+		investingEntity {
+			name
+			id
+		}
 	}
 }

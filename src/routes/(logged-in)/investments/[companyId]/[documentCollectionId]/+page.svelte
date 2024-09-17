@@ -29,29 +29,25 @@
 	let messageStore = new SendMessageToChatStore();
 
 	const handleSendMessage = async (event) => {
-		const res = await messageStore.mutate({ id: chatId, message: userInput });
-		console.log({ res });
-		const message = await res.data?.sendMessageToChat;
-
-		console.log({ message });
+		const sendMessageRes = await messageStore.mutate({ id: chatId, message: userInput });
+		const sendMessageBody = await sendMessageRes.data?.sendMessageToChat;
+		console.log({ sendMessageBody });
 	};
 
 	$: userId = data.user.id;
-	$: investingEntityId = data.investingEntityId;
+	$: investingEntityId = data.investingEntity.id;
 	$: companyId = data.companyId;
 	$: documentCollection = data.documentCollection;
-
-	$: if (form?.success) {
-		chatId = form.chatId;
-		subscription.listen({ chatId: chatId });
-		console.log({ chatId });
-	}
 
 	$: if (form?.error) {
 		toast.error('Something went wrong', { position: 'bottom-center' });
 	}
 
-	$: console.log({ $subscription });
+	$: if (form?.chatId) {
+		chatId = form.chatId;
+	}
+
+	$: console.log({ data, $subscription });
 </script>
 
 {#if documentCollection}

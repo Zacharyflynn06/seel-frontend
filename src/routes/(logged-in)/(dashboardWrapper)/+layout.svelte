@@ -3,8 +3,6 @@
 
 	import { page } from '$app/stores';
 	import { selectedEntityStore } from '$lib/stores/selectedEntityStore.js';
-	import { selectedCompanyStore } from '$lib/stores/selectedCompanyStore.js';
-
 	export let data;
 
 	function formatTitleFromPath(path: string) {
@@ -14,26 +12,17 @@
 			.join(' ');
 	}
 
-	function handleChangeInvestingEntity(event) {
-		const entity = data.user.investingEntities.filter((entity) => entity.id === event.target.value);
-		$selectedEntityStore = entity[0];
-		$selectedCompanyStore = entity[0].companies[0];
-	}
-	function handleChangeCompany(event) {
-		const company = $selectedEntityStore.companies.filter(
-			(company) => company.id === event.target.value
-		);
-		$selectedCompanyStore = company[0];
+	function handleChangeInvestingEntity(event: Event) {
+		$selectedEntityStore = event?.currentTarget?.value;
 	}
 
-	let user = data.user;
+	$: user = data.user;
 
-	if ($selectedEntityStore === null) {
-		$selectedEntityStore = data.user.investingEntities[0];
-		$selectedCompanyStore = data.user.investingEntities[0].companies[0];
+	if (!$selectedEntityStore) {
+		$selectedEntityStore = data?.user?.investingEntities[0].id;
 	}
 
-	console.log({ $selectedEntityStore, $selectedCompanyStore });
+	$: console.log('layout', { $selectedEntityStore });
 </script>
 
 <div class="mb-5 flex items-end justify-between">
@@ -48,14 +37,14 @@
 				{/each}
 			</SelectInput>
 		{/if}
-		<span class="inline-flex font-spartan uppercase tracking-widest">Investments</span>
+		<!-- <span class="inline-flex font-spartan uppercase tracking-widest">Investments</span>
 		{#if $selectedEntityStore && $selectedEntityStore.companies}
 			<SelectInput name="company" on:change={handleChangeCompany}>
 				{#each $selectedEntityStore.companies as company}
 					<option value={company.id}>{company.attributes[0].stringValue}</option>
 				{/each}
 			</SelectInput>
-		{/if}
+		{/if} -->
 	</div>
 </div>
 

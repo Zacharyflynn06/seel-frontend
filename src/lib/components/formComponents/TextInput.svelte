@@ -29,6 +29,7 @@
 			type="text"
 			bind:value
 			{name}
+			id={name}
 			{placeholder}
 			class={className}
 			{minlength}

@@ -8,5 +8,14 @@ query GetDocumentCollection($id: ID!) {
 			id
 			name
 		}
+		company {
+			id
+			attributes {
+				stringValue
+			}
+		}
+		investingEntity {
+			id
+		}
 	}
 }

@@ -1,0 +1,81 @@
+import {
+	DeleteDocumentCollectionStore,
+	GetCompanyStore,
+	UpsertDocumentCollectionStore,
+	type UpsertDocumentCollectionInput
+} from '$houdini';
+import type { Actions } from '@sveltejs/kit';
+import type { PageLoad } from './$types';
+
+export const load: PageLoad = async (event) => {
+	const companyId = event.params.companyId;
+
+	const store = new GetCompanyStore();
+
+	const { data } = await store.fetch({ event, variables: { id: companyId } });
+	return {
+		company: data?.getCompany,
+		investingEntity: data?.getCompany?.investingEntity
+	};
+};
+
+export const actions: Actions = {
+	add_new_document_collection: async (event) => {
+		const data = await event.request.formData();
+
+		const name = data.get('documentCollectionName')?.toString();
+		const investingEntityId = data.get('investingEntityId')?.toString();
+		const companyId = data.get('companyId')?.toString();
+		const userId = event?.locals?.user?.id;
+		const store = new UpsertDocumentCollectionStore();
+
+		if (!name || !investingEntityId || !companyId) {
+			return { error: 'All fields are required' };
+		}
+
+		const input: UpsertDocumentCollectionInput = {
+			name: name,
+			investingEntityId: investingEntityId,
+			companyId: companyId,
+			userId: userId
+		};
+
+		const res = await store.mutate({ input }, { event });
+
+		if (res.errors) {
+			console.log({ error: res.errors[0].message });
+			return { error: res.errors[0].message };
+		}
+
+		return {
+			success: true,
+			message: 'Successfully added new document collection'
+		};
+	},
+
+	delete_document_collection: async (event) => {
+		const data = await event.request.formData();
+		const documentCollectionId = data.get('document_collection_id')?.toString();
+
+		const store = new DeleteDocumentCollectionStore();
+
+		if (!documentCollectionId) {
+			return {
+				error: 'Document collection id not found'
+			};
+		}
+
+		try {
+			await store.mutate({ id: documentCollectionId }, { event }).then((res) => {
+				console.log({ res });
+			});
+			return {
+				success: true,
+				message: 'Successfully deleted document collection'
+			};
+		} catch (error) {
+			console.log((error as Error).message);
+			return { error: (error as Error).message };
+		}
+	}
+};
