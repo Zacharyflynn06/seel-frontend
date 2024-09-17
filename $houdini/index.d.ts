@@ -2,6 +2,7 @@ export * from "./artifacts/AddDocumentToCollection";
 export * from "./artifacts/AskSeel";
 export * from "./artifacts/ChatEvent";
 export * from "./artifacts/DeleteCompany";
+export * from "./artifacts/DeleteDocumentCollection";
 export * from "./artifacts/GetCompany";
 export * from "./artifacts/GetDocumentCollection";
 export * from "./artifacts/GetFields";

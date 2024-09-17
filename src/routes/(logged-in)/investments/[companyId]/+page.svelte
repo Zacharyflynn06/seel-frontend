@@ -8,45 +8,54 @@
 	import type { ActionData } from './$types';
 	import LineItem from '$lib/components/LineItem.svelte';
 	import ManageDocumentCollectionForm from '$lib/components/formComponents/ManageDocumentCollectionForm.svelte';
+	import toast from 'svelte-french-toast';
 	export let data: PageData;
-	// export let form: ActionData;
+	export let form: ActionData;
 
 	let loading = false;
 
+	$: if (form?.success) {
+		console.log('success', form);
+		toast.success(form.message, { position: 'top-center' });
+	}
+
+	$: if (form?.error) {
+		toast.error(form?.error, { position: 'top-center' });
+	}
+
 	console.log({ data });
 	$: company = data.company;
-	$: investingEntityId = data.investingEntityId;
+	$: investingEntity = data.investingEntity;
 </script>
 
 {#if company}
 	<div class="space-y-5">
 		<Card heading="{company?.attributes[0].stringValue}'s Details">
-			<div class="divide-y"></div>
+			<div class="divide-y">TODO: add company details and attributes.</div>
 		</Card>
-		<Card heading="{company?.attributes[0].stringValue}'s Document Collections">
-			<div class="divide-y">
-				{#each company.documentCollections as documentCollection}
-					<div in:fly={{ y: 20 }} out:slide class="flex w-full py-5">
-						<a
-							href="/investments/{company.id}/{documentCollection.id}"
-							class="flex w-full items-center justify-between"
-						>
-							<div class="flex items-center space-x-5 text-lg">
-								<LineItem>
-									{documentCollection.name}
-								</LineItem>
-							</div>
-						</a>
+		<Card
+			heading="{company?.attributes[0].stringValue}'s Document Collections"
+			className="space-y-5"
+		>
+			{#each company.documentCollections as documentCollection}
+				<div in:fly={{ y: 20 }} out:slide class="flex w-full py-5">
+					<a
+						href="/investments/{company.id}/{documentCollection.id}"
+						class="flex w-full items-center justify-between"
+					>
+						<div class="flex items-center space-x-5 text-lg">
+							<LineItem>
+								{documentCollection.name}
+							</LineItem>
+						</div>
+					</a>
 
-						<ManageDocumentCollectionForm {documentCollection} />
-					</div>
-				{:else}
-					<p>No document collections added yet, add one below!</p>
-				{/each}
-			</div>
-		</Card>
+					<ManageDocumentCollectionForm {documentCollection} />
+				</div>
+			{:else}
+				<p>No document collections added yet, add one below!</p>
+			{/each}
 
-		<Card heading="Add a new document collection to {company?.attributes[0].stringValue ?? ''}">
 			<form
 				use:enhance={() => {
 					loading = true;
@@ -65,7 +74,7 @@
 					type="text"
 					required
 				></TextInput>
-				<input type="hidden" name="investingEntityId" value={investingEntityId} />
+				<input type="hidden" name="investingEntityId" value={investingEntity.id} />
 				<input type="hidden" name="companyId" value={company.id} />
 				<SmallButton type="submit" label="Add Document Collection" {loading}></SmallButton>
 			</form>

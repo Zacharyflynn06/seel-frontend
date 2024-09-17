@@ -3,6 +3,7 @@
  export { default as AskSeel} from './AskSeel'
  export { default as ChatEvent} from './ChatEvent'
  export { default as DeleteCompany} from './DeleteCompany'
+ export { default as DeleteDocumentCollection} from './DeleteDocumentCollection'
  export { default as GetCompany} from './GetCompany'
  export { default as GetDocumentCollection} from './GetDocumentCollection'
  export { default as GetFields} from './GetFields'
