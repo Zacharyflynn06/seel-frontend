@@ -7,7 +7,7 @@
 	import type { PageData } from './$types';
 	import type { ActionData } from './$types';
 	import LineItem from '$lib/components/LineItem.svelte';
-	import ManageDocumentCollectionForm from './ManageDocumentCollectionForm.svelte';
+	import ManageDocumentCollectionForm from '$lib/components/formComponents/ManageDocumentCollectionForm.svelte';
 	export let data: PageData;
 	// export let form: ActionData;
 
@@ -20,13 +20,15 @@
 
 {#if company}
 	<div class="space-y-5">
+		<Card heading="{company?.attributes[0].stringValue}'s Details">
+			<div class="divide-y"></div>
+		</Card>
 		<Card heading="{company?.attributes[0].stringValue}'s Document Collections">
 			<div class="divide-y">
 				{#each company.documentCollections as documentCollection}
 					<div in:fly={{ y: 20 }} out:slide class="flex w-full py-5">
-						<!-- this is the roundabout way we are getting the company name for now -->
 						<a
-							href="/dashboard/{investingEntityId}/{company.id}/{documentCollection.id}"
+							href="/investments/{company.id}/{documentCollection.id}"
 							class="flex w-full items-center justify-between"
 						>
 							<div class="flex items-center space-x-5 text-lg">

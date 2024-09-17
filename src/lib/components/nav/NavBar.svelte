@@ -27,17 +27,17 @@
 			href: '/review-deals',
 			icon: FolderSearch
 		},
-		{
-			name: 'Pipeline',
-			href: '/pipeline',
-			icon: Workflow
-		},
+		// {
+		// 	name: 'Pipeline',
+		// 	href: '/pipeline',
+		// 	icon: Workflow
+		// },
 
-		{
-			name: 'Documents',
-			href: '/documents',
-			icon: Files
-		},
+		// {
+		// 	name: 'Documents',
+		// 	href: '/documents',
+		// 	icon: Files
+		// },
 		{
 			name: 'Admin console',
 			href: '/admin',
