@@ -23,7 +23,7 @@
 		toast.error(form?.error, { position: 'top-center' });
 	}
 
-	console.log({ data });
+	$: console.log({ data });
 	$: company = data.company;
 	$: investingEntity = data.investingEntity;
 </script>
