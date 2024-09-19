@@ -19,6 +19,7 @@ export * from "./artifacts/UpsertDocumentCollection";
 export * from "./artifacts/UpsertDocumentMetadata";
 export * from "./artifacts/UpsertField";
 export * from "./artifacts/UpsertInvestingEntity";
+export * from "./artifacts/UpsertInvestmentCriterion";
 export * from "./artifacts/UpsertUser";
 export * from "./runtime";
 export * from "./graphql";

@@ -20,4 +20,5 @@
  export { default as UpsertDocumentMetadata} from './UpsertDocumentMetadata'
  export { default as UpsertField} from './UpsertField'
  export { default as UpsertInvestingEntity} from './UpsertInvestingEntity'
+ export { default as UpsertInvestmentCriterion} from './UpsertInvestmentCriterion'
  export { default as UpsertUser} from './UpsertUser'

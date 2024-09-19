@@ -25,6 +25,9 @@ query GetUser($id: ID!) {
 				required
 				rules
 				field {
+					fieldType {
+						name
+					}
 					name
 					id
 				}

@@ -9,7 +9,7 @@
 </script>
 
 <button
-	{disabled}
+	disabled={disabled || loading}
 	{type}
 	class="flex min-w-[80px] space-x-2.5 rounded-md bg-pink text-off-white {disabled
 		? 'text-grey-01  opacity-50 dark:border dark:border-grey-08 '
