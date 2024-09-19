@@ -4,8 +4,8 @@ import { UpsertInvestingEntityStore } from "../plugins/houdini-svelte/stores/Ups
 import { UpsertFieldStore } from "../plugins/houdini-svelte/stores/UpsertField";
 import { UpsertDocumentMetadataStore } from "../plugins/houdini-svelte/stores/UpsertDocumentMetadata";
 import { UpsertDocumentCollectionStore } from "../plugins/houdini-svelte/stores/UpsertDocumentCollection";
-import { UpsertChatStore } from "../plugins/houdini-svelte/stores/UpsertChat";
 import { UpsertCompanyStore } from "../plugins/houdini-svelte/stores/UpsertCompany";
+import { UpsertChatStore } from "../plugins/houdini-svelte/stores/UpsertChat";
 import { SendMessageToChatStore } from "../plugins/houdini-svelte/stores/SendMessageToChat";
 import { linkInvestingEntityToUserStore } from "../plugins/houdini-svelte/stores/linkInvestingEntityToUser";
 import { GetUsersStore } from "../plugins/houdini-svelte/stores/GetUsers";
@@ -16,9 +16,9 @@ import { GetInvestingEntitiesStore } from "../plugins/houdini-svelte/stores/GetI
 import { GetFieldsStore } from "../plugins/houdini-svelte/stores/GetFields";
 import { GetDocumentCollectionStore } from "../plugins/houdini-svelte/stores/GetDocumentCollection";
 import { GetCompanyStore } from "../plugins/houdini-svelte/stores/GetCompany";
-import { ChatEventStore } from "../plugins/houdini-svelte/stores/ChatEvent";
 import { DeleteDocumentCollectionStore } from "../plugins/houdini-svelte/stores/DeleteDocumentCollection";
 import { DeleteCompanyStore } from "../plugins/houdini-svelte/stores/DeleteCompany";
+import { ChatEventStore } from "../plugins/houdini-svelte/stores/ChatEvent";
 import { AskSeelStore } from "../plugins/houdini-svelte/stores/AskSeel";
 import { AddDocumentToCollectionStore } from "../plugins/houdini-svelte/stores/AddDocumentToCollection";
 import type { Cache as InternalCache } from "./cache/cache";
@@ -52,12 +52,12 @@ export function graphql(
 ): UpsertDocumentCollectionStore;
 
 export function graphql(
-    str: "mutation UpsertChat($input: UpsertChatInput!) {\n\tupsertChat(input: $input) {\n\t\tid\n\t}\n}\n"
-): UpsertChatStore;
-
-export function graphql(
     str: "mutation UpsertCompany($input: UpsertCompanyInput!) {\n\tupsertCompany(input: $input) {\n\t\tid\n\t}\n}\n"
 ): UpsertCompanyStore;
+
+export function graphql(
+    str: "mutation UpsertChat($input: UpsertChatInput!) {\n\tupsertChat(input: $input) {\n\t\tid\n\t}\n}\n"
+): UpsertChatStore;
 
 export function graphql(
     str: "mutation SendMessageToChat($id: ID!, $message: String!) {\n\tsendMessageToChat(id: $id, message: $message)\n}\n"
@@ -98,16 +98,16 @@ export function graphql(
 ): GetCompanyStore;
 
 export function graphql(
-    str: "subscription ChatEvent($chatId: ID!) {\n\tchatEvent(chatId: $chatId) {\n\t\tchatId\n\t\teventType\n\t\ttext\n\t}\n}\n"
-): ChatEventStore;
-
-export function graphql(
     str: "mutation DeleteDocumentCollection($id: ID!) {\n\tdeleteDocumentCollection(id: $id) {\n\t\tid\n\t}\n}\n"
 ): DeleteDocumentCollectionStore;
 
 export function graphql(
     str: "mutation DeleteCompany($id: ID!) {\n\tdeleteCompany(id: $id) {\n\t\tid\n\t}\n}\n"
 ): DeleteCompanyStore;
+
+export function graphql(
+    str: "subscription ChatEvent($chatId: ID!) {\n\tchatEvent(chatId: $chatId) {\n\t\tchatId\n\t\teventType\n\t\ttext\n\t}\n}\n"
+): ChatEventStore;
 
 export function graphql(
     str: "query AskSeel($question: String!) {\n\task(question: $question)\n}\n"

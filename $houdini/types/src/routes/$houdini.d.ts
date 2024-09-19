@@ -11,7 +11,7 @@ type OutputDataShape<T> = MaybeWithVoid<Omit<App.PageData, RequiredKeys<T>> & Pa
 type EnsureDefined<T> = T extends null | undefined ? {} : T;
 type OptionalUnion<U extends Record<string, any>, A extends keyof U = U extends U ? keyof U : never> = U extends unknown ? { [P in Exclude<A, keyof U>]?: never } & U : never;
 export type Snapshot<T = any> = Kit.Snapshot<T>;
-type LayoutRouteId = RouteId | "/(auth)/forgot-password" | "/(auth)/log-in" | "/(auth)/log-out" | "/(auth)/new-password" | "/(auth)/sign-up" | "/(logged-in)/(dashboardWrapper)/dashboard" | "/(logged-in)/(dashboardWrapper)/review-deals" | "/(logged-in)/(dashboardWrapper)/submit-deals" | "/(logged-in)/admin" | "/(logged-in)/admin/manage-fields" | "/(logged-in)/admin/manage-investing-entities" | "/(logged-in)/chat-demo" | "/(logged-in)/investments/[companyId]" | "/(logged-in)/investments/[companyId]/[documentCollectionId]" | "/(public)" | "/(public)/about" | "/(public)/privacy-policy" | null
+type LayoutRouteId = RouteId | "/(auth)/forgot-password" | "/(auth)/log-in" | "/(auth)/log-out" | "/(auth)/new-password" | "/(auth)/sign-up" | "/(logged-in)/(dashboardWrapper)/dashboard" | "/(logged-in)/(dashboardWrapper)/review-deals" | "/(logged-in)/(dashboardWrapper)/submit-deals" | "/(logged-in)/admin" | "/(logged-in)/admin/manage-fields" | "/(logged-in)/admin/manage-investing-entities" | "/(logged-in)/investments/[companyId]" | "/(logged-in)/investments/[companyId]/[documentCollectionId]" | "/(public)" | "/(public)/about" | "/(public)/privacy-policy" | null
 type LayoutParams = RouteParams & { companyId?: string; documentCollectionId?: string }
 type LayoutServerParentData = EnsureDefined<{}>;
 type LayoutParentData = EnsureDefined<{}>;

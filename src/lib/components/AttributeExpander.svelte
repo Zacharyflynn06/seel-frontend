@@ -11,6 +11,8 @@
 	let isOpen = false;
 
 	let loading = false;
+
+	console.log(criteriaObject.rules);
 </script>
 
 <form
@@ -19,6 +21,7 @@
 		return async ({ update }) => {
 			update();
 			loading = false;
+			isOpen = false;
 		};
 	}}
 	action="?/save_criteria"
@@ -30,13 +33,13 @@
 	<div>{criteriaObject.field.name}</div>
 
 	{#if isOpen}
-		<ToggleInput name="required" value={criteriaObject.required} />
-		<ToggleInput name="enabled" value={criteriaObject.enabled} />
+		<ToggleInput name="required" bind:value={criteriaObject.required} />
+		<ToggleInput name="enabled" bind:value={criteriaObject.enabled} />
 	{:else}
 		<div>{criteriaObject.required}</div>
 		<div>{criteriaObject.enabled}</div>
 	{/if}
-	<div>{criteriaObject.rules}</div>
+	<div>{!!criteriaObject.rules}</div>
 	<div>{criteriaObject.field.fieldType.name}</div>
 
 	<div>
