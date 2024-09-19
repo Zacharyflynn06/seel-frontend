@@ -17,6 +17,9 @@ importers:
       aws-sdk:
         specifier: ^2.1596.0
         version: 2.1596.0
+      chart.js:
+        specifier: ^4.4.4
+        version: 4.4.4
       filepond:
         specifier: ^4.30.6
         version: 4.30.6
@@ -1889,6 +1892,9 @@ packages:
     resolution: {integrity: sha512-uDBFBvCYUT4UaZZKv7gJejQvbrOp4YyI1S0Z92DPiMbyLq0DPDXz3Lt2ZqUZKlQrinBX+W1TO6w0RudEX6Q6WA==}
     engines: {node: ^16.14 || >=18}
 
+  '@kurkle/color@0.3.2':
+    resolution: {integrity: sha512-fuscdXJ9G1qb7W8VdHi+IwRqij3lBkosAm4ydQtEmbY58OzHXqQhvlxqEkoz0yssNVn38bcpRWgA9PP+OGoisw==}
+
   '@nodelib/fs.scandir@2.1.5':
     resolution: {integrity: sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g==}
     engines: {node: '>= 8'}
@@ -2649,6 +2655,10 @@ packages:
   chalk@4.1.2:
     resolution: {integrity: sha512-oKnbhFyRIXpUuez8iBMmyEa4nbj4IOQyuhc/wy9kY7/WVPcwIO9VA668Pu8RkO7+0G76SLROeyw9CpQ061i4mA==}
     engines: {node: '>=10'}
+
+  chart.js@4.4.4:
+    resolution: {integrity: sha512-emICKGBABnxhMjUjlYRR12PmOXhJ2eJjEHL2/dZlWjxRAZT1D8xplLFq5M0tMQK8ja+wBS/tuVEJB5C6r7VxJA==}
+    engines: {pnpm: '>=8'}
 
   check-error@1.0.3:
     resolution: {integrity: sha512-iKEoDYaRmd1mxM90a2OEfWhjsjPpYPuQ+lMYsoxB126+t8fw7ySEO48nmDg5COTjxDI65/Y2OWpeEHk3ZOe8zg==}
@@ -8039,6 +8049,8 @@ snapshots:
     dependencies:
       esm-env: 1.0.0
 
+  '@kurkle/color@0.3.2': {}
+
   '@nodelib/fs.scandir@2.1.5':
     dependencies:
       '@nodelib/fs.stat': 2.0.5
@@ -9120,6 +9132,10 @@ snapshots:
     dependencies:
       ansi-styles: 4.3.0
       supports-color: 7.2.0
+
+  chart.js@4.4.4:
+    dependencies:
+      '@kurkle/color': 0.3.2
 
   check-error@1.0.3:
     dependencies:

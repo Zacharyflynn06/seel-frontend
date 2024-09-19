@@ -17,11 +17,11 @@
 			icon: LayoutDashboard
 		},
 
-		// {
-		// 	name: 'Submit Deals',
-		// 	href: '/submit-deals',
-		// 	icon: FolderUp
-		// },
+		{
+			name: 'Submit Deals',
+			href: '/submit-deals',
+			icon: FolderUp
+		},
 		{
 			name: 'Review Deals',
 			href: '/review-deals',

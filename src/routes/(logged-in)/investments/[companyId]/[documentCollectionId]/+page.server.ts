@@ -1,6 +1,7 @@
 import {
 	AddDocumentToCollectionStore,
 	GetDocumentCollectionStore,
+	SendMessageToChatStore,
 	UpsertChatStore
 } from '$houdini';
 import type { Actions } from '@sveltejs/kit';
@@ -101,6 +102,43 @@ export const actions: Actions = {
 		return {
 			success: true,
 			chatId: chatId
+		};
+	},
+
+	send_message: async (event) => {
+		const data = await event.request.formData();
+		const chatId = data.get('chatId')?.toString();
+		const message = data.get('user_input')?.toString();
+		// let subscription = new ChatEventStore();
+		const messageStore = new SendMessageToChatStore();
+
+		if (!chatId) {
+			return {
+				error: true,
+				message: 'Chat id not found'
+			};
+		}
+		if (!message) {
+			return {
+				error: true,
+				message: 'Message not found'
+			};
+		}
+
+		const sendMessageRes = await messageStore.mutate({ id: chatId, message: message }, { event });
+
+		if (sendMessageRes.errors) {
+			return {
+				error: true,
+				message: sendMessageRes.errors[0].message
+			};
+		}
+		const sendMessageBody = await sendMessageRes.data?.sendMessageToChat;
+
+		console.log({ sendMessageBody });
+		return {
+			success: true,
+			answer: sendMessageBody
 		};
 	}
 };
