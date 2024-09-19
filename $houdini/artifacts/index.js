@@ -22,3 +22,4 @@
  export { default as UpsertInvestingEntity} from './UpsertInvestingEntity'
  export { default as UpsertInvestmentCriterion} from './UpsertInvestmentCriterion'
  export { default as UpsertUser} from './UpsertUser'
+ export { default as ValidateCompany} from './ValidateCompany'

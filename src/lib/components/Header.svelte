@@ -28,7 +28,7 @@
 <header
 	class="fixed top-0 z-10 flex h-[60px] w-full justify-center bg-light-grey-08 shadow-08dp dark:bg-grey-08"
 >
-	<div class="relative flex h-full w-full items-center justify-between px-5">
+	<div class="relative flex h-full w-full items-center justify-between px-10">
 		<a href="/" class="font-spartan text-5xl font-semibold leading-[.5] text-purple dark:text-pink"
 			>seel</a
 		>

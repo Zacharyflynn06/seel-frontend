@@ -17,6 +17,18 @@ query GetCompany($id: ID!) {
 		investingEntity {
 			name
 			id
+			investmentCriteria {
+				enabled
+				required
+				rules
+				field {
+					fieldType {
+						name
+					}
+					name
+					id
+				}
+			}
 		}
 	}
 }

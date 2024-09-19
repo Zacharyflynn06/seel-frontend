@@ -21,6 +21,7 @@ export * from "./artifacts/UpsertField";
 export * from "./artifacts/UpsertInvestingEntity";
 export * from "./artifacts/UpsertInvestmentCriterion";
 export * from "./artifacts/UpsertUser";
+export * from "./artifacts/ValidateCompany";
 export * from "./runtime";
 export * from "./graphql";
 export * from "./plugins/houdini-plugin-svelte-global-stores/stores"

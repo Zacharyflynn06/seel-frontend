@@ -53,7 +53,7 @@
 
 		<div class="rounded-lg bg-light-grey-04 p-5 shadow-08dp dark:bg-grey-04">
 			<div class="space-y-5 border-b">
-				<h1>{selectedEntity?.name}'s Investment Criteria</h1>
+				<h1>Manage Investment Criteria for {selectedEntity.name}</h1>
 				<p>TODO: some copy explaining what this is</p>
 				<custom-table class="grid grid-cols-6 text-left">
 					<th class=" py-2">Criteria</th>

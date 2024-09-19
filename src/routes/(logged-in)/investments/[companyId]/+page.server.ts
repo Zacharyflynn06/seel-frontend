@@ -2,6 +2,7 @@ import {
 	DeleteDocumentCollectionStore,
 	GetCompanyStore,
 	UpsertDocumentCollectionStore,
+	ValidateCompanyStore,
 	type UpsertDocumentCollectionInput
 } from '$houdini';
 import type { Actions } from '@sveltejs/kit';
@@ -10,12 +11,26 @@ import type { PageLoad } from './$types';
 export const load: PageLoad = async (event) => {
 	const companyId = event.params.companyId;
 
-	const store = new GetCompanyStore();
+	const getCompanyStore = new GetCompanyStore();
+	const getCompanyRes = await getCompanyStore.fetch({ event, variables: { id: companyId } });
+	const company = getCompanyRes.data?.getCompany;
 
-	const { data } = await store.fetch({ event, variables: { id: companyId } });
+	if (!company) {
+		return {
+			error: 'Company not found'
+		};
+	}
+
+	const validateCompanyStore = new ValidateCompanyStore();
+	const validateCompanyRes = await validateCompanyStore.fetch({
+		event,
+		variables: { companyId: companyId }
+	});
+
 	return {
-		company: data?.getCompany,
-		investingEntity: data?.getCompany?.investingEntity
+		company: company,
+		investingEntity: company.investingEntity,
+		validateCompany: validateCompanyRes.data?.validateCompany
 	};
 };
 
