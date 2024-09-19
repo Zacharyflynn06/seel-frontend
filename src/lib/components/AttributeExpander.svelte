@@ -3,6 +3,8 @@
 	import { X } from 'lucide-svelte';
 	import SmallButton from './buttons/SmallButton.svelte';
 	import TextAreaInput from './formComponents/TextAreaInput.svelte';
+	import ToggleInput from './formComponents/ToggleInput.svelte';
+	import { slide } from 'svelte/transition';
 
 	export let criteriaObject;
 	export let index;
@@ -14,33 +16,38 @@
 	$: console.log({ isOpen });
 </script>
 
-<div
-	class="grid w-full cursor-pointer grid-cols-5 items-center border-b border-light-grey-01 text-left"
+<form
+	use:enhance={() => {
+		loading = true;
+		return async ({ update }) => {
+			update();
+			loading = false;
+		};
+	}}
+	action="?/save_criteria"
+	method="POST"
+	class="grid w-full cursor-pointer grid-cols-5 items-center border-b border-light-grey-01 py-3 text-left"
 >
-	<div class="py-2">{criteriaObject.field.name}</div>
-	<div class="py-2">{criteriaObject.required}</div>
-	<div class="py-2">{criteriaObject.enabled}</div>
-	<div class="py-2">{criteriaObject.rules}</div>
+	<div>{criteriaObject.field.name}</div>
+
+	{#if isOpen}
+		<ToggleInput name="required" />
+		<ToggleInput name="enabled" />
+	{:else}
+		<div>{criteriaObject.required}</div>
+		<div>{criteriaObject.enabled}</div>
+	{/if}
+	<div>{criteriaObject.rules}</div>
 	<div>
-		<button class="rounded-sm bg-pink px-3 py-1 text-off-white" on:click={() => (isOpen = !isOpen)}
-			>Edit</button
+		<button
+			class="rounded-sm bg-pink px-3 py-1 text-off-white shadow-md"
+			on:click|preventDefault={() => (isOpen = !isOpen)}>Edit</button
 		>
 	</div>
 
 	{#if isOpen}
-		<div class="col-span-3 grid py-5">
-			<form
-				use:enhance={() => {
-					loading = true;
-					return async ({ update }) => {
-						update();
-						loading = false;
-					};
-				}}
-				action="?/get_investment_rulset"
-				method="POST"
-				class="w-full items-center space-y-5"
-			>
+		<div transition:slide class="col-span-3 grid py-5">
+			<div class="w-full items-center space-y-5">
 				<TextAreaInput
 					label="Describe your custom criteria for {criteriaObject.field.name}"
 					name="description"
@@ -50,8 +57,8 @@
 					<SmallButton label="Save" type="submit" />
 					<button type="button" on:click|preventDefault={() => (isOpen = false)}>Cancel</button>
 				</div>
-			</form>
+			</div>
 		</div>
 		<div class="col-span-1 grid py-5"></div>
 	{/if}
-</div>
+</form>

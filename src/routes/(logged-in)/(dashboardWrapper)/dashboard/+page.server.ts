@@ -8,6 +8,10 @@ import {
 import type { Actions } from '@sveltejs/kit';
 
 export const actions: Actions = {
+	save_criteria: async (event) => {
+		const formData = await event.request.formData();
+		const description = formData.get('description')?.toString();
+	},
 	get_investment_rulset: async (event) => {
 		const formData = await event.request.formData();
 		const description = formData.get('description')?.toString();

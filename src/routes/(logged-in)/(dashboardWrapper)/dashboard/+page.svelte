@@ -1,24 +1,13 @@
 <script lang="ts">
 	import Card from '$lib/components/Card.svelte';
-	import LineItem from '$lib/components/LineItem.svelte';
-	import { selectedCompanyStore } from '$lib/stores/selectedCompanyStore';
 	import { selectedEntityStore } from '$lib/stores/selectedEntityStore';
-	import { fly } from 'svelte/transition';
-	import { enhance } from '$app/forms';
 	import type { ActionData, PageData } from './$types';
-	import TextInput from '$lib/components/formComponents/TextInput.svelte';
-	import SmallButton from '$lib/components/buttons/SmallButton.svelte';
 	import toast from 'svelte-french-toast';
-	import ManageCompanyForm from '$lib/components/formComponents/ManageCompanyForm.svelte';
-	import TextAreaInput from '$lib/components/formComponents/TextAreaInput.svelte';
 	import AttributeExpander from '$lib/components/AttributeExpander.svelte';
-
 	export let form: ActionData;
 	export let data: PageData;
 
-	let loading = false;
-
-	$: selectedEntity = data.user.investingEntities.filter(
+	$: selectedEntity = data?.user?.investingEntities.filter(
 		(entity) => entity.id === $selectedEntityStore
 	)[0];
 
@@ -32,6 +21,14 @@
 	$: if (form?.error) {
 		toast.error(form?.error, { position: 'top-center' });
 	}
+
+	function sortInvestmentCriteriaByAttribute(investmentCriteria) {
+		return investmentCriteria.sort((a, b) => a.field.name.localeCompare(b.field.name));
+	}
+
+	$: sortedInvestmentCriteria = sortInvestmentCriteriaByAttribute(
+		selectedEntity?.investmentCriteria
+	);
 	// console.log({ $selectedEntityStore, $selectedCompanyStore });
 </script>
 
@@ -52,46 +49,6 @@
 					</div>
 				</div>
 			</Card>
-
-			<Card heading="{selectedEntity?.name}'s Investments" className="space-y-5">
-				<div class="divide-y">
-					{#each selectedEntity.companies as company (company.id)}
-						<div in:fly={{ x: -20 }} class="flex w-full py-5">
-							{#each company.attributes as attribute}
-								<a href="investments/{company.id}" class="flex w-full items-center justify-between">
-									<div class="flex items-center space-x-5 text-lg">
-										<LineItem>
-											{attribute.stringValue}
-										</LineItem>
-									</div>
-								</a>
-							{/each}
-
-							<ManageCompanyForm {company} />
-						</div>
-					{:else}
-						<p>No companies yet, add one below!</p>
-					{/each}
-				</div>
-
-				<form
-					use:enhance={() => {
-						loading = true;
-						return async ({ update }) => {
-							update();
-							loading = false;
-						};
-					}}
-					action="?/add_new_company"
-					method="POST"
-					class="space-y-5"
-				>
-					<TextInput label="Investment Name" name="company_name" type="text" required></TextInput>
-					<input type="hidden" name="investing_entity_id" value={selectedEntity.id} />
-					<SmallButton type="submit" label="Add Investment" disabled={loading} {loading}
-					></SmallButton>
-				</form>
-			</Card>
 		</div>
 
 		<div class="rounded-lg bg-light-grey-04 p-5 shadow-08dp dark:bg-grey-04">
@@ -106,7 +63,7 @@
 				</custom-table>
 			</div>
 
-			{#each selectedEntity.investmentCriteria as criteriaObject, index (criteriaObject.field.id)}
+			{#each sortedInvestmentCriteria as criteriaObject, index (criteriaObject.field.id)}
 				<AttributeExpander {criteriaObject} {index} />
 			{/each}
 		</div>
