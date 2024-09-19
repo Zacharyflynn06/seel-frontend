@@ -403,6 +403,9 @@ type InvestmentCriterion {
   """  If true, then this field must have a value for a company to be accepted
   """
   required: Boolean!
+
+  """  JSON string describing validation rules for this field"""
+  rules: AWSJSON
 }
 
 input LinkInvestingEntityToUserInput {
@@ -629,6 +632,8 @@ input UpsertInvestmentCriterionInput {
   """  If true, then this field must have a value for a company to be accepted
   """
   required: Boolean!
+
+  """  JSON string describing validation rules for this field"""
   rules: AWSJSON
 }
 

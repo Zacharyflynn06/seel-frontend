@@ -58,8 +58,9 @@
 	<Card heading="Manage Fields">
 		{#each fields as field}
 			<div class="mb-5">
-				<h3 class="text-lg font-bold">{field.name}</h3>
-				<p class="text-sm">{field.description}</p>
+				<h3 class="text-lg font-bold"><span class="font-bold">{field.name}</span></h3>
+				<p class="text-sm"><span class="font-bold">Description: </span>{field.description}</p>
+				<p class="text-sm"><span class="font-bold">Field Type: </span> {field.fieldType.name}</p>
 			</div>
 		{/each}
 	</Card>

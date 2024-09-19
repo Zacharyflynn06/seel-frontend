@@ -21,6 +21,17 @@ const config = {
 			generate: ['mutation', 'subscription', 'fragment']
 		},
 		'houdini-svelte': {}
+	},
+	scalars: {
+		AWSJSON: {
+			type: 'object',
+			unmarshal(val) {
+				return val && typeof val === 'string' ? JSON.parse(val) : val;
+			},
+			marshal(obj) {
+				return obj && typeof obj !== 'string' ? JSON.stringify(obj) : obj;
+			}
+		}
 	}
 };
 

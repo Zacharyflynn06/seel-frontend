@@ -58,6 +58,9 @@
 
 		return fetch(url, {
 			method: 'PUT',
+			headers: {
+				'Content-Type': 'application/octet-stream'
+			},
 			body: data
 		});
 	};

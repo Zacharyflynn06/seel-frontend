@@ -4,9 +4,9 @@ import type { PageServerLoad } from './$types';
 
 export const load: PageServerLoad = async (event) => {
 	const getFieldsStore = new GetFieldsStore();
-	const fields = await getFieldsStore.fetch({ event });
+	const { data } = await getFieldsStore.fetch({ event });
 
-	return { fields: fields.data?.getFields };
+	return { fields: data?.getFields };
 };
 
 export const actions: Actions = {

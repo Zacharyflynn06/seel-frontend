@@ -1,14 +1,16 @@
 import type { Record } from "./public/record";
+import { GetUsers$result, GetUsers$input } from "../artifacts/GetUsers";
+import { GetUsersStore } from "../plugins/houdini-svelte/stores/GetUsers";
+import { GetUser$result, GetUser$input } from "../artifacts/GetUser";
+import { GetUserStore } from "../plugins/houdini-svelte/stores/GetUser";
+import { GetIvestmentCriteriaRulset$result, GetIvestmentCriteriaRulset$input } from "../artifacts/GetIvestmentCriteriaRulset";
+import { GetIvestmentCriteriaRulsetStore } from "../plugins/houdini-svelte/stores/GetIvestmentCriteriaRulset";
+import { GetInvestingEntity$result, GetInvestingEntity$input } from "../artifacts/GetInvestingEntity";
+import { GetInvestingEntityStore } from "../plugins/houdini-svelte/stores/GetInvestingEntity";
 import { GetInvestingEntities$result, GetInvestingEntities$input } from "../artifacts/GetInvestingEntities";
 import { GetInvestingEntitiesStore } from "../plugins/houdini-svelte/stores/GetInvestingEntities";
 import { GetFields$result, GetFields$input } from "../artifacts/GetFields";
 import { GetFieldsStore } from "../plugins/houdini-svelte/stores/GetFields";
-import { GetUser$result, GetUser$input } from "../artifacts/GetUser";
-import { GetUserStore } from "../plugins/houdini-svelte/stores/GetUser";
-import { GetUsers$result, GetUsers$input } from "../artifacts/GetUsers";
-import { GetUsersStore } from "../plugins/houdini-svelte/stores/GetUsers";
-import { GetInvestingEntity$result, GetInvestingEntity$input } from "../artifacts/GetInvestingEntity";
-import { GetInvestingEntityStore } from "../plugins/houdini-svelte/stores/GetInvestingEntity";
 import { GetDocumentCollection$result, GetDocumentCollection$input } from "../artifacts/GetDocumentCollection";
 import { GetDocumentCollectionStore } from "../plugins/houdini-svelte/stores/GetDocumentCollection";
 import { GetCompany$result, GetCompany$input } from "../artifacts/GetCompany";
@@ -145,7 +147,7 @@ export declare type CacheTypeDef = {
                     args: never;
                 };
                 jsonValue: {
-                    type: any | null;
+                    type: object | null;
                     args: never;
                 };
                 phoneValue: {
@@ -383,7 +385,7 @@ export declare type CacheTypeDef = {
                     args: never;
                 };
                 jsonValue: {
-                    type: any | null;
+                    type: object | null;
                     args: never;
                 };
                 name: {
@@ -445,7 +447,7 @@ export declare type CacheTypeDef = {
                     args: never;
                 };
                 jsonValue: {
-                    type: any | null;
+                    type: object | null;
                     args: never;
                 };
                 phoneValue: {
@@ -542,6 +544,10 @@ export declare type CacheTypeDef = {
                     type: boolean;
                     args: never;
                 };
+                rules: {
+                    type: object | null;
+                    args: never;
+                };
             };
             fragments: [];
         };
@@ -632,7 +638,7 @@ export declare type CacheTypeDef = {
                     };
                 };
                 getInvestmentCriteriaRuleSet: {
-                    type: any;
+                    type: object;
                     args: {
                         description: string;
                     };
@@ -696,5 +702,5 @@ export declare type CacheTypeDef = {
         };
     };
     lists: {};
-    queries: [[AskSeelStore, AskSeel$result, AskSeel$input], [GetCompanyStore, GetCompany$result, GetCompany$input], [GetDocumentCollectionStore, GetDocumentCollection$result, GetDocumentCollection$input], [GetInvestingEntityStore, GetInvestingEntity$result, GetInvestingEntity$input], [GetUsersStore, GetUsers$result, GetUsers$input], [GetUserStore, GetUser$result, GetUser$input], [GetFieldsStore, GetFields$result, GetFields$input], [GetInvestingEntitiesStore, GetInvestingEntities$result, GetInvestingEntities$input]];
+    queries: [[AskSeelStore, AskSeel$result, AskSeel$input], [GetCompanyStore, GetCompany$result, GetCompany$input], [GetDocumentCollectionStore, GetDocumentCollection$result, GetDocumentCollection$input], [GetFieldsStore, GetFields$result, GetFields$input], [GetInvestingEntitiesStore, GetInvestingEntities$result, GetInvestingEntities$input], [GetInvestingEntityStore, GetInvestingEntity$result, GetInvestingEntity$input], [GetIvestmentCriteriaRulsetStore, GetIvestmentCriteriaRulset$result, GetIvestmentCriteriaRulset$input], [GetUserStore, GetUser$result, GetUser$input], [GetUsersStore, GetUsers$result, GetUsers$input]];
 };

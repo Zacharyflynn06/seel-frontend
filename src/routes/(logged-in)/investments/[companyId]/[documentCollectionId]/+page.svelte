@@ -12,6 +12,7 @@
 	import toast from 'svelte-french-toast';
 	import { ChatEventStore, SendMessageToChatStore } from '$houdini';
 	import LineItem from '$lib/components/LineItem.svelte';
+	import Typewriter from 'svelte-typewriter';
 
 	export let data: PageData;
 	export let form: ActionData;
@@ -24,14 +25,20 @@
 	let userInput = '';
 
 	let chatId = '';
+	let answer = '';
 
-	let subscription = new ChatEventStore();
+	// let subscription = new ChatEventStore();
 	let messageStore = new SendMessageToChatStore();
 
-	const handleSendMessage = async (event) => {
+	const handleSendMessage = async () => {
 		const sendMessageRes = await messageStore.mutate({ id: chatId, message: userInput });
 		const sendMessageBody = await sendMessageRes.data?.sendMessageToChat;
+		userInput = '';
+
 		console.log({ sendMessageBody });
+		if (sendMessageBody) {
+			answer = sendMessageBody;
+		}
 	};
 
 	$: userId = data.user.id;
@@ -45,9 +52,8 @@
 
 	$: if (form?.chatId) {
 		chatId = form.chatId;
+		console.log({ chatId });
 	}
-
-	$: console.log({ data, $subscription });
 </script>
 
 {#if documentCollection}
@@ -129,6 +135,7 @@
 					name="user_input"
 				>
 					<button
+						type="submit"
 						on:click={handleSendMessage}
 						class=" {userInput && userInput.length > 4
 							? 'text-purple dark:text-pink'
@@ -141,6 +148,14 @@
 						{/if}
 					</button>
 				</TextInput>
+
+				<div class="w-full text-left">
+					{#if answer}
+						<Typewriter>
+							{answer}
+						</Typewriter>
+					{/if}
+				</div>
 			{/if}
 		</Card>
 	</div>
