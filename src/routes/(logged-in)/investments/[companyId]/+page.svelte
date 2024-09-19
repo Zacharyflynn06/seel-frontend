@@ -79,5 +79,9 @@
 				<SmallButton type="submit" label="Add Document Collection" {loading}></SmallButton>
 			</form>
 		</Card>
+
+		<Card>
+			TODO: add a table with attribute name and passing/failing value, percentage if applicable
+		</Card>
 	</div>
 {/if}

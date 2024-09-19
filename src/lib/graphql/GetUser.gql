@@ -23,6 +23,7 @@ query GetUser($id: ID!) {
 			investmentCriteria {
 				enabled
 				required
+				rules
 				field {
 					name
 					id

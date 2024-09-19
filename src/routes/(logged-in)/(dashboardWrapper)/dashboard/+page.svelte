@@ -11,6 +11,7 @@
 	import toast from 'svelte-french-toast';
 	import ManageCompanyForm from '$lib/components/formComponents/ManageCompanyForm.svelte';
 	import TextAreaInput from '$lib/components/formComponents/TextAreaInput.svelte';
+	import AttributeExpander from '$lib/components/AttributeExpander.svelte';
 
 	export let form: ActionData;
 	export let data: PageData;
@@ -34,97 +35,80 @@
 	// console.log({ $selectedEntityStore, $selectedCompanyStore });
 </script>
 
-{#if selectedEntity}
-	<div class="space-y-5">
-		<Card heading="{selectedEntity?.name}'s Details">
-			<div class="space-y-5">
-				<div>
-					Address: {selectedEntity.address}
-				</div>
-				<div>
-					Strategy: {selectedEntity.strategy}
-				</div>
-
-				<div>
-					Type: {selectedEntity.entityType}
-				</div>
-			</div>
-		</Card>
-
-		<Card className="space-y-5">
-			<table class="w-full">
-				<thead>
-					<tr>
-						<th class="px-4 py-2">Criteria</th>
-						<th class="px-4 py-2">Required</th>
-						<th class="px-4 py-2">Enabled</th>
-					</tr>
-				</thead>
-				<tbody>
-					{#each selectedEntity.investmentCriteria as criteriaObject, i}
-						<tr class="border-b border-t border-light-grey-01">
-							<td class="px-4 py-2">{criteriaObject.field.name}</td>
-							<td class="px-4 py-2">{criteriaObject.required}</td>
-							<td class="px-4 py-2">{criteriaObject.enabled}</td>
-						</tr>
-					{/each}
-				</tbody>
-			</table>
-
-			<form
-				use:enhance={() => {
-					loading = true;
-					return async ({ update }) => {
-						update();
-						loading = false;
-					};
-				}}
-				action="?/get_investment_rulset"
-				method="POST"
-				class="space-y-5"
-			>
-				<TextAreaInput label="Description" name="description" required></TextAreaInput>
-				<SmallButton label="Save" type="submit" />
-			</form>
-		</Card>
-		<Card heading="{selectedEntity?.name}'s Investments" className="space-y-5">
-			<div class="divide-y">
-				{#each selectedEntity.companies as company (company.id)}
-					<div in:fly={{ x: -20 }} class="flex w-full py-5">
-						{#each company.attributes as attribute}
-							<a href="investments/{company.id}" class="flex w-full items-center justify-between">
-								<div class="flex items-center space-x-5 text-lg">
-									<LineItem>
-										{attribute.stringValue}
-									</LineItem>
-								</div>
-							</a>
-						{/each}
-
-						<ManageCompanyForm {company} />
+<div class="space-y-5">
+	{#if selectedEntity}
+		<div class="flex space-x-5">
+			<Card heading="{selectedEntity?.name}'s Details">
+				<div class="space-y-5">
+					<div>
+						Address: {selectedEntity.address}
 					</div>
-				{:else}
-					<p>No companies yet, add one below!</p>
-				{/each}
+					<div>
+						Strategy: {selectedEntity.strategy}
+					</div>
+
+					<div>
+						Type: {selectedEntity.entityType}
+					</div>
+				</div>
+			</Card>
+
+			<Card heading="{selectedEntity?.name}'s Investments" className="space-y-5">
+				<div class="divide-y">
+					{#each selectedEntity.companies as company (company.id)}
+						<div in:fly={{ x: -20 }} class="flex w-full py-5">
+							{#each company.attributes as attribute}
+								<a href="investments/{company.id}" class="flex w-full items-center justify-between">
+									<div class="flex items-center space-x-5 text-lg">
+										<LineItem>
+											{attribute.stringValue}
+										</LineItem>
+									</div>
+								</a>
+							{/each}
+
+							<ManageCompanyForm {company} />
+						</div>
+					{:else}
+						<p>No companies yet, add one below!</p>
+					{/each}
+				</div>
+
+				<form
+					use:enhance={() => {
+						loading = true;
+						return async ({ update }) => {
+							update();
+							loading = false;
+						};
+					}}
+					action="?/add_new_company"
+					method="POST"
+					class="space-y-5"
+				>
+					<TextInput label="Investment Name" name="company_name" type="text" required></TextInput>
+					<input type="hidden" name="investing_entity_id" value={selectedEntity.id} />
+					<SmallButton type="submit" label="Add Investment" disabled={loading} {loading}
+					></SmallButton>
+				</form>
+			</Card>
+		</div>
+
+		<div class="rounded-lg bg-light-grey-04 p-5 shadow-08dp dark:bg-grey-04">
+			<div class="space-y-5 border-b">
+				<h1>Investment Criteria</h1>
+				<p>click to edit</p>
+				<custom-table class="grid grid-cols-5 text-left">
+					<th class=" py-2">Criteria</th>
+					<th class=" py-2">Required</th>
+					<th class=" py-2">Enabled</th>
+					<th class=" py-2">Rules</th>
+				</custom-table>
 			</div>
 
-			<form
-				use:enhance={() => {
-					loading = true;
-					return async ({ update }) => {
-						update();
-						loading = false;
-					};
-				}}
-				action="?/add_new_company"
-				method="POST"
-				class="space-y-5"
-			>
-				<TextInput label="Investment Name" name="company_name" type="text" required></TextInput>
-				<input type="hidden" name="investing_entity_id" value={selectedEntity.id} />
-				<SmallButton type="submit" label="Add Investment" disabled={loading} {loading}
-				></SmallButton>
-			</form>
-		</Card>
-	</div>
-{/if}
+			{#each selectedEntity.investmentCriteria as criteriaObject, index (criteriaObject.field.id)}
+				<AttributeExpander {criteriaObject} {index} />
+			{/each}
+		</div>
+	{/if}
+</div>
