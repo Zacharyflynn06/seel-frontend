@@ -25,10 +25,10 @@
 	$: console.log('layout', { user });
 </script>
 
-<div class="mb-5 flex items-end justify-between">
+<div class="mb-5 flex flex-col space-y-10 md:flex-row md:items-end md:justify-between">
 	<h1 class="text-5xl">{formatTitleFromPath($page.url.pathname)}</h1>
 
-	<div class="flex items-end justify-between space-x-5">
+	<div class="flex flex-col justify-between md:flex-row md:items-end md:space-x-5">
 		<span class="inline-flex font-spartan uppercase tracking-widest">Investing Entity</span>
 		{#if user && user.investingEntities}
 			<SelectInput name="investingEntity" on:change={handleChangeInvestingEntity}>

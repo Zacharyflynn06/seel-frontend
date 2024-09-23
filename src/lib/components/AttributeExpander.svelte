@@ -26,21 +26,37 @@
 	}}
 	action="?/save_criteria"
 	method="POST"
-	class="grid w-full cursor-pointer grid-cols-6 items-center border-b border-light-grey-01 py-3 text-left"
+	class="w-full cursor-pointer grid-cols-6 items-center border-b border-light-grey-01 py-3 text-left md:grid"
 >
 	<input type="hidden" name="investing_entity_id" value={$selectedEntityStore} />
 	<input type="hidden" name="field_id" value={criteriaObject.field.id} />
-	<div>{criteriaObject.field.name}</div>
+	<div class="font-bold">{criteriaObject.field.name}</div>
 
 	{#if isOpen}
-		<ToggleInput name="required" bind:value={criteriaObject.required} />
+		<div class="flex space-x-2">
+			<ToggleInput name="required" bind:value={criteriaObject.required} />
+			<div>Required</div>
+		</div>
+
 		<ToggleInput name="enabled" bind:value={criteriaObject.enabled} />
 	{:else}
-		<div>{criteriaObject.required}</div>
-		<div>{criteriaObject.enabled}</div>
+		<div class="flex space-x-2">
+			<div class="md:hidden">Required:</div>
+			<div>{criteriaObject.required}</div>
+		</div>
+		<div class="flex space-x-2">
+			<div class="md:hidden">Enabled:</div>
+			<div>{criteriaObject.enabled}</div>
+		</div>
 	{/if}
-	<div>{!!criteriaObject.rules}</div>
-	<div>{criteriaObject.field.fieldType.name}</div>
+	<div class="flex space-x-2">
+		<div class="md:hidden">Rules:</div>
+		<div>{!!criteriaObject.rules}</div>
+	</div>
+	<div class="flex space-x-2">
+		<div class="md:hidden">Field Type:</div>
+		<div>{criteriaObject.field.fieldType.name}</div>
+	</div>
 
 	<div>
 		<button

@@ -58,10 +58,10 @@
 </script>
 
 {#if company}
-	<h1 class="text-5xl">{company?.attributes[0].stringValue}</h1>
+	<h1 class="mb-5 text-3xl md:text-5xl">{company?.attributes[0].stringValue}</h1>
 
-	<div class="flex space-x-5">
-		<div class="w-1/2 space-y-5">
+	<div class="flex flex-col space-y-5 md:flex-row md:space-x-5">
+		<div class="w-full space-y-5 md:w-1/2">
 			<Card heading="Criteria Match - {percentage * 100}%">
 				<div class=" flex w-full justify-center">
 					<DoughnutChart {percentage} />
@@ -96,7 +96,7 @@
 		</div>
 
 		{#if documentCollection}
-			<div class="w-1/2 space-y-5">
+			<div class="space-y-5 md:w-1/2">
 				<Card heading="Add a new file" className="mb-5">
 					<FileInput
 						{userId}
