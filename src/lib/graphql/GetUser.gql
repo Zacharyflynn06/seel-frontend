@@ -16,9 +16,20 @@ query GetUser($id: ID!) {
 						name
 						description
 					}
-					value {
-						stringValue
+
+					stringValue
+				}
+			}
+			investmentCriteria {
+				enabled
+				required
+				rules
+				field {
+					fieldType {
+						name
 					}
+					name
+					id
 				}
 			}
 		}

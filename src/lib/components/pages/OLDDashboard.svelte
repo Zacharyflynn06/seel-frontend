@@ -41,7 +41,7 @@
 				</div>
 			</Card>
 			<Card headingIsCentered heading="Submit a new deal">
-				<button class="flex h-full w-full items-center justify-center text-red-500">
+				<button class="text-red-500 flex h-full w-full items-center justify-center">
 					<UploadIcon className="h-8 w-8 {animatedTouchClasses}" />
 				</button>
 			</Card>

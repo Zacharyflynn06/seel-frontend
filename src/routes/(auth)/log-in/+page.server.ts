@@ -1,9 +1,9 @@
 import { dev } from '$app/environment';
-import { fail, redirect } from '@sveltejs/kit';
+import { fail } from '@sveltejs/kit';
 import { Auth } from 'aws-amplify';
 
 export const actions = {
-	login: async ({ request, cookies, locals }) => {
+	login: async ({ request, cookies }) => {
 		const data = await request?.formData();
 		const email = data.get('email-address');
 		const password = data.get('password');
@@ -20,12 +20,12 @@ export const actions = {
 				httpOnly: true,
 				sameSite: 'strict',
 				secure: dev,
-				maxAge: 60 * 60 // one hour
+				maxAge: 60 * 60 * 24 * 7
 			});
 			return { success: true };
 			// redirect(300, '/dashboard');
 		} catch (error) {
-			return { error: error.message };
+			return { error: (error as Error).message };
 		}
 	}
 };

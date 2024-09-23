@@ -1,4 +1,4 @@
-import { redirect, type Handle } from '@sveltejs/kit';
+import { type Handle } from '@sveltejs/kit';
 
 import { sequence } from '@sveltejs/kit/hooks';
 import { GetUserStore, setSession } from '$houdini';
@@ -24,7 +24,7 @@ async function authorize({ resolve, event }) {
 			id: res.id,
 			investingEntities: res.investingEntities
 		};
-		console.log(res);
+		// console.log(res);
 		event.locals.user = currentUser;
 		setSession(event, { currentUser });
 		return resolve(event);

@@ -8,9 +8,7 @@
 
 <Header marginForNav={true} />
 
-<main
-	class="flex min-h-[calc(100vh-60px)] flex-col items-center justify-center p-5 md:ml-[10rem] {mainPanelWidth} "
->
+<main class="flex min-h-[calc(100vh-60px)] flex-col p-5 md:ml-[10rem] {mainPanelWidth} ">
 	<slot />
 
 	<!-- Empty div for bottom nav -->

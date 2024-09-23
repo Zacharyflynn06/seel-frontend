@@ -4,20 +4,6 @@ export const ChatEventType = {
 };
 
 /**  ##############################################################################
-                                    Fields                                   #
-##############################################################################
- The type used to store this field in the DB */
-export const FieldTypePostgres = {
-    "BOOL": "BOOL",
-    "DATE": "DATE",
-    "DOUBLE": "DOUBLE",
-    "INT": "INT",
-    "TEXT": "TEXT",
-    "TIME": "TIME",
-    "TIMESTAMP": "TIMESTAMP"
-};
-
-/**  ##############################################################################
                                    Company                                   #
 ##############################################################################
  Used as the Tag part of a tagged union */

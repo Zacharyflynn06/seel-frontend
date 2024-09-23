@@ -11,6 +11,7 @@
 	export let companyId: string;
 	export let investingEntityId: string;
 	export let userId: string;
+	export let upsertDocumentMetadataId: string = '';
 
 	// Register the plugins
 	registerPlugin(
@@ -34,6 +35,7 @@
 			.then((res) => {
 				console.log({ res });
 				uploadUrl = res?.data?.upsertDocumentMetadata?.uploadUrl;
+				upsertDocumentMetadataId = res?.data?.upsertDocumentMetadata?.id;
 			});
 
 		return uploadUrl;
@@ -56,6 +58,9 @@
 
 		return fetch(url, {
 			method: 'PUT',
+			headers: {
+				'Content-Type': 'application/octet-stream'
+			},
 			body: data
 		});
 	};

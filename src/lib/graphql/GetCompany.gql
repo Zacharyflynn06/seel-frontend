@@ -7,26 +7,32 @@ query GetCompany($id: ID!) {
 				id
 				name
 			}
-			value {
-				stringValue
-				booleanValue
-				dateValue
-				emailValue
-				floatValue
-				intValue
-				ipAddressValue
-				phoneValue
-				jsonValue
-				timeValue
-				timestampValue
-				urlValue
-				dateTimeValue
-			}
+			stringValue
 		}
 
 		documentCollections {
 			name
 			id
+			documents {
+				id
+				name
+			}
+		}
+		investingEntity {
+			name
+			id
+			investmentCriteria {
+				enabled
+				required
+				rules
+				field {
+					fieldType {
+						name
+					}
+					name
+					id
+				}
+			}
 		}
 	}
 }

@@ -10,10 +10,10 @@
 
 <form
 	use:enhance={() => {
-		// We don't need to reset loading spinner as it is removed
 		loading = true;
 		return async ({ update }) => {
 			update();
+			loading = false;
 		};
 	}}
 	action="?/delete_document_collection"

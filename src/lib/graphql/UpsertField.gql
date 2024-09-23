@@ -1,0 +1,11 @@
+mutation UpsertField($input: UpsertFieldInput!) {
+	upsertField(input: $input) {
+		description
+		id
+		name
+		fieldType {
+			name
+			id
+		}
+	}
+}

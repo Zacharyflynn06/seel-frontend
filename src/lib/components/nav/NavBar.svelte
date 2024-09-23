@@ -1,37 +1,47 @@
 <script lang="ts">
 	import NavItem from './NavItem.svelte';
 	import type { NavigationItem } from '$lib/types/nav';
-	import CheckIcon from '../icons/CheckIcon.svelte';
-	import RectangleGroupIcon from '../icons/RectangleGroupIcon.svelte';
-	import RocketIcon from '../icons/RocketIcon.svelte';
+	import {
+		LayoutDashboard,
+		FolderUp,
+		FolderSearch,
+		Workflow,
+		LockKeyhole,
+		Files
+	} from 'lucide-svelte';
 
 	const navLinks: NavigationItem[] = [
 		{
 			name: 'Dashboard',
 			href: '/dashboard',
-			icon: CheckIcon
+			icon: LayoutDashboard
 		},
 
-		// {
-		// 	name: 'submit Deals',
-		// 	href: '/submit-deals',
-		// 	icon: RocketIcon
-		// },
-
 		{
-			name: 'Admin console',
-			href: '/admin',
-			icon: RocketIcon
+			name: 'Submit Deals',
+			href: '/submit-deals',
+			icon: FolderUp
+		},
+		{
+			name: 'Review Deals',
+			href: '/review-deals',
+			icon: FolderSearch
 		}
 		// {
 		// 	name: 'Pipeline',
 		// 	href: '/pipeline',
-		// 	icon: InboxStackIcon
+		// 	icon: Workflow
+		// },
+
+		// {
+		// 	name: 'Documents',
+		// 	href: '/documents',
+		// 	icon: Files
 		// },
 		// {
-		// 	name: 'documents',
-		// 	href: '/documents',
-		// 	icon: FolderIcon
+		// 	name: 'Admin console',
+		// 	href: '/admin',
+		// 	icon: LockKeyhole
 		// }
 	];
 </script>

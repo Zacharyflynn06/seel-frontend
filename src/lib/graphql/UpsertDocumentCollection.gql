@@ -6,5 +6,6 @@ mutation UpsertDocumentCollection($input: UpsertDocumentCollectionInput!) {
 		chats {
 			id
 		}
+		id
 	}
 }
