@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
-	import { flexCenter } from '$lib/classes';
 	import Card from '../Card.svelte';
 	import SmallButton from '../buttons/SmallButton.svelte';
 	import FileInput from '../formComponents/FileInput.svelte';
@@ -8,34 +7,41 @@
 
 	let filePreviewUrl: string | undefined = undefined;
 	let loading = false;
+	let file: File;
+
+	async function handleSubmit(event: SubmitEvent) {
+		loading = !loading;
+		// console.log({ event });
+		debugger;
+		if (!filePreviewUrl) {
+			loading = false;
+			return;
+		}
+
+		try {
+			await fetch(filePreviewUrl, {
+				method: 'PUT',
+				body: file
+			});
+		} catch (error) {
+			loading = false;
+			console.log(error);
+		}
+	}
 </script>
 
-<!-- <GridLayout columnSpacingClass=""> -->
-<div class=" flex h-full w-full justify-center md:items-center">
+<div class="flex h-full w-full justify-center md:items-center">
 	<Card
 		heading="Upload Documents"
-		className="h-[calc(100vh-113px)] md:min-h-[50%] md:max-w-[500px] md:max-h-[50%] overflow-none grid items center"
+		className="h-fit md:w-full w-[95%] md:max-w-[500px] md:h-[500px]"
 	>
-		<FileInput bind:previewUrl={filePreviewUrl} />
-		{#if filePreviewUrl}
-			<!-- content here -->
-			<form
-				method="POST"
-				action="?/upload"
-				use:enhance={() => {
-					loading = true;
-					return async ({ update }) => {
-						loading = false;
-						update();
-					};
-				}}
-			>
-				<div class="flex h-fit w-full items-center justify-center">
-					<input type="text" hidden name="fileUrl" value={filePreviewUrl} />
-					<SmallButton type="submit" bind:loading label="Submit"><UploadIcon /></SmallButton>
-				</div>
-			</form>
-		{/if}
+		<form on:submit|preventDefault={handleSubmit}>
+			<FileInput bind:file bind:signedUrl={filePreviewUrl} />
+
+			<input type="text" hidden name="fileUrl" value={filePreviewUrl} />
+			<SmallButton type="submit" bind:loading label="Submit">
+				<UploadIcon />
+			</SmallButton>
+		</form>
 	</Card>
 </div>
-<!-- </GridLayout> -->

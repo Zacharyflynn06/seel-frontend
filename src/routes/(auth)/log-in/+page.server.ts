@@ -1,11 +1,10 @@
-import { GetUserStore, setSession } from '$houdini';
-import { fail, redirect } from '@sveltejs/kit';
+import { dev } from '$app/environment';
+import { fail } from '@sveltejs/kit';
 import { Auth } from 'aws-amplify';
 
 export const actions = {
-	login: async ({ request, locals, cookies }) => {
-		const data = await request.formData();
-
+	login: async ({ request, cookies }) => {
+		const data = await request?.formData();
 		const email = data.get('email-address');
 		const password = data.get('password');
 
@@ -15,16 +14,18 @@ export const actions = {
 
 		try {
 			const cognitoUser = await Auth.signIn(email, password);
-			const session = await Auth.userSession(cognitoUser);
 
-			const userStore = await new GetUserStore();
-			console.log('userStore', userStore.variables);
-			console.log('successfully logged in', { session });
+			cookies?.set('session_id', cognitoUser.username, {
+				path: '/',
+				httpOnly: true,
+				sameSite: 'strict',
+				secure: dev,
+				maxAge: 60 * 60 * 24 * 7
+			});
+			return { success: true };
+			// redirect(300, '/dashboard');
 		} catch (error) {
-			console.log((error as Error).message);
-			return fail(400, { error: 'Invalid email or password, please try again' });
+			return { error: (error as Error).message };
 		}
-
-		// redirect(300, '/submit-deals');
 	}
 };

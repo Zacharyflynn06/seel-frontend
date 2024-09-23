@@ -9,16 +9,22 @@ export default {
 				99: '99%'
 			},
 			colors: {
+				red: '#ff334a',
+				yellow: '#ffd12e',
+				green: '#10c660',
 				black: '#020202',
-				'off-white': '#f2f2f2',
-				'off-black': '#313131',
+				'off-white': '#fafafa',
+				'off-black': '#0a0a0a',
 				purple: '#4b4a78',
 				'light-purple': '#9f9efa',
 				pink: '#d0577b',
+				'light-grey-08': '#f5f5f5',
+				'light-grey-04': '#e5e5e5',
+				'light-grey-01': '#d4d4d4',
 
-				'grey-08': '#525252',
-				'grey-04': '#414141',
-				'grey-01': '#313131'
+				'grey-08': '#404040',
+				'grey-04': '#262626',
+				'grey-01': '#171717'
 			},
 			boxShadow: {
 				DEFAULT: '0 1px 2px 0 rgba(0, 0, 0, 0.05), 0 4px 8px 0 rgba(0, 0, 0, 0.05)',
@@ -29,7 +35,6 @@ export default {
 				red: '0px 0px 4px 1px rgba(246, 102, 111, 0.25)',
 				gold: '0px 0px 4px 1px rgba(255, 122, 0, 0.45)',
 				pink: '0px 0px 4px 1px rgba(208, 87, 123, .45)'
-				// autofill: '0 0 0 30px var(--tw-shadow-color) inset !important '
 			},
 			dropShadow: {
 				pink: '0px 0px 4px 1px rgba(208, 87, 123, .45)'

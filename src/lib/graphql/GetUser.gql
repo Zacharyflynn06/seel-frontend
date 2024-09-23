@@ -1,6 +1,37 @@
-query GetUser($id: String!) {
+query GetUser($id: ID!) {
 	getUser(id: $id) {
-		id
 		email
+		id
+		investingEntities {
+			name
+			address
+			entityType
+			strategy
+			id
+			companies {
+				id
+				attributes {
+					field {
+						id
+						name
+						description
+					}
+
+					stringValue
+				}
+			}
+			investmentCriteria {
+				enabled
+				required
+				rules
+				field {
+					fieldType {
+						name
+					}
+					name
+					id
+				}
+			}
+		}
 	}
 }

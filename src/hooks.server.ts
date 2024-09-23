@@ -1,18 +1,37 @@
-import { fail, redirect, type Handle } from '@sveltejs/kit';
+import { type Handle } from '@sveltejs/kit';
+
 import { sequence } from '@sveltejs/kit/hooks';
-import { Auth } from 'aws-amplify';
+import { GetUserStore, setSession } from '$houdini';
 
-async function authorize({ event, resolve }) {
-	// console.log({ 'hooks.server.ts event': event });
+async function authorize({ resolve, event }) {
+	let currentUser;
 
-	try {
-		const user = await Auth.currentAuthenticatedUser();
-	} catch (error) {
-		console.log(error);
+	const cookieId = event.cookies.get('session_id');
+
+	if (!cookieId) {
+		// console.log('no cookie');
+		return resolve(event);
 	}
+	// console.log({ cookieId });
+	const userStore = new GetUserStore();
+
+	const req = await userStore.fetch({ event, variables: { id: cookieId } });
+	const res = req.data.getUser;
+	if (res) {
+		currentUser = {
+			isAuthenticated: true,
+			email: res.email,
+			id: res.id,
+			investingEntities: res.investingEntities
+		};
+		// console.log(res);
+		event.locals.user = currentUser;
+		setSession(event, { currentUser });
+		return resolve(event);
+	}
+
 	return resolve(event);
 }
-
 async function logger({ event, resolve }) {
 	const startTime = Date.now();
 	const humanFormatDate = new Date(startTime).toLocaleString();

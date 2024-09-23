@@ -5,4 +5,6 @@
 // 		user,
 // 		isLoggedIn: !!user
 // 	};
+
+// 	console.log('hooks.client.ts', context);
 // };

@@ -1,73 +1,81 @@
 <script lang="ts">
 	import { page } from '$app/stores';
 	import DarkModeToggleButton from './buttons/DarkModeToggleButton.svelte';
-	import SmallButton from './buttons/SmallButton.svelte';
+
+	import { slide } from 'svelte/transition';
 	import { enhance } from '$app/forms';
-	import { fade } from 'svelte/transition';
+	import { onMount } from 'svelte';
+	import { mainPanelWidth } from '$lib/classes';
+	import toast from 'svelte-french-toast';
+	export let marginForNav = false;
 
-	let title: string;
+	let isMenuOpen = false;
+	let isLoggedIn = $page.data.user ? true : false;
 
-	function extractTitleFromPathname() {
-		return $page.url.pathname
-			.split('/')
-			.map((part) => part.replace('-', ' '))
-			.join(' ');
-	}
+	onMount(() => {
+		if ($page.data.user) {
+			isLoggedIn = true;
+		}
+	});
 
-	$: if ($page.url.pathname !== '/') {
-		title = extractTitleFromPathname();
-	} else {
-		title = 'Dashboard';
-	}
+	const closeMenu = () => {
+		isMenuOpen = false;
+	};
+
+	$: url = $page.url;
 </script>
 
-<header class="flex items-center justify-between p-5 dark:bg-grey-01 dark:text-off-white">
-	<div
-		class="mx-auto flex w-full max-w-[1200px] flex-col-reverse justify-between md:flex-row md:items-center"
-	>
-		<h1 class="w-fit pt-5 text-3xl font-extrabold capitalize md:mr-5 md:w-[25%] md:pt-0">
-			{title}
-		</h1>
-		<div class="w-full space-x-5 text-[1rem] md:flex md:w-full md:justify-between">
-			<div class="hidden md:flex md:space-x-5">
-				<!-- <div class="grid items-center xl:flex xl:space-x-2.5 xl:space-y-0">
-					<span
-						class="hidden text-xs uppercase tracking-[.3rem] text-black/50 dark:text-white/50 xl:block"
-						>organization</span
-					>
-					<select name="" id="" class={selectBoxClasses}>
-						<option value="">platy partners</option>
-						<option value="">option 1</option>
-						<option value="">option 2</option>
-						<option value="">option 3</option>
-						<option value="">option 4</option>
-						<option value="">option 5</option>
-					</select>
-				</div>
+<header
+	class="fixed top-0 z-10 flex h-[60px] w-full justify-center bg-light-grey-08 shadow-08dp dark:bg-grey-08"
+>
+	<div class="relative flex h-full w-full items-center justify-between px-10">
+		<a href="/" class="font-spartan text-5xl font-semibold leading-[.5] text-purple dark:text-pink"
+			>seel</a
+		>
 
-				<div class="grid items-center xl:flex xl:space-x-2.5">
-					<span
-						class="hidden text-xs uppercase tracking-[.3rem] text-black/50 dark:text-white/50 xl:block"
-						>vehicles</span
-					>
-					<select name="" id="" class={selectBoxClasses}>
-						<option value="">platy partners fund</option>
-					</select>
-				</div> -->
-			</div>
+		<!-- <DarkModeToggleButton on:toggle={() => (isMenuOpen = false)} /> -->
+		<button
+			class="relative flex font-spartan text-3xl leading-[.5]"
+			on:click|preventDefault={() => (isMenuOpen = !isMenuOpen)}
+		>
+			Menu
+		</button>
 
-			<div
-				class="flex items-center justify-end space-x-2 md:mr-2.5 md:flex md:flex-shrink-0 md:justify-start"
+		{#if isMenuOpen}
+			<!-- content here -->
+			<nav
+				transition:slide
+				class="absolute right-0 top-[60px] z-20 flex flex-col space-y-2 bg-light-grey-08 p-5 text-lg shadow-08dp dark:bg-grey-08"
 			>
-				<DarkModeToggleButton />
-				<form transition:fade action="/log-out" method="POST" use:enhance>
-					<SmallButton type="submit" label="Sign Out" />
-				</form>
-				<!-- <div class="text-pink"><CogIcon /></div>
-				<div class="text-pink"><BellIcon /></div>
-				<div class="font-bold">Username</div>
-				<div class="h-10 w-10 rounded-full bg-white dark:bg-off-black" /> -->
-			</div>
-		</div>
+				{#if isLoggedIn}
+					<form action="/log-out" method="POST" use:enhance>
+						<button on:click={closeMenu} type="submit">Sign Out</button>
+					</form>
+					<a on:click={closeMenu} href="/dashboard">Dashboard</a>
+				{:else}
+					{#if !url.pathname.includes('log-in')}
+						<a on:click={closeMenu} href="/log-in">Log In</a>
+					{/if}
+					{#if !url.pathname.includes('sign-up')}
+						<a on:click={closeMenu} href="/sign-up">Sign Up</a>
+					{/if}
+				{/if}
+				{#if !url.pathname.includes('sign-up')}
+					<a on:click={closeMenu} href="/">Home</a>
+				{/if}
+				{#if !url.pathname.includes('about')}
+					<a on:click={closeMenu} href="/about">About</a>
+				{/if}
+				{#if !url.pathname.includes('privacy-policy')}
+					<a on:click={closeMenu} href="/privacy-policy">Privacy</a>
+				{/if}
+				<div class="flex w-full">
+					<DarkModeToggleButton on:toggle={() => (isMenuOpen = false)} />
+				</div>
+			</nav>
+		{/if}
 	</div>
 </header>
+
+<!-- this dummy div saves a bunch of headaches with padding -->
+<div class="mt-[60px] w-full bg-transparent"></div>

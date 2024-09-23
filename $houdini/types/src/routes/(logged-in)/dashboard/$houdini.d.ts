@@ -11,13 +11,33 @@ type OutputDataShape<T> = MaybeWithVoid<Omit<App.PageData, RequiredKeys<T>> & Pa
 type EnsureDefined<T> = T extends null | undefined ? {} : T;
 type OptionalUnion<U extends Record<string, any>, A extends keyof U = U extends U ? keyof U : never> = U extends unknown ? { [P in Exclude<A, keyof U>]?: never } & U : never;
 export type Snapshot<T = any> = Kit.Snapshot<T>;
-type PageParentData = Omit<EnsureDefined<import('../../$houdini').LayoutData>, keyof import('../$houdini').LayoutData> & EnsureDefined<import('../$houdini').LayoutData>;
+type PageServerParentData = Omit<Omit<EnsureDefined<import('../../$houdini').LayoutServerData>, keyof import('../$houdini').LayoutServerData> & EnsureDefined<import('../$houdini').LayoutServerData>, keyof LayoutServerData> & EnsureDefined<LayoutServerData>;
+type PageParentData = Omit<Omit<EnsureDefined<import('../../$houdini').LayoutData>, keyof import('../$houdini').LayoutData> & EnsureDefined<import('../$houdini').LayoutData>, keyof LayoutData> & EnsureDefined<LayoutData>;
+type LayoutRouteId = RouteId | "/(logged-in)/dashboard" | "/(logged-in)/dashboard/[investingEntityId]" | "/(logged-in)/dashboard/[investingEntityId]/[companyId]" | "/(logged-in)/dashboard/[investingEntityId]/[companyId]/[documentCollectionId]"
+type LayoutParams = RouteParams & { investingEntityId?: string; companyId?: string; documentCollectionId?: string }
+type LayoutParentData = Omit<EnsureDefined<import('../../$houdini').LayoutData>, keyof import('../$houdini').LayoutData> & EnsureDefined<import('../$houdini').LayoutData>;
 						type MakeOptional<Target, Keys extends keyof Target> = Omit<Target, Keys> & {
 							[Key in Keys]?: Target[Key] | undefined | null
 						}
 					
 
+export type PageServerLoad<OutputData extends Partial<App.PageData> & Record<string, any> | void = Partial<App.PageData> & Record<string, any> | void> = Kit.ServerLoad<RouteParams, PageServerParentData, OutputData, RouteId>;
+export type PageServerLoadEvent = Parameters<PageServerLoad>[0];
+type ExcludeActionFailure<T> = T extends Kit.ActionFailure<any> ? never : T extends void ? never : T;
+type ActionsSuccess<T extends Record<string, (...args: any) => any>> = { [Key in keyof T]: ExcludeActionFailure<Awaited<ReturnType<T[Key]>>>; }[keyof T];
+type ExtractActionFailure<T> = T extends Kit.ActionFailure<infer X>	? X extends void ? never : X : never;
+type ActionsFailure<T extends Record<string, (...args: any) => any>> = { [Key in keyof T]: Exclude<ExtractActionFailure<Awaited<ReturnType<T[Key]>>>, void>; }[keyof T];
+type ActionsExport = typeof import('./proxy+page.server.js').actions
+export type SubmitFunction = Kit.SubmitFunction<Expand<ActionsSuccess<ActionsExport>>, Expand<ActionsFailure<ActionsExport>>>
+export type ActionData = Expand<Kit.AwaitedActions<ActionsExport>> | null;
 export type PageServerData = null;
 export type PageLoad<OutputData extends OutputDataShape<PageParentData> = OutputDataShape<PageParentData>> = Kit.Load<RouteParams, PageServerData, PageParentData, OutputData, RouteId>;
 export type PageLoadEvent = Parameters<PageLoad>[0];
 export type PageData = Expand<Expand<Omit<PageParentData, keyof PageParentData & EnsureDefined<PageServerData>> & OptionalUnion<EnsureDefined<PageParentData & EnsureDefined<PageServerData>>>> & {  }>;
+export type Action<OutputData extends Record<string, any> | void = Record<string, any> | void> = Kit.Action<RouteParams, OutputData, RouteId>
+export type Actions<OutputData extends Record<string, any> | void = Record<string, any> | void> = Kit.Actions<RouteParams, OutputData, RouteId>
+export type LayoutServerData = null;
+export type LayoutLoad<OutputData extends OutputDataShape<LayoutParentData> = OutputDataShape<LayoutParentData>> = Kit.Load<LayoutParams, LayoutServerData, LayoutParentData, OutputData, LayoutRouteId>;
+export type LayoutLoadEvent = Parameters<LayoutLoad>[0];
+export type LayoutData = Expand<Expand<Omit<LayoutParentData, keyof LayoutParentData & EnsureDefined<LayoutServerData>> & OptionalUnion<EnsureDefined<LayoutParentData & EnsureDefined<LayoutServerData>>>> & {  }>;
+export type RequestEvent = Kit.RequestEvent<RouteParams, RouteId>;

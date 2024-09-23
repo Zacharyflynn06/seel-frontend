@@ -1,0 +1,11 @@
+query ValidateCompany($companyId: ID!) {
+	validateCompany(companyId: $companyId) {
+		error
+		status
+		field {
+			description
+			id
+			name
+		}
+	}
+}

@@ -8,7 +8,6 @@ const config = {
 	defaultPartial: true,
 	defaultFragmentMasking: 'disable',
 	framework: 'sveltekit',
-	schemaPath: './schema.graphql',
 	watchSchema: {
 		url: 'https://fmfxd3pstrhzffv2nppqxedxa4.appsync-api.us-east-1.amazonaws.com/graphql',
 		headers: {
@@ -23,9 +22,6 @@ const config = {
 		},
 		'houdini-svelte': {}
 	},
-
-	// Yeah... AppSync only allows their build-in scalars:
-	// AWSDate, AWSDateTime, AWSEmail, AWSIPAddress, AWSJSON, AWSPhone, AWSTime, AWSTimestamp, AWSURL
 	scalars: {
 		AWSJSON: {
 			type: 'object',
@@ -34,16 +30,6 @@ const config = {
 			},
 			marshal(obj) {
 				return obj && typeof obj !== 'string' ? JSON.stringify(obj) : obj;
-			}
-		},
-
-		DateTime: {
-			type: 'Date',
-			unmarshal(val) {
-				return val ? new Date(val) : null;
-			},
-			marshal(date) {
-				return date && date.getTime();
 			}
 		}
 	}

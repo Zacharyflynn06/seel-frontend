@@ -54,90 +54,616 @@ directive @aws_subscribe(
 directive @defer on FIELD
 
 """
+The `AWSDate` scalar type provided by AWS AppSync, represents a valid ***extended*** [ISO 8601 Date](https://en.wikipedia.org/wiki/ISO_8601#Calendar_dates) string. In other words, this scalar type accepts date strings of the form `YYYY-MM-DD`.  The scalar can also accept "negative years" of the form `-YYYY` which correspond to years before `0000`. For example, "**-2017-05-01**" and "**-9999-01-01**" are both valid dates.  This scalar type can also accept an optional [time zone offset](https://en.wikipedia.org/wiki/ISO_8601#Time_zone_designators). For example, "**1970-01-01**", "**1970-01-01Z**", "**1970-01-01-07:00**" and "**1970-01-01+05:30**" are all valid dates. The time zone offset must either be `Z` (representing the UTC time zone) or be in the format `±hh:mm:ss`. The seconds field in the timezone offset will be considered valid even though it is not part of the ISO 8601 standard.
+"""
+scalar AWSDate
+
+"""
+The `AWSDateTime` scalar type provided by AWS AppSync, represents a valid ***extended*** [ISO 8601 DateTime](https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations) string. In other words, this scalar type accepts datetime strings of the form `YYYY-MM-DDThh:mm:ss.SSSZ`.  The scalar can also accept "negative years" of the form `-YYYY` which correspond to years before `0000`. For example, "**-2017-01-01T00:00Z**" and "**-9999-01-01T00:00Z**" are both valid datetime strings.  The field after the two digit seconds field is a nanoseconds field. It can accept between 1 and 9 digits. So, for example, "**1970-01-01T12:00:00.2Z**", "**1970-01-01T12:00:00.277Z**" and "**1970-01-01T12:00:00.123456789Z**" are all valid datetime strings.  The seconds and nanoseconds fields are optional (the seconds field must be specified if the nanoseconds field is to be used).  The [time zone offset](https://en.wikipedia.org/wiki/ISO_8601#Time_zone_designators) is compulsory for this scalar. The time zone offset must either be `Z` (representing the UTC time zone) or be in the format `±hh:mm:ss`. The seconds field in the timezone offset will be considered valid even though it is not part of the ISO 8601 standard.
+"""
+scalar AWSDateTime
+
+"""
+The `AWSEmail` scalar type provided by AWS AppSync, represents an Email address string that complies with [RFC 822](https://www.ietf.org/rfc/rfc822.txt). For example, "**username@example.com**" is a valid Email address.
+"""
+scalar AWSEmail
+
+"""
+The `AWSIPAddress` scalar type provided by AWS AppSync, represents a valid [IPv4](https://en.wikipedia.org/wiki/IPv4#Addressing) or [IPv6](https://en.wikipedia.org/wiki/IPv6_address) address string.  IP addresses with subnet masks are considered valid. However, subnet masks are not necessary. For example, "**127.0.0.1**" and "**127.0.0.1/8**" are both considered valid IP Addresses.
+"""
+scalar AWSIPAddress
+
+"""
 The `AWSJSON` scalar type provided by AWS AppSync, represents a JSON string that complies with [RFC 8259](https://tools.ietf.org/html/rfc8259).  Maps like "**{\\"upvotes\\": 10}**", lists like "**[1,2,3]**", and scalar values like "**\\"AWSJSON example string\\"**", "**1**", and "**true**" are accepted as valid JSON and will automatically be parsed and loaded in the resolver mapping templates as Maps, Lists, or Scalar values rather than as the literal input strings.  Invalid JSON strings like "**{a: 1}**", "**{'a': 1}**" and "**Unquoted string**" will throw GraphQL validation errors.
 """
 scalar AWSJSON
 
-type Client {
-  companies: [Company!]
-  config: AWSJSON!
-  display_name: String!
-  id: String!
-  lookup_name: String!
+"""
+The `AWSPhone` scalar type provided by AWS AppSync, represents a valid Phone Number. Phone numbers are serialized and deserialized as Strings. Segments of the phone number may be whitespace delimited or hyphenated.  The number can specify a country code at the beginning. However, United States numbers without country codes are still considered to be valid.
+"""
+scalar AWSPhone
+
+"""
+The `AWSTime` scalar type provided by AWS AppSync, represents a valid ***extended*** [ISO 8601 Time](https://en.wikipedia.org/wiki/ISO_8601#Times) string. In other words, this scalar type accepts time strings of the form `hh:mm:ss.SSS`.  The field after the two digit seconds field is a nanoseconds field. It can accept between 1 and 9 digits. So, for example, "**12:00:00.2**", "**12:00:00.277**" and "**12:00:00.123456789**" are all valid time strings. The seconds and nanoseconds fields are optional (the seconds field must be specified if the nanoseconds field is to be used).  This scalar type can also accept an optional [time zone offset](https://en.wikipedia.org/wiki/ISO_8601#Time_zone_designators). For example, "**12:30**", "**12:30Z**", "**12:30:24-07:00**" and "**12:30:24.500+05:30**" are all valid time strings. The time zone offset must either be `Z` (representing the UTC time zone) or be in the format `±hh:mm:ss`. The seconds field in the timezone offset will be considered valid even though it is not part of the ISO 8601 standard.
+"""
+scalar AWSTime
+
+"""
+The `AWSTimestamp` scalar type provided by AWS AppSync, represents the number of seconds that have elapsed since `1970-01-01T00:00Z`. Negative values are also accepted and these represent the number of seconds till `1970-01-01T00:00Z`.  Timestamps are serialized and deserialized as integers. The minimum supported timestamp value is **`-31557014167219200`** which corresponds to `-1000000000-01-01T00:00Z`. The maximum supported timestamp value is **`31556889864403199`** which corresponds to `1000000000-12-31T23:59:59.999999999Z`.
+"""
+scalar AWSTimestamp
+
+"""
+The `AWSURL` scalar type provided by AWS AppSync, represents a valid URL string (Ex: <https://www.amazon.com/>). The URL may use any scheme and may also be a local URL (Ex: <http://localhost/>).  URLs without schemes like "**amazon.com**" or "**www.amazon.com**" are considered invalid. URLs which contain double slashes (two consecutive forward slashes) in their path are also considered invalid.
+"""
+scalar AWSURL
+
+type Chat {
+  company: Company
+  description: String
+  documentCollection: DocumentCollection
+  id: ID!
+  investingEntity: InvestingEntity
+  name: String!
+  user: User
 }
 
+type ChatEvent {
+  chatId: ID!
+  eventType: ChatEventType!
+  text: String
+}
+
+enum ChatEventType {
+  ACKNOWLEDGE
+  REPLY
+}
+
+"""  A Company is just a collection of attributes"""
 type Company {
-  any_additional_founders: String
-  burn_rate: Int
-  category: String
-  client: Client!
-  company_name: String
-  competitors: String
-  differentiation_from_competitors: String
-  first_time_founder: Boolean
-  full_time: Boolean
-  funding_round: String
-  id: String!
-  is_saas: Boolean
-  is_us_based: Boolean
-  location: String
-  next_steps: String
-  source: CompanySource!
-  university: String
-  users: [User!]
-  women_founded_or_owned: Boolean
+  attributes: [CompanyAttribute!]!
+  chats: [Chat!]!
+  documentCollections: [DocumentCollection!]!
+  documents: [DocumentMetadata!]!
+  id: ID!
+  investingEntity: InvestingEntity!
 }
 
-enum CompanySource {
+"""  Associates a value with its type and field"""
+type CompanyAttribute {
+  booleanValue: Boolean
+  dateTimeValue: AWSDateTime
+  dateValue: AWSDate
+  emailValue: AWSEmail
+  field: Field!
+  floatValue: Float
+  intValue: Int
+  ipAddressValue: AWSIPAddress
+  jsonValue: AWSJSON
+  phoneValue: AWSPhone
+  stringValue: String
+  timeValue: AWSTime
+  timestampValue: AWSTimestamp
+  urlValue: AWSURL
+}
+
+input CompanyAttributeIdInput {
+  companyId: ID!
+  fieldId: ID!
+}
+
+"""
+  Used to communicate which fields match or don't match an Investing
+ Entity's investing critiera
+"""
+type CompanyAttributeValidation {
+  """
+    A string with an error message or null if the field passed its
+   check
+  """
+  error: String
+
+  """  the Field this validation was for"""
+  field: Field
+
+  """  True if the field passed, False otherwise"""
+  status: Boolean!
+}
+
+type DocumentCollection {
+  chats: [Chat!]!
+  company: Company
+  description: String
+  documents: [DocumentMetadata!]!
+  id: ID!
+  investingEntity: InvestingEntity
+  name: String!
+  user: User
+}
+
+input DocumentCollectionAssociationIds {
+  documentCollectionId: ID!
+  documentMetadataId: ID!
+}
+
+"""
+ ##############################################################################
+                                   Document                                  #
+##############################################################################
+"""
+type DocumentMetadata {
+  company: Company
+  description: String
+  documentCollections: [DocumentCollection!]!
+
+  """
+    URL to download the body of this document. NULL if no document has
+   been uploaded yet.
+  """
+  downloadUrl: AWSURL
+  id: ID!
+  investingEntity: InvestingEntity
+  mimeType: String
+  name: String!
+
+  """
+    URL to make a PUT request to with the body of the document. See:
+   https://docs.aws.amazon.com/AmazonS3/latest/userguide/PresignedUrlUploadObject.html
+  """
+  uploadUrl: AWSURL!
+  user: User
+}
+
+type Field {
+  description: String!
+  fieldType: FieldType!
+  id: ID!
+  name: String!
+}
+
+"""
+ ##############################################################################
+                                    Fields                                   #
+##############################################################################
+ Represents a type that a user can associate with a custom field. This will be
+ used for formatting the different internal postgres types to strings that will
+ be displayed in the UI.
+"""
+type FieldType {
+  description: String
+
+  """
+    If not null, this is a format string suitable for a printf- or strfime-style
+   function
+  """
+  formatString: String
+  graphqlScalar: FieldValueType!
+  id: ID!
+  isMultiSelect: Boolean!
+  isSingleSelect: Boolean!
+
+  """  Name must be unique across all users"""
+  name: String!
+  options: [FieldTypeOption!]!
+}
+
+"""
+  Represents a particular choice for a multi- or single-select field
+ type
+"""
+type FieldTypeOption {
+  booleanValue: Boolean
+  dateTimeValue: AWSDateTime
+  dateValue: AWSDate
+  emailValue: AWSEmail
+  fieldType: FieldType!
+  floatValue: Float
+  id: ID!
+  intValue: Int
+  ipAddressValue: AWSIPAddress
+  jsonValue: AWSJSON
+  name: String!
+  phoneValue: AWSPhone
+  stringValue: String
+  timeValue: AWSTime
+  timestampValue: AWSTimestamp
+  urlValue: AWSURL
+}
+
+input FieldTypeOptionInput {
+  booleanValue: Boolean
+  dateTimeValue: AWSDateTime
+  dateValue: AWSDate
+  emailValue: AWSEmail
+  fieldTypeId: ID!
+  floatValue: Float
+  id: ID
+  intValue: Int
+  ipAddressValue: AWSIPAddress
+  jsonValue: AWSJSON
+  name: String!
+  phoneValue: AWSPhone
+  stringValue: String
+  timeValue: AWSTime
+  timestampValue: AWSTimestamp
+  urlValue: AWSURL
+}
+
+"""
+  A Field's value can be serialized as any AppSync Scalar value. The AWS*
+ extension Scalars are serialized as JavaScript strings.
+"""
+type FieldValue {
+  booleanValue: Boolean
+  dateTimeValue: AWSDateTime
+  dateValue: AWSDate
+  emailValue: AWSEmail
+  floatValue: Float
+  intValue: Int
+  ipAddressValue: AWSIPAddress
+  jsonValue: AWSJSON
+  phoneValue: AWSPhone
+  stringValue: String
+  timeValue: AWSTime
+  timestampValue: AWSTimestamp
+  urlValue: AWSURL
+}
+
+"""  Only one of these fields should be set"""
+input FieldValueInput {
+  boolean: Boolean
+  date: AWSDate
+  dateTime: AWSDateTime
+  email: AWSEmail
+  float: Float
+  int: Int
+  ipAddress: AWSIPAddress
+  json: AWSJSON
+  phone: AWSPhone
+  string: String
+  time: AWSTime
+  timestamp: AWSTimestamp
+  url: AWSURL
+}
+
+"""
+ ##############################################################################
+                                   Company                                   #
+##############################################################################
+ Used as the Tag part of a tagged union
+"""
+enum FieldValueType {
+  BOOLEAN
+  DATE
+  DATE_TIME
   EMAIL
-  FRONTEND
+  FLOAT
+  INT
+  IP_ADDRESS
+  JSON
+  PHONE
+  STRING
+  TIME
+  TIMESTAMP
+  URL
 }
 
-input KeyValuePair {
-  key: String!
-  value: String!
+type InvestingEntity {
+  address: String!
+  chats: [Chat!]!
+  companies: [Company!]!
+  documentCollections: [DocumentCollection!]!
+  documents: [DocumentMetadata!]!
+  entityType: InvestingEntityType!
+  id: ID!
+  investmentCriteria: [InvestmentCriterion!]!
+  name: String!
+  strategy: InvestingEntityStrategy!
+  users: [User!]!
+}
+
+enum InvestingEntityStrategy {
+  DIGITAL_ASSETS
+  FUND_OF_FUNDS
+  OTHER
+  PRIVATE_DEBT
+  PRIVATE_EQUITY
+  REAL_ESTATE
+  VENTURE_CAPITAL
+}
+
+"""
+ ##############################################################################
+                                     Fund                                    #
+##############################################################################
+"""
+enum InvestingEntityType {
+  FUND
+  OTHER
+  SERIES_LLC
+  SPV
+}
+
+"""
+ ##############################################################################
+                         Investment Criteria                                 #
+##############################################################################
+ Joins an investing entity to a field.
+"""
+type InvestmentCriterion {
+  """  If false, then this field will be ignored"""
+  enabled: Boolean!
+
+  """  The field this criterion applies to"""
+  field: Field!
+
+  """  The entity imposing the criterion"""
+  investingEntity: InvestingEntity!
+
+  """  If true, then this field must have a value for a company to be accepted
+  """
+  required: Boolean!
+
+  """  JSON string describing validation rules for this field"""
+  rules: AWSJSON
+}
+
+input LinkInvestingEntityToUserInput {
+  investingEntityId: ID!
+  userId: ID!
 }
 
 type Mutation {
-  addCompanyToUser(company_id: String!, user_id: String!): Boolean!
-  removeCompanyFromUser(company_id: String!, user_id: String!): Boolean!
-  upsertCompany(company: UpsertCompanyInput!): Company!
+  addDocumentToCollection(input: DocumentCollectionAssociationIds!): [DocumentMetadata!]!
+  deleteChat(id: ID!): Chat
+  deleteCompany(id: ID!): Company
+  deleteCompanyAttribute(input: CompanyAttributeIdInput!): CompanyAttribute
+  deleteDocumentCollection(id: ID!): DocumentCollection
+  deleteDocumentMetadata(id: ID!): DocumentMetadata
+  deleteField(id: ID!): Field
+  deleteFieldType(id: ID!): FieldType
+  deleteFieldTypeOption(fieldTypeId: ID!, fieldTypeOptionId: ID!): FieldTypeOption
+  deleteInvestingEntity(id: ID!): InvestingEntity
+
+  """  Delete an investment criterion"""
+  deleteInvestmentCriterion(fieldId: ID!, investingEntityId: ID!): InvestmentCriterion
+  deleteUser(id: ID!): User
+  linkInvestingEntityToUser(input: LinkInvestingEntityToUserInput!): [User!]!
+  postChatEvent(input: PostChatEventInput!): ChatEvent
+  removeDocumentFromCollection(input: DocumentCollectionAssociationIds!): [DocumentMetadata!]!
+  sendMessageToChat(id: ID!, message: String): String
+  unlinkInvestingEntityFromUser(input: UnlinkInvestingEntityFromUserInput!): [User!]!
+  upsertChat(input: UpsertChatInput): Chat!
+  upsertCompany(input: UpsertCompanyInput!): Company!
+  upsertCompanyAttribute(input: UpsertSingleCompanyAttributeInput!): CompanyAttribute!
+
+  """
+    Create or update a company by having the AI model extract
+   information from a set of documents.
+  """
+  upsertCompanyFromDocumentCollection(input: UpsertCompanyFromDocumentCollectionInput!): ID!
+  upsertDocumentCollection(input: UpsertDocumentCollectionInput!): DocumentCollection!
+  upsertDocumentMetadata(input: UpsertDocumentMetadataInput!): DocumentMetadata
+  upsertField(input: UpsertFieldInput!): Field!
+  upsertFieldType(input: UpsertFieldTypeInput!): FieldType!
+  upsertFieldTypeOption(input: FieldTypeOptionInput!): FieldTypeOption!
+  upsertInvestingEntity(input: UpsertInvestingEntityInput!): InvestingEntity!
+
+  """  Create or change an investment criterion"""
+  upsertInvestmentCriterion(fieldId: ID!, input: UpsertInvestmentCriterionInput!, investingEntityId: ID!): InvestmentCriterion!
   upsertUser(user: UpsertUserInput!): User!
 }
 
-type Query {
-  addDocumentToCollectionUrl(collectionName: String!, metadata: [KeyValuePair]): String!
-  ask(question: String!): String!
-  documentUploadUrl(clientLookupName: String!, userId: String!): String!
-  getCompany(id: String!): Company
-  getUser(id: String!): User
+"""  Internal, used by chat_handler to send events"""
+input PostChatEventInput {
+  chatId: ID!
+  eventType: ChatEventType!
+  text: String
 }
 
-input UpsertClientInput {
-  config: AWSJSON!
-  display_name: String!
-  id: String
-  lookup_name: String!
+type Query {
+  ask(question: String!): String!
+  getAllDocumentMetadata: [DocumentMetadata!]!
+  getChat(id: ID!): Chat
+  getChats: [Chat!]!
+  getCompanies: [Company!]!
+  getCompany(id: ID!): Company
+  getCompanyAttribute(input: CompanyAttributeIdInput!): CompanyAttribute
+  getDocumentCollection(id: ID!): DocumentCollection
+  getDocumentCollections: [DocumentCollection!]!
+  getField(id: ID!): Field
+  getFieldType(id: ID!): FieldType
+  getFieldTypeOption(fieldTypeId: ID!, fieldTypeOptionId: ID!): FieldTypeOption
+  getFieldTypes: [FieldType!]!
+  getFields: [Field!]!
+  getInvestingEntities: [InvestingEntity!]!
+  getInvestingEntity(id: ID!): InvestingEntity
+  getInvestmentCriteriaRuleSet(description: String!): AWSJSON!
+  getSingleDocumentMetadata(id: ID!): DocumentMetadata
+  getUser(id: ID!): User
+  getUsers: [User!]!
+  validateCompany(companyId: ID!): [CompanyAttributeValidation!]!
+}
+
+type Subscription {
+  chatEvent(chatId: ID!): ChatEvent
+}
+
+input UnlinkInvestingEntityFromUserInput {
+  investingEntityId: ID!
+  userId: ID!
+}
+
+input UpsertChatInput {
+  companyId: ID
+  description: String
+  documentCollectionId: ID
+  id: ID
+  investingEntityId: ID
+  name: String!
+  userId: ID
+}
+
+input UpsertCompanyAttributeInput {
+  booleanValue: Boolean
+  dateTimeValue: AWSDateTime
+  dateValue: AWSDate
+  emailValue: AWSEmail
+  fieldId: ID!
+  floatValue: Float
+  intValue: Int
+  ipAddressValue: AWSIPAddress
+  jsonValue: AWSJSON
+  phoneValue: AWSPhone
+  stringValue: String
+  timeValue: AWSTime
+  timestampValue: AWSTimestamp
+  urlValue: AWSURL
+}
+
+"""
+  Create or update a company by having the AI Model extract
+ information from a document collection
+"""
+input UpsertCompanyFromDocumentCollectionInput {
+  """
+    The ID of a company to update. If not provided, then a new company
+   will be created.
+  """
+  companyId: ID
+
+  """  The document collection to send to the model"""
+  documentCollectionId: ID!
+
+  """
+    If an investingEntityId is not provided, the model will be sent
+   this list of fields to search for instead.
+  """
+  fieldIds: [ID!]
+
+  """
+    If provided, the model will look for fields based on the
+   investment criteria for this investing entity and will associate
+   the resulting company with it. This takes precedence over the
+   fieldIds option.
+  """
+  investingEntityId: ID
+
+  """
+    If true, then any existing field values that are not re-confirmed
+   by the model will be deleted. Defaults to false.
+  """
+  removeExtraFields: Boolean
 }
 
 input UpsertCompanyInput {
-  any_additional_founders: String
-  burn_rate: Int
-  category: String
-  client_id: String!
-  company_name: String
-  competitors: String
-  differentiation_from_competitors: String
-  first_time_founder: Boolean
-  full_time: Boolean
-  funding_round: String
-  id: String
-  is_saas: Boolean
-  is_us_based: Boolean
-  location: String
-  next_steps: String
-  university: String
-  women_founded_or_owned: Boolean
+  attributes: [UpsertCompanyAttributeInput!]!
+
+  """
+    If specified, indicates the ID of the company to update. If this
+   is not specified, then an investingEntityId must be provided.
+  """
+  id: ID
+
+  """
+    If `id` is not given, this is used to create a new Company
+   associated with this investing entity
+  """
+  investingEntityId: ID
+}
+
+input UpsertDocumentCollectionInput {
+  companyId: ID
+  description: String
+  id: ID
+  investingEntityId: ID
+  name: String!
+  userId: ID
+}
+
+input UpsertDocumentMetadataInput {
+  companyId: ID
+  description: String
+
+  """  If provided, the upsert request modifies an existing document."""
+  id: ID
+  investingEntityId: ID
+
+  """
+    If this is not provided, the back end will infer a meme type after
+   uploading a new file.
+  """
+  mimeType: String
+  name: String!
+  userId: ID
+}
+
+input UpsertFieldInput {
+  description: String!
+  fieldTypeId: ID!
+  id: ID
+  name: String!
+}
+
+input UpsertFieldTypeInput {
+  description: String
+  formatString: String
+  graphqlScalar: FieldValueType!
+  id: ID
+  isMultiSelect: Boolean
+  isSingleSelect: Boolean
+  name: String!
+}
+
+input UpsertInvestingEntityInput {
+  address: String!
+  entityType: InvestingEntityType!
+  id: ID
+  name: String!
+  strategy: InvestingEntityStrategy!
+}
+
+"""  Metadata attached to the association between fields and investing entities
+"""
+input UpsertInvestmentCriterionInput {
+  """  If false, then this field will be ignored"""
+  enabled: Boolean!
+
+  """  If true, then this field must have a value for a company to be accepted
+  """
+  required: Boolean!
+
+  """  JSON string describing validation rules for this field"""
+  rules: AWSJSON
+}
+
+input UpsertSingleCompanyAttributeInput {
+  booleanValue: Boolean
+
+  """
+    If specified, indicates the ID of the company to update. If this
+   is not specified, then an investingEntityId must be provided.
+  """
+  companyId: ID
+  dateTimeValue: AWSDateTime
+  dateValue: AWSDate
+  emailValue: AWSEmail
+  fieldId: ID!
+  floatValue: Float
+  intValue: Int
+
+  """
+    If `id` is not given, this is used to create a new Company
+   associated with this investing entity
+  """
+  investingEntityId: ID
+  ipAddressValue: AWSIPAddress
+  jsonValue: AWSJSON
+  phoneValue: AWSPhone
+  stringValue: String
+  timeValue: AWSTime
+  timestampValue: AWSTimestamp
+  urlValue: AWSURL
 }
 
 input UpsertUserInput {
@@ -145,8 +671,16 @@ input UpsertUserInput {
   id: String
 }
 
+"""
+ ##############################################################################
+                                     User                                    #
+##############################################################################
+"""
 type User {
-  companies: [Company!]
+  chats: [Chat!]!
+  documentCollections: [DocumentCollection!]!
+  documents: [DocumentMetadata!]!
   email: String!
   id: String!
+  investingEntities: [InvestingEntity!]!
 }

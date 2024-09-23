@@ -1,23 +1,42 @@
 <script>
-	import { textInputClasses } from '$lib/classes';
+	import { inputBorderClasses, inputLabelClasses, inputResetClasses } from '$lib/classes';
 
 	export let label = '';
 	export let value = '';
 	export let name = '';
 	export let placeholder = '';
-	export let className = textInputClasses;
+	export let extraClasses = '';
 	export let type = 'text';
 	export let minlength = 0;
 	export let required = false;
+	export let autocomplete = 'off';
+	export let disabled = false;
+	export let className =
+		inputResetClasses +
+		inputBorderClasses +
+		' dark:placeholder:text-off-white mt-1 block w-full dark:text-off-white shadow-04dp shadow-autofill ' +
+		extraClasses;
 </script>
 
-<label class="block">
-	<span class="font-spartan text-off-black dark:text-off-white">{label}</span>
-
+<fieldset class="relative">
+	{#if label}
+		<label for={name} class={inputLabelClasses}>
+			{label}
+		</label>
+	{/if}
 	{#if type === 'text'}
-		<input type="text" {value} {name} {placeholder} class={className} {minlength} {required} />
-	{:else if type === 'number'}
-		<input type="number" {name} {value} {required} />
+		<input
+			type="text"
+			bind:value
+			{name}
+			id={name}
+			{placeholder}
+			class={className}
+			{minlength}
+			{required}
+			{autocomplete}
+			{disabled}
+		/>
 	{:else if type === 'password'}
 		<input
 			type="password"
@@ -30,6 +49,9 @@
 			autocomplete="current-password"
 		/>
 	{:else if type === 'email'}
-		<input type="email" {value} {name} {placeholder} class={className} {minlength} {required} />
+		<input type="email" bind:value {name} {placeholder} class={className} {minlength} {required} />
 	{/if}
-</label>
+	<div class="absolute right-2.5 top-1/4 z-10">
+		<slot />
+	</div>
+</fieldset>

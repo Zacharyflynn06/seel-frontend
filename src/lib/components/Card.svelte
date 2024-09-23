@@ -7,14 +7,14 @@
 </script>
 
 <section
-	class="w-full space-y-2 bg-white p-5 shadow-08dp dark:bg-off-black md:rounded-2xl {className}"
+	class="h-fit w-full space-y-5 rounded-lg bg-light-grey-04 p-5 shadow-08dp dark:bg-grey-04 md:max-w-[500px] xl:max-w-[650px] {className} "
 >
 	{#if heading}
-		<h2 class="{cardHeadingClasses} {headingIsCentered ? 'text-center' : ''} h-[10%]">
+		<h1 class="{cardHeadingClasses} {headingIsCentered ? 'text-center' : 'text-left'}">
 			{heading}
-		</h2>
+		</h1>
 	{/if}
-	<div class={heading ? 'h-[85%] ' : 'h-full'}>
+	<div class={heading ? 'h-fit ' : 'h-full '}>
 		<slot />
 	</div>
 </section>

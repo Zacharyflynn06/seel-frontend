@@ -1,0 +1,5 @@
+mutation AddDocumentToCollection($input: DocumentCollectionAssociationIds!) {
+	addDocumentToCollection(input: $input) {
+		id
+	}
+}

@@ -1,0 +1,5 @@
+mutation UpsertCompany($input: UpsertCompanyInput!) {
+	upsertCompany(input: $input) {
+		id
+	}
+}

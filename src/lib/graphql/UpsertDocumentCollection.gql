@@ -1,0 +1,11 @@
+mutation UpsertDocumentCollection($input: UpsertDocumentCollectionInput!) {
+	upsertDocumentCollection(input: $input) {
+		company {
+			id
+		}
+		chats {
+			id
+		}
+		id
+	}
+}
