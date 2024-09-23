@@ -54,7 +54,7 @@
 		<div class="rounded-lg bg-light-grey-04 p-5 shadow-08dp dark:bg-grey-04">
 			<div class="space-y-5 border-b">
 				<h1>Manage Investment Criteria</h1>
-				<custom-table class="grid-cols-6 text-left md:grid">
+				<custom-table class="hidden grid-cols-6 text-left md:grid">
 					<th class=" py-2">Criteria</th>
 					<th class=" py-2">Required</th>
 					<th class=" py-2">Enabled</th>

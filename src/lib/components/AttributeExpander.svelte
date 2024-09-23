@@ -9,10 +9,7 @@
 	export let index;
 	// your script goes here
 	let isOpen = false;
-
 	let loading = false;
-
-	console.log(criteriaObject.rules);
 </script>
 
 <form
@@ -26,7 +23,7 @@
 	}}
 	action="?/save_criteria"
 	method="POST"
-	class="w-full cursor-pointer grid-cols-6 items-center border-b border-light-grey-01 py-3 text-left md:grid"
+	class="w-full cursor-pointer grid-cols-6 items-center space-y-2.5 border-b border-light-grey-01 py-3 text-left md:grid md:space-y-0"
 >
 	<input type="hidden" name="investing_entity_id" value={$selectedEntityStore} />
 	<input type="hidden" name="field_id" value={criteriaObject.field.id} />
@@ -38,7 +35,10 @@
 			<div>Required</div>
 		</div>
 
-		<ToggleInput name="enabled" bind:value={criteriaObject.enabled} />
+		<div class="flex space-x-2">
+			<ToggleInput name="enabled" bind:value={criteriaObject.enabled} />
+			<div>Enabled</div>
+		</div>
 	{:else}
 		<div class="flex space-x-2">
 			<div class="md:hidden">Required:</div>
@@ -58,7 +58,7 @@
 		<div>{criteriaObject.field.fieldType.name}</div>
 	</div>
 
-	<div>
+	<div class="mt-5 md:mt-0">
 		<button
 			class="rounded-sm bg-pink px-3 py-1 text-off-white shadow-md"
 			on:click|preventDefault={() => (isOpen = !isOpen)}>{isOpen ? 'Close' : 'Edit'}</button
@@ -78,6 +78,6 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-span-1 grid py-5"></div>
+		<div class="col-span-1 hidden py-5 md:grid"></div>
 	{/if}
 </form>
