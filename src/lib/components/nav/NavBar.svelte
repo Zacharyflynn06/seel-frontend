@@ -26,7 +26,7 @@
 			name: 'Review Deals',
 			href: '/review-deals',
 			icon: FolderSearch
-		},
+		}
 		// {
 		// 	name: 'Pipeline',
 		// 	href: '/pipeline',
@@ -38,11 +38,11 @@
 		// 	href: '/documents',
 		// 	icon: Files
 		// },
-		{
-			name: 'Admin console',
-			href: '/admin',
-			icon: LockKeyhole
-		}
+		// {
+		// 	name: 'Admin console',
+		// 	href: '/admin',
+		// 	icon: LockKeyhole
+		// }
 	];
 </script>
 

@@ -50,7 +50,7 @@
 	</div>
 
 	{#if isOpen}
-		<div transition:slide class="col-span-3 grid py-5">
+		<div in:slide class="col-span-3 grid py-5">
 			<div class="w-full items-center space-y-5">
 				<TextAreaInput
 					label="Describe your custom criteria for {criteriaObject.field.name}"

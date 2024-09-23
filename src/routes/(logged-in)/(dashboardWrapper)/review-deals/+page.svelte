@@ -3,18 +3,13 @@
 	import LineItem from '$lib/components/LineItem.svelte';
 	import { selectedEntityStore } from '$lib/stores/selectedEntityStore';
 	import { fly } from 'svelte/transition';
-	import { enhance } from '$app/forms';
-	import TextInput from '$lib/components/formComponents/TextInput.svelte';
-	import SmallButton from '$lib/components/buttons/SmallButton.svelte';
-	import toast from 'svelte-french-toast';
+
 	import ManageCompanyForm from '$lib/components/formComponents/ManageCompanyForm.svelte';
 	import type { ActionData, PageData } from './$types';
 	import { ChevronLeft, ChevronRight } from 'lucide-svelte';
 
-	export let form: ActionData;
 	export let data: PageData;
 
-	let loading = false;
 	let selectedInvestment = null;
 
 	$: selectedEntity = data.user.investingEntities.filter(
@@ -27,7 +22,7 @@
 </script>
 
 <div class="flex h-full space-x-5">
-	<Card heading="Deals" className="space-y-5 h-full">
+	<!-- <Card heading="Deals" className="space-y-5 h-full">
 		<div class="flex w-full items-center justify-between">
 			<button
 				disabled={!selectedInvestment || selectedEntity.companies.indexOf(selectedInvestment) === 0}
@@ -68,7 +63,7 @@
 				<ChevronRight class="h-12 w-12" />
 			</button>
 		</div>
-	</Card>
+	</Card> -->
 
 	<Card heading="{selectedEntity?.name}'s Investments" className="space-y-5">
 		<div class="divide-y">
@@ -87,25 +82,10 @@
 					<ManageCompanyForm {company} />
 				</div>
 			{:else}
-				<p>No companies yet, add one below!</p>
+				<p>
+					No companies yet, add one at <a class="underline" href="/submit-deals">Submit Deals</a>
+				</p>
 			{/each}
 		</div>
-
-		<form
-			use:enhance={() => {
-				loading = true;
-				return async ({ update }) => {
-					update();
-					loading = false;
-				};
-			}}
-			action="?/add_new_company"
-			method="POST"
-			class="space-y-5"
-		>
-			<TextInput label="Investment Name" name="company_name" type="text" required></TextInput>
-			<input type="hidden" name="investing_entity_id" value={selectedEntity.id} />
-			<SmallButton type="submit" label="Add Investment" disabled={loading} {loading}></SmallButton>
-		</form>
 	</Card>
 </div>

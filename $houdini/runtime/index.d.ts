@@ -1,26 +1,26 @@
 import { UpsertCompanyStore } from "../plugins/houdini-svelte/stores/UpsertCompany";
 import { UpsertUserStore } from "../plugins/houdini-svelte/stores/UpsertUser";
 import { ValidateCompanyStore } from "../plugins/houdini-svelte/stores/ValidateCompany";
+import { UpsertDocumentCollectionStore } from "../plugins/houdini-svelte/stores/UpsertDocumentCollection";
 import { UpsertInvestmentCriterionStore } from "../plugins/houdini-svelte/stores/UpsertInvestmentCriterion";
+import { UpsertDocumentMetadataStore } from "../plugins/houdini-svelte/stores/UpsertDocumentMetadata";
 import { UpsertInvestingEntityStore } from "../plugins/houdini-svelte/stores/UpsertInvestingEntity";
 import { UpsertFieldStore } from "../plugins/houdini-svelte/stores/UpsertField";
-import { UpsertDocumentMetadataStore } from "../plugins/houdini-svelte/stores/UpsertDocumentMetadata";
 import { UpsertChatStore } from "../plugins/houdini-svelte/stores/UpsertChat";
-import { SendMessageToChatStore } from "../plugins/houdini-svelte/stores/SendMessageToChat";
-import { UpsertDocumentCollectionStore } from "../plugins/houdini-svelte/stores/UpsertDocumentCollection";
 import { GetUsersStore } from "../plugins/houdini-svelte/stores/GetUsers";
+import { SendMessageToChatStore } from "../plugins/houdini-svelte/stores/SendMessageToChat";
 import { linkInvestingEntityToUserStore } from "../plugins/houdini-svelte/stores/linkInvestingEntityToUser";
 import { GetUserStore } from "../plugins/houdini-svelte/stores/GetUser";
+import { GetDocumentCollectionStore } from "../plugins/houdini-svelte/stores/GetDocumentCollection";
 import { GetIvestmentCriteriaRulsetStore } from "../plugins/houdini-svelte/stores/GetIvestmentCriteriaRulset";
+import { DeleteCompanyStore } from "../plugins/houdini-svelte/stores/DeleteCompany";
 import { GetInvestingEntityStore } from "../plugins/houdini-svelte/stores/GetInvestingEntity";
 import { GetInvestingEntitiesStore } from "../plugins/houdini-svelte/stores/GetInvestingEntities";
 import { GetFieldsStore } from "../plugins/houdini-svelte/stores/GetFields";
-import { GetCompanyStore } from "../plugins/houdini-svelte/stores/GetCompany";
-import { GetDocumentCollectionStore } from "../plugins/houdini-svelte/stores/GetDocumentCollection";
 import { DeleteDocumentCollectionStore } from "../plugins/houdini-svelte/stores/DeleteDocumentCollection";
+import { GetCompanyStore } from "../plugins/houdini-svelte/stores/GetCompany";
 import { AddDocumentToCollectionStore } from "../plugins/houdini-svelte/stores/AddDocumentToCollection";
 import { ChatEventStore } from "../plugins/houdini-svelte/stores/ChatEvent";
-import { DeleteCompanyStore } from "../plugins/houdini-svelte/stores/DeleteCompany";
 import { AskSeelStore } from "../plugins/houdini-svelte/stores/AskSeel";
 import type { Cache as InternalCache } from "./cache/cache";
 import type { CacheTypeDef } from "./generated";
@@ -41,8 +41,16 @@ export function graphql(
 ): ValidateCompanyStore;
 
 export function graphql(
+    str: "mutation UpsertDocumentCollection($input: UpsertDocumentCollectionInput!) {\n\tupsertDocumentCollection(input: $input) {\n\t\tcompany {\n\t\t\tid\n\t\t}\n\t\tchats {\n\t\t\tid\n\t\t}\n\t\tid\n\t}\n}\n"
+): UpsertDocumentCollectionStore;
+
+export function graphql(
     str: "mutation UpsertInvestmentCriterion(\n\t$fieldId: ID!\n\t$input: UpsertInvestmentCriterionInput!\n\t$investingEntityId: ID!\n) {\n\tupsertInvestmentCriterion(\n\t\tfieldId: $fieldId\n\t\tinput: $input\n\t\tinvestingEntityId: $investingEntityId\n\t) {\n\t\tenabled\n\t\trequired\n\t\trules\n\t}\n}\n"
 ): UpsertInvestmentCriterionStore;
+
+export function graphql(
+    str: "mutation UpsertDocumentMetadata($input: UpsertDocumentMetadataInput!) {\n\tupsertDocumentMetadata(input: $input) {\n\t\tid\n\t\tuploadUrl\n\t\tdownloadUrl\n\t\tmimeType\n\t\tname\n\t}\n}\n"
+): UpsertDocumentMetadataStore;
 
 export function graphql(
     str: "mutation UpsertInvestingEntity($input: UpsertInvestingEntityInput!) {\n\tupsertInvestingEntity(input: $input) {\n\t\taddress\n\t\tentityType\n\t\tid\n\t\tname\n\t\tstrategy\n\t}\n}\n"
@@ -53,22 +61,14 @@ export function graphql(
 ): UpsertFieldStore;
 
 export function graphql(
-    str: "mutation UpsertDocumentMetadata($input: UpsertDocumentMetadataInput!) {\n\tupsertDocumentMetadata(input: $input) {\n\t\tid\n\t\tuploadUrl\n\t\tdownloadUrl\n\t\tmimeType\n\t\tname\n\t}\n}\n"
-): UpsertDocumentMetadataStore;
-
-export function graphql(
     str: "mutation UpsertChat($input: UpsertChatInput!) {\n\tupsertChat(input: $input) {\n\t\tid\n\t}\n}\n"
 ): UpsertChatStore;
+
+export function graphql(str: "query GetUsers {\n\tgetUsers {\n\t\temail\n\t\tid\n\t}\n}\n"): GetUsersStore;
 
 export function graphql(
     str: "mutation SendMessageToChat($id: ID!, $message: String!) {\n\tsendMessageToChat(id: $id, message: $message)\n}\n"
 ): SendMessageToChatStore;
-
-export function graphql(
-    str: "mutation UpsertDocumentCollection($input: UpsertDocumentCollectionInput!) {\n\tupsertDocumentCollection(input: $input) {\n\t\tcompany {\n\t\t\tid\n\t\t}\n\t\tchats {\n\t\t\tid\n\t\t}\n\t\tid\n\t}\n}\n"
-): UpsertDocumentCollectionStore;
-
-export function graphql(str: "query GetUsers {\n\tgetUsers {\n\t\temail\n\t\tid\n\t}\n}\n"): GetUsersStore;
 
 export function graphql(
     str: "mutation linkInvestingEntityToUser($input: LinkInvestingEntityToUserInput!) {\n\tlinkInvestingEntityToUser(input: $input) {\n\t\tid\n\t}\n}\n"
@@ -79,8 +79,16 @@ export function graphql(
 ): GetUserStore;
 
 export function graphql(
+    str: "query GetDocumentCollection($id: ID!) {\n\tgetDocumentCollection(id: $id) {\n\t\tchats {\n\t\t\tid\n\t\t}\n\t\tname\n\t\tdocuments {\n\t\t\tid\n\t\t\tname\n\t\t}\n\t\tcompany {\n\t\t\tid\n\t\t\tattributes {\n\t\t\t\tstringValue\n\t\t\t}\n\t\t}\n\t\tinvestingEntity {\n\t\t\tid\n\t\t}\n\t}\n}\n"
+): GetDocumentCollectionStore;
+
+export function graphql(
     str: "query GetIvestmentCriteriaRulset($input: String!) {\n\tgetInvestmentCriteriaRuleSet(description: $input)\n}\n"
 ): GetIvestmentCriteriaRulsetStore;
+
+export function graphql(
+    str: "mutation DeleteCompany($id: ID!) {\n\tdeleteCompany(id: $id) {\n\t\tid\n\t}\n}\n"
+): DeleteCompanyStore;
 
 export function graphql(
     str: "query GetInvestingEntity($id: ID!) {\n\tgetInvestingEntity(id: $id) {\n\t\taddress\n\t\tid\n\n\t\tcompanies {\n\t\t\tdocuments {\n\t\t\t\tname\n\t\t\t\tdownloadUrl\n\t\t\t\tid\n\t\t\t}\n\t\t\tattributes {\n\t\t\t\tfield {\n\t\t\t\t\tdescription\n\t\t\t\t\tid\n\t\t\t\t\tname\n\t\t\t\t}\n\n\t\t\t\tstringValue\n\t\t\t}\n\t\t\tid\n\t\t}\n\t\tentityType\n\t\tname\n\t\tstrategy\n\t\tinvestmentCriteria {\n\t\t\tenabled\n\t\t\tfield {\n\t\t\t\tname\n\t\t\t\tid\n\t\t\t}\n\t\t\trequired\n\t\t}\n\t}\n}\n"
@@ -95,16 +103,12 @@ export function graphql(
 ): GetFieldsStore;
 
 export function graphql(
-    str: "query GetCompany($id: ID!) {\n\tgetCompany(id: $id) {\n\t\tid\n\t\tattributes {\n\t\t\tfield {\n\t\t\t\tdescription\n\t\t\t\tid\n\t\t\t\tname\n\t\t\t}\n\t\t\tstringValue\n\t\t}\n\n\t\tdocumentCollections {\n\t\t\tname\n\t\t\tid\n\t\t}\n\t\tinvestingEntity {\n\t\t\tname\n\t\t\tid\n\t\t\tinvestmentCriteria {\n\t\t\t\tenabled\n\t\t\t\trequired\n\t\t\t\trules\n\t\t\t\tfield {\n\t\t\t\t\tfieldType {\n\t\t\t\t\t\tname\n\t\t\t\t\t}\n\t\t\t\t\tname\n\t\t\t\t\tid\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n}\n"
-): GetCompanyStore;
-
-export function graphql(
-    str: "query GetDocumentCollection($id: ID!) {\n\tgetDocumentCollection(id: $id) {\n\t\tchats {\n\t\t\tid\n\t\t}\n\t\tname\n\t\tdocuments {\n\t\t\tid\n\t\t\tname\n\t\t}\n\t\tcompany {\n\t\t\tid\n\t\t\tattributes {\n\t\t\t\tstringValue\n\t\t\t}\n\t\t}\n\t\tinvestingEntity {\n\t\t\tid\n\t\t}\n\t}\n}\n"
-): GetDocumentCollectionStore;
-
-export function graphql(
     str: "mutation DeleteDocumentCollection($id: ID!) {\n\tdeleteDocumentCollection(id: $id) {\n\t\tid\n\t}\n}\n"
 ): DeleteDocumentCollectionStore;
+
+export function graphql(
+    str: "query GetCompany($id: ID!) {\n\tgetCompany(id: $id) {\n\t\tid\n\t\tattributes {\n\t\t\tfield {\n\t\t\t\tdescription\n\t\t\t\tid\n\t\t\t\tname\n\t\t\t}\n\t\t\tstringValue\n\t\t}\n\n\t\tdocumentCollections {\n\t\t\tname\n\t\t\tid\n\t\t\tdocuments {\n\t\t\t\tid\n\t\t\t\tname\n\t\t\t}\n\t\t}\n\t\tinvestingEntity {\n\t\t\tname\n\t\t\tid\n\t\t\tinvestmentCriteria {\n\t\t\t\tenabled\n\t\t\t\trequired\n\t\t\t\trules\n\t\t\t\tfield {\n\t\t\t\t\tfieldType {\n\t\t\t\t\t\tname\n\t\t\t\t\t}\n\t\t\t\t\tname\n\t\t\t\t\tid\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n}\n"
+): GetCompanyStore;
 
 export function graphql(
     str: "mutation AddDocumentToCollection($input: DocumentCollectionAssociationIds!) {\n\taddDocumentToCollection(input: $input) {\n\t\tid\n\t}\n}\n"
@@ -113,10 +117,6 @@ export function graphql(
 export function graphql(
     str: "subscription ChatEvent($chatId: ID!) {\n\tchatEvent(chatId: $chatId) {\n\t\tchatId\n\t\teventType\n\t\ttext\n\t}\n}\n"
 ): ChatEventStore;
-
-export function graphql(
-    str: "mutation DeleteCompany($id: ID!) {\n\tdeleteCompany(id: $id) {\n\t\tid\n\t}\n}\n"
-): DeleteCompanyStore;
 
 export function graphql(
     str: "query AskSeel($question: String!) {\n\task(question: $question)\n}\n"

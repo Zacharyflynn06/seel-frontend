@@ -18,8 +18,8 @@
 
 	$: user = data.user;
 
-	if (!$selectedEntityStore) {
-		$selectedEntityStore = data?.user?.investingEntities[0].id;
+	$: if (!$selectedEntityStore) {
+		$selectedEntityStore = user?.investingEntities[0].id;
 	}
 
 	$: console.log('layout', { user });
