@@ -2,6 +2,7 @@ query GetUser($id: ID!) {
 	getUser(id: $id) {
 		email
 		id
+		completedRegistrationStep
 		investingEntities {
 			name
 			address
@@ -23,7 +24,6 @@ query GetUser($id: ID!) {
 			investmentCriteria {
 				enabled
 				required
-				rules
 				field {
 					fieldType {
 						name
