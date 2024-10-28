@@ -7,10 +7,23 @@ import { GetInvestingEntities$result, GetInvestingEntities$input } from "../arti
 import { GetInvestingEntitiesStore } from "../plugins/houdini-svelte/stores/GetInvestingEntities";
 import { GetUser$result, GetUser$input } from "../artifacts/GetUser";
 import { GetUserStore } from "../plugins/houdini-svelte/stores/GetUser";
+<<<<<<< Updated upstream
 import { GetIvestmentCriteriaRulset$result, GetIvestmentCriteriaRulset$input } from "../artifacts/GetIvestmentCriteriaRulset";
 import { GetIvestmentCriteriaRulsetStore } from "../plugins/houdini-svelte/stores/GetIvestmentCriteriaRulset";
 import { GetInvestingEntity$result, GetInvestingEntity$input } from "../artifacts/GetInvestingEntity";
 import { GetInvestingEntityStore } from "../plugins/houdini-svelte/stores/GetInvestingEntity";
+=======
+import { GetUsers$result, GetUsers$input } from "../artifacts/GetUsers";
+import { GetUsersStore } from "../plugins/houdini-svelte/stores/GetUsers";
+import { GetInvestingEntity$result, GetInvestingEntity$input } from "../artifacts/GetInvestingEntity";
+import { GetInvestingEntityStore } from "../plugins/houdini-svelte/stores/GetInvestingEntity";
+import { GetInvestingEntities$result, GetInvestingEntities$input } from "../artifacts/GetInvestingEntities";
+import { GetInvestingEntitiesStore } from "../plugins/houdini-svelte/stores/GetInvestingEntities";
+import { GetFields$result, GetFields$input } from "../artifacts/GetFields";
+import { GetFieldsStore } from "../plugins/houdini-svelte/stores/GetFields";
+import { GetDocumentCollection$result, GetDocumentCollection$input } from "../artifacts/GetDocumentCollection";
+import { GetDocumentCollectionStore } from "../plugins/houdini-svelte/stores/GetDocumentCollection";
+>>>>>>> Stashed changes
 import { GetCompany$result, GetCompany$input } from "../artifacts/GetCompany";
 import { GetCompanyStore } from "../plugins/houdini-svelte/stores/GetCompany";
 import { GetFields$result, GetFields$input } from "../artifacts/GetFields";
@@ -530,6 +543,10 @@ export declare type CacheTypeDef = {
         InvestmentCriterion: {
             idFields: never;
             fields: {
+                description: {
+                    type: string | null;
+                    args: never;
+                };
                 enabled: {
                     type: boolean;
                     args: never;
@@ -544,10 +561,6 @@ export declare type CacheTypeDef = {
                 };
                 required: {
                     type: boolean;
-                    args: never;
-                };
-                rules: {
-                    type: object | null;
                     args: never;
                 };
             };
@@ -639,12 +652,6 @@ export declare type CacheTypeDef = {
                         id: string;
                     };
                 };
-                getInvestmentCriteriaRuleSet: {
-                    type: object;
-                    args: {
-                        description: string;
-                    };
-                };
                 getSingleDocumentMetadata: {
                     type: Record<CacheTypeDef, "DocumentMetadata"> | null;
                     args: {
@@ -679,6 +686,10 @@ export declare type CacheTypeDef = {
                     type: (Record<CacheTypeDef, "Chat">)[];
                     args: never;
                 };
+                completedRegistrationStep: {
+                    type: number;
+                    args: never;
+                };
                 documentCollections: {
                     type: (Record<CacheTypeDef, "DocumentCollection">)[];
                     args: never;
@@ -704,5 +715,9 @@ export declare type CacheTypeDef = {
         };
     };
     lists: {};
+<<<<<<< Updated upstream
     queries: [[AskSeelStore, AskSeel$result, AskSeel$input], [GetDocumentCollectionStore, GetDocumentCollection$result, GetDocumentCollection$input], [GetFieldsStore, GetFields$result, GetFields$input], [GetCompanyStore, GetCompany$result, GetCompany$input], [GetInvestingEntityStore, GetInvestingEntity$result, GetInvestingEntity$input], [GetIvestmentCriteriaRulsetStore, GetIvestmentCriteriaRulset$result, GetIvestmentCriteriaRulset$input], [GetUserStore, GetUser$result, GetUser$input], [GetInvestingEntitiesStore, GetInvestingEntities$result, GetInvestingEntities$input], [GetUsersStore, GetUsers$result, GetUsers$input], [ValidateCompanyStore, ValidateCompany$result, ValidateCompany$input]];
+=======
+    queries: [[AskSeelStore, AskSeel$result, AskSeel$input], [GetCompanyStore, GetCompany$result, GetCompany$input], [GetDocumentCollectionStore, GetDocumentCollection$result, GetDocumentCollection$input], [GetFieldsStore, GetFields$result, GetFields$input], [GetInvestingEntitiesStore, GetInvestingEntities$result, GetInvestingEntities$input], [GetInvestingEntityStore, GetInvestingEntity$result, GetInvestingEntity$input], [GetUsersStore, GetUsers$result, GetUsers$input], [GetUserStore, GetUser$result, GetUser$input], [ValidateCompanyStore, ValidateCompany$result, ValidateCompany$input]];
+>>>>>>> Stashed changes
 };

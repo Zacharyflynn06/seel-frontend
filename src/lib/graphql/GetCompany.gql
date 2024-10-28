@@ -25,9 +25,6 @@ query GetCompany($id: ID!) {
 				enabled
 				required
 				field {
-					fieldType {
-						name
-					}
 					name
 					id
 				}

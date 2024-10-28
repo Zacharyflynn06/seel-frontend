@@ -32,15 +32,14 @@ export const actions: Actions = {
 				return { error: req.errors[0].message };
 			}
 
-			console.log(req.data?.getInvestmentCriteriaRuleSet);
+			// console.log(req.data?.getInvestmentCriteriaRuleSet);
 
-			rules = req.data?.getInvestmentCriteriaRuleSet;
+			// rules = req.data?.getInvestmentCriteriaRuleSet;
 		}
 
 		const input: UpsertInvestmentCriterionInput = {
 			required: required === 'on',
-			enabled: enabled === 'on',
-			rules: { rules }
+			enabled: enabled === 'on'
 		};
 
 		const res = await store.mutate(

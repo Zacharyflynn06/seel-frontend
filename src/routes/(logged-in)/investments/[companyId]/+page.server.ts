@@ -16,6 +16,12 @@ export const load: PageLoad = async (event) => {
 
 	const getCompanyStore = new GetCompanyStore();
 	const getCompanyRes = await getCompanyStore.fetch({ event, variables: { id: companyId } });
+
+	if (getCompanyRes.errors) {
+		return {
+			error: getCompanyRes.errors[0].message
+		};
+	}
 	const company = getCompanyRes.data?.getCompany;
 
 	if (!company) {

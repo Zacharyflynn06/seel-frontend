@@ -1,4 +1,4 @@
-import { type Handle } from '@sveltejs/kit';
+import type { Handle } from '@sveltejs/kit';
 
 import { sequence } from '@sveltejs/kit/hooks';
 import { GetUserStore, setSession } from '$houdini';
@@ -9,24 +9,41 @@ async function authorize({ resolve, event }) {
 	const cookieId = event.cookies.get('session_id');
 
 	if (!cookieId) {
-		// console.log('no cookie');
+		console.log('no cookie');
 		return resolve(event);
 	}
-	// console.log({ cookieId });
-	const userStore = new GetUserStore();
 
-	const req = await userStore.fetch({ event, variables: { id: cookieId } });
-	const res = req.data.getUser;
-	if (res) {
-		currentUser = {
-			isAuthenticated: true,
-			email: res.email,
-			id: res.id,
-			investingEntities: res.investingEntities
-		};
-		// console.log(res);
-		event.locals.user = currentUser;
-		setSession(event, { currentUser });
+	// console.log({ cookieId });
+
+	try {
+		const userStore = new GetUserStore();
+
+		const req = await userStore.fetch({ event, variables: { id: cookieId } });
+
+		// console.log({ req });
+
+		if (req.errors) {
+			for (const error of req.errors) {
+				console.log(error);
+			}
+			return resolve(event);
+		}
+
+		const user = req?.data?.getUser;
+
+		if (user) {
+			currentUser = {
+				isAuthenticated: true,
+				email: user.email,
+				id: user.id,
+				investingEntities: user.investingEntities
+			};
+			event.locals.user = currentUser;
+			setSession(event, { currentUser });
+			return resolve(event);
+		}
+	} catch (error) {
+		console.error(error);
 		return resolve(event);
 	}
 

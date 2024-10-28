@@ -1,3 +1,0 @@
-query GetIvestmentCriteriaRulset($input: String!) {
-	getInvestmentCriteriaRuleSet(description: $input)
-}
