@@ -4,7 +4,7 @@
 
 <Card width="md:max-w-[1100px] " bgColor="bg-white">
 	<div
-		class="flex w-full flex-col items-center justify-center space-y-5 py-20 text-center md:px-10"
+		class="flex w-full flex-col items-center justify-center space-y-5 pt-20 text-center md:px-10"
 	>
 		<div class="flex flex-col items-center uppercase">
 			<h1 class="text-7xl text-purple dark:text-white">Product Designer</h1>
@@ -96,5 +96,6 @@
 				</ul>
 			</div>
 		</div>
+		<div class="text-xl">To apply, please email emma@seeldeals.com and matt@seeldeals.com</div>
 	</div>
 </Card>
