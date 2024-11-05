@@ -1,0 +1,54 @@
+name: Build API
+
+on:
+  workflow_call:
+    outputs:
+        image:
+            description: "The image that was built and pushed to Amazon ECR"
+            value: ${{ jobs.build.outputs.image }}
+    inputs:
+      aws_region:
+        required: true
+        type: string
+        default: us-east-1
+      aws_iam_role:
+        required: true
+        type: string
+        default: arn:aws:iam::590183691469:role/github-role
+      ecr_repository:
+        required: true
+        type: string
+
+permissions:
+    id-token: write
+    contents: read
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    outputs:
+        image: ${{ steps.build-image.outputs.image }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ inputs.aws_iam_role }}
+          aws-region: ${{ inputs.aws_region }}
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v2
+
+      - name: Build, tag, and push image to Amazon ECR
+        id: build-image
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          ECR_REPOSITORY: ${{ inputs.ecr_repository }}
+          IMAGE_TAG: ${{ github.sha }}-${{ github.run_attempt }}
+        run: |
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG -f Dockerfile .
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+          echo "image=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG" >> $GITHUB_OUTPUT

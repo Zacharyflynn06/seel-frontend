@@ -19,7 +19,7 @@
 			/>
 		</svg>
 	</div>
-	<div class="text-lg font-semibold underline hover:text-blue-600">
+	<div class="text-lg font-semibold underline hover:text-purple">
 		<slot />
 	</div>
 </div>

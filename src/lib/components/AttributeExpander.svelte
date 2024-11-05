@@ -6,8 +6,7 @@
 	import { slide } from 'svelte/transition';
 	import { selectedEntityStore } from '$lib/stores/selectedEntityStore';
 	export let criteriaObject;
-	export let index;
-	// your script goes here
+
 	let isOpen = false;
 	let loading = false;
 </script>
@@ -52,10 +51,6 @@
 	<div class="flex space-x-2">
 		<div class="md:hidden">Rules:</div>
 		<div>{!!criteriaObject.rules}</div>
-	</div>
-	<div class="flex space-x-2">
-		<div class="md:hidden">Field Type:</div>
-		<div>{criteriaObject.field.fieldType.name}</div>
 	</div>
 
 	<div class="mt-5 md:mt-0">

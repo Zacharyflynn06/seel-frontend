@@ -1,8 +1,4 @@
-import {
-	GetIvestmentCriteriaRulsetStore,
-	UpsertInvestmentCriterionStore,
-	type UpsertInvestmentCriterionInput
-} from '$houdini';
+import { UpsertInvestmentCriterionStore, type UpsertInvestmentCriterionInput } from '$houdini';
 import type { Actions } from '@sveltejs/kit';
 
 export const actions: Actions = {
@@ -14,33 +10,15 @@ export const actions: Actions = {
 		const investingEntityId = formData.get('investing_entity_id')?.toString();
 		const fieldId = formData.get('field_id')?.toString();
 		const store = new UpsertInvestmentCriterionStore();
-		let rules = '';
 
 		console.log({ userCriteriaInput, required, enabled, investingEntityId, fieldId });
 		if (!investingEntityId || !fieldId) {
 			return { error: 'Investing entity id or field id not found' };
 		}
 
-		if (userCriteriaInput) {
-			const investmentCriterionStore = new GetIvestmentCriteriaRulsetStore();
-			const req = await investmentCriterionStore.fetch({
-				event,
-				variables: { input: userCriteriaInput }
-			});
-
-			if (req.errors) {
-				return { error: req.errors[0].message };
-			}
-
-			console.log(req.data?.getInvestmentCriteriaRuleSet);
-
-			rules = req.data?.getInvestmentCriteriaRuleSet;
-		}
-
 		const input: UpsertInvestmentCriterionInput = {
 			required: required === 'on',
-			enabled: enabled === 'on',
-			rules: { rules }
+			enabled: enabled === 'on'
 		};
 
 		const res = await store.mutate(

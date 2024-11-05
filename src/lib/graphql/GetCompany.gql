@@ -24,11 +24,7 @@ query GetCompany($id: ID!) {
 			investmentCriteria {
 				enabled
 				required
-				rules
 				field {
-					fieldType {
-						name
-					}
 					name
 					id
 				}

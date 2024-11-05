@@ -1,0 +1,70 @@
+name: Deploy API
+
+on:
+  workflow_call:
+    inputs:
+      environment:
+        required: true
+        type: string
+      aws_region:
+        required: true
+        type: string
+        default: us-east-1
+      aws_iam_role:
+        required: true
+        type: string
+        default: arn:aws:iam::590183691469:role/github-role
+      image:
+        required: true
+        type: string
+      ecs_service:
+        required: true
+        type: string
+      ecs_cluster:
+        required: true
+        type: string
+      container_name:
+        required: true
+        type: string
+      task_family:
+        required: true
+        type: string
+
+permissions:
+    id-token: write
+    contents: read
+
+jobs:          
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    environment: ${{inputs.environment}}
+    concurrency:
+      group: ${{ inputs.environment }}
+      cancel-in-progress: true
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ inputs.aws_iam_role }}
+          aws-region: ${{ inputs.aws_region }}
+
+      - name: Fill in the new image ID in the Amazon ECS task definition
+        id: task-def
+        uses: aws-actions/amazon-ecs-render-task-definition@v1
+        with:
+          task-definition-family: ${{ inputs.task_family }}
+          container-name: ${{ inputs.container_name }}
+          image: ${{ inputs.image }}
+
+      - name: Deploy Amazon ECS task definition
+        uses: aws-actions/amazon-ecs-deploy-task-definition@v2
+        with:
+          task-definition: ${{ steps.task-def.outputs.task-definition }}
+          service: ${{ inputs.ecs_service }}
+          cluster: ${{ inputs.ecs_cluster }}
+          wait-for-service-stability: true

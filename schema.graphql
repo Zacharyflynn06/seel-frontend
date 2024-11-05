@@ -391,6 +391,9 @@ enum InvestingEntityType {
  Joins an investing entity to a field.
 """
 type InvestmentCriterion {
+  """  User text describing additional requirements for this field"""
+  description: String
+
   """  If false, then this field will be ignored"""
   enabled: Boolean!
 
@@ -403,9 +406,6 @@ type InvestmentCriterion {
   """  If true, then this field must have a value for a company to be accepted
   """
   required: Boolean!
-
-  """  JSON string describing validation rules for this field"""
-  rules: AWSJSON
 }
 
 input LinkInvestingEntityToUserInput {
@@ -478,7 +478,6 @@ type Query {
   getFields: [Field!]!
   getInvestingEntities: [InvestingEntity!]!
   getInvestingEntity(id: ID!): InvestingEntity
-  getInvestmentCriteriaRuleSet(description: String!): AWSJSON!
   getSingleDocumentMetadata(id: ID!): DocumentMetadata
   getUser(id: ID!): User
   getUsers: [User!]!
@@ -626,15 +625,15 @@ input UpsertInvestingEntityInput {
 """  Metadata attached to the association between fields and investing entities
 """
 input UpsertInvestmentCriterionInput {
+  """  User text describing additional requirements for this field"""
+  description: String
+
   """  If false, then this field will be ignored"""
   enabled: Boolean!
 
   """  If true, then this field must have a value for a company to be accepted
   """
   required: Boolean!
-
-  """  JSON string describing validation rules for this field"""
-  rules: AWSJSON
 }
 
 input UpsertSingleCompanyAttributeInput {
@@ -667,6 +666,7 @@ input UpsertSingleCompanyAttributeInput {
 }
 
 input UpsertUserInput {
+  completedRegistrationStep: Int!
   email: String!
   id: String
 }
@@ -678,6 +678,7 @@ input UpsertUserInput {
 """
 type User {
   chats: [Chat!]!
+  completedRegistrationStep: Int!
   documentCollections: [DocumentCollection!]!
   documents: [DocumentMetadata!]!
   email: String!

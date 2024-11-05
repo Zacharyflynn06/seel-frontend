@@ -47,6 +47,7 @@
 		form.answer = '';
 	}
 
+	$: console.log({ data });
 	$: company = data.company;
 	$: investingEntity = data.investingEntity;
 	$: validateCompany = data.validateCompany;
@@ -132,14 +133,19 @@
 						{#each documentCollection.documents as document}
 							<!-- this is the roundabout way we are getting the company name for now -->
 							<div in:fly={{ y: 20 }} out:slide class="flex w-full divide-y">
-								<a
+								<!-- <a
 									href="/dashboard/{investingEntity.id}/{company.id}/{documentCollection.id}"
 									class="flex w-full items-center justify-between"
 								>
 									<LineItem>
 										{document.name}
 									</LineItem>
-								</a>
+								</a> -->
+								<div class="flex w-full items-center justify-between">
+									<LineItem>
+										{document.name}
+									</LineItem>
+								</div>
 							</div>
 						{:else}
 							<p>No documents added yet, add one above!</p>

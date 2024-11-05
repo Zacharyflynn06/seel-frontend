@@ -1,0 +1,56 @@
+name: CI/CD Pipeline
+
+on:
+    push:
+        branches:
+            - main
+            - staging
+            - develop
+        paths-ignore:
+            - .gitignore
+            - LICENSE
+            - README.md
+    workflow_dispatch:
+
+permissions:
+    id-token: write
+    contents: read
+
+jobs:
+    build:
+        uses: ./.github/workflows/build.yml
+        secrets: inherit
+        with:
+            aws_region: ${{vars.AWS_REGION}}
+            aws_iam_role: ${{vars.AWS_IAM_ROLE}}
+            ecr_repository: ${{vars.ECR_REPOSITORY}}
+
+    deploy-dev:
+        uses: ./.github/workflows/deploy.yml
+        if: github.ref == 'refs/heads/develop'
+        needs: build
+        secrets: inherit
+        with:
+            environment: dev
+            aws_region: ${{vars.AWS_REGION}}
+            aws_iam_role: ${{vars.AWS_IAM_ROLE}}
+            image: ${{needs.build.outputs.image}}
+            ecs_service: ${{vars.DEV_ECS_SERVICE}}
+            ecs_cluster: ${{vars.DEV_ECS_CLUSTER}}
+            container_name: ${{vars.DEV_CONTAINER_NAME}}
+            task_family: ${{vars.DEV_TASK_FAMILY}}
+
+    deploy-staging:
+        uses: ./.github/workflows/deploy.yml
+        if: github.ref == 'refs/heads/staging'
+        needs: build
+        secrets: inherit
+        with:
+            environment: staging
+            aws_region: ${{vars.AWS_REGION}}
+            aws_iam_role: ${{vars.AWS_IAM_ROLE}}
+            image: ${{needs.build.outputs.image}}
+            ecs_service: ${{vars.STAGING_ECS_SERVICE}}
+            ecs_cluster: ${{vars.STAGING_ECS_CLUSTER}}
+            container_name: ${{vars.STAGING_CONTAINER_NAME}}
+            task_family: ${{vars.DEV_TASK_FAMILY}}
