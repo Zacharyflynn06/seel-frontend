@@ -3,8 +3,8 @@ import type { Handle } from '@sveltejs/kit';
 
 import { sequence } from '@sveltejs/kit/hooks';
 
-async function authorize({ resolve, event }: { resolve: Function; event: any }) {
-	console.log('hooks authorize start');
+async function authorize({ resolve, event }) {
+	// let currentUser;
 
 	const jwt = event.cookies.get('session_id');
 
@@ -13,17 +13,40 @@ async function authorize({ resolve, event }: { resolve: Function; event: any }) 
 		return resolve(event);
 	}
 
-	const userAttributes = await fetchUserAttributes();
+	// console.log({ cookieId });
 
-	console.log({ userAttributes });
+	// try {
+	// 	const userStore = new GetUserStore();
 
-	event.locals.user = {
-		isAuthenticated: true,
-		email: userAttributes.email,
-		id: userAttributes.sub
-	};
+	// 	const req = await userStore.fetch({ event, variables: { id: cookieId } });
 
-	console.log('hooks authorize end');
+	// 	// console.log({ req });
+
+	// 	if (req.errors) {
+	// 		for (const error of req.errors) {
+	// 			console.log(error);
+	// 		}
+	// 		return resolve(event);
+	// 	}
+
+	// 	const user = req?.data?.getUser;
+
+	// 	if (user) {
+	// 		currentUser = {
+	// 			isAuthenticated: true,
+	// 			email: user.email,
+	// 			id: user.id,
+	// 			investingEntities: user.investingEntities
+	// 		};
+	// 		event.locals.user = currentUser;
+	// 		setSession(event, { currentUser });
+	// 		return resolve(event);
+	// 	}
+	// } catch (error) {
+	// 	console.error(error);
+	// 	return resolve(event);
+	// }
+
 	return resolve(event);
 }
 async function logger({ resolve, event }: { resolve: Function; event: any }) {
