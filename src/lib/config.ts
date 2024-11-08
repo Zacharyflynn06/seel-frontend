@@ -14,4 +14,4 @@ export const AWS_REGION: string | undefined = p.VITE_AWS_REGION;
 
 export const AUTH_SECRET = p.VITE_AUTH_SECRET;
 
-export const API_HOST = p.API_HOST;
+export const API_HOST = p.VITE_API_HOST;
