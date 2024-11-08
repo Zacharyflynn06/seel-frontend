@@ -1,12 +1,13 @@
 <script lang="ts">
 	// This type error is a known issue, (https://github.com/pqina/svelte-filepond/issues/13) does not seem to be fixed yet
 	import FilePond, { registerPlugin } from 'svelte-filepond';
+	//
 	import FilePondPluginImageExifOrientation from 'filepond-plugin-image-exif-orientation';
 	import FilePondPluginImagePreview from 'filepond-plugin-image-preview';
 	import FilePondPluginFileEncode from 'filepond-plugin-file-encode';
 	import 'filepond/dist/filepond.min.css';
 	import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css';
-	import { UpsertDocumentMetadataStore } from '$houdini';
+	// import { UpsertDocumentMetadataStore } from '$houdini';
 
 	export let companyId: string;
 	export let investingEntityId: string;
@@ -28,17 +29,16 @@
 	export let fileIsReady = false;
 
 	const getPresignedUrl = async (filename: string): Promise<string> => {
-		let uploadUrl = '';
-		const store = new UpsertDocumentMetadataStore();
-		await store
-			.mutate({ input: { name: filename, investingEntityId, companyId, userId } })
-			.then((res) => {
-				console.log({ res });
-				uploadUrl = res?.data?.upsertDocumentMetadata?.uploadUrl;
-				upsertDocumentMetadataId = res?.data?.upsertDocumentMetadata?.id;
-			});
-
-		return uploadUrl;
+		// let uploadUrl = '';
+		// const store = new UpsertDocumentMetadataStore();
+		// await store
+		// 	.mutate({ input: { name: filename, investingEntityId, companyId, userId } })
+		// 	.then((res) => {
+		// 		console.log({ res });
+		// 		uploadUrl = res?.data?.upsertDocumentMetadata?.uploadUrl;
+		// 		upsertDocumentMetadataId = res?.data?.upsertDocumentMetadata?.id;
+		// 	});
+		// return uploadUrl;
 	};
 
 	const readFile = (file: File) =>

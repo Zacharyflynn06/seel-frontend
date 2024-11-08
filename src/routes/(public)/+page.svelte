@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { AskSeelStore } from '$houdini';
 	import GradientBg from '$lib/components/GradientBg.svelte';
 	import Spinner from '$lib/components/Spinner.svelte';
 	import TextInput from '$lib/components/formComponents/TextInput.svelte';
@@ -17,30 +16,28 @@
 	}
 
 	async function handleSubmit(event: SubmitEvent) {
-		console.log({ event });
-		loading = !loading;
-
-		if (!userInput) {
-			loading = false;
-			return;
-		}
-
-		try {
-			let store = new AskSeelStore();
-			store.variables = true;
-			await store.fetch({ variables: { question: userInput } }).then((response) => {
-				loading = false;
-				if (response?.data?.ask) {
-					chatBotResponses?.push({ question: userInput, answer: response.data.ask });
-					chatBotResponses = chatBotResponses;
-					userInput = '';
-				}
-				console.log({ chatBotResponses });
-			});
-		} catch (error) {
-			loading = false;
-			console.log({ error });
-		}
+		// console.log({ event });
+		// loading = !loading;
+		// if (!userInput) {
+		// 	loading = false;
+		// 	return;
+		// }
+		// try {
+		// 	let store = new AskSeelStore();
+		// 	store.variables = true;
+		// 	await store.fetch({ variables: { question: userInput } }).then((response) => {
+		// 		loading = false;
+		// 		if (response?.data?.ask) {
+		// 			chatBotResponses?.push({ question: userInput, answer: response.data.ask });
+		// 			chatBotResponses = chatBotResponses;
+		// 			userInput = '';
+		// 		}
+		// 		console.log({ chatBotResponses });
+		// 	});
+		// } catch (error) {
+		// 	loading = false;
+		// 	console.log({ error });
+		// }
 	}
 </script>
 

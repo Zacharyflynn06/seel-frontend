@@ -13,3 +13,5 @@ export const S3_PRIVATE_ACCESS_KEY: string | undefined = p.VITE_S3_PRIVATE_ACCES
 export const AWS_REGION: string | undefined = p.VITE_AWS_REGION;
 
 export const AUTH_SECRET = p.VITE_AUTH_SECRET;
+
+export const API_HOST = p.API_HOST;
