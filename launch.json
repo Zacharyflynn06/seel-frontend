@@ -1,0 +1,13 @@
+// This file is used by Visual Studio Code to launch your application in debug mode
+
+{
+	"version": "0.2.0",
+	"configurations": [
+		{
+			"command": "npm run dev",
+			"name": "Run development server",
+			"request": "launch",
+			"type": "node-terminal"
+		}
+	]
+}
