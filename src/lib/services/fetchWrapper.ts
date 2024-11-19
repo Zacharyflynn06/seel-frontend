@@ -1,4 +1,4 @@
-export const handleErrorResponse = (error: string, status = 400) => {
+const handleErrorResponse = (error: string, status = 400) => {
 	return new Response(
 		JSON.stringify({
 			error,
@@ -8,19 +8,11 @@ export const handleErrorResponse = (error: string, status = 400) => {
 	);
 };
 
-export const handleSuccessResponse = (data = {}, status = 200) => {
-	return new Response(
-		JSON.stringify({
-			data,
-			status
-		}),
-		{ status }
-	);
-};
+type HttpMethod = 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH';
 export const performFetch = async (
 	path: string,
-	method: string,
-	body: any,
+	method: HttpMethod,
+	body: Record<string, unknown> | null,
 	token: string | null
 ) => {
 	let headers: { 'Content-Type': string; Authorization?: string } = {
@@ -34,17 +26,18 @@ export const performFetch = async (
 		};
 	}
 
-	const response = await fetch(`${import.meta.env.VITE_API_URL}/${path}`, {
+	const init: RequestInit = {
 		method,
 		headers,
-		body
-	});
+		body: body ? JSON.stringify(body) : null
+	};
+
+	const response = await fetch(`${import.meta.env.VITE_API_URL}${path}`, init);
 
 	if (response.status >= 400) {
-		console.error(response);
 		const resBody = await response.json();
 		return handleErrorResponse(resBody.error, response.status);
 	}
 
-	return response;
+	return response.json();
 };

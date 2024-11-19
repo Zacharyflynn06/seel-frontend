@@ -7,7 +7,6 @@
 	import { onMount } from 'svelte';
 	import { mainPanelWidth } from '$lib/classes';
 	import toast from 'svelte-french-toast';
-	export let marginForNav = false;
 
 	let isMenuOpen = false;
 	let isLoggedIn = $page.data.user ? true : false;

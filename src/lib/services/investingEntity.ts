@@ -8,7 +8,7 @@ interface createInvestingEntityInput {
 }
 
 export const getAllInvestingEntities = async (token: string) => {
-	return await performFetch('/investing_entities', 'GET', null, token);
+	return await performFetch('/investing_entities/', 'GET', null, token);
 };
 
 export const getInvestingEntity = async (id: string, token: string) => {

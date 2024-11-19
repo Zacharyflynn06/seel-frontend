@@ -4,11 +4,11 @@ declare global {
 	namespace App {
 		// interface Error {}
 		interface Locals {
-			user?: {
+			user: {
 				isAuthenticated: boolean;
 				email: string;
 				id: string;
-				investingEntities: InvestingEntity[];
+				accessToken: string;
 			};
 		}
 		// interface PageData {}

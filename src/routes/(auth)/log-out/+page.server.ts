@@ -1,6 +1,7 @@
 import { redirect } from '@sveltejs/kit';
 import type { Actions, PageServerLoad } from './$types';
-import { Auth } from 'aws-amplify';
+import { createEmptyUserObject } from '$lib/services/user';
+import { signOut } from 'aws-amplify/auth';
 
 export const load: PageServerLoad = async () => {
 	// we only use this endpoint for the api
@@ -9,13 +10,16 @@ export const load: PageServerLoad = async () => {
 };
 
 export const actions: Actions = {
-	default({ cookies, locals }) {
+	default: async ({ cookies, locals }) => {
 		try {
-			Auth.signOut();
-			cookies.delete('session_id', { path: '/' });
-			locals.user = undefined;
+			await signOut();
+			cookies.set('session_id', '', {
+				path: '/',
+				expires: new Date(0)
+			});
+			locals.user = await createEmptyUserObject();
 		} catch (error) {
-			return { error: error.message };
+			return { error: (error as Error).message };
 		}
 	}
 };

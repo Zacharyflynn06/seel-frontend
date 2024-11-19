@@ -1,6 +1,6 @@
-import { dev } from '$app/environment';
+import { getAllInvestingEntities } from '$lib/services/investingEntity';
 import { fail } from '@sveltejs/kit';
-import { signIn, signOut } from 'aws-amplify/auth';
+import { signIn, fetchAuthSession, signOut } from 'aws-amplify/auth';
 
 export const actions = {
 	login: async ({ request, cookies }) => {
@@ -20,16 +20,22 @@ export const actions = {
 				return fail(400, { error: 'Invalid email or password' });
 			}
 
-			cookies?.set('session_id', email, {
+			const { tokens } = await fetchAuthSession();
+			const accessToken = tokens?.accessToken.toString();
+
+			if (!accessToken) {
+				return fail(400, { error: 'Invalid email or password' });
+			}
+
+			cookies?.set('session_id', accessToken, {
 				path: '/',
 				httpOnly: true,
 				sameSite: 'strict',
-				secure: dev,
+				secure: process.env.NODE_ENV === 'production',
 				maxAge: 60 * 60 * 24 * 7
 			});
 
 			return { success: true };
-			// redirect(300, '/dashboard');
 		} catch (error) {
 			return { error: (error as Error).message };
 		}
