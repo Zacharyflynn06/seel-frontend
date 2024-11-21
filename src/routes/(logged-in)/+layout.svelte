@@ -6,7 +6,7 @@
 
 <NavBar />
 
-<Header marginForNav={true} />
+<Header />
 
 <main class="flex min-h-[calc(100vh-60px)] flex-col p-5 md:ml-[10rem] {mainPanelWidth} ">
 	<slot />

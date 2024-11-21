@@ -16,7 +16,7 @@ type HttpMethod = 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH';
 export const performFetch = async (
 	path: string,
 	method: HttpMethod,
-	body: Record<string, unknown> | null,
+	body: string | object | null,
 	token: string | null
 ) => {
 	// Set up headers for the request

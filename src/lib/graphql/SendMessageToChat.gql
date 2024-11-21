@@ -1,3 +1,0 @@
-mutation SendMessageToChat($id: ID!, $message: String!) {
-	sendMessageToChat(id: $id, message: $message)
-}

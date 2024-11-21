@@ -1,7 +1,0 @@
-subscription ChatEvent($chatId: ID!) {
-	chatEvent(chatId: $chatId) {
-		chatId
-		eventType
-		text
-	}
-}

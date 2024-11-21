@@ -1,5 +1,0 @@
-mutation DeleteDocumentCollection($id: ID!) {
-	deleteDocumentCollection(id: $id) {
-		id
-	}
-}

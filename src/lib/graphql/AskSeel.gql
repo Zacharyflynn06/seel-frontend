@@ -1,3 +1,0 @@
-query AskSeel($question: String!) {
-	ask(question: $question)
-}

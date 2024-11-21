@@ -5,8 +5,6 @@
 	import { slide } from 'svelte/transition';
 	import { enhance } from '$app/forms';
 	import { onMount } from 'svelte';
-	import { mainPanelWidth } from '$lib/classes';
-	import toast from 'svelte-french-toast';
 
 	let isMenuOpen = false;
 	let isLoggedIn = $page.data.user ? true : false;

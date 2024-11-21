@@ -1,5 +1,0 @@
-mutation linkInvestingEntityToUser($input: LinkInvestingEntityToUserInput!) {
-	linkInvestingEntityToUser(input: $input) {
-		id
-	}
-}

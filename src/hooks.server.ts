@@ -1,10 +1,12 @@
 import { getAllInvestingEntities, getInvestingEntity } from '$lib/services/investingEntity';
+import { getUserInfo } from '$lib/services/user';
+import { fetchUserAttributes } from '@aws-amplify/auth';
 import type { Handle } from '@sveltejs/kit';
 
 import { sequence } from '@sveltejs/kit/hooks';
 
-async function authorize({ resolve, event }) {
-	let currentUser;
+async function authorize({ resolve, event }: { resolve: Function; event: any }) {
+	console.log('authorize');
 
 	const jwt = event.cookies.get('session_id');
 
@@ -13,9 +15,19 @@ async function authorize({ resolve, event }) {
 		return resolve(event);
 	}
 
+	const userAttributes = await fetchUserAttributes();
+
+	// console.log({ userAttributes });
+
+	event.locals.user = {
+		isAuthenticated: true,
+		email: userAttributes.email,
+		id: userAttributes.sub
+	};
+
 	return resolve(event);
 }
-async function logger({ event, resolve }) {
+async function logger({ resolve, event }: { resolve: Function; event: any }) {
 	const startTime = Date.now();
 	const humanFormatDate = new Date(startTime).toLocaleString();
 	const response = await resolve(event);
