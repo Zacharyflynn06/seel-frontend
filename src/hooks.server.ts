@@ -1,5 +1,3 @@
-import { getAllInvestingEntities, getInvestingEntity } from '$lib/services/investingEntity';
-import { getUserInfo } from '$lib/services/user';
 import { fetchUserAttributes } from '@aws-amplify/auth';
 import type { Handle } from '@sveltejs/kit';
 
