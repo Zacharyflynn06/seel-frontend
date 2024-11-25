@@ -4,7 +4,7 @@ import type { Handle } from '@sveltejs/kit';
 import { sequence } from '@sveltejs/kit/hooks';
 
 async function authorize({ resolve, event }: { resolve: Function; event: any }) {
-	console.log('authorize');
+	console.log('hooks authorize start');
 
 	const jwt = event.cookies.get('session_id');
 
@@ -15,7 +15,7 @@ async function authorize({ resolve, event }: { resolve: Function; event: any }) 
 
 	const userAttributes = await fetchUserAttributes();
 
-	// console.log({ userAttributes });
+	console.log({ userAttributes });
 
 	event.locals.user = {
 		isAuthenticated: true,
@@ -23,6 +23,7 @@ async function authorize({ resolve, event }: { resolve: Function; event: any }) 
 		id: userAttributes.sub
 	};
 
+	console.log('hooks authorize end');
 	return resolve(event);
 }
 async function logger({ resolve, event }: { resolve: Function; event: any }) {

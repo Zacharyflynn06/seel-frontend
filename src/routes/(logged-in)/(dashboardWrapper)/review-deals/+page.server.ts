@@ -1,4 +1,3 @@
-import { DeleteCompanyStore } from '$houdini';
 import type { Actions } from '@sveltejs/kit';
 
 export const actions: Actions = {
@@ -7,16 +6,12 @@ export const actions: Actions = {
 		const data = await event.request.formData();
 		const companyId = data.get('company_id')?.toString();
 
-		const store = new DeleteCompanyStore();
-
 		if (!companyId) {
 			return { error: 'Company id not found' };
 		}
 
 		try {
-			await store.mutate({ id: companyId }, { event }).then((res) => {
-				console.log({ res });
-			});
+			// TODO Delete Company
 			return {
 				success: true,
 				message: 'Successfully deleted company'

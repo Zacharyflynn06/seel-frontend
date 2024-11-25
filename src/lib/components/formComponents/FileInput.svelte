@@ -7,7 +7,6 @@
 	import FilePondPluginFileEncode from 'filepond-plugin-file-encode';
 	import 'filepond/dist/filepond.min.css';
 	import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css';
-	// import { UpsertDocumentMetadataStore } from '$houdini';
 
 	export let companyId: string;
 	export let investingEntityId: string;

@@ -1,5 +1,5 @@
 import { fail } from '@sveltejs/kit';
-import { signIn, fetchAuthSession, signOut } from 'aws-amplify/auth';
+import { signIn, fetchAuthSession, signOut, fetchUserAttributes } from 'aws-amplify/auth';
 
 export const actions = {
 	login: async ({ request, cookies, locals }) => {
@@ -23,10 +23,6 @@ export const actions = {
 			}
 
 			const { tokens } = await fetchAuthSession();
-
-			const userAttributes = await fetchUserAttributes();
-
-			console.log({ tokens });
 
 			const accessToken = tokens?.accessToken;
 

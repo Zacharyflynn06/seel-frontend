@@ -1,8 +1,5 @@
 <script lang="ts">
-	import SelectInput from '$lib/components/formComponents/SelectInput.svelte';
-
 	import { page } from '$app/stores';
-	import { selectedEntityStore } from '$lib/stores/selectedEntityStore.js';
 	export let data;
 
 	function formatTitleFromPath(path: string) {
@@ -12,15 +9,15 @@
 			.join(' ');
 	}
 
-	function handleChangeInvestingEntity(event: Event) {
-		$selectedEntityStore = event?.currentTarget?.value;
-	}
+	// function handleChangeInvestingEntity(event: Event) {
+	// 	$selectedEntityStore = event?.currentTarget?.value;
+	// }
 
 	$: user = data.user;
 
-	$: if (!$selectedEntityStore) {
-		$selectedEntityStore = user?.investingEntities[0].id;
-	}
+	// $: if (!$selectedEntityStore) {
+	// 	$selectedEntityStore = user?.investingEntities[0].id;
+	// }
 
 	$: console.log('layout', { user });
 </script>
@@ -30,13 +27,13 @@
 
 	<div class="flex flex-col justify-between md:flex-row md:items-end md:space-x-5">
 		<span class="inline-flex font-spartan uppercase tracking-widest">Investing Entity</span>
-		{#if user && user.investingEntities}
+		<!-- {#if user && user.investingEntities}
 			<SelectInput name="investingEntity" on:change={handleChangeInvestingEntity}>
 				{#each user.investingEntities as entity}
 					<option value={entity.id}>{entity.name}</option>
 				{/each}
 			</SelectInput>
-		{/if}
+		{/if} -->
 		<!-- <span class="inline-flex font-spartan uppercase tracking-widest">Investments</span>
 		{#if $selectedEntityStore && $selectedEntityStore.companies}
 			<SelectInput name="company" on:change={handleChangeCompany}>

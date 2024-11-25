@@ -12,7 +12,7 @@
 
 	$: if (form?.success) {
 		toast.success('Logged in successfully', { position: 'top-center' });
-		// goto('/dashboard');
+		goto('/dashboard');
 	}
 
 	$: if (form?.error) {

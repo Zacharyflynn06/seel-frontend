@@ -1,6 +1,5 @@
-<script lang="ts">
+<!-- <script lang="ts">
 	import { enhance } from '$app/forms';
-	import { InvestingEntityStrategy, InvestingEntityType } from '$houdini';
 	import SmallButton from '$lib/components/buttons/SmallButton.svelte';
 	import Card from '$lib/components/Card.svelte';
 	import SelectInput from '$lib/components/formComponents/SelectInput.svelte';
@@ -84,4 +83,4 @@
 			...loading
 		{/each}
 	</Card>
-</div>
+</div> -->
